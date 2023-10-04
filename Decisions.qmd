@@ -1,0 +1,215 @@
+---
+format:
+  html:
+    mermaid:
+      theme: neutral
+---
+
+# Decisions Under Uncertainty
+
+In this module we will learn how to create decision models. These models rely on probability and expected values. We will map the decision process using a decision tree and value each decision with a monetary value or an expected monetary value (EMV). Our objective is to identify the best decision given the possible choices and uncertainty.
+
+## Shopaholic Retail Company
+
+Imagine you are the CEO of the Shopaholic Retail Company, and you are considering whether to launch a new product line. You have conducted market research and have estimated two possible outcomes based on customer demand and competition.
+
+-   **Success Scenario:** If the new product line is well-received by customers and captures a significant market share, you anticipate an annual profit of \$5 million.
+-   **Failure Scenario:** If the new product line fails to gain traction in the market, you estimate an annual loss of \$3 million due to production costs and missed opportunities.
+
+In this decision, you face uncertainty regarding customer preferences, market conditions, and competitive dynamics. The new product line's success or failure will determine your company's financial outcome. Determining how to adequately assess the risks involved in this decision and the potential outcomes is of importance.
+
+## Expected Monetary Value {#sec-EMV}
+
+According to your estimates, you believe that there is a $60$% chance of success and a $40$% chance of failure. Using this information, you can calculate the **expected monetary value (EMV)** of the decision by multiplying the monetary value of each outcome by its respective probability and summing them up:
+
+::: {.pull-right-50 .text-center}
+Expected Value = (Prob. of Success \* Value of Success) + (Prob. of Failure \* Value of Failure)
+
+Expected Value = (0.6 \* 5 million) + (0.4 \* -3 million)
+
+Expected Value = 3 million + (-1.2 million)
+
+Expected Value = 1.8 million
+:::
+
+\n
+
+The **expected monetary value** estimates the average monetary outcome you can expect from a decision involving uncertainty. In this example, the value is positive, suggesting that launching the new product line results in a profit on average. Mathematically we express the monetary expected value as the sum product of probabilities and monetary values.
+
+::: {.pull-right-50 .text-center}
+$EMV=\sum p_{i}x_{i}$
+:::
+
+where $EMV$ is the expected monetary value, $p_{i}$ is the probability of outcome $i$, and $x_{i}$ is the monetary value resulting from outcome $i$. Notice that if we had other decisions involving uncertainty, we could also evaluate them using the EMV. Hence, the EMV allows us to rank and choose best decisions when uncertainty is present.
+
+## Decision Trees
+
+**Decision trees** visually map the entire business decision process. Below you can see the decision tree for the decision to introduce a new production line.
+
+```{mermaid}
+%%| fig-width: 5
+%%| theme: dark
+graph LR
+    A[ ] -->|Introduce Production Line| C(( )) 
+    A[ ] -->|Don't Introduce| B( 0 )
+    C -->|Success p=0.6| D( 5 )
+    C -->|Failure p=0.4| E( -3 )
+```
+
+<br> Decision trees are read from left to right. Notice that there are two main branches stemming from the first decision node (i.e., the first square to the left). You can decide to *Introduce* or *Not Introduce* the new production line. If you *Introduce*, you reach a probability node (i.e., the circle that leads to the success and failure branches) where chance determines success or failure at the probabilities given. In the end, your choice of introducing the new product line yields an expected monetary value of 1.8 million, whereas not introducing the line yields no payoff.
+
+To solve decision trees and find the optimal decision use **backward induction**. Starting from the right of the decision tree and working back to the left at each probability node calculate the EMV. At each decision node, take the maximum of EMV's to identify the optimal decision. Applying this procedure to our simple example, we would start with the probability node that leads to the success and failure branches and calculate the EMV of 1.8 million (refer to @sec-EMV). Moving back to our initial decision, we now have the choice to *Introduce* or *Not Introduce*. In this case we should *Introduce*, since the resulting EMV (1.8) is higher than *Not Introduce* (0).
+
+## Consulting Team
+
+Consider now the option of hiring a consulting team that promises to give you a bit more certainty. The team provides a recommendation based on market research, historical data, and their expertise for \$500,000. However, it is known that the team has a false positive rate (i.e., recommending to go with a project when the project would fail) of 15% and a false negative rate of 5% (i.e., recommending not going with a project and when the project would succeed). Below you can see the updated decision tree with the results of the recommendation (i.e., *Positive*, and *Negative*).
+
+```{mermaid theme=darkly}
+%%| fig-width: 5
+graph LR
+    F(( ))--> |Positive p=?| A[ ]
+    A[ ] -->|Introduce Production Line| C(( )) 
+    A[ ] -->|Don't Introduce| B( -0.5 )
+    C -->|Success p=?| D( 4.5 )
+    C -->|Failure p=?| E( -3.5 )
+    
+    F(( ))--> |Negative p=?| G[ ]
+    G[ ] -->|Introduce Production Line| H(( )) 
+    G[ ] -->|Don't Introduce| I( -0.5 )
+    H -->|Success p=?| J( 4.5 )
+    H -->|Failure p=?| K( -3.5 )
+```
+
+Note that even though the consultants might recommend not introducing the production line, the CEO can still decide to go against their recommendation. Also, some probabilities are now unknown and must be calculated (they are highlighted in the decision tree with $?$). For example, given that the recommendation is positive, the probability that the introduction would succeed is unknown $p(Success|+)$. We will use probability theory to uncover the missing probabilities in the upcoming sections. Finally, the final payoffs have all been adjusted to reflect the cost of hiring the team of consultants.
+
+Ultimately, we would like gain more certainty on our decision to introduce the production line. Additionally, knowing if we should hire consultants to advise is equally essential.
+
+## Updating Probabilities
+
+The **Law of total probability** is useful in determining the probabilities that we get a positive recommendation $p(+)$ or a negative recommendation $p(-)$. In sum the law states:
+
+::: {.pull-right-50 .text-center}
+$p(A)=p(A|B)p(B)+p(A|B^c)p(B^c)$
+:::
+
+Substituting the values provided in our problem we obtain:
+
+::: {.pull-right-50 .text-center}
+$p(+)=p(+|Failure)p(Failure)+p(+|Success)p(Success)$ \n
+
+$p(+)=0.15(0.4)+0.95(0.6)$ \n
+
+$p(+)=0.63$
+:::
+
+Hence, the probability of obtaining a recommendation of introducing the new product line is $63$% and of not recommending the introduction is $p(-)=37$%. The updated decision tree is now:
+
+```{mermaid theme=darkly}
+%%| fig-width: 5
+graph LR
+    F(( ))--> |Positive p=0.63| A[ ]
+    A[ ] -->|Introduce Production Line| C(( )) 
+    A[ ] -->|Don't Introduce| B( -0.5 )
+    C -->|Success p=?| D( 4.5 )
+    C -->|Failure p=?| E( -3.5 )
+    
+    F(( ))--> |Negative p=0.37| G[ ]
+    G[ ] -->|Introduce Production Line| H(( )) 
+    G[ ] -->|Don't Introduce| I( -0.5 )
+    H -->|Success p=?| J( 4.5 )
+    H -->|Failure p=?| K( -3.5 )
+```
+
+## Bayes' Theorem
+
+Now we can use Bayes' Theorem to update our probabilities given the recommendation from the consulting team. Recall that **Bayes' Theorem** is a concept in probability that helps us update our beliefs when given new information. Mathematically, Bayes' Theorem states:
+
+::: {.pull-right-50 .text-center}
+$p(A|B)=\frac{p(B|A)p(A)}{p(B)}$
+:::
+
+Substituting values we can find the missing probabilities at the edge of the tree. In particular:
+
+::: {.pull-right-50 .text-center}
+$p(Success|+)=\frac{p(+|Success)p(Success)}{p(+)}$ \n
+
+$p(Success|+)=\frac{0.95(0.6)}{0.63}$ \n
+
+$p(Success|+)=0.90$
+:::
+
+This implies that $p(Failure|+)=0.10$. Similarly, the probabilities $p(Success|-)$ and $p(Failure|-)$ can be found using Bayes' theorem (the reader should try to obtain these probabilities). The updated decision tree is given below:
+
+```{mermaid theme=darkly}
+%%| fig-width: 5
+graph LR
+    F(( ))--> |Positive p=0.63| A[ ]
+    A[ ] -->|Introduce Production Line| C(( )) 
+    A[ ] -->|Don't Introduce| B( -0.5 )
+    C -->|Success p=0.90| D( 4.5 )
+    C -->|Failure p=0.10| E( -3.5 )
+    
+    F(( ))--> |Negative p=0.37| G[ ]
+    G[ ] -->|Introduce Production Line| H(( )) 
+    G[ ] -->|Don't Introduce| I( -0.5 )
+    H -->|Success p=0.08| J( 4.5 )
+    H -->|Failure p=0.92| K( -3.5 )
+```
+
+## Optimal Decision {#sec-Optimal}
+
+Now that we have calculated the probabilities we can finally decide whether we should hire the consulting team, and most importantly whether we should introduce the new product line. Summarizing the decision tree by calculating the EMV's for each probability node yields:
+
+```{mermaid theme=darkly}
+%%| fig-width: 5
+graph LR
+    F(( ))--> |Positive p=0.63| A[ ]
+    A[ ] -->|Introduce Production Line| C(( ))
+    A[ ] -->|Don't Introduce| B( -0.5 )
+    C --> D(EMV=3.70)
+    
+    F(( ))--> |Negative p=0.37| G[ ]
+    G[ ] -->|Introduce Production Line| H(( )) 
+    G[ ] -->|Don't Introduce| I( -0.5 )
+    H --> J(EMV=-2.86)
+```
+
+Note that even though the consultants might recommend not introducing the production line, the CEO can still decide to go against their recommendation. If the recommendation is positive, then the EMV resulting from introduction of the product line ($3.70$) is greater than the loss of not introducing the product line ($-0.5$). Similarly, if the recommendation is negative, the EMV from the introduction ($-2.86$) is less than the EMV of not introducing the product line ($-0.5$). As a consequence, the recommendation is aligned with the CEO's best decision.
+
+## The Value of Information
+
+We are now faced with an important question. What is the value of the information provided by the consulting team? In other words, should the CEO hire the consultants? To answer this question, let's start by calculating expected monetary value of the tree in @sec-Optimal:
+
+::: {.pull-right-50 .text-center}
+$EMV=0.63(3.70)+0.37(-0.5)$ \n
+
+$EMV=2.146$ \n
+:::
+
+This EMV is higher than the EMV of making the decision without the consultants (1.8 million). This highlights that the information provided by the consulting team is valuable to the CEO. Moreover, the CEO should be willing to pay up to \$846,000 (EMV with free information - EMV without information) for the consulting service.
+
+## Readings
+
+The readings for this chapter are mainly from @PMS. Chapter 9 provides an excellent introduction to decision models with a couple of solved problems using Excel. I recommend using R (as a calculator) instead of Excel, as this book mainly uses R. To construct decision trees in R, you can use [mermaid](https://www.rdocumentation.org/packages/DiagrammeR/versions/1.0.10/topics/mermaid) along with [Quarto](https://Quarto.org). Some probability concepts are essential to review before you start reading the chapter. In particular, discrete random variables, expected value, conditional probability, probability rules, and Bayes' theorem.
+
+-   @PMS Chapters 9.1 (Introduction), 9.2 (Elements of Decision Analysis), 9.3 (Single-Stage Decision Problems) and 9.5 (Multistage Decision Problems). It is recommended you follow along in R as opposed to Excel (or Precision Tree Add-In).
+
+-   @JK Chapter 4.1 (Fundamental Probability Concepts), 4.2 (Rules of Probability), 4.3 (Contingency Tables and Probabilities), and 4.4 (The Total Probability Rule and Bayes' Theorem).
+
+-   Quarto: <https://Quarto.org>
+
+-   Mermaid in Quarto Document: <https://quarto.org/docs/authoring/diagrams.html>
+
+-   Mermaid in R Script: <https://www.rdocumentation.org/packages/DiagrammeR/versions/1.0.10/topics/mermaid>
+
+## Lessons Learned In This Chapter
+
+-   Use the concept of Expected Monetary Value to rank decisions involving uncertainty.
+
+-   Use Decision Trees to map the business decision process.
+
+-   Apply backward induction to solve decision problems.
+
+-   Apply the Law of Total Probability and Bayes' Theorem to update probabilities.
+
+-   Determine the price of information.
