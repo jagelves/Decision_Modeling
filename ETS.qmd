@@ -257,22 +257,46 @@ fit %>%
 On Monday Tesla reported 435,059 deliveries for Q3 2023. Tesla reported downtime at its factories caused a downshift in production in the third quarter. A similar shutdown occurred on the Q2 2022. We can use this information to get a more accurate prediction.
 
 ```{r}
-tesla<-mutate(tesla,Down=c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0))
+tesla<-mutate(tesla,Down=c(0,0,0,0,0,0,
+                           0,0,0,0,0,0,0,0,0,0,0,0,0,
+                           0,0,0,0,0,0,1,0,0,0,0))
 
-fit <- tesla %>%
-  model(
-    LSS = TSLM(deliveries ~ trend()+I(trend()^2)+season()+Down)
-  )
-
-Down_Scenario <- scenarios(
-  Factory_Down = new_data(tesla, 1) |>
-    mutate(Down=1),
-  names_to = "Scenario")
-
-forecast(fit,Down_Scenario)
 ```
 
-The new forecast is now closer to the reported delivery number.
+The code above includes a dummy variable to capture the shutdown. Now we can use this variable to estimate the TSLM model again: 
+
+```{r}
+fit <- tesla %>%
+  model(
+    LSS = TSLM(deliveries~trend()+
+                 I(trend()^2)+season()+Down)
+  )
+
+```
+
+The last step is to create a scenario where Tesla has a shutdown and one where there is no shutdown. We can use the `scenarios()` function. Here, we create a new data set that includes four periods in which the dummy is 1 (factory has a shutdown) and the dummy is 0 (factory has no shutdown).
+
+```{r}
+Down_Scenario <- scenarios(
+  Factory_Down = new_data(tesla, 4) |>
+    mutate(Down=rep(1,4)),
+  Factory_Up = new_data(tesla, 4) |>
+    mutate(Down=rep(0,4)),
+  names_to = "Scenario")
+```
+We can now plot the new forecast with scenarios.
+
+```{r}
+tesla %>%
+  autoplot(deliveries) + 
+  autolayer(forecast(fit,new_data=Down_Scenario),
+            level=NULL)+ theme_classic() +
+  labs(x="Quarter", y="",
+       title = "Tesla Car Deliveries Forecasts",
+       subtitle = "Scenario Forecast") + theme_classic()
+```
+
+The new forecast of 429,404 is now closer to the reported delivery number of 435,059. The analyst consensus estimate was 454,809.
 
 ## Readings
 
