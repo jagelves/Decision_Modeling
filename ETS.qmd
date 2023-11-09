@@ -257,9 +257,10 @@ fit %>%
 On 10/09/23 Tesla reported 435,059 deliveries for Q3 2023. On the previous earning call, Tesla warned investors that factories would be shut down to accommodate the production of a new type of vehicle (highland model 3). A similar shutdown occurred on Q2 2022. We can use this information to get a more accurate prediction.
 
 ```{r}
-tesla<-mutate(tesla,Down=c(0,0,0,0,0,0,
-                           0,0,0,0,0,0,0,0,0,0,0,0,0,
-                           0,0,0,0,0,0,1,0,0,0,0))
+tesla<-mutate(tesla,
+                Down=case_when(
+                  period==yearquarter("2022 Q2") ~ 1,
+                                       TRUE ~ 0))
 
 ```
 
