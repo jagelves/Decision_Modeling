@@ -242,7 +242,7 @@ fit %>%
   
 ```
 
-Forecasts for the four quarters are shown above, with the corresponding mean. In general, both models predict Tesla will continue its trend and increase its deliveries every quarter. According to the DAMPEDS model, Tesla is expected to deliver about $516,000$ cars on average with a standard deviation $854$ cars. If we recall the 68-95-99.7 rule, Tesla deliveries for Q3 of 2023 will likely be between $513000$ and $519000$. The increasing standard deviation for future periods reminds us that longer-period forecasts have even more uncertainty. The plot below illustrates the forecasts for both models along with the $95$% prediction intervals.
+Forecasts for the four quarters are shown above, with the corresponding mean. In general, both models predict Tesla will continue its trend and increase its deliveries every quarter. According to the DAMPEDS model, Tesla is expected to deliver about $516,000$ cars on average. The plot below illustrates the forecasts for both models along with the $95$% prediction intervals. The increasing standard deviation for future periods reminds us that longer-period forecasts have even more uncertainty. 
 
 ```{r}
 fit %>%
