@@ -123,7 +123,7 @@ calits_fc %>% autoplot(level=NULL) + theme_classic() +
        x="")
 ```
 
-Note how the Mean and Naive models predict that the series will continue without a trend. The LS and Drift models predicts that the series will continue its trend but, like all other methods, do not consider the seasonal pattern discussed in [Chapter -@sec-Visual]. In future chapters, we will look at models that account for both trend and seasonality.
+Note how the Mean and Naive models predict that the series will continue without a trend. The LS and Drift models predicts that the series will continue its trend but, like all other methods, do not consider the seasonal pattern that is evident in the average price of avocados. In future chapters, we will look at models that account for both trend and seasonality.
 
 ## Over-Fitting
 
