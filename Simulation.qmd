@@ -40,11 +40,12 @@ Fish_Entitled_Oz<-5 #Input
 set.seed(20)
 Attendance<-round(rtriang(1,20,50,30),0) # Random Variable
 
-Consumption<-Attendance*Fish_Entitled_Oz # Calculated 
+Demand<-Attendance*Fish_Entitled_Oz # Calculated 
 Available<-Order_Oz # Calculated
-
-Profit<-min(Consumption,Available)/Fish_Entitled_Oz*Entry_Fee-Order_Oz*Price_Fish_Oz-Price_Miso #Outcome
-
+Consumption<-min(Demand,Available) #Calculated
+Revenue<-Consumption/Fish_Entitled_Oz*Entry_Fee# Calculated
+Cost<-Order_Oz*Price_Fish_Oz+Price_Miso #Calculated
+Profit<-Revenue-Cost # Outcome
 ```
 
 In the model above, you can see how the inputs have fixed values. These values were given to us by the restaurant and the restaurant has little or no control over them (the market price of the fish, the cost of making Miso soup, etc.). The random variable, captures the source of uncertainty (i.e., how many people attend the event). As you can see we have used here the `rtriang()` function from the `extraDistr` package to generate the attendance. We have chosen the triangle distribution since the restaurant has provided us with a lower limit (20), an upper limit (50), and a most likely case for attendance (30). Note also the use of the `set.seed()` function. This allows you to replicate the random numbers generated.
@@ -77,13 +78,18 @@ V_Fish_Entitled_Oz<-rep(Fish_Entitled_Oz,n)
 
 set.seed(12)
 V_Attendance<-round(rtriang(n,20,50,30),0)
-Consumption<-V_Attendance*V_Fish_Entitled_Oz
+V_Demand<-V_Attendance*V_Fish_Entitled_Oz
 Available<-V_Order_Oz
 
-V_Profit<-pmin(Consumption,Available)/V_Fish_Entitled_Oz*V_Entry_Fee-V_Order_Oz*V_Price_Fish_Oz-V_Price_Miso
+V_Consumption<-pmin(V_Demand,Available) 
+V_Revenue<-V_Consumption/Fish_Entitled_Oz*Entry_Fee
+V_Cost<-Order_Oz*Price_Fish_Oz+Price_Miso
+V_Profit<-V_Revenue-V_Cost
 ```
 
-From the simulation it seems like that the restaurant would make on average a profit of about $211.5$ dollars if they order $160$ ounces of fish. There are however, a couple of questions left unanswered. First, what are the other possible profits when ordering $160$ ounces? Second, is there another amount of fish that would give them a higher expected profit?
+In the code above, you will notice that operations have been vectorized to avoid the use of for loops. For example, the order (*Order_Oz*) has been repeated 10000 times. By doing this, the inputs can now be combined with the randomly generated attendance (*V_Attendance*). Finally, note as well the use of the `pmin()` function instead of the `min()` function. This allows us to apply the `min()` function to each element (rows) of the vectors.  
+
+From the simulation it seems like that the restaurant would make on average a profit of about $`r round(mean(V_Profit),2)`$ dollars if they order $160$ ounces of fish. There are however, a couple of questions left unanswered. First, what are the other possible profits when ordering $160$ ounces? Second, is there another amount of fish that would give them a higher expected profit?
 
 ## Flaw Of Averages
 
@@ -106,10 +112,10 @@ Now to answer the main question, what should be the amount ordered of fish? To a
 ```{r}
 
 Order_Oz=seq(160,240,10)
-Price_Fish_Oz<-9/16 # Input
-Price_Miso<-300 # Input
-Entry_Fee<-20 # Input
-Fish_Entitled_Oz<-5 #Input
+Price_Fish_Oz<-9/16 
+Price_Miso<-300 
+Entry_Fee<-20 
+Fish_Entitled_Oz<-5 
 
 Profits<-c()
 
@@ -122,11 +128,11 @@ V_Entry_Fee<-rep(Entry_Fee,n)
 V_Fish_Entitled_Oz<-rep(Fish_Entitled_Oz,n)
 
 set.seed(12)
-V_Attendance<-round(rtriang(n,20,50,30),0) # Random Variable
-Consumption<-V_Attendance*V_Fish_Entitled_Oz # Calculated
-Available<-V_Order_Oz # Calculated
+V_Attendance<-round(rtriang(n,20,50,30),0) 
+V_Demand<-V_Attendance*V_Fish_Entitled_Oz 
+Available<-V_Order_Oz
 
-V_Profit<-pmin(Consumption,Available)/V_Fish_Entitled_Oz*V_Entry_Fee-V_Order_Oz*V_Price_Fish_Oz-V_Price_Miso
+V_Profit<-pmin(V_Demand,Available)/V_Fish_Entitled_Oz*V_Entry_Fee-V_Order_Oz*V_Price_Fish_Oz-V_Price_Miso
 Profits<-c(Profits,mean(V_Profit))
 }
 
