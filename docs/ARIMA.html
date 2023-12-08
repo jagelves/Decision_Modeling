@@ -311,7 +311,7 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 </div>
 <p>The series now fluctuates closer to the mean, but unlike the white noise process behaves less erratic. You will notice that in some periods the change in deliveries from quarter to quarter is high. For example, following the lows at the beginning of the year, deliveries seem to increase sharply. There seems to be correlations between the quarters (time dependencies).</p>
-<p>Aonother pattern shown in the graph above is heteroskedasticity (increasing variance), The variance of the series seems to be low from the period of 2016-2018 while significantly higher for the period after. To normalize the variance of the series we can conduct a Box-Cox transformation.</p>
+<p>Another pattern shown in the graph above is heteroskedasticity (increasing variance), The variance of the series seems to be low from the period of 2016-2018 while significantly higher for the period after. To normalize the variance of the series we can conduct a Box-Cox transformation.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> deliveries <span class="sc">%&gt;%</span> <span class="fu">as_tsibble</span>(<span class="at">index=</span>period, <span class="at">regular=</span>T) <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">features</span>(deliveries, <span class="at">features =</span> guerrero) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(lambda_guerrero) </span>
@@ -325,7 +325,7 @@ We can generate a white noise process by using the normal distribution with a me
 <p><img src="ARIMA_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The transformation has made the series a bit more homoskedastic (variance is more uniform) than the series without the transformation. It is important to note that both transformations (differencing and box-cox) can be undone by using an inverse function. We can always return the series to its original form.</p>
+<p>The transformation has made the series a bit more homoskedastic (variance is more uniform) than the series without the transformation. It is important to note that both transformations (differencing and box-cox) can be undone by using an inverse function. We can always return the series to its original form. Luckily, <code>fable</code> does this automatically for us when we estimate a model.</p>
 <p>A couple of statistical features used to determine the stationarity of a series are the <em>unitroot_kpss</em> and <em>unitroot_ndiffs</em>. In general, a low p-value allows us to reject the null of hypothesis of stationarity. Below, we test the features with the non-stationary Tesla deliveries.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>deliveries <span class="sc">%&gt;%</span> <span class="fu">as_tsibble</span>(<span class="at">index=</span>period, <span class="at">regular=</span>T) <span class="sc">%&gt;%</span></span>
@@ -805,7 +805,7 @@ We can generate a white noise process by using the normal distribution with a me
 <center>
 <span class="math inline">\(\rho_{y_t,y_{t-k}}=\frac{cov(y_t,y_{y-k})}{sd(y_t)sd(y_{t-k})}\)</span>
 </center>
-<p>Let’s illustrate the use of autocorrelations with an example. This time let’s inspect personal income growth in the state of California. Below we load the data and create the train and test sets.</p>
+<p><br> Let’s illustrate the use of autocorrelations with an example. This time let’s inspect personal income growth in the state of California. Below we load the data and create the train and test sets.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -1419,7 +1419,7 @@ We can generate a white noise process by using the normal distribution with a me
 </section>
 <section id="model-selection" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="model-selection">Model Selection</h3>
-<p>We can choose between these choose between the LS and AR(1) models by looking at the AIC, AICc, or BIC.</p>
+<p>We can choose between the LS and AR(1) models by looking at the AIC, AICc, or BIC.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(PI_fit) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(AICc) <span class="sc">%&gt;%</span> <span class="fu">select</span>(.model<span class="sc">:</span>BIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

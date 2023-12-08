@@ -62,7 +62,7 @@ deliveries %>%
 
 The series now fluctuates closer to the mean, but unlike the white noise process behaves less erratic. You will notice that in some periods the change in deliveries from quarter to quarter is high. For example, following the lows at the beginning of the year, deliveries seem to increase sharply. There seems to be correlations between the quarters (time dependencies).
 
-Aonother pattern shown in the graph above is heteroskedasticity (increasing variance), The variance of the series seems to be low from the period of 2016-2018 while significantly higher for the period after. To normalize the variance of the series we can conduct a Box-Cox transformation.
+Another pattern shown in the graph above is heteroskedasticity (increasing variance), The variance of the series seems to be low from the period of 2016-2018 while significantly higher for the period after. To normalize the variance of the series we can conduct a Box-Cox transformation.
 
 ```{r, warning=FALSE, message=FALSE}
 lambda <- deliveries %>% as_tsibble(index=period, regular=T) %>%
@@ -75,7 +75,7 @@ deliveries %>% as_tsibble(index=period, regular=T) %>%
        subtitle = "Q1 2016 - Q4 2022",x="",y="")
 ```
 
-The transformation has made the series a bit more homoskedastic (variance is more uniform) than the series without the transformation. It is important to note that both transformations (differencing and box-cox) can be undone by using an inverse function. We can always return the series to its original form.
+The transformation has made the series a bit more homoskedastic (variance is more uniform) than the series without the transformation. It is important to note that both transformations (differencing and box-cox) can be undone by using an inverse function. We can always return the series to its original form. Luckily, `fable` does this automatically for us when we estimate a model.
 
 A couple of statistical features used to determine the stationarity of a series are the *unitroot_kpss* and *unitroot_ndiffs*. In general, a low p-value allows us to reject the null of hypothesis of stationarity. Below, we test the features with the non-stationary Tesla deliveries.
 
@@ -104,6 +104,7 @@ Autocorrelations are essential in time series analysis since they indicate the d
 
 <center>$\rho_{y_t,y_{t-k}}=\frac{cov(y_t,y_{y-k})}{sd(y_t)sd(y_{t-k})}$</center>
 
+<br>
 Let's illustrate the use of autocorrelations with an example. This time let's inspect personal income growth in the state of California. Below we load the data and create the train and test sets.
 
 ```{r, message=FALSE, warning=FALSE}
@@ -242,7 +243,7 @@ The PACF once again shows no pattern for the residuals of the AR(1) model and so
 
 ### Model Selection {.unnumbered}
 
-We can choose between these choose between the LS and AR(1) models by looking at the AIC, AICc, or BIC.
+We can choose between the LS and AR(1) models by looking at the AIC, AICc, or BIC.
 
 ```{r, results='hide'}
 glance(PI_fit) %>% arrange(AICc) %>% select(.model:BIC)
