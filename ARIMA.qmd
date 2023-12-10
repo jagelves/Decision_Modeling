@@ -443,9 +443,12 @@ Now we can plot the forecasts for the ensemble, the AR1 and the LS model.
 ```{r}
 fit2 %>% select(AR1,LS,Ensemble) %>%
   forecast(h=27) %>% autoplot(level=NULL) +
-  autolayer(cali,average_price) + theme_classic()
+  autolayer(cali,average_price) + theme_classic() +
+  labs(y="", title= "California's Forecasted Average Price Of Avocados",
+       subtitle = "Jan 4, 2015 - Dec 2, 2018",
+       x="")
 ```
-We can now see how the ensemble fits the test data better than each model individually. Let's confirm the accuracy of the ensemble to the test set by calculating some measures.
+The plot illustrates how the ensemble fits the test data better than each model individually. Let's confirm the accuracy of the ensemble to the test set by calculating some measures.
 
 ```{r, results='hide'}
 fit2 %>% forecast(h=27) %>% accuracy(cali)

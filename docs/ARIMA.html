@@ -3099,12 +3099,15 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(AR1,LS,Ensemble) <span class="sc">%&gt;%</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">27</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">level=</span><span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(cali,average_price) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(cali,average_price) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">""</span>, <span class="at">title=</span> <span class="st">"California's Forecasted Average Price Of Avocados"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Jan 4, 2015 - Dec 2, 2018"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="ARIMA_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>We can now see how the ensemble fits the test data better than each model individually. Let’s confirm the accuracy of the ensemble to the test set by calculating some measures.</p>
+<p>The plot illustrates how the ensemble fits the test data better than each model individually. Let’s confirm the accuracy of the ensemble to the test set by calculating some measures.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">27</span>) <span class="sc">%&gt;%</span> <span class="fu">accuracy</span>(cali)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
