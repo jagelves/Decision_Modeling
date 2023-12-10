@@ -238,8 +238,9 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#revisiting-chilangos-restaurant" id="toc-revisiting-chilangos-restaurant" class="nav-link" data-scroll-target="#revisiting-chilangos-restaurant">Revisiting Chilango’s Restaurant</a></li>
   </ul></li>
-  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">7.5</span> Readings</a></li>
-  <li><a href="#leasons-learned" id="toc-leasons-learned" class="nav-link" data-scroll-target="#leasons-learned"><span class="header-section-number">7.6</span> Leasons Learned</a></li>
+  <li><a href="#combination-of-models-ensembles" id="toc-combination-of-models-ensembles" class="nav-link" data-scroll-target="#combination-of-models-ensembles"><span class="header-section-number">7.5</span> Combination of Models (Ensembles)</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">7.6</span> Readings</a></li>
+  <li><a href="#leasons-learned" id="toc-leasons-learned" class="nav-link" data-scroll-target="#leasons-learned"><span class="header-section-number">7.7</span> Leasons Learned</a></li>
   </ul>
 </nav>
     </div>
@@ -2498,18 +2499,18 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>cali <span class="sc">%&gt;%</span></span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">key=</span>geography,<span class="at">index=</span>date,<span class="at">regular=</span>T) <span class="sc">%&gt;%</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_index</span>(<span class="st">"2015-01-04"</span><span class="sc">~</span><span class="st">"2018-06-02"</span>) <span class="ot">-&gt;</span> calits_train</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_index</span>(.<span class="sc">~</span><span class="st">"2018-06-02"</span>) <span class="ot">-&gt;</span> calits_train</span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>cali <span class="sc">%&gt;%</span></span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">key=</span>geography,</span>
 <span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">index=</span>date, <span class="at">regular=</span>T) <span class="sc">%&gt;%</span></span>
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_index</span>(<span class="st">"2018-06-02"</span><span class="sc">~</span><span class="st">"2018-12-02"</span>) <span class="ot">-&gt;</span> calits_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Next, we will estimate the LS, ETS, AR, and ARIMA models. We will allow an algorithm to specify the parameters of both the ETS and ARIMA models by using the <code>ETS()</code> and <code>ARIMA()</code> functions and omitting arguments. Within the <code>ARIMA()</code> function we will set the <em>approximation</em> argument to FALSE so that the search for the best ARIMA model is exhaustive.</p>
+<p>Next, we will estimate the LS, ETS, AR1, and ARIMA models. We will allow an algorithm to specify the parameters of both the ETS and ARIMA models by using the <code>ETS()</code> and <code>ARIMA()</code> functions and omitting arguments. Within the <code>ARIMA()</code> function we will set the <em>approximation</em> argument to FALSE so that the search for the best ARIMA model is exhaustive. Note also how an AR1 model is calculated. The <code>ARIMA()</code> function is called along with the <code>pdq()</code> function. The first argument of the <code>pdq()</code> function is the order of the AR process (p), the next argument is the number of differences needed to make the series stationary (d), and the last argument is the order of the MA process (q). Hence, for the AR1 model we specify <code>pdq(1,0,0)</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">model</span>(calits_train,<span class="at">ETS=</span><span class="fu">ETS</span>(average_price),</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">ARIMA=</span><span class="fu">ARIMA</span>(average_price,<span class="at">approximation =</span> F),</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">AR=</span><span class="fu">AR</span>(average_price<span class="sc">~</span><span class="fu">order</span>(<span class="dv">1</span>)),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">AR1=</span><span class="fu">ARIMA</span>(average_price<span class="sc">~</span><span class="fu">pdq</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)),</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">LS=</span><span class="fu">TSLM</span>(average_price<span class="sc">~</span><span class="fu">trend</span>()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The coefficients for the models can be retrieved by using the <code>tidy()</code> or <code>coef()</code> functions.</p>
@@ -3019,18 +3020,18 @@ We can generate a white noise process by using the normal distribution with a me
 <td headers="statistic" class="gt_row gt_center">8.7888</td>
 <td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
     <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">AR</td>
-<td headers="term" class="gt_row gt_center">constant</td>
-<td headers="estimate" class="gt_row gt_center">0.2139</td>
-<td headers="std.error" class="gt_row gt_center">0.0605</td>
-<td headers="statistic" class="gt_row gt_center">3.5351</td>
-<td headers="p.value" class="gt_row gt_center">0.0005</td></tr>
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">AR</td>
+<td headers=".model" class="gt_row gt_center">AR1</td>
 <td headers="term" class="gt_row gt_center">ar1</td>
-<td headers="estimate" class="gt_row gt_center">0.8743</td>
-<td headers="std.error" class="gt_row gt_center">0.0354</td>
-<td headers="statistic" class="gt_row gt_center">24.6880</td>
+<td headers="estimate" class="gt_row gt_center">0.8816</td>
+<td headers="std.error" class="gt_row gt_center">0.0350</td>
+<td headers="statistic" class="gt_row gt_center">25.2051</td>
+<td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
+    <tr><td headers="geography" class="gt_row gt_center">California</td>
+<td headers=".model" class="gt_row gt_center">AR1</td>
+<td headers="term" class="gt_row gt_center">constant</td>
+<td headers="estimate" class="gt_row gt_center">0.1971</td>
+<td headers="std.error" class="gt_row gt_center">0.0097</td>
+<td headers="statistic" class="gt_row gt_center">20.3814</td>
 <td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
     <tr><td headers="geography" class="gt_row gt_center">California</td>
 <td headers=".model" class="gt_row gt_center">LS</td>
@@ -3085,9 +3086,27 @@ We can generate a white noise process by using the normal distribution with a me
 <p><img src="ARIMA_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Interestingly, the AR(1) and the LS model perform the best. The LS model overestimates the test data, while the AR(1) underestimates it. One could imagine combining the forecasts of these models to obtain a better one. Lastly, let’s confirm the accuracy of these two models by comparing forecasts to the test set.</p>
+<p>Interestingly, the AR(1) and the LS model perform the best. The LS model overestimates the test data, while the AR(1) underestimates it. One could imagine combining the forecasts of these models to obtain a better one.</p>
+</section>
+</section>
+<section id="combination-of-models-ensembles" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="combination-of-models-ensembles"><span class="header-section-number">7.5</span> Combination of Models (Ensembles)</h2>
+<p>To create a combination of models we can use the <em>fit</em> object containing the mable. Specifically, any model in the <em>fit</em> object can be combined using a linear combination. The code below combines the AR(1) model and the LS model by finding a simple average between both models.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">27</span>) <span class="sc">%&gt;%</span> <span class="fu">accuracy</span>(cali)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span>  <span class="fu">mutate</span>(<span class="at">Ensemble=</span><span class="fl">0.5</span><span class="sc">*</span>LS<span class="fl">+0.5</span><span class="sc">*</span>AR1) <span class="ot">-&gt;</span> fit2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can plot the forecasts for the ensemble, the AR1 and the LS model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(AR1,LS,Ensemble) <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">27</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">level=</span><span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(cali,average_price) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can now see how the ensemble fits the test data better than each model individually. Let’s confirm the accuracy of the ensemble to the test set by calculating some measures.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">27</span>) <span class="sc">%&gt;%</span> <span class="fu">accuracy</span>(cali)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -3553,17 +3572,17 @@ We can generate a white noise process by using the normal distribution with a me
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers=".model" class="gt_row gt_center">AR</td>
+    <tr><td headers=".model" class="gt_row gt_center">AR1</td>
 <td headers="geography" class="gt_row gt_center">California</td>
 <td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">0.14</td>
-<td headers="RMSE" class="gt_row gt_center">0.18</td>
-<td headers="MAE" class="gt_row gt_center">0.14</td>
-<td headers="MPE" class="gt_row gt_center">7.07</td>
-<td headers="MAPE" class="gt_row gt_center">7.40</td>
-<td headers="MASE" class="gt_row gt_center">1.40</td>
-<td headers="RMSSE" class="gt_row gt_center">1.32</td>
-<td headers="ACF1" class="gt_row gt_center">0.51</td></tr>
+<td headers="ME" class="gt_row gt_center">0.16</td>
+<td headers="RMSE" class="gt_row gt_center">0.21</td>
+<td headers="MAE" class="gt_row gt_center">0.16</td>
+<td headers="MPE" class="gt_row gt_center">8.65</td>
+<td headers="MAPE" class="gt_row gt_center">8.65</td>
+<td headers="MASE" class="gt_row gt_center">1.63</td>
+<td headers="RMSSE" class="gt_row gt_center">1.49</td>
+<td headers="ACF1" class="gt_row gt_center">0.50</td></tr>
     <tr><td headers=".model" class="gt_row gt_center">ARIMA</td>
 <td headers="geography" class="gt_row gt_center">California</td>
 <td headers=".type" class="gt_row gt_center">Test</td>
@@ -3586,17 +3605,28 @@ We can generate a white noise process by using the normal distribution with a me
 <td headers="MASE" class="gt_row gt_center">1.95</td>
 <td headers="RMSSE" class="gt_row gt_center">1.69</td>
 <td headers="ACF1" class="gt_row gt_center">0.50</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center" style="background-color: #90EE90;">LS</td>
+    <tr><td headers=".model" class="gt_row gt_center" style="background-color: #90EE90;">Ensemble</td>
 <td headers="geography" class="gt_row gt_center" style="background-color: #90EE90;">California</td>
 <td headers=".type" class="gt_row gt_center" style="background-color: #90EE90;">Test</td>
-<td headers="ME" class="gt_row gt_center" style="background-color: #90EE90;">−0.10</td>
-<td headers="RMSE" class="gt_row gt_center" style="background-color: #90EE90;">0.16</td>
-<td headers="MAE" class="gt_row gt_center" style="background-color: #90EE90;">0.14</td>
-<td headers="MPE" class="gt_row gt_center" style="background-color: #90EE90;">−5.88</td>
-<td headers="MAPE" class="gt_row gt_center" style="background-color: #90EE90;">7.78</td>
-<td headers="MASE" class="gt_row gt_center" style="background-color: #90EE90;">1.37</td>
-<td headers="RMSSE" class="gt_row gt_center" style="background-color: #90EE90;">1.14</td>
-<td headers="ACF1" class="gt_row gt_center" style="background-color: #90EE90;">0.52</td></tr>
+<td headers="ME" class="gt_row gt_center" style="background-color: #90EE90;">0.03</td>
+<td headers="RMSE" class="gt_row gt_center" style="background-color: #90EE90;">0.13</td>
+<td headers="MAE" class="gt_row gt_center" style="background-color: #90EE90;">0.10</td>
+<td headers="MPE" class="gt_row gt_center" style="background-color: #90EE90;">1.38</td>
+<td headers="MAPE" class="gt_row gt_center" style="background-color: #90EE90;">5.26</td>
+<td headers="MASE" class="gt_row gt_center" style="background-color: #90EE90;">0.98</td>
+<td headers="RMSSE" class="gt_row gt_center" style="background-color: #90EE90;">0.92</td>
+<td headers="ACF1" class="gt_row gt_center" style="background-color: #90EE90;">0.51</td></tr>
+    <tr><td headers=".model" class="gt_row gt_center">LS</td>
+<td headers="geography" class="gt_row gt_center">California</td>
+<td headers=".type" class="gt_row gt_center">Test</td>
+<td headers="ME" class="gt_row gt_center">−0.10</td>
+<td headers="RMSE" class="gt_row gt_center">0.16</td>
+<td headers="MAE" class="gt_row gt_center">0.14</td>
+<td headers="MPE" class="gt_row gt_center">−5.88</td>
+<td headers="MAPE" class="gt_row gt_center">7.78</td>
+<td headers="MASE" class="gt_row gt_center">1.37</td>
+<td headers="RMSSE" class="gt_row gt_center">1.14</td>
+<td headers="ACF1" class="gt_row gt_center">0.52</td></tr>
   </tbody>
   
   
@@ -3605,9 +3635,8 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 </div>
 </section>
-</section>
-<section id="readings" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="readings"><span class="header-section-number">7.5</span> Readings</h2>
+<section id="readings" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="readings"><span class="header-section-number">7.6</span> Readings</h2>
 <p>Chapter 9 of <span class="citation" data-cites="FPP3">Hyndman (<a href="references.html#ref-FPP3" role="doc-biblioref">2021</a>)</span> deals with ARIMA models. The readings are not very technical and omit explaining the model selection process. For readers wanting even more mathematical details as well as a deep dive into the model selection process I recommend reading <span class="citation" data-cites="GGR">Gonzalez (<a href="references.html#ref-GGR" role="doc-biblioref">2013</a>)</span>. For those looking for an alternative to <span class="citation" data-cites="FPP3">Hyndman (<a href="references.html#ref-FPP3" role="doc-biblioref">2021</a>)</span> you can try <span class="citation" data-cites="ADAM">Svetunkov (<a href="references.html#ref-ADAM" role="doc-biblioref">2023</a>)</span> or <span class="citation" data-cites="IER">Hank (<a href="references.html#ref-IER" role="doc-biblioref">2023</a>)</span>.</p>
 <ul>
 <li><p><span class="citation" data-cites="FPP3">Hyndman (<a href="references.html#ref-FPP3" role="doc-biblioref">2021</a>)</span> Chapter 9 (ARIMA Models).</p></li>
@@ -3616,8 +3645,8 @@ We can generate a white noise process by using the normal distribution with a me
 <li><p><span class="citation" data-cites="IER">Hank (<a href="references.html#ref-IER" role="doc-biblioref">2023</a>)</span></p></li>
 </ul>
 </section>
-<section id="leasons-learned" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="leasons-learned"><span class="header-section-number">7.6</span> Leasons Learned</h2>
+<section id="leasons-learned" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="leasons-learned"><span class="header-section-number">7.7</span> Leasons Learned</h2>
 <p>In this module you have been introduced to ARIMA model. Particularly you have learned to:</p>
 <ul>
 <li><p>Apply autocorrelations, partial autocorrelations, stationarity and white noise to model time series.</p></li>

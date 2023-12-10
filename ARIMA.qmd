@@ -368,7 +368,7 @@ cali %>%
 
 cali %>%
   as_tsibble(key=geography,index=date,regular=T) %>%
-  filter_index("2015-01-04"~"2018-06-02") -> calits_train
+  filter_index(.~"2018-06-02") -> calits_train
 
 cali %>%
   as_tsibble(key=geography,
@@ -376,12 +376,12 @@ cali %>%
   filter_index("2018-06-02"~"2018-12-02") -> calits_test
 ```
 
-Next, we will estimate the LS, ETS, AR, and ARIMA models. We will allow an algorithm to specify the parameters of both the ETS and ARIMA models by using the `ETS()` and `ARIMA()` functions and omitting arguments. Within the `ARIMA()` function we will set the *approximation* argument to FALSE so that the search for the best ARIMA model is exhaustive.
+Next, we will estimate the LS, ETS, AR1, and ARIMA models. We will allow an algorithm to specify the parameters of both the ETS and ARIMA models by using the `ETS()` and `ARIMA()` functions and omitting arguments. Within the `ARIMA()` function we will set the *approximation* argument to FALSE so that the search for the best ARIMA model is exhaustive. Note also how an AR1 model is calculated. The `ARIMA()` function is called along with the `pdq()` function. The first argument of the `pdq()` function is the order of the AR process (p), the next argument is the number of differences needed to make the series stationary (d), and the last argument is the order of the MA process (q). Hence, for the AR1 model we specify `pdq(1,0,0)`.
 
 ```{r}
 fit <- model(calits_train,ETS=ETS(average_price),
               ARIMA=ARIMA(average_price,approximation = F),
-              AR=AR(average_price~order(1)),
+              AR1=ARIMA(average_price~pdq(1,0,0)),
               LS=TSLM(average_price~trend()))
 ```
 
@@ -429,14 +429,31 @@ fit %>% forecast(h=27) %>% autoplot(level=NULL) +
        x="")
 ```
 
-Interestingly, the AR(1) and the LS model perform the best. The LS model overestimates the test data, while the AR(1) underestimates it. One could imagine combining the forecasts of these models to obtain a better one. Lastly, let's confirm the accuracy of these two models by comparing forecasts to the test set.
+Interestingly, the AR(1) and the LS model perform the best. The LS model overestimates the test data, while the AR(1) underestimates it. One could imagine combining the forecasts of these models to obtain a better one.
+
+## Combination of Models (Ensembles)
+To create a combination of models we can use the *fit* object containing the mable. Specifically, any model in the *fit* object can be combined using a linear combination. The code below combines the AR(1) model and the LS model by finding a simple average between both models.
+
+```{r}
+fit %>%  mutate(Ensemble=0.5*LS+0.5*AR1) -> fit2
+```
+
+Now we can plot the forecasts for the ensemble, the AR1 and the LS model.
+
+```{r}
+fit2 %>% select(AR1,LS,Ensemble) %>%
+  forecast(h=27) %>% autoplot(level=NULL) +
+  autolayer(cali,average_price) + theme_classic()
+```
+We can now see how the ensemble fits the test data better than each model individually. Let's confirm the accuracy of the ensemble to the test set by calculating some measures.
 
 ```{r, results='hide'}
-fit %>% forecast(h=27) %>% accuracy(cali)
+fit2 %>% forecast(h=27) %>% accuracy(cali)
 ```
 
 ```{r, echo=FALSE}
-fit %>% forecast(new_data = calits_test) %>% 
+fit2 %>%
+  forecast(new_data = calits_test) %>% 
   accuracy(cali) %>%
   gt() %>%
   cols_align("center") %>% 
@@ -448,7 +465,7 @@ fit %>% forecast(new_data = calits_test) %>%
              decimals = 2) %>% 
   tab_style_body(
     style = cell_fill(color="lightgreen"),
-    values = "LS",
+    values = "Ensemble",
     targets ="row")
 ```
 
