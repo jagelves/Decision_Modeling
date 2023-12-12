@@ -40,52 +40,53 @@ In general, before modeling and forecasting, we will check whether the series is
 library(fpp3)
 library(tidyverse)
 library(gt)
-deliveries<-read_csv("https://jagelves.github.io/Data/tsla_deliveries.csv")
+tesla<-read_csv("https://jagelves.github.io/Data/tsla_deliveries.csv")
 
-deliveries$period<-yearquarter(deliveries$period)
+tesla %>%
+  mutate(period=yearquarter(period)) %>%
+  as_tsibble(index=period, regular=T) -> tesla
 
-deliveries %>%
-  as_tsibble(index=period, regular=T) %>% autoplot(deliveries) + theme_classic()+ geom_abline(slope=0, intercept=mean(deliveries$deliveries), col="blue",                             linetype="dashed", lwd=1, alpha=0.4) + 
+tesla %>% autoplot(deliveries) + theme_classic()+ geom_abline(slope=0, intercept=mean(tesla$deliveries), col="blue",                             linetype="dashed", lwd=1, alpha=0.4) + 
   labs(title="Tesla Vehicle Deliveries",
        subtitle="Q1 2016 - Q4 2022", y="", x="")
 ```
 
-Deliveries have been on an upward trend as the company is currently scaling its production, and demand is strong. This series is not stationary since it crosses the mean (blue line) once and never revisits it. That is, the mean is not constant and changes with time. It is possible to make the series stationary by finding differences. Below is the graph of the first difference.
+Deliveries have been on an upward trend as the company is currently scaling its production, and demand is strong. This series is not stationary since it crosses the mean (blue line) once and never revisits it. That is, the mean is not constant and changes with time. It is possible to make the series stationary by finding differences (i.e. the change in deliveries from quarter to quarter). Below is the graph of the first difference.
 
 ```{r, warning=FALSE, message=FALSE}
-deliveries %>%
-  as_tsibble(index=period, regular=T) %>% autoplot(difference(deliveries)) + theme_classic() +
-  labs(title="Change In Tesla's Vehicle Deliveries",
+tesla %>%
+  autoplot(difference(deliveries)) + theme_classic() +
+  labs(title="Quarterly Change In Tesla's Vehicle Deliveries",
        subtitle = "Q1 2016 - Q4 2022",x="",y="") + 
-  geom_hline(yintercept = mean(difference(deliveries$deliveries), na.rm = TRUE), col="blue", linetype="dashed", lwd=1, alpha=0.4)
+  geom_hline(yintercept = mean(difference(tesla$deliveries), na.rm = TRUE), col="blue", linetype="dashed", lwd=1, alpha=0.4)
 ```
 
 The series now fluctuates closer to the mean, but unlike the white noise process behaves less erratic. You will notice that in some periods the change in deliveries from quarter to quarter is high. For example, following the lows at the beginning of the year, deliveries seem to increase sharply. There seems to be correlations between the quarters (time dependencies).
 
-Another pattern shown in the graph above is heteroskedasticity (increasing variance), The variance of the series seems to be low from the period of 2016-2018 while significantly higher for the period after. To normalize the variance of the series we can conduct a Box-Cox transformation.
+Another pattern shown in the graph above is heteroskedasticity (increasing variance), The variance of the series seems to be low in the period of 2016-2018 while significantly higher for the period after. To normalize the variance of the series we can conduct a Box-Cox transformation.
 
 ```{r, warning=FALSE, message=FALSE}
-lambda <- deliveries %>% as_tsibble(index=period, regular=T) %>%
+lambda <- tesla %>% 
   features(deliveries, features = guerrero) %>% pull(lambda_guerrero) 
 
-deliveries %>% as_tsibble(index=period, regular=T) %>%
+tesla %>%
   autoplot(box_cox(difference(deliveries), lambda)) +
   labs(y = "")+ theme_classic() +
   labs(title="Box-Cox Transformation of Tesla's Vehicle Deliveries",
        subtitle = "Q1 2016 - Q4 2022",x="",y="")
 ```
 
-The transformation has made the series a bit more homoskedastic (variance is more uniform) than the series without the transformation. It is important to note that both transformations (differencing and box-cox) can be undone by using an inverse function. We can always return the series to its original form. Luckily, `fable` does this automatically for us when we estimate a model.
+The transformation has made the series a bit more homoskedastic (variance is more uniform) than the series without the transformation. It is important to note that both transformations (differencing and box-cox) can be undone by using an inverse function. Hence, we can always return the series to its original form. Luckily, `fable` does this automatically for us when we forecast a model.
 
-A couple of statistical features used to determine the stationarity of a series are the *unitroot_kpss* and *unitroot_ndiffs*. In general, a low p-value allows us to reject the null of hypothesis of stationarity. Below, we test the features with the non-stationary Tesla deliveries.
+A couple of statistical features used to determine the stationarity of a series are the *unitroot_kpss* and *unitroot_ndiffs*. In general, a low p-value allows us to reject the null of hypothesis of stationarity. Below, we test the features with Tesla's deliveries.
 
 ```{r, results='hide'}
-deliveries %>% as_tsibble(index=period, regular=T) %>%
+tesla %>%
   features(deliveries, features = c(unitroot_kpss, unitroot_ndiffs)) 
 ```
 
 ```{r echo=FALSE}
-deliveries %>% as_tsibble(index=period, regular=T) %>%
+tesla %>%
   features(deliveries, features = c(unitroot_kpss, unitroot_ndiffs)) %>% gt() %>%
   cols_align("center") %>% 
   tab_header(title = 
@@ -96,7 +97,7 @@ deliveries %>% as_tsibble(index=period, regular=T) %>%
              decimals = 3)
 ```
 
-The test reports a p-value of 0.01 when it is below 0.01 and 0.1 when it is above 0.1. Hence, the p-value confirms that Tesla deliveries are non-stationary and that two differences are required to make the data stationary. Two differences might be required as Tesla's deliveries seem to be growing exponentially.
+Unfortunately, the test does not report the calculated p-value. Instead, it reports a p-value of 0.01 when the p-value is below 0.01 and 0.1 when it is above 0.1. Given that the p-value reported is 0.01, we verify that Tesla deliveries are non-stationary and that two differences are required to make the data stationary (ndiffs=2).
 
 ### The autocorrelation function {.unnumbered}
 
