@@ -233,7 +233,7 @@ AIC (Akaike Information Criterion), AICc (corrected AIC), and BIC (Bayesian Info
 
 -   **AICc** is an adjustment to the AIC measure, particularly for smaller sample sizes. AIC tends to overestimate the complexity penalty when the number of data points is relatively small. AICc adds a correction factor to account for this and is calculated using the formula:
 
-<center>$AICc = AICc + \frac{2(k+2)(k+3)}{T-k-3}$</center>
+<center>$AICc = AIC + \frac{2(k+2)(k+3)}{T-k-3}$</center>
 
 <br> AICc provides a more accurate measure of model fit in situations where the sample size is small. Note that as $T$ gets large, the correction factor approximates zero. As with the AIC, a lower AICc value indicates better fit.
 
