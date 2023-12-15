@@ -10,7 +10,7 @@ Chilango's Kitchen specializes in tacos and burritos made to order in front of t
 
 ## The Avocado Data Set {#sec-Avocado}
 
-The Hass Avocado Board provides the data set and contains weekly retail scan data of U.S. retail volume (units) and price. Retail scan data comes directly from retailers' cash registers based on actual retail sales of Hass avocados. The data reflects an expanded, multi-outlet reporting aggregating the following channels: grocery, mass, club, drug, dollar, and military. The Average Price (of avocados) in the table reflects a per unit (per avocado) cost, even when multiple units (avocados) are sold in bags. Other avocados (e.g. greenskins) are not included in this data. You can find the data [here](https://jagelves.github.io/Data/avocado2020.csv).
+The [Hass Avocado Board](https://hassavocadoboard.com) provides the data set and contains weekly retail scan data of U.S. retail volume (units) and price. Retail scan data comes directly from retailers' cash registers based on actual retail sales of Hass avocados. The data reflects an expanded, multi-outlet reporting aggregating the following channels: grocery, mass, club, drug, dollar, and military. The Average Price (of avocados) in the table reflects a per unit (per avocado) cost, even when multiple units (avocados) are sold in bags. Other avocados (e.g. greenskins) are not included in this data. You can find the data [here](https://jagelves.github.io/Data/avocado2020.csv).
 
 **Note:** In general the data is recorded weekly. However, there is an entry on 01/01/2018, that is right after 12/31/2017. This is a single observation that is not weekly. There are also missing dates from 12/02/2018-12/31/2018.
 
@@ -62,13 +62,20 @@ avocado %>% filter(date!=ymd("2018-01-01")) -> avocado
 
 You should notice that whereas the `select()` function chooses particular variables (i.e., columns), the `filter()` function chooses rows of the tibble that meet the conditions listed. Note also that the filtered data set is assigned (`->`) to *avocado* overwriting the older object.
 
-The examples above highlight the use of `dplyr` functions to transform your data. There are plenty of other functions, but learning these are outside the scope of this book. To find out more, I recommend reading @R4DS Chapter 4. For now, we will use one more data transformation technique to retrieve California's average price of organic avocados for 2015-2018.
+The examples above highlight the use of `dplyr` functions to transform your data. There are plenty of other functions, but learning these are outside the scope of this book. To find out more, I recommend reading @R4DS Chapter 4. Let's use the `filter()` and `select()` functions once more to retrieve California's average price of organic avocados for 2015-2018.
 
 ```{r}
 avocado %>% 
   filter(geography=="California", type=="organic", year<=2018) %>% 
-  select(date, average_price, geography) -> cali
+  select(date, average_price) -> cali
 ```
+
+When exploring time series data, it is important to standardize the time interval between observations. The code below calculates the number of days between observations.
+
+```{r}
+cali %>% pull(date) %>% diff()
+```
+The `pull()` function vectorizes the *date* variable, making it possible to apply the `diff()` function. The result confirms that all observations are seven days apart and that no missing observations or duplicates exist.
 
 ## Visualizing The Data {#sec-Visual}
 
@@ -76,19 +83,21 @@ To visualize the data, we will be using `ggplot2`. One of the main functions in 
 
 ```{r}
 ggplot(data=cali) + 
-  geom_line(mapping=aes(x=date,y=average_price, group=geography),color="black") +
+  geom_line(mapping=aes(x=date,y=average_price),
+            color="black") +
   theme_classic() + 
   labs(x="",
        y="Average Price", 
        title="Organic Avocado Price in California",
-       subtitle="2015-2018")  
+       subtitle="2015-2018",
+       caption="https://hassavocadoboard.com")  
 ```
 
 The average price of avocados in California increased during the period considered. It reached a maximum of about $2.60$ in $2017$ and a minimum of $1.10$ in $2015$. There is also a seasonal pattern with low prices at the beginning of the year and peaks mid-year. In upcoming chapters, we will extrapolate these patterns and use them to forecast time series.
 
 ## tsibbles
 
-When dealing with time series, time plays an important role. Consequently, we will use a data structure called a tsibble (time series tibble). tsibbles are defined by a time index (i.e., the date) that has a standard interval (i.e., days, weeks, months, and years) and keys (i.e., dimensions or observational units). In the *avocado* data set, we are mainly interested in the average price of the avocados. You will note that the prices are classified by location (geography) and type (organic and conventional). You can learn more about tsibbles [here](https://tsibble.tidyverts.org).
+When analyzing time series, time plays a central role. Consequently, we will use a data structure to handle a time series called a tsibble (time series tibble). tsibbles are defined by a time index (i.e., the date) that has a standard interval (i.e., days, weeks, months, and years) and keys (i.e., dimensions that do not vary with time). In the *avocado* data set, we are mainly interested in the average price of the avocados. You will note that the prices are classified by location (geography) and type (organic and conventional). You can learn more about tsibbles [here](https://tsibble.tidyverts.org).
 
 tsibbles, as well a variety of packages that help us analyze time series, are part of the `fpp3` package. Below we load the package, and coerce our avocado tibble to a tsibble.
 
@@ -100,13 +109,13 @@ avocado %>%
   filter_index("2015-01-04"~"2018-12-02")-> avocadots
 ```
 
-In the code above, the `as_tsibble()` function was called with the parameter *regular* set at true indicating that the date has no gaps and occurs every week (the greatest common divisor of the index column). The function `filter_index()` is called as it allows us to determine the window for analysis. As noted in @sec-Avocado, there are some missing dates in December 2018. We limit the analysis for now to 2015-2018.
+In the code above, the `as_tsibble()` function was called with the parameter *regular* set at true, indicating that the date has no gaps and occurs every week (the greatest common divisor of the index column). Additionally, the type of avocado and the geography do not vary with time and are classified as a *key*. The function `filter_index()` is called as it allows us to determine the window for analysis. As noted in @sec-Avocado, there are some missing dates in December 2018. We limit the analysis for now to 2015-2018.
 
 Recall, that we are interested in the average price of avocados for California. We can specify the tsibble for analysis, by using `dplyr`.
 
 ```{r}
 avocadots %>% filter(geography=="California", type=="organic") %>%
-  select(date,geography,average_price) -> calits
+  select(date,average_price) -> calits
 ```
 
 ## Time Series Decomposition
