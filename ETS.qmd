@@ -281,7 +281,7 @@ The last step is to create a scenario where Tesla has a shutdown and one where t
 ```{r}
 Down_Scenario <- scenarios(
   Factory_Down = new_data(tesla, 4) |>
-    mutate(Down=c(1,1,0,0)),
+    mutate(Down=rep(1,4)),
   Factory_Up = new_data(tesla, 4) |>
     mutate(Down=rep(0,4)),
   names_to = "Scenario")
