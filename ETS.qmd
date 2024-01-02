@@ -255,7 +255,7 @@ fit %>%
 
 ## Scenarios
 
-On 10/09/23 Tesla reported 435,059 deliveries for Q3 2023. On the previous earning call, Tesla warned investors that factories would be shut to accommodate the production of a new type of vehicle (highland model 3). Since a similar shutdown occurred on Q2 2022, we can use this information to get a more accurate prediction.
+On 10/09/23 Tesla reported 435,059 deliveries for Q3 2023. On the previous earning call, Tesla warned investors that factories would be shutdown to accommodate the production of a new type of vehicle (highland model 3). Since a similar shutdown occurred on Q2 2022, we can use this information to get a more accurate prediction.
 
 ```{r}
 tesla<-mutate(tesla,
@@ -276,7 +276,7 @@ fit <- tesla %>%
 
 ```
 
-The last step is to create a scenario where Tesla has shutdown and one where there is no shutdown. To do this we can use the `scenarios()` function and create a new data set for forecasting that includes four periods in which the dummy is 1 (factory has a shutdown) and four periods where the dummy is 0 (factory has no shutdown).
+The last step is to create a scenario where Tesla has a shutdown and one where there is no shutdown. To do this we can use the `scenarios()` function and create a new data set for forecasting that includes four periods in which the dummy is 1 (factory has a shutdown) and four periods where the dummy is 0 (factory has no shutdown).
 
 ```{r}
 Down_Scenario <- scenarios(
@@ -299,7 +299,7 @@ tesla %>%
        subtitle = "Scenario Forecast") + theme_classic()
 ```
 
-The new forecast of 429,404 is now closer to the reported delivery number of 435,059. The analyst consensus estimate was 454,809. For the 4th quarter of 2023 the analyst consensus is 483,000, which is inline with the forecast of the LSS model (480,000). The 95% confidence interval of [422,553, 537,182] is retrieved using the `hilo()` function.  
+The new forecast of 429,404 is now closer to the reported delivery number of 435,059. The analyst consensus estimate was 454,809. For the 4th quarter of 2023 the analyst consensus was 480,500, which is inline with the forecast of the LSS model (about 480,000). The 95% confidence interval of [422,553, 537,182] is retrieved using the `hilo()` function.  
 
 ```{r}
 fit %>% forecast(new_data=Down_Scenario) %>%
