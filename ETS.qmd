@@ -247,7 +247,7 @@ Forecasts for the four quarters are shown above, with the corresponding mean. In
 ```{r}
 fit %>%
   forecast(h = 4) %>%
-  autoplot(tesla, level=95)+
+  autoplot(tesla, level=95) +
   labs(x="Quarter", y="",
        title = "Tesla Car Deliveries Forecasts",
        subtitle = "Q1 2017 to Q2 2023") + theme_classic()
@@ -303,8 +303,12 @@ The new forecast of 429,404 is now closer to the reported delivery number of 435
 
 ```{r}
 fit %>% forecast(new_data=Down_Scenario) %>%
-  hilo(95) %>%
-  select(Down,period,.mean,`95%`)
+  hilo(95) %>% unpack_hilo("95%") %>%
+  as_tibble() %>%
+  select(Down,period,.mean,`95%_lower`,`95%_upper`) %>%
+  gt() %>% fmt_number(columns=c(.mean,
+                       `95%_lower`,`95%_upper`),
+             decimals = 2)
   
 ```
 
