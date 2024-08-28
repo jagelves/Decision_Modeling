@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -66,7 +67,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -75,8 +82,10 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <meta name="mermaid-theme" content="neutral">
@@ -87,6 +96,33 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-sidebar floating">
@@ -95,13 +131,13 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Decisions.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Decisions Under Uncertainty</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Decisions.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Decisions Under Uncertainty</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -110,7 +146,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Decision Modeling</a> 
@@ -180,7 +216,7 @@ div.csl-indent {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -197,6 +233,7 @@ div.csl-indent {
   <li><a href="#the-value-of-information" id="toc-the-value-of-information" class="nav-link" data-scroll-target="#the-value-of-information"><span class="header-section-number">1.8</span> The Value of Information</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">1.9</span> Readings</a></li>
   <li><a href="#lessons-learned-in-this-chapter" id="toc-lessons-learned-in-this-chapter" class="nav-link" data-scroll-target="#lessons-learned-in-this-chapter"><span class="header-section-number">1.10</span> Lessons Learned In This Chapter</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">1.11</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -218,7 +255,9 @@ div.csl-indent {
   </div>
   
 
+
 </header>
+
 
 <p>In this module we will learn how to create decision models. These models rely on probability and expected values. We will map the decision process using a decision tree and value each decision with a monetary value or an expected monetary value (EMV). Our objective is to identify the best decision given the possible choices and uncertainty.</p>
 <section id="shopaholic-retail-company" class="level2" data-number="1.1">
@@ -248,9 +287,10 @@ div.csl-indent {
 <section id="decision-trees" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">1.3</span> Decision Trees</h2>
 <p><strong>Decision trees</strong> visually map the entire business decision process. Below you can see the decision tree for the decision to introduce a new production line.</p>
-<div class="cell" data-fig-width="5" data-theme="dark">
+<div class="cell" data-fig-width="5" data-theme="dark" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">graph LR
     A[ ] --&gt;|Introduce Production Line| C(( )) 
@@ -259,18 +299,20 @@ div.csl-indent {
     C --&gt;|Failure p=0.4| E( -3 )
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
 <p><br> Decision trees are read from left to right. Notice that there are two main branches stemming from the first decision node (i.e., the first square to the left). You can decide to <em>Introduce</em> or <em>Not Introduce</em> the new production line. If you <em>Introduce</em>, you reach a probability node (i.e., the circle that leads to the success and failure branches) where chance determines success or failure at the probabilities given. In the end, your choice of introducing the new product line yields an expected monetary value of 1.8 million, whereas not introducing the line yields no payoff.</p>
-<p>To solve decision trees and find the optimal decision use <strong>backward induction</strong>. Starting from the right of the decision tree and working back to the left at each probability node calculate the EMV. At each decision node, take the maximum of EMV’s to identify the optimal decision. Applying this procedure to our simple example, we would start with the probability node that leads to the success and failure branches and calculate the EMV of 1.8 million (refer to <a href="#sec-EMV"><span>Section&nbsp;1.2</span></a>). Moving back to our initial decision, we now have the choice to <em>Introduce</em> or <em>Not Introduce</em>. In this case we should <em>Introduce</em>, since the resulting EMV (1.8) is higher than <em>Not Introduce</em> (0).</p>
+<p>To solve decision trees and find the optimal decision use <strong>backward induction</strong>. Starting from the right of the decision tree and working back to the left at each probability node calculate the EMV. At each decision node, take the maximum of EMV’s to identify the optimal decision. Applying this procedure to our simple example, we would start with the probability node that leads to the success and failure branches and calculate the EMV of 1.8 million (refer to <a href="#sec-EMV" class="quarto-xref"><span>Section 1.2</span></a>). Moving back to our initial decision, we now have the choice to <em>Introduce</em> or <em>Not Introduce</em>. In this case we should <em>Introduce</em>, since the resulting EMV (1.8) is higher than <em>Not Introduce</em> (0).</p>
 </section>
 <section id="consulting-team" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="consulting-team"><span class="header-section-number">1.4</span> Consulting Team</h2>
 <p>Consider now the option of hiring a consulting team that promises to give you a bit more certainty. The team provides a recommendation based on market research, historical data, and their expertise for $500,000. However, it is known that the team has a false positive rate (i.e., recommending to go with a project when the project would fail) of 15% and a false negative rate of 5% (i.e., recommending not going with a project and when the project would succeed). Below you can see the updated decision tree with the results of the recommendation (i.e., <em>Positive</em>, and <em>Negative</em>).</p>
-<div class="cell" data-fig-width="5">
+<div class="cell" data-fig-width="5" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">graph LR
     F(( ))--&gt; |Positive p=?| A[ ]
@@ -286,6 +328,7 @@ div.csl-indent {
     H --&gt;|Failure p=?| K( -3.5 )
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -305,9 +348,10 @@ div.csl-indent {
 <p><span class="math inline">\(p(+)=0.63\)</span></p>
 </div>
 <p>Hence, the probability of obtaining a recommendation of introducing the new product line is <span class="math inline">\(63\)</span>% and of not recommending the introduction is <span class="math inline">\(p(-)=37\)</span>%. The updated decision tree is now:</p>
-<div class="cell" data-fig-width="5">
+<div class="cell" data-fig-width="5" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">graph LR
     F(( ))--&gt; |Positive p=0.63| A[ ]
@@ -323,6 +367,7 @@ div.csl-indent {
     H --&gt;|Failure p=?| K( -3.5 )
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -340,9 +385,10 @@ div.csl-indent {
 <p><span class="math inline">\(p(Success|+)=0.90\)</span></p>
 </div>
 <p>This implies that <span class="math inline">\(p(Failure|+)=0.10\)</span>. Similarly, the probabilities <span class="math inline">\(p(Success|-)\)</span> and <span class="math inline">\(p(Failure|-)\)</span> can be found using Bayes’ theorem (the reader should try to obtain these probabilities). The updated decision tree is given below:</p>
-<div class="cell" data-fig-width="5">
+<div class="cell" data-fig-width="5" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">graph LR
     F(( ))--&gt; |Positive p=0.63| A[ ]
@@ -358,6 +404,7 @@ div.csl-indent {
     H --&gt;|Failure p=0.92| K( -3.5 )
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -365,9 +412,10 @@ div.csl-indent {
 <section id="sec-Optimal" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="sec-Optimal"><span class="header-section-number">1.7</span> Optimal Decision</h2>
 <p>Now that we have calculated the probabilities we can finally decide whether we should hire the consulting team, and most importantly whether we should introduce the new product line. Summarizing the decision tree by calculating the EMV’s for each probability node yields:</p>
-<div class="cell" data-fig-width="5">
+<div class="cell" data-fig-width="5" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">graph LR
     F(( ))--&gt; |Positive p=0.63| A[ ]
@@ -381,6 +429,7 @@ div.csl-indent {
     H --&gt; J(EMV=-2.86)
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -388,7 +437,7 @@ div.csl-indent {
 </section>
 <section id="the-value-of-information" class="level2" data-number="1.8">
 <h2 data-number="1.8" class="anchored" data-anchor-id="the-value-of-information"><span class="header-section-number">1.8</span> The Value of Information</h2>
-<p>We are now faced with an important question. What is the value of the information provided by the consulting team? In other words, should the CEO hire the consultants? To answer this question, let’s start by calculating expected monetary value of the tree in <a href="#sec-Optimal"><span>Section&nbsp;1.7</span></a>:</p>
+<p>We are now faced with an important question. What is the value of the information provided by the consulting team? In other words, should the CEO hire the consultants? To answer this question, let’s start by calculating expected monetary value of the tree in <a href="#sec-Optimal" class="quarto-xref"><span>Section 1.7</span></a>:</p>
 <div class="pull-right-50 text-center">
 <p><span class="math inline">\(EMV=0.63(3.70)+0.37(-0.5)\)</span> </p>
 <p><span class="math inline">\(EMV=2.146\)</span> </p>
@@ -415,9 +464,135 @@ div.csl-indent {
 <li><p>Apply the Law of Total Probability and Bayes’ Theorem to update probabilities.</p></li>
 <li><p>Determine the price of information.</p></li>
 </ul>
+</section>
+<section id="exercises" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="exercises"><span class="header-section-number">1.11</span> Exercises</h2>
+<ol type="1">
+<li>Tesla, a U.S. EV car manufacturer, is considering expanding production to meet potential increases in the demand for one of its cars. Tesla’s alternatives are to construct a new plant, expand the existing plant, or do nothing in the short run. Analysts within Tesla expect the market for their EV’s may expand, remain stable, or contract, with probabilities of 0.35, 0.35, and 0.30, respectively. The table below contains the profit generated under each scenario. What is your recommendation to Tesla?</li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Expand</th>
+<th style="text-align: center;">Stable</th>
+<th style="text-align: center;">Contract</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">New Plant</td>
+<td style="text-align: center;">400,000</td>
+<td style="text-align: center;">-100,000</td>
+<td style="text-align: center;">-200,000</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Expand Plant</td>
+<td style="text-align: center;">250,000</td>
+<td style="text-align: center;">-50,000</td>
+<td style="text-align: center;">-75,000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Do Nothing</td>
+<td style="text-align: center;">50,000</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">-30,000</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+Suggested Answer
+</summary>
+<p><em>We can use expected values to guide our recommendation to Tesla. The expected value of each option is as follows: constructing a new plant is 45,000, expanding plant is 47,500, and doing nothing is 8,500. Following these results we could <strong>recommend Tesla to expand its existing plant</strong>, as this option would give the company the highest expected profit.</em></p>
+</details>
+<ol start="2" type="1">
+<li><p>Frontier Airlines is considering purchasing a new airplane from an aircraft manufacturer. The manufacturer offers the airplane for 50 million. The airline estimates that, if the airplane is purchased, it could generate an additional revenue of 120 million over its operational lifetime. However, this is contingent on the condition that the airline industry remains stable and demand for flights remains high, which the airline estimates has a 70% probability of occurring.</p>
+<p>If the industry faces a downturn (a 30% probability), the airline estimates it will only be able to generate $30 million in revenue from the airplane over its lifetime.</p>
+<p>Alternatively, the airline has the option to lease an older model airplane for 10 million. The older airplane would generate $40 million in revenue over its lifetime, regardless of industry conditions.</p>
+<p>Should the airline purchase the new airplane or lease the older model?</p></li>
+</ol>
+<details>
+<summary>
+Suggested Answer
+</summary>
+<p><em>Once again we can use the expected value in this problem. The option of buying the airplane yields an expected profit of 43 million dollars, whereas the option of leasing the airplane yields a profit of 30 million. Given this result, we should <strong>recommend Frontier airlines to buy the airplane</strong>.</em></p>
+</details>
+<ol start="3" type="1">
+<li><p>PharmaCo is a pharmaceutical company considering whether to launch a new drug called “CureFast”. The success of CureFast in the market depends on the drug’s effectiveness in treating a particular condition. PharmaCo estimates that there is a 40% chance that the drug will be highly effective and thus successful in the market. If CureFast is successful, the company will earn a profit of 50 million. However, if the drug is not effective, PharmaCo will incur a loss of 20 million due to production, marketing, and other sunk costs.</p>
+<p>Before deciding to launch the drug, PharmaCo can conduct a clinical trial at a cost of $5 million. The clinical trial is not perfect and has the following characteristics:</p>
+<ul>
+<li>If the drug is truly effective, there is a 90% chance that the clinical trial will show positive results. If the drug is not effective, there is a 15% chance that the clinical trial will still show positive results.</li>
+</ul>
+<p>Should PharmaCo conduct the clinical trial before deciding whether to launch CureFast, and what is the maximum amount they should pay for the trial?</p></li>
+</ol>
+<details>
+<summary>
+Suggested Answer
+</summary>
+<p><em>The expected value when not launching the clinical trial is 8 million. Since the expected value after conducting the trial is higher (11.2 million), <strong>PharmaCo should conduct the clinical trial and use the results to inform their decision on whether to launch CureFast.PharmaCo should pay at most 8.2 million for the clinical trial</strong>.</em></p>
+</details>
+<ol start="4" type="1">
+<li><p>João “Golden Toes” Silva is the next Brazilian league wonder kid, and Arsenal’s scouts are buzzing with excitement. The club’s analysts estimate that João has a 70% chance of being a success at Arsenal, performing at a top level and helping the club win titles.</p>
+<p>If João is successful, Arsenal stands to make £18 million in profits through merchandise sales, increased ticket revenue, and potential transfer fees. However, if João fails to live up to expectations (which has a 30% chance), it could cost the club £8 million (wasted wages, and negative press).</p>
+<p>Given the risk of signing the player, the club can conduct a thorough physical exam on João to ensure he’s healthy and injury-free (this is an additional test than that required for all signed players). The cost of this physical test is £3 million.</p>
+<p>Based on historical data, if João is a success, there’s a 99% chance that the physical test will show he’s in perfect health. On the other hand, if João is likely to be a flop, there’s still a 5% chance that the test will incorrectly indicate he’s healthy.</p>
+<p>Should Arsenal conduct the physical test? Would your recommendation change if the price of the test could be bargained down?</p></li>
+</ol>
+<details>
+<summary>
+Suggested Answer
+</summary>
+<p><em>Without the test, the expected value is 10,200,000. With the test, the expected value is 9,354,000. We <strong>recommend Arsenal go without the test and sign the player</strong>. If the club can decrease the price of the test to at most 2,154,000 they should perform the test and proceed with the signing of João, if the test indicates that he is healthy.</em></p>
+</details>
+<ol start="5" type="1">
+<li>The Crypto Gains investment firm is planning to invest in Bitcoin to diversify its portfolio. The firm knows that it will need 50 Bitcoins six months from now to meet its investment strategy. The company has three options for acquiring the needed Bitcoins. It can buy the Bitcoins at the market price six months from now or purchase a futures contract now. The contract guarantees delivery of the Bitcoins in six months, and the cost of purchasing it will be based on today’s market price. Assume that the possible Bitcoin futures contracts available for purchase are for 25 Bitcoins or 50 Bitcoins only. No futures contracts can be purchased or sold in the intervening months; thus, Crypto Gains’ possible decisions are to:</li>
+</ol>
+<ul>
+<li><p>Purchase a futures contract for 50 Bitcoins now.</p></li>
+<li><p>Purchase a futures contract for 25 Bitcoins now and purchase 25 Bitcoins in six months at market price.</p></li>
+<li><p>Purchase all 50 Bitcoins needed in six months at the market price.</p>
+<p>The price of Bitcoin bought now for delivery in six months is 30,000 dollars per Bitcoin. The transaction cost for 25-Bitcoin and 50-Bitcoin future contracts are 1,500 and 2,800 dollars, respectively. Finally, the company has assessed the probability distribution for the possible Bitcoin prices six months from now in dollars per Bitcoin. The table below contains the possible prices and the corresponding probabilities. Which investment strategy should Crypto Gains pursue to minimize risk and potential costs while securing the necessary Bitcoins?</p></li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Price</th>
+<th style="text-align: center;">Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">$28,000</td>
+<td style="text-align: center;">0.10</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">$29,500</td>
+<td style="text-align: center;">0.30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">$31,000</td>
+<td style="text-align: center;">0.35</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">$32,500</td>
+<td style="text-align: center;">0.15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">$34,000</td>
+<td style="text-align: center;">0.10</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+Suggested Answer
+</summary>
+<p><em>The expected values are a follows: buy 50 Bitcoins now via futures contract: 1,502,800, buy 25 Bitcoins now via futures contract, and 25 Bitcoins in six months at market price: 1,520,875, buy all 50 Bitcoins in six months at market price: 1,538,750. The lowest expected cost is from the first option—purchasing a futures contract for 50 Bitcoins now. This option provides the certainty of price, avoiding the risk of price fluctuations in the market, and results in the lowest overall cost, 1,502,800. <strong>Crypto Gains should purchase a futures contract for 50 Bitcoins now to secure the necessary investment and minimize costs</strong>.</em></p>
+</details>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-JK" class="csl-entry" role="listitem">
 Jaggia, Sanjiv, and Allison Kelly. 2022. <em>Business Statistics</em>. McGraw Hill.
 </div>
@@ -507,10 +682,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -520,8 +712,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -533,7 +734,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -577,6 +901,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -602,6 +927,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -663,17 +1014,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Tools.html" class="pagination-link">
+      <a href="./Tools.html" class="pagination-link" aria-label="Tools for Working With Simulation">
         <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tools for Working With Simulation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 
