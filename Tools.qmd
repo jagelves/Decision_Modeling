@@ -1,8 +1,8 @@
 # Tools for Working With Simulation
 
-Business simulation is a type of computer-based modeling that allows us to experiment and analyze different business scenarios and strategies. Its appeal comes from being a cost-effective way to explore and test business decisions in production, marketing, finance, and operations, among many others.
+Business simulation allows companies to model real-world scenarios and experiment with different strategies in a controlled, cost-effective environment. By using tools like R, businesses can simulate complex processes, such as customer demand, operational workflows, or financial projections, and analyze the potential outcomes without the risks associated with actual implementation. In the next couple of modules, we'll explore how to use R to perform various simulation tasks, providing you with the skills to create and analyze your business models.
 
-We will be using R to conduct business simulation. Before we can build our simulation models, we must learn the tools to perform the analysis. In this module, we'll learn how to store data in R, generate random numbers, use loops and conditionals, and transform vectors to simulate real data.
+Before we can build our simulation models, we must learn the tools to perform the analysis. In this module, we'll learn how to store data in R, generate random numbers, use loops and conditionals, and transform vectors to simulate real data.
 
 ## Storing Our Data in R
 
