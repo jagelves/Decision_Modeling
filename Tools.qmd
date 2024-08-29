@@ -201,6 +201,30 @@ Below, the table is reproduced once more, but with the simulated values. Can you
 | Sat |  1459  |  1464  |  1408  |  1443  |  *1502*  |
 | Sun |  1580  |  1534  |  1512  |  1599  |  *1587*  |
 
+## Chi Square Test
+
+Although we have visual confirmation that ferry rides during weekdays are uniformily distributed, we would like to perform a statistical test to prove that this is in fact the case. The **Chi-Square Test** is generally used to compare observed frequencies with expected frequencies across categorical data. Using this comparison, we can determine if the observed data does in fact follow the hypothesis distribution. Below is code to perform the test:
+
+```{r}
+# Observed frequencies
+observed <- c(5, 5, 5, 5, 5)
+
+# Expected frequencies under uniform distribution
+# Since we have 5 categories and assuming uniform distribution,
+# each category is expected to have an equal frequency.
+total_observations <- sum(observed)
+num_categories <- length(observed)
+expected <- rep(total_observations / num_categories, num_categories)
+
+# Perform the Chi-Square test
+chi_square_test <- chisq.test(observed, p = rep(1/num_categories, num_categories))
+
+# Display the test results
+print(chi_square_test)
+```
+**Chi-Square Statistic (X-squared)** measures the divergence between observed and expected frequencies. Since, the observed distribution is exactly the same with the expected frequency the divergence is 0. The p-value indicates the probability of observing a Chi-Square statistic as extreme as, or more extreme than, the one computed, assuming the null hypothesis (that the distribution is uniform) is true. A small p-value (typically < 0.05) indicates that the observed distribution is significantly different from a uniform distribution.
+Since the p-value is 1 we can't reject the null hypothesis, and vote in favor of ferry rides being uniformily distributed. Note that the Chi-Square test can be used for any discrete distribution.
+
 ## Readings
 
 These reading will help you review the concepts and theory necessary for completing this chapter. @HOP reviews the R basics needed to perform computer simulation, @JK introduces probability distributions, @GelvesBS has several applied probability problems (with solutions), while @PMS provides an application of the distributions to business simulation.
