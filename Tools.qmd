@@ -2,7 +2,7 @@
 
 Business simulation allows companies to model real-world scenarios and experiment with different strategies in a controlled, cost-effective environment. By using tools like R, businesses can simulate complex processes, such as customer demand, operational workflows, or financial projections, and analyze the potential outcomes without the risks associated with actual implementation. In the next couple of modules, we'll explore how to use R to perform various simulation tasks, providing you with the skills to create and analyze your business models.
 
-Before we can build our simulation models, we must learn the tools to perform the analysis. In this module, we'll learn how to store data in R, generate random numbers, use loops and conditionals, and transform vectors to simulate real data.
+To effectively build and analyze simulation models, it's essential first to understand the foundational tools and techniques in R. In this module, we'll learn how to store and manipulate data in R, generate random numbers, and use loops and conditionals to simulate various scenarios. Mastering these skills will enable you to create realistic simulations that can accurately model real-world business processes.
 
 ## Storing Our Data in R
 
