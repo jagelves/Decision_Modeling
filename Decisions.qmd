@@ -9,6 +9,8 @@ format:
 
 In this module we will learn how to create decision models. These models rely on probability and expected values. We will map the decision process using a decision tree and value each decision with a monetary value or an expected monetary value (EMV). Our objective is to identify the best decision given the possible choices and uncertainty.
 
+Decision models are crucial in business because they provide a structured approach to making complex decisions under uncertainty. By quantifying the potential outcomes and associated risks, these models help companies navigate uncertainties and make informed choices that maximize value. Whether it's deciding to launch a new product, enter a new market, or allocate resources, decision models enable businesses to evaluate different scenarios, anticipate potential challenges, and choose strategies that align with their long-term goals. In a rapidly changing business environment, the ability to make data-driven decisions is a critical competitive advantage.
+
 ## Shopaholic Retail Company
 
 Imagine you are the CEO of the Shopaholic Retail Company, and you are considering whether to launch a new product line. You have conducted market research and have estimated two possible outcomes based on customer demand and competition.
