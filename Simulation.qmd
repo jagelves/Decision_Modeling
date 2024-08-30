@@ -169,11 +169,11 @@ The readings for this chapter will introduce the application of simulation model
 
 ## Exercises
 
-1. A technology company is preparing to launch a special edition smartphone accessory designed exclusively for the latest model of a popular smartphone. This accessory is only compatible with this specific model, and the company anticipates that demand will peak during the first six months following the smartphone's release. After this period, a new model of the smartphone is expected to be released, rendering the accessory obsolete. The company estimates that demand for the accessory during the six-month period is governed by the probability distribution in the table below.
+1. Apple is preparing to launch a special edition smartphone accessory designed exclusively for its latest iPhone. This accessory is only compatible with this specific model, and the company anticipates that demand will peak during the first 12 months following the smartphone's release. After this period, a new model of the smartphone is expected to be released, rendering the accessory obsolete. The company estimates that demand for the accessory during the twelve-month period is governed by the probability distribution in the table below.
 
-    The production involves a fixed cost of 20,000 dollars, with a variable cost of 15 dollars per unit produced. Each accessory is sold for 100 dollars. However, any unsold units after the six-month period will have no value, as they are not compatible with the newer smartphone models.
+    The production involves a fixed cost of 20,000 dollars, with a variable cost of 15 dollars per unit produced. Each accessory is sold for 100 dollars. However, any unsold units after the twelve-month period will have no value, as they are not compatible with the newest iPhone.
 
-    The company is considering producing 10,000 units of the accessory. Using a simulation with 100,000 replications, calculate the expected profit and standard deviation. Additionally, determine the range within which the company can be 90% certain that the actual profit from selling the accessory during the six-month period will fall.
+    The company is considering producing 10,000 units of the accessory. Using a simulation with 100,000 replications, calculate the expected profit and standard deviation. Additionally, determine the range within which the company can be 90% certain that the actual profit from selling the accessory during the twelve-month period will fall.
 
 Demand (units)	|Probability (%)|
 |:-------------:|:-------------:|
@@ -187,11 +187,11 @@ Demand (units)	|Probability (%)|
 
 <summary>Suggested Answer</summary>
 
-*Expected Profit: 350,000*
+*Expected Profit: 645,000*
 
-*Standard Deviation: 50,000*
+*Standard Deviation: 119,326*
 
-*90% Confidence Interval: [280,000, 420,000]* 
+*90% Confidence Interval: [430,000, 830,000]* 
 
 </details>
 
