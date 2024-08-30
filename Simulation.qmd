@@ -228,3 +228,40 @@ Demand (units)	|Probability (%)|
 *Min: -9383, Q1: 31304, Median:56357, Q3:82821, Max:190625*
               
 </details>
+
+4. You are considering an investment in the SPY (S&P 500 ETF) over a 20-year period. Your investment strategy involves making an initial investment, followed by yearly contributions.
+
+    The key parameters for your investment are as follows:
+
+    - *Stock Ticker:* SPY (S&P 500 ETF)
+    - *Initial Investment:* $1,000
+    - *Average Yearly Return:* 10% (0.1)
+    - *Standard Deviation of Yearly Returns:* 18% (0.18)
+    - *Yearly Investment:* $6,000
+    - *Investment Period:* 20 years
+
+    Run 10,000 simulations of your investment over 20 years. Each year, returns are normally distributed with the given average and standard deviation. Track the value of your investment at the end of each year. Calculate the following statistics for the investment value at the end of 20 years:
+
+    - Average (mean) end value
+    - Worst Case Scenario: Minimum
+    - Bear Case: 25th percentile (Q1)
+    - Base Case: Median (50th percentile)
+    - Bull Case: 75th percentile (Q3)
+    - Best Case Scenario: Maximum
+
+    Based on your simulation results, how much can you expect to have in your account after 20 years on average? What are the Bear, Base and Bull case predictions?
+    
+
+<details>
+
+<summary>Suggested Answer</summary>
+
+*Expected End Value after 20 years: $380,000*
+
+*Bear Case: $233,000*
+
+*Base Case: $332,000*
+
+*Bull Case: $476,000*
+              
+</details>
