@@ -206,6 +206,6 @@ Demand (units)	|Probability (%)|
 
 *Optimal Overbooking Strategy: 18 seats*
 
-*Minimum Expected Cost: $4,200*
+*Minimum Expected Cost: $1,633*
 
 </details>
