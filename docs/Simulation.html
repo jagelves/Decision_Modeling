@@ -547,6 +547,22 @@ Suggested Answer
 <p><em>Base Case: $332,000</em></p>
 <p><em>Bull Case: $476,000</em></p>
 </details>
+<ol start="5" type="1">
+<li>You are tasked with simulating the price of BTC (Bitcoin) over one year using Brownian motion and plotting the result. Brownian motion is a mathematical model used to describe random motion, often applied in finance to simulate stock price movements. In particular, the returns of a stock are described by the following equation:</li>
+</ol>
+<p><span class="math inline">\(\text{returns} = (\mu - 0.5 \times \sigma^2) \times dt + \sigma \times \sqrt{dt} \times \epsilon\)</span></p>
+<p>where <span class="math inline">\(\epsilon\)</span> is a random shock drawn from a standard normal distribution, <span class="math inline">\(\mu\)</span> is the expected annual return, <span class="math inline">\(\sigma^2\)</span> is the variance of returns, and <span class="math inline">\(dt = 1/365\)</span>. Assume that the starting Bitcoin price is 50,000 dollars, with an average return of 40% and standard deviation of 100%. Let the path of Bitcoin be given by:</p>
+<p><span class="math inline">\(Price=S0+cumprod(1+returns)\)</span></p>
+<p>where <span class="math inline">\(S0\)</span> is the initial price. Generate 1000 price paths using Brownian motion (set seed to 150). Report the mean, bear (Q1), base (Q2) and bull cases (Q3) of the final prices after 1 year.</p>
+<details>
+<summary>
+Suggested Answer
+</summary>
+<p><em>Expected End Value 1 year (365 days): $48,293</em></p>
+<p><em>Bear Case (Q1): $823</em></p>
+<p><em>Base Case (Q2): $27,306</em></p>
+<p><em>Bull Case (Q3): $58,680</em></p>
+</details>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
