@@ -433,7 +433,7 @@ dbl (10): average_price, total_volume, 4046, 4225, 4770, total_bags, small_b...
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>avocado <span class="sc">%&gt;%</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">key=</span><span class="fu">c</span>(type, geography),</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">index=</span>date, <span class="at">regular=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">index=</span>date) <span class="sc">%&gt;%</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_index</span>(<span class="st">"2015-01-04"</span><span class="sc">~</span><span class="st">"2018-12-02"</span>)<span class="ot">-&gt;</span> avocadots</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In the code above, the <code>as_tsibble()</code> function was called with the parameter <em>regular</em> set at true, indicating that the date has no gaps and occurs every week (the greatest common divisor of the index column). Additionally, the type of avocado and the geography do not vary with time and are classified as a <em>key</em>. The function <code>filter_index()</code> is called as it allows us to determine the window for analysis. As noted in <a href="#sec-Avocado" class="quarto-xref"><span>Section 4.2</span></a>, there are some missing dates in December 2018. We limit the analysis for now to 2015-2018.</p>
@@ -449,7 +449,7 @@ dbl (10): average_price, total_volume, 4046, 4225, 4770, total_bags, small_b...
 <p>In practice, the decomposition is constructed in several steps. First, a moving average of the series is calculated to track the trend. The trend is then subtracted from the series to obtain a de-trended series. The seasonal component is calculated by averaging the values based on the window provided (52 weeks or yearly) for the de-trended series. The error is the remaining series fluctuation that is not explained by the trend or the seasonal component (<span class="math inline">\(Series-Trend-Seasonal=Error\)</span>). In the end, each component can be graphed and displayed, as illustrated below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>calits <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="fu">STL</span>(average_price<span class="sc">~</span><span class="fu">trend</span>(<span class="at">window=</span><span class="dv">199</span>)<span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">STL=</span><span class="fu">STL</span>(average_price<span class="sc">~</span><span class="fu">trend</span>(<span class="at">window=</span><span class="dv">199</span>)<span class="sc">+</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">season</span>(<span class="at">window=</span><span class="dv">51</span>), <span class="at">robust=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()<span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -460,31 +460,7 @@ dbl (10): average_price, total_volume, 4046, 4225, 4770, total_bags, small_b...
 </div>
 </div>
 </div>
-<p><code>fable</code> allows us to construct this model easily by using the <code>model()</code> function. This function will allow us to estimate a variety of time series models, so we will be using it regularly. The particular model we are running is STL, hence the use of the <code>STL()</code> function within the <code>model()</code> function. We define the model by specifying the dependent variable (i.e., <em>average_price</em>) followed by a tilde (<code>~</code>) and the components. As you can see, the <em>window</em> argument in the <code>trend()</code> function is set to a relatively large value and the <code>season()</code> function specifies <span class="math inline">\(51\)</span> weeks to capture the yearly seasonality. By doing this the moving average reflects the general direction of the series and avoids the small fluctuations of the data. The <em>robust</em> parameter is set to true to make the fitting process less sensitive to outliers or influential data points. You can learn more about this function in Chapter 3 of <span class="citation" data-cites="FPP3">Hyndman (<a href="references.html#ref-FPP3" role="doc-biblioref">2021</a>)</span>.</p>
-<p>We can retrieve the numbers involved in the decomposition by using the following command:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>calits <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="fu">STL</span>(average_price<span class="sc">~</span><span class="fu">trend</span>(<span class="at">window=</span><span class="dv">199</span>)<span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">season</span>(<span class="at">window=</span><span class="dv">51</span>), <span class="at">robust=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tsibble: 205 x 6 [7D]
-# Key:       .model [1]
-   .model                     date       average_price .fitted   .resid   .innov
-   &lt;chr&gt;                      &lt;date&gt;             &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
- 1 "STL(average_price ~ tren… 2015-01-04          1.24    1.34 -0.103   -0.103  
- 2 "STL(average_price ~ tren… 2015-01-11          1.1     1.25 -0.151   -0.151  
- 3 "STL(average_price ~ tren… 2015-01-18          1.24    1.38 -0.135   -0.135  
- 4 "STL(average_price ~ tren… 2015-01-25          1.3     1.35 -0.0535  -0.0535 
- 5 "STL(average_price ~ tren… 2015-02-01          1.11    1.31 -0.202   -0.202  
- 6 "STL(average_price ~ tren… 2015-02-08          1.35    1.30  0.0522   0.0522 
- 7 "STL(average_price ~ tren… 2015-02-15          1.52    1.48  0.0435   0.0435 
- 8 "STL(average_price ~ tren… 2015-02-22          1.41    1.42 -0.00651 -0.00651
- 9 "STL(average_price ~ tren… 2015-03-01          1.15    1.22 -0.0655  -0.0655 
-10 "STL(average_price ~ tren… 2015-03-08          1.48    1.33  0.145    0.145  
-# ℹ 195 more rows</code></pre>
-</div>
-</div>
+<p><code>fable</code> allows us to construct this model easily by using the <code>model()</code> function. This function will allow us to estimate a variety of time series models, so we will be using it regularly. The particular model we are running is STL, hence the use of the <code>STL()</code> function within the <code>model()</code> function. We define the model by specifying the dependent variable (i.e., <em>average_price</em>) followed by a tilde (<code>~</code>) and the components. As you can see, the <em>window</em> argument in the <code>trend()</code> function is set to a relatively large value. By doing this the moving average reflects the general direction of the series and avoids the small fluctuations of the data. The <code>season()</code> function specifies <span class="math inline">\(51\)</span> weeks to capture the yearly seasonality. Finally, the <em>robust</em> parameter is set to true to make the fitting process less sensitive to outliers or influential data points. Experiment by changing the <em>window</em> parameter to see how the decomposition changes. You can learn more about decomposition and these functions in Chapter 3 of <span class="citation" data-cites="FPP3">Hyndman (<a href="references.html#ref-FPP3" role="doc-biblioref">2021</a>)</span>.</p>
 <p>As shown above, the trend is increasing, and the seasonal component confirms low levels at the beginning of the year and high levels in the summer. These are two general patterns that determine the price of avocados in California and provide valuable insight to share with Chilango’s Kitchen.</p>
 </section>
 <section id="readings" class="level2" data-number="4.8">
