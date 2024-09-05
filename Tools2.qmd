@@ -265,12 +265,40 @@ The graph shows a golden cross at the beginning of March and a death cross mid J
 
 3. The data file:
 https://jagelves.github.io/Data/ElectricityBill.csv
-contains energy consumption from a typical U.S. household. Import the data, graph and perform STL decomposition.
+contains energy consumption from a typical U.S. household. Import the data, graph the *Bill Amount* variable and perform STL decomposition. Is there a clear seasonal pattern?
 
 <details>
 
 <summary>Suggested Answer</summary>
 
+To import the data and create a tsibble use the following code:
 
+```{r message=FALSE}
+library(tidyverse)
+library(fpp3)
+rm(list=ls())
+Elec<-read_csv("http://jagelves.github.io/Data/ElectricityBill.csv")
 
+Elec %>% mutate(Date=yearmonth(paste(Year, Month, sep = "-"))) %>% 
+  select(Date,`Bill Amount`) %>% 
+  as_tsibble(index=Date)-> Elec_ts
+```
+
+The graph can be created using the autoplot function.
+
+```{r}
+library(ggthemes)
+Elec_ts %>% autoplot(.vars=`Bill Amount`) + theme_clean() +
+  labs(title="Energy Bill In Dollars",
+       y="",x="")
+```
+
+The decomposition is performed using the `model()` and `STL()` functions:
+
+```{r}
+Elec_ts %>% model(STL=STL(`Bill Amount`~trend()+season())) %>% 
+  components() %>% autoplot() + theme_clean()
+```
+
+The graph above shows a clear seasonal pattern. The energy bill is at its highest in the month of January, and lowest in the month of May. In general, winter and summer have higher bills than fall and spring.
 </details>

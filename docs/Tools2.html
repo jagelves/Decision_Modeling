@@ -589,8 +589,51 @@ Suggested Answer
 The graph shows a golden cross at the beginning of March and a death cross mid June. The golden cross was followed by an increase in the price of BTC, and the death cross was followed by a decline in the price of BTC.
 </details>
 <ol start="3" type="1">
-<li></li>
+<li>The data file: https://jagelves.github.io/Data/ElectricityBill.csv contains energy consumption from a typical U.S. household. Import the data, graph the <em>Bill Amount</em> variable and perform STL decomposition. Is there a clear seasonal pattern?</li>
 </ol>
+<details>
+<summary>
+Suggested Answer
+</summary>
+<p>To import the data and create a tsibble use the following code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>Elec<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"http://jagelves.github.io/Data/ElectricityBill.csv"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>Elec <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">yearmonth</span>(<span class="fu">paste</span>(Year, Month, <span class="at">sep =</span> <span class="st">"-"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Date,<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index=</span>Date)<span class="ot">-&gt;</span> Elec_ts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The graph can be created using the autoplot function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">.vars=</span><span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">theme_clean</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Energy Bill In Dollars"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">""</span>,<span class="at">x=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Tools2_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The decomposition is performed using the <code>model()</code> and <code>STL()</code> functions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="at">STL=</span><span class="fu">STL</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span><span class="sc">~</span><span class="fu">trend</span>()<span class="sc">+</span><span class="fu">season</span>())) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_clean</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Tools2_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+The graph above shows a clear seasonal pattern. The energy bill is at its highest in the month of January, and lowest in the month of May. In general, winter and summer have higher bills than fall and spring.
+</details>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
