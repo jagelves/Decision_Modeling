@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -100,7 +101,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -109,6 +116,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -118,6 +126,33 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-sidebar floating">
@@ -126,12 +161,12 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ETS.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ETS</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ETS.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ETS</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -141,7 +176,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Decision Modeling</a> 
@@ -211,7 +246,7 @@ div.csl-indent {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -248,7 +283,9 @@ div.csl-indent {
   </div>
   
 
+
 </header>
+
 
 <p>In this section we will be introducing and applying the Error, Trend, Seasonality (ETS) model. This model provides a flexible approach for modeling and forecasting time series data by incorporating components for error, trend, and seasonality. The ETS model allows different combinations of these components to be included in the model based on the characteristics observed in the data.</p>
 <section id="ets-components" class="level2" data-number="6.1">
@@ -302,7 +339,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Q1 2017 to Q2 2023"</span>) <span class="sc">+</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Quarter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ETS_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The most striking aspect of Tesla’s deliveries is the exponential trend. There also seems to be a seasonal component, with relatively higher production Q4 versus the other quarters. These characteristics will be adopted by the ETS model to forecast the series. Below we can see the STL decomposition that confirm these characteristics.</p>
@@ -311,7 +352,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="fu">STL</span>(deliveries<span class="sc">~</span><span class="fu">trend</span>() <span class="sc">+</span> <span class="fu">season</span>())) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ETS_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -342,24 +387,23 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
-<div id="jfsjafovfs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jfsjafovfs table {
+<div id="notgfljglz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#notgfljglz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jfsjafovfs thead, #jfsjafovfs tbody, #jfsjafovfs tfoot, #jfsjafovfs tr, #jfsjafovfs td, #jfsjafovfs th {
+#notgfljglz thead, #notgfljglz tbody, #notgfljglz tfoot, #notgfljglz tr, #notgfljglz td, #notgfljglz th {
   border-style: none;
 }
 
-#jfsjafovfs p {
+#notgfljglz p {
   margin: 0;
   padding: 0;
 }
 
-#jfsjafovfs .gt_table {
+#notgfljglz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -385,12 +429,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_caption {
+#notgfljglz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jfsjafovfs .gt_title {
+#notgfljglz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -402,7 +446,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#jfsjafovfs .gt_subtitle {
+#notgfljglz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -414,7 +458,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#jfsjafovfs .gt_heading {
+#notgfljglz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -426,13 +470,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_bottom_border {
+#notgfljglz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_col_headings {
+#notgfljglz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -447,7 +491,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_col_heading {
+#notgfljglz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -467,7 +511,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#jfsjafovfs .gt_column_spanner_outer {
+#notgfljglz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -479,15 +523,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#jfsjafovfs .gt_column_spanner_outer:first-child {
+#notgfljglz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jfsjafovfs .gt_column_spanner_outer:last-child {
+#notgfljglz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jfsjafovfs .gt_column_spanner {
+#notgfljglz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -499,11 +543,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#jfsjafovfs .gt_spanner_row {
+#notgfljglz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jfsjafovfs .gt_group_heading {
+#notgfljglz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -529,7 +573,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#jfsjafovfs .gt_empty_group_heading {
+#notgfljglz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -544,15 +588,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#jfsjafovfs .gt_from_md > :first-child {
+#notgfljglz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jfsjafovfs .gt_from_md > :last-child {
+#notgfljglz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jfsjafovfs .gt_row {
+#notgfljglz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -571,7 +615,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#jfsjafovfs .gt_stub {
+#notgfljglz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -584,7 +628,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#jfsjafovfs .gt_stub_row_group {
+#notgfljglz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -598,15 +642,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#jfsjafovfs .gt_row_group_first td {
+#notgfljglz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jfsjafovfs .gt_row_group_first th {
+#notgfljglz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jfsjafovfs .gt_summary_row {
+#notgfljglz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -616,16 +660,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#jfsjafovfs .gt_first_summary_row {
+#notgfljglz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_first_summary_row.thick {
+#notgfljglz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jfsjafovfs .gt_last_summary_row {
+#notgfljglz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -635,7 +679,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_grand_summary_row {
+#notgfljglz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -645,7 +689,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#jfsjafovfs .gt_first_grand_summary_row {
+#notgfljglz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -655,7 +699,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_last_grand_summary_row_top {
+#notgfljglz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -665,11 +709,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_striped {
+#notgfljglz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jfsjafovfs .gt_table_body {
+#notgfljglz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -678,7 +722,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_footnotes {
+#notgfljglz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -692,7 +736,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_footnote {
+#notgfljglz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -701,7 +745,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#jfsjafovfs .gt_sourcenotes {
+#notgfljglz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -715,7 +759,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#jfsjafovfs .gt_sourcenote {
+#notgfljglz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -723,152 +767,165 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#jfsjafovfs .gt_left {
+#notgfljglz .gt_left {
   text-align: left;
 }
 
-#jfsjafovfs .gt_center {
+#notgfljglz .gt_center {
   text-align: center;
 }
 
-#jfsjafovfs .gt_right {
+#notgfljglz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jfsjafovfs .gt_font_normal {
+#notgfljglz .gt_font_normal {
   font-weight: normal;
 }
 
-#jfsjafovfs .gt_font_bold {
+#notgfljglz .gt_font_bold {
   font-weight: bold;
 }
 
-#jfsjafovfs .gt_font_italic {
+#notgfljglz .gt_font_italic {
   font-style: italic;
 }
 
-#jfsjafovfs .gt_super {
+#notgfljglz .gt_super {
   font-size: 65%;
 }
 
-#jfsjafovfs .gt_footnote_marks {
+#notgfljglz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jfsjafovfs .gt_asterisk {
+#notgfljglz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jfsjafovfs .gt_indent_1 {
+#notgfljglz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jfsjafovfs .gt_indent_2 {
+#notgfljglz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jfsjafovfs .gt_indent_3 {
+#notgfljglz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jfsjafovfs .gt_indent_4 {
+#notgfljglz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jfsjafovfs .gt_indent_5 {
+#notgfljglz .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="9" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>Cross Validation Models</strong></td>
-    </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".model">.model</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".type">.type</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="ME">ME</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="RMSE">RMSE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MAE">MAE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MPE">MPE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MAPE">MAPE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MASE">MASE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="RMSSE">RMSSE</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers=".model" class="gt_row gt_center">ALGO</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">40.231</td>
-<td headers="RMSE" class="gt_row gt_center">57.608</td>
-<td headers="MAE" class="gt_row gt_center">45.297</td>
-<td headers="MPE" class="gt_row gt_center">23.474</td>
-<td headers="MAPE" class="gt_row gt_center">28.654</td>
-<td headers="MASE" class="gt_row gt_center">1.042</td>
-<td headers="RMSSE" class="gt_row gt_center">0.990</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">DAMPED</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">18.701</td>
-<td headers="RMSE" class="gt_row gt_center">55.497</td>
-<td headers="MAE" class="gt_row gt_center">44.900</td>
-<td headers="MPE" class="gt_row gt_center">8.033</td>
-<td headers="MAPE" class="gt_row gt_center">32.803</td>
-<td headers="MASE" class="gt_row gt_center">1.033</td>
-<td headers="RMSSE" class="gt_row gt_center">0.954</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center" style="background-color: #90EE90;">DAMPEDS</td>
-<td headers=".type" class="gt_row gt_center" style="background-color: #90EE90;">Test</td>
-<td headers="ME" class="gt_row gt_center" style="background-color: #90EE90;">21.011</td>
-<td headers="RMSE" class="gt_row gt_center" style="background-color: #90EE90;">47.198</td>
-<td headers="MAE" class="gt_row gt_center" style="background-color: #90EE90;">38.590</td>
-<td headers="MPE" class="gt_row gt_center" style="background-color: #90EE90;">9.399</td>
-<td headers="MAPE" class="gt_row gt_center" style="background-color: #90EE90;">23.120</td>
-<td headers="MASE" class="gt_row gt_center" style="background-color: #90EE90;">0.888</td>
-<td headers="RMSSE" class="gt_row gt_center" style="background-color: #90EE90;">0.811</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">HOLT</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">15.122</td>
-<td headers="RMSE" class="gt_row gt_center">57.200</td>
-<td headers="MAE" class="gt_row gt_center">46.728</td>
-<td headers="MPE" class="gt_row gt_center">4.127</td>
-<td headers="MAPE" class="gt_row gt_center">34.811</td>
-<td headers="MASE" class="gt_row gt_center">1.075</td>
-<td headers="RMSSE" class="gt_row gt_center">0.983</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">LS</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">11.657</td>
-<td headers="RMSE" class="gt_row gt_center">43.208</td>
-<td headers="MAE" class="gt_row gt_center">37.200</td>
-<td headers="MPE" class="gt_row gt_center">2.527</td>
-<td headers="MAPE" class="gt_row gt_center">28.375</td>
-<td headers="MASE" class="gt_row gt_center">0.856</td>
-<td headers="RMSSE" class="gt_row gt_center">0.742</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center" style="background-color: #90EE90;">LSS</td>
-<td headers=".type" class="gt_row gt_center" style="background-color: #90EE90;">Test</td>
-<td headers="ME" class="gt_row gt_center" style="background-color: #90EE90;">9.739</td>
-<td headers="RMSE" class="gt_row gt_center" style="background-color: #90EE90;">41.890</td>
-<td headers="MAE" class="gt_row gt_center" style="background-color: #90EE90;">36.739</td>
-<td headers="MPE" class="gt_row gt_center" style="background-color: #90EE90;">1.641</td>
-<td headers="MAPE" class="gt_row gt_center" style="background-color: #90EE90;">28.748</td>
-<td headers="MASE" class="gt_row gt_center" style="background-color: #90EE90;">0.845</td>
-<td headers="RMSSE" class="gt_row gt_center" style="background-color: #90EE90;">0.720</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">SES</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">40.991</td>
-<td headers="RMSE" class="gt_row gt_center">58.160</td>
-<td headers="MAE" class="gt_row gt_center">45.750</td>
-<td headers="MPE" class="gt_row gt_center">23.988</td>
-<td headers="MAPE" class="gt_row gt_center">28.824</td>
-<td headers="MASE" class="gt_row gt_center">1.053</td>
-<td headers="RMSSE" class="gt_row gt_center">0.999</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="9" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Cross Validation Models</strong></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id=".type" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.type</th>
+<th id="ME" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">ME</th>
+<th id="RMSE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">RMSE</th>
+<th id="MAE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MAE</th>
+<th id="MPE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MPE</th>
+<th id="MAPE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MAPE</th>
+<th id="MASE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MASE</th>
+<th id="RMSSE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">RMSSE</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">ALGO</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">40.231</td>
+<td class="gt_row gt_center" headers="RMSE">57.608</td>
+<td class="gt_row gt_center" headers="MAE">45.297</td>
+<td class="gt_row gt_center" headers="MPE">23.474</td>
+<td class="gt_row gt_center" headers="MAPE">28.654</td>
+<td class="gt_row gt_center" headers="MASE">1.042</td>
+<td class="gt_row gt_center" headers="RMSSE">0.990</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model">DAMPED</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">18.701</td>
+<td class="gt_row gt_center" headers="RMSE">55.497</td>
+<td class="gt_row gt_center" headers="MAE">44.900</td>
+<td class="gt_row gt_center" headers="MPE">8.033</td>
+<td class="gt_row gt_center" headers="MAPE">32.803</td>
+<td class="gt_row gt_center" headers="MASE">1.033</td>
+<td class="gt_row gt_center" headers="RMSSE">0.954</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model" style="background-color: #90EE90">DAMPEDS</td>
+<td class="gt_row gt_center" headers=".type" style="background-color: #90EE90">Test</td>
+<td class="gt_row gt_center" headers="ME" style="background-color: #90EE90">21.011</td>
+<td class="gt_row gt_center" headers="RMSE" style="background-color: #90EE90">47.198</td>
+<td class="gt_row gt_center" headers="MAE" style="background-color: #90EE90">38.590</td>
+<td class="gt_row gt_center" headers="MPE" style="background-color: #90EE90">9.399</td>
+<td class="gt_row gt_center" headers="MAPE" style="background-color: #90EE90">23.120</td>
+<td class="gt_row gt_center" headers="MASE" style="background-color: #90EE90">0.888</td>
+<td class="gt_row gt_center" headers="RMSSE" style="background-color: #90EE90">0.811</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model">HOLT</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">15.122</td>
+<td class="gt_row gt_center" headers="RMSE">57.200</td>
+<td class="gt_row gt_center" headers="MAE">46.728</td>
+<td class="gt_row gt_center" headers="MPE">4.127</td>
+<td class="gt_row gt_center" headers="MAPE">34.811</td>
+<td class="gt_row gt_center" headers="MASE">1.075</td>
+<td class="gt_row gt_center" headers="RMSSE">0.983</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">LS</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">11.657</td>
+<td class="gt_row gt_center" headers="RMSE">43.208</td>
+<td class="gt_row gt_center" headers="MAE">37.200</td>
+<td class="gt_row gt_center" headers="MPE">2.527</td>
+<td class="gt_row gt_center" headers="MAPE">28.375</td>
+<td class="gt_row gt_center" headers="MASE">0.856</td>
+<td class="gt_row gt_center" headers="RMSSE">0.742</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model" style="background-color: #90EE90">LSS</td>
+<td class="gt_row gt_center" headers=".type" style="background-color: #90EE90">Test</td>
+<td class="gt_row gt_center" headers="ME" style="background-color: #90EE90">9.739</td>
+<td class="gt_row gt_center" headers="RMSE" style="background-color: #90EE90">41.890</td>
+<td class="gt_row gt_center" headers="MAE" style="background-color: #90EE90">36.739</td>
+<td class="gt_row gt_center" headers="MPE" style="background-color: #90EE90">1.641</td>
+<td class="gt_row gt_center" headers="MAPE" style="background-color: #90EE90">28.748</td>
+<td class="gt_row gt_center" headers="MASE" style="background-color: #90EE90">0.845</td>
+<td class="gt_row gt_center" headers="RMSSE" style="background-color: #90EE90">0.720</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">SES</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">40.991</td>
+<td class="gt_row gt_center" headers="RMSE">58.160</td>
+<td class="gt_row gt_center" headers="MAE">45.750</td>
+<td class="gt_row gt_center" headers="MPE">23.988</td>
+<td class="gt_row gt_center" headers="MAPE">28.824</td>
+<td class="gt_row gt_center" headers="MASE">1.053</td>
+<td class="gt_row gt_center" headers="RMSSE">0.999</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -887,24 +944,23 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
-<div id="fesqidmtqs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fesqidmtqs table {
+<div id="tqgtehxzzw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tqgtehxzzw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fesqidmtqs thead, #fesqidmtqs tbody, #fesqidmtqs tfoot, #fesqidmtqs tr, #fesqidmtqs td, #fesqidmtqs th {
+#tqgtehxzzw thead, #tqgtehxzzw tbody, #tqgtehxzzw tfoot, #tqgtehxzzw tr, #tqgtehxzzw td, #tqgtehxzzw th {
   border-style: none;
 }
 
-#fesqidmtqs p {
+#tqgtehxzzw p {
   margin: 0;
   padding: 0;
 }
 
-#fesqidmtqs .gt_table {
+#tqgtehxzzw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -930,12 +986,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_caption {
+#tqgtehxzzw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fesqidmtqs .gt_title {
+#tqgtehxzzw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -947,7 +1003,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#fesqidmtqs .gt_subtitle {
+#tqgtehxzzw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -959,7 +1015,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#fesqidmtqs .gt_heading {
+#tqgtehxzzw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -971,13 +1027,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_bottom_border {
+#tqgtehxzzw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_col_headings {
+#tqgtehxzzw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -992,7 +1048,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_col_heading {
+#tqgtehxzzw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1012,7 +1068,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#fesqidmtqs .gt_column_spanner_outer {
+#tqgtehxzzw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1024,15 +1080,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#fesqidmtqs .gt_column_spanner_outer:first-child {
+#tqgtehxzzw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fesqidmtqs .gt_column_spanner_outer:last-child {
+#tqgtehxzzw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fesqidmtqs .gt_column_spanner {
+#tqgtehxzzw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1044,11 +1100,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#fesqidmtqs .gt_spanner_row {
+#tqgtehxzzw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fesqidmtqs .gt_group_heading {
+#tqgtehxzzw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1074,7 +1130,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#fesqidmtqs .gt_empty_group_heading {
+#tqgtehxzzw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1089,15 +1145,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#fesqidmtqs .gt_from_md > :first-child {
+#tqgtehxzzw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fesqidmtqs .gt_from_md > :last-child {
+#tqgtehxzzw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fesqidmtqs .gt_row {
+#tqgtehxzzw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1116,7 +1172,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#fesqidmtqs .gt_stub {
+#tqgtehxzzw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1129,7 +1185,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#fesqidmtqs .gt_stub_row_group {
+#tqgtehxzzw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1143,15 +1199,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#fesqidmtqs .gt_row_group_first td {
+#tqgtehxzzw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fesqidmtqs .gt_row_group_first th {
+#tqgtehxzzw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fesqidmtqs .gt_summary_row {
+#tqgtehxzzw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1161,16 +1217,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#fesqidmtqs .gt_first_summary_row {
+#tqgtehxzzw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_first_summary_row.thick {
+#tqgtehxzzw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fesqidmtqs .gt_last_summary_row {
+#tqgtehxzzw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1180,7 +1236,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_grand_summary_row {
+#tqgtehxzzw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1190,7 +1246,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#fesqidmtqs .gt_first_grand_summary_row {
+#tqgtehxzzw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1200,7 +1256,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_last_grand_summary_row_top {
+#tqgtehxzzw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1210,11 +1266,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_striped {
+#tqgtehxzzw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fesqidmtqs .gt_table_body {
+#tqgtehxzzw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1223,7 +1279,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_footnotes {
+#tqgtehxzzw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1237,7 +1293,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_footnote {
+#tqgtehxzzw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1246,7 +1302,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#fesqidmtqs .gt_sourcenotes {
+#tqgtehxzzw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1260,7 +1316,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#fesqidmtqs .gt_sourcenote {
+#tqgtehxzzw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1268,119 +1324,130 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#fesqidmtqs .gt_left {
+#tqgtehxzzw .gt_left {
   text-align: left;
 }
 
-#fesqidmtqs .gt_center {
+#tqgtehxzzw .gt_center {
   text-align: center;
 }
 
-#fesqidmtqs .gt_right {
+#tqgtehxzzw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fesqidmtqs .gt_font_normal {
+#tqgtehxzzw .gt_font_normal {
   font-weight: normal;
 }
 
-#fesqidmtqs .gt_font_bold {
+#tqgtehxzzw .gt_font_bold {
   font-weight: bold;
 }
 
-#fesqidmtqs .gt_font_italic {
+#tqgtehxzzw .gt_font_italic {
   font-style: italic;
 }
 
-#fesqidmtqs .gt_super {
+#tqgtehxzzw .gt_super {
   font-size: 65%;
 }
 
-#fesqidmtqs .gt_footnote_marks {
+#tqgtehxzzw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fesqidmtqs .gt_asterisk {
+#tqgtehxzzw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fesqidmtqs .gt_indent_1 {
+#tqgtehxzzw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fesqidmtqs .gt_indent_2 {
+#tqgtehxzzw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fesqidmtqs .gt_indent_3 {
+#tqgtehxzzw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fesqidmtqs .gt_indent_4 {
+#tqgtehxzzw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fesqidmtqs .gt_indent_5 {
+#tqgtehxzzw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>LSS Model Coefficients</strong></td>
-    </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="term">term</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="estimate">estimate</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="std.error">std.error</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="statistic">statistic</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="p.value">p.value</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="term" class="gt_row gt_center">(Intercept)</td>
-<td headers="estimate" class="gt_row gt_center">36.43</td>
-<td headers="std.error" class="gt_row gt_center">13.97</td>
-<td headers="statistic" class="gt_row gt_center">2.61</td>
-<td headers="p.value" class="gt_row gt_center">0.02</td></tr>
-    <tr><td headers="term" class="gt_row gt_center">trend()</td>
-<td headers="estimate" class="gt_row gt_center">−7.33</td>
-<td headers="std.error" class="gt_row gt_center">1.92</td>
-<td headers="statistic" class="gt_row gt_center">−3.82</td>
-<td headers="p.value" class="gt_row gt_center">0.00</td></tr>
-    <tr><td headers="term" class="gt_row gt_center">I(trend()^2)</td>
-<td headers="estimate" class="gt_row gt_center">0.70</td>
-<td headers="std.error" class="gt_row gt_center">0.06</td>
-<td headers="statistic" class="gt_row gt_center">11.62</td>
-<td headers="p.value" class="gt_row gt_center">0.00</td></tr>
-    <tr><td headers="term" class="gt_row gt_center">season()year2</td>
-<td headers="estimate" class="gt_row gt_center">−8.63</td>
-<td headers="std.error" class="gt_row gt_center">10.91</td>
-<td headers="statistic" class="gt_row gt_center">−0.79</td>
-<td headers="p.value" class="gt_row gt_center">0.44</td></tr>
-    <tr><td headers="term" class="gt_row gt_center">season()year3</td>
-<td headers="estimate" class="gt_row gt_center">8.07</td>
-<td headers="std.error" class="gt_row gt_center">11.35</td>
-<td headers="statistic" class="gt_row gt_center">0.71</td>
-<td headers="p.value" class="gt_row gt_center">0.48</td></tr>
-    <tr><td headers="term" class="gt_row gt_center">season()year4</td>
-<td headers="estimate" class="gt_row gt_center">21.40</td>
-<td headers="std.error" class="gt_row gt_center">11.35</td>
-<td headers="statistic" class="gt_row gt_center">1.88</td>
-<td headers="p.value" class="gt_row gt_center">0.07</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>LSS Model Coefficients</strong></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">term</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">estimate</th>
+<th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">std.error</th>
+<th id="statistic" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">statistic</th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">p.value</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="term">(Intercept)</td>
+<td class="gt_row gt_center" headers="estimate">36.43</td>
+<td class="gt_row gt_center" headers="std.error">13.97</td>
+<td class="gt_row gt_center" headers="statistic">2.61</td>
+<td class="gt_row gt_center" headers="p.value">0.02</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="term">trend()</td>
+<td class="gt_row gt_center" headers="estimate">−7.33</td>
+<td class="gt_row gt_center" headers="std.error">1.92</td>
+<td class="gt_row gt_center" headers="statistic">−3.82</td>
+<td class="gt_row gt_center" headers="p.value">0.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="term">I(trend()^2)</td>
+<td class="gt_row gt_center" headers="estimate">0.70</td>
+<td class="gt_row gt_center" headers="std.error">0.06</td>
+<td class="gt_row gt_center" headers="statistic">11.62</td>
+<td class="gt_row gt_center" headers="p.value">0.00</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="term">season()year2</td>
+<td class="gt_row gt_center" headers="estimate">−8.63</td>
+<td class="gt_row gt_center" headers="std.error">10.91</td>
+<td class="gt_row gt_center" headers="statistic">−0.79</td>
+<td class="gt_row gt_center" headers="p.value">0.44</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="term">season()year3</td>
+<td class="gt_row gt_center" headers="estimate">8.07</td>
+<td class="gt_row gt_center" headers="std.error">11.35</td>
+<td class="gt_row gt_center" headers="statistic">0.71</td>
+<td class="gt_row gt_center" headers="p.value">0.48</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="term">season()year4</td>
+<td class="gt_row gt_center" headers="estimate">21.40</td>
+<td class="gt_row gt_center" headers="std.error">11.35</td>
+<td class="gt_row gt_center" headers="statistic">1.88</td>
+<td class="gt_row gt_center" headers="p.value">0.07</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
-<p>The output above, reveals that the seasonal dummy for Q4 is statistically significant at the <span class="math inline">\(10\)</span>% confirming the seasonal pattern found in the decomposition (<a href="#sec-data"><span>Section&nbsp;6.3</span></a>). The plot below shows the fit of the models with the blue line representing the LSS model and the red line the DAMPEDS model.</p>
+<p>The output above, reveals that the seasonal dummy for Q4 is statistically significant at the <span class="math inline">\(10\)</span>% confirming the seasonal pattern found in the decomposition (<a href="#sec-data" class="quarto-xref"><span>Section 6.3</span></a>). The plot below shows the fit of the models with the blue line representing the LSS model and the red line the DAMPEDS model.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(deliveries, <span class="at">lwd=</span><span class="fl">1.2</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">col=</span><span class="st">"blue"</span>,</span>
@@ -1391,7 +1458,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Q1 2017 to Q2 2023"</span>) <span class="sc">+</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Quarter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ETS_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1413,24 +1484,23 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
-<div id="awqlsgngwy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#awqlsgngwy table {
+<div id="gtjhuzggsh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gtjhuzggsh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#awqlsgngwy thead, #awqlsgngwy tbody, #awqlsgngwy tfoot, #awqlsgngwy tr, #awqlsgngwy td, #awqlsgngwy th {
+#gtjhuzggsh thead, #gtjhuzggsh tbody, #gtjhuzggsh tfoot, #gtjhuzggsh tr, #gtjhuzggsh td, #gtjhuzggsh th {
   border-style: none;
 }
 
-#awqlsgngwy p {
+#gtjhuzggsh p {
   margin: 0;
   padding: 0;
 }
 
-#awqlsgngwy .gt_table {
+#gtjhuzggsh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1456,12 +1526,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_caption {
+#gtjhuzggsh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#awqlsgngwy .gt_title {
+#gtjhuzggsh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1473,7 +1543,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#awqlsgngwy .gt_subtitle {
+#gtjhuzggsh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1485,7 +1555,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#awqlsgngwy .gt_heading {
+#gtjhuzggsh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1497,13 +1567,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_bottom_border {
+#gtjhuzggsh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_col_headings {
+#gtjhuzggsh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1518,7 +1588,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_col_heading {
+#gtjhuzggsh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1538,7 +1608,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#awqlsgngwy .gt_column_spanner_outer {
+#gtjhuzggsh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1550,15 +1620,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#awqlsgngwy .gt_column_spanner_outer:first-child {
+#gtjhuzggsh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#awqlsgngwy .gt_column_spanner_outer:last-child {
+#gtjhuzggsh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#awqlsgngwy .gt_column_spanner {
+#gtjhuzggsh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1570,11 +1640,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#awqlsgngwy .gt_spanner_row {
+#gtjhuzggsh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#awqlsgngwy .gt_group_heading {
+#gtjhuzggsh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1600,7 +1670,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#awqlsgngwy .gt_empty_group_heading {
+#gtjhuzggsh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1615,15 +1685,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#awqlsgngwy .gt_from_md > :first-child {
+#gtjhuzggsh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#awqlsgngwy .gt_from_md > :last-child {
+#gtjhuzggsh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#awqlsgngwy .gt_row {
+#gtjhuzggsh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1642,7 +1712,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#awqlsgngwy .gt_stub {
+#gtjhuzggsh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1655,7 +1725,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#awqlsgngwy .gt_stub_row_group {
+#gtjhuzggsh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1669,15 +1739,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#awqlsgngwy .gt_row_group_first td {
+#gtjhuzggsh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#awqlsgngwy .gt_row_group_first th {
+#gtjhuzggsh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#awqlsgngwy .gt_summary_row {
+#gtjhuzggsh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1687,16 +1757,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#awqlsgngwy .gt_first_summary_row {
+#gtjhuzggsh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_first_summary_row.thick {
+#gtjhuzggsh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#awqlsgngwy .gt_last_summary_row {
+#gtjhuzggsh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1706,7 +1776,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_grand_summary_row {
+#gtjhuzggsh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1716,7 +1786,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#awqlsgngwy .gt_first_grand_summary_row {
+#gtjhuzggsh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1726,7 +1796,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_last_grand_summary_row_top {
+#gtjhuzggsh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1736,11 +1806,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_striped {
+#gtjhuzggsh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#awqlsgngwy .gt_table_body {
+#gtjhuzggsh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1749,7 +1819,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_footnotes {
+#gtjhuzggsh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1763,7 +1833,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_footnote {
+#gtjhuzggsh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1772,7 +1842,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#awqlsgngwy .gt_sourcenotes {
+#gtjhuzggsh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1786,7 +1856,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#awqlsgngwy .gt_sourcenote {
+#gtjhuzggsh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1794,112 +1864,125 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#awqlsgngwy .gt_left {
+#gtjhuzggsh .gt_left {
   text-align: left;
 }
 
-#awqlsgngwy .gt_center {
+#gtjhuzggsh .gt_center {
   text-align: center;
 }
 
-#awqlsgngwy .gt_right {
+#gtjhuzggsh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#awqlsgngwy .gt_font_normal {
+#gtjhuzggsh .gt_font_normal {
   font-weight: normal;
 }
 
-#awqlsgngwy .gt_font_bold {
+#gtjhuzggsh .gt_font_bold {
   font-weight: bold;
 }
 
-#awqlsgngwy .gt_font_italic {
+#gtjhuzggsh .gt_font_italic {
   font-style: italic;
 }
 
-#awqlsgngwy .gt_super {
+#gtjhuzggsh .gt_super {
   font-size: 65%;
 }
 
-#awqlsgngwy .gt_footnote_marks {
+#gtjhuzggsh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#awqlsgngwy .gt_asterisk {
+#gtjhuzggsh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#awqlsgngwy .gt_indent_1 {
+#gtjhuzggsh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#awqlsgngwy .gt_indent_2 {
+#gtjhuzggsh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#awqlsgngwy .gt_indent_3 {
+#gtjhuzggsh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#awqlsgngwy .gt_indent_4 {
+#gtjhuzggsh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#awqlsgngwy .gt_indent_5 {
+#gtjhuzggsh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>Model Fit Information Criterion</strong></td>
-    </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".model">.model</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="AIC">AIC</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="AICc">AICc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="BIC">BIC</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers=".model" class="gt_row gt_center">SES</td>
-<td headers="AIC" class="gt_row gt_center">237.16</td>
-<td headers="AICc" class="gt_row gt_center">238.36</td>
-<td headers="BIC" class="gt_row gt_center">240.69</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">HOLT</td>
-<td headers="AIC" class="gt_row gt_center">233.99</td>
-<td headers="AICc" class="gt_row gt_center">237.32</td>
-<td headers="BIC" class="gt_row gt_center">239.88</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">DAMPED</td>
-<td headers="AIC" class="gt_row gt_center">236.37</td>
-<td headers="AICc" class="gt_row gt_center">241.31</td>
-<td headers="BIC" class="gt_row gt_center">243.44</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">DAMPEDS</td>
-<td headers="AIC" class="gt_row gt_center">233.92</td>
-<td headers="AICc" class="gt_row gt_center">250.84</td>
-<td headers="BIC" class="gt_row gt_center">245.70</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">ALGO</td>
-<td headers="AIC" class="gt_row gt_center">223.19</td>
-<td headers="AICc" class="gt_row gt_center">224.39</td>
-<td headers="BIC" class="gt_row gt_center">226.73</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">LS</td>
-<td headers="AIC" class="gt_row gt_center">150.12</td>
-<td headers="AICc" class="gt_row gt_center">152.22</td>
-<td headers="BIC" class="gt_row gt_center">154.83</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center" style="background-color: #90EE90;">LSS</td>
-<td headers="AIC" class="gt_row gt_center" style="background-color: #90EE90;">147.17</td>
-<td headers="AICc" class="gt_row gt_center" style="background-color: #90EE90;">154.17</td>
-<td headers="BIC" class="gt_row gt_center" style="background-color: #90EE90;">155.41</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Fit Information Criterion</strong></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id="AIC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">AIC</th>
+<th id="AICc" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">AICc</th>
+<th id="BIC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">BIC</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">SES</td>
+<td class="gt_row gt_center" headers="AIC">237.16</td>
+<td class="gt_row gt_center" headers="AICc">238.36</td>
+<td class="gt_row gt_center" headers="BIC">240.69</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model">HOLT</td>
+<td class="gt_row gt_center" headers="AIC">233.99</td>
+<td class="gt_row gt_center" headers="AICc">237.32</td>
+<td class="gt_row gt_center" headers="BIC">239.88</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">DAMPED</td>
+<td class="gt_row gt_center" headers="AIC">236.37</td>
+<td class="gt_row gt_center" headers="AICc">241.31</td>
+<td class="gt_row gt_center" headers="BIC">243.44</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model">DAMPEDS</td>
+<td class="gt_row gt_center" headers="AIC">233.92</td>
+<td class="gt_row gt_center" headers="AICc">250.84</td>
+<td class="gt_row gt_center" headers="BIC">245.70</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">ALGO</td>
+<td class="gt_row gt_center" headers="AIC">223.19</td>
+<td class="gt_row gt_center" headers="AICc">224.39</td>
+<td class="gt_row gt_center" headers="BIC">226.73</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model">LS</td>
+<td class="gt_row gt_center" headers="AIC">150.12</td>
+<td class="gt_row gt_center" headers="AICc">152.22</td>
+<td class="gt_row gt_center" headers="BIC">154.83</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model" style="background-color: #90EE90">LSS</td>
+<td class="gt_row gt_center" headers="AIC" style="background-color: #90EE90">147.17</td>
+<td class="gt_row gt_center" headers="AICc" style="background-color: #90EE90">154.17</td>
+<td class="gt_row gt_center" headers="BIC" style="background-color: #90EE90">155.41</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1916,24 +1999,23 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
-<div id="woljykynpf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#woljykynpf table {
+<div id="yiiujspzgj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yiiujspzgj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#woljykynpf thead, #woljykynpf tbody, #woljykynpf tfoot, #woljykynpf tr, #woljykynpf td, #woljykynpf th {
+#yiiujspzgj thead, #yiiujspzgj tbody, #yiiujspzgj tfoot, #yiiujspzgj tr, #yiiujspzgj td, #yiiujspzgj th {
   border-style: none;
 }
 
-#woljykynpf p {
+#yiiujspzgj p {
   margin: 0;
   padding: 0;
 }
 
-#woljykynpf .gt_table {
+#yiiujspzgj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1959,12 +2041,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#woljykynpf .gt_caption {
+#yiiujspzgj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#woljykynpf .gt_title {
+#yiiujspzgj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1976,7 +2058,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#woljykynpf .gt_subtitle {
+#yiiujspzgj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1988,7 +2070,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#woljykynpf .gt_heading {
+#yiiujspzgj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2000,13 +2082,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#woljykynpf .gt_bottom_border {
+#yiiujspzgj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#woljykynpf .gt_col_headings {
+#yiiujspzgj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2021,7 +2103,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#woljykynpf .gt_col_heading {
+#yiiujspzgj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2041,7 +2123,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#woljykynpf .gt_column_spanner_outer {
+#yiiujspzgj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2053,15 +2135,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#woljykynpf .gt_column_spanner_outer:first-child {
+#yiiujspzgj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#woljykynpf .gt_column_spanner_outer:last-child {
+#yiiujspzgj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#woljykynpf .gt_column_spanner {
+#yiiujspzgj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2073,11 +2155,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#woljykynpf .gt_spanner_row {
+#yiiujspzgj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#woljykynpf .gt_group_heading {
+#yiiujspzgj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2103,7 +2185,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#woljykynpf .gt_empty_group_heading {
+#yiiujspzgj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2118,15 +2200,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#woljykynpf .gt_from_md > :first-child {
+#yiiujspzgj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#woljykynpf .gt_from_md > :last-child {
+#yiiujspzgj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#woljykynpf .gt_row {
+#yiiujspzgj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2145,7 +2227,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#woljykynpf .gt_stub {
+#yiiujspzgj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2158,7 +2240,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#woljykynpf .gt_stub_row_group {
+#yiiujspzgj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2172,15 +2254,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#woljykynpf .gt_row_group_first td {
+#yiiujspzgj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#woljykynpf .gt_row_group_first th {
+#yiiujspzgj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#woljykynpf .gt_summary_row {
+#yiiujspzgj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2190,16 +2272,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#woljykynpf .gt_first_summary_row {
+#yiiujspzgj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#woljykynpf .gt_first_summary_row.thick {
+#yiiujspzgj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#woljykynpf .gt_last_summary_row {
+#yiiujspzgj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2209,7 +2291,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#woljykynpf .gt_grand_summary_row {
+#yiiujspzgj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2219,7 +2301,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#woljykynpf .gt_first_grand_summary_row {
+#yiiujspzgj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2229,7 +2311,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#woljykynpf .gt_last_grand_summary_row_top {
+#yiiujspzgj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2239,11 +2321,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#woljykynpf .gt_striped {
+#yiiujspzgj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#woljykynpf .gt_table_body {
+#yiiujspzgj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2252,7 +2334,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#woljykynpf .gt_footnotes {
+#yiiujspzgj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2266,7 +2348,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#woljykynpf .gt_footnote {
+#yiiujspzgj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2275,7 +2357,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#woljykynpf .gt_sourcenotes {
+#yiiujspzgj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2289,7 +2371,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#woljykynpf .gt_sourcenote {
+#yiiujspzgj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2297,116 +2379,131 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#woljykynpf .gt_left {
+#yiiujspzgj .gt_left {
   text-align: left;
 }
 
-#woljykynpf .gt_center {
+#yiiujspzgj .gt_center {
   text-align: center;
 }
 
-#woljykynpf .gt_right {
+#yiiujspzgj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#woljykynpf .gt_font_normal {
+#yiiujspzgj .gt_font_normal {
   font-weight: normal;
 }
 
-#woljykynpf .gt_font_bold {
+#yiiujspzgj .gt_font_bold {
   font-weight: bold;
 }
 
-#woljykynpf .gt_font_italic {
+#yiiujspzgj .gt_font_italic {
   font-style: italic;
 }
 
-#woljykynpf .gt_super {
+#yiiujspzgj .gt_super {
   font-size: 65%;
 }
 
-#woljykynpf .gt_footnote_marks {
+#yiiujspzgj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#woljykynpf .gt_asterisk {
+#yiiujspzgj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#woljykynpf .gt_indent_1 {
+#yiiujspzgj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#woljykynpf .gt_indent_2 {
+#yiiujspzgj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#woljykynpf .gt_indent_3 {
+#yiiujspzgj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#woljykynpf .gt_indent_4 {
+#yiiujspzgj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#woljykynpf .gt_indent_5 {
+#yiiujspzgj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>Forecasts</strong></td>
-    </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="period">period</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="deliveries">deliveries</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".mean">.mean</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".model">.model</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="period" class="gt_row gt_center">2023 Q3</td>
-<td headers="deliveries" class="gt_row gt_center">N(516, 854)</td>
-<td headers=".mean" class="gt_row gt_center">515.90</td>
-<td headers=".model" class="gt_row gt_center">DAMPEDS</td></tr>
-    <tr><td headers="period" class="gt_row gt_center">2023 Q4</td>
-<td headers="deliveries" class="gt_row gt_center">N(563, 1681)</td>
-<td headers=".mean" class="gt_row gt_center">562.94</td>
-<td headers=".model" class="gt_row gt_center">DAMPEDS</td></tr>
-    <tr><td headers="period" class="gt_row gt_center">2024 Q1</td>
-<td headers="deliveries" class="gt_row gt_center">N(579, 2895)</td>
-<td headers=".mean" class="gt_row gt_center">578.73</td>
-<td headers=".model" class="gt_row gt_center">DAMPEDS</td></tr>
-    <tr><td headers="period" class="gt_row gt_center">2024 Q2</td>
-<td headers="deliveries" class="gt_row gt_center">N(602, 4563)</td>
-<td headers=".mean" class="gt_row gt_center">601.50</td>
-<td headers=".model" class="gt_row gt_center">DAMPEDS</td></tr>
-    <tr><td headers="period" class="gt_row gt_center">2023 Q3</td>
-<td headers="deliveries" class="gt_row gt_center">N(489, 709)</td>
-<td headers=".mean" class="gt_row gt_center">488.95</td>
-<td headers=".model" class="gt_row gt_center">LSS</td></tr>
-    <tr><td headers="period" class="gt_row gt_center">2023 Q4</td>
-<td headers="deliveries" class="gt_row gt_center">N(539, 754)</td>
-<td headers=".mean" class="gt_row gt_center">538.99</td>
-<td headers=".model" class="gt_row gt_center">LSS</td></tr>
-    <tr><td headers="period" class="gt_row gt_center">2024 Q1</td>
-<td headers="deliveries" class="gt_row gt_center">N(556, 782)</td>
-<td headers=".mean" class="gt_row gt_center">555.69</td>
-<td headers=".model" class="gt_row gt_center">LSS</td></tr>
-    <tr><td headers="period" class="gt_row gt_center">2024 Q2</td>
-<td headers="deliveries" class="gt_row gt_center">N(587, 844)</td>
-<td headers=".mean" class="gt_row gt_center">586.56</td>
-<td headers=".model" class="gt_row gt_center">LSS</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Forecasts</strong></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id="period" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">period</th>
+<th id="deliveries" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">deliveries</th>
+<th id=".mean" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.mean</th>
+<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="period">2023 Q3</td>
+<td class="gt_row gt_center" headers="deliveries">N(516, 854)</td>
+<td class="gt_row gt_center" headers=".mean">515.90</td>
+<td class="gt_row gt_center" headers=".model">DAMPEDS</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="period">2023 Q4</td>
+<td class="gt_row gt_center" headers="deliveries">N(563, 1681)</td>
+<td class="gt_row gt_center" headers=".mean">562.94</td>
+<td class="gt_row gt_center" headers=".model">DAMPEDS</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="period">2024 Q1</td>
+<td class="gt_row gt_center" headers="deliveries">N(579, 2895)</td>
+<td class="gt_row gt_center" headers=".mean">578.73</td>
+<td class="gt_row gt_center" headers=".model">DAMPEDS</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="period">2024 Q2</td>
+<td class="gt_row gt_center" headers="deliveries">N(602, 4563)</td>
+<td class="gt_row gt_center" headers=".mean">601.50</td>
+<td class="gt_row gt_center" headers=".model">DAMPEDS</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="period">2023 Q3</td>
+<td class="gt_row gt_center" headers="deliveries">N(489, 709)</td>
+<td class="gt_row gt_center" headers=".mean">488.95</td>
+<td class="gt_row gt_center" headers=".model">LSS</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="period">2023 Q4</td>
+<td class="gt_row gt_center" headers="deliveries">N(539, 754)</td>
+<td class="gt_row gt_center" headers=".mean">538.99</td>
+<td class="gt_row gt_center" headers=".model">LSS</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="period">2024 Q1</td>
+<td class="gt_row gt_center" headers="deliveries">N(556, 782)</td>
+<td class="gt_row gt_center" headers=".mean">555.69</td>
+<td class="gt_row gt_center" headers=".model">LSS</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="period">2024 Q2</td>
+<td class="gt_row gt_center" headers="deliveries">N(587, 844)</td>
+<td class="gt_row gt_center" headers=".mean">586.56</td>
+<td class="gt_row gt_center" headers=".model">LSS</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2419,20 +2516,25 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Tesla Car Deliveries Forecasts"</span>,</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Q1 2017 to Q2 2023"</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ETS_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 <section id="scenarios" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="scenarios"><span class="header-section-number">6.7</span> Scenarios</h2>
-<p>On 10/09/23 Tesla reported 435,059 deliveries for Q3 2023. On the previous earning call, Tesla warned investors that factories would be shutdown to accommodate the production of a new type of vehicle (highland model 3). Since a similar shutdown occurred on Q2 2022, we can use this information to get a more accurate prediction.</p>
+<p>On October 9, 2023, Tesla announced 435,059 deliveries for Q3, signaling strong performance. However, during the previous earnings call, Tesla had already cautioned investors about potential delivery impacts due to planned factory shutdowns and upgrades. These shutdowns are necessary to retool production lines for their upcoming vehicles, the Highland Model 3 and Cybertruck. Interestingly, a similar factory shutdown occurred in Q2 2022, giving us valuable historical data to make more precise predictions.</p>
+<p>To factor in the effect of these shutdowns, we can introduce a dummy variable, where we assign a value of 1 during shutdown quarters and 0 otherwise. Here’s the code:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tesla<span class="ot">&lt;-</span><span class="fu">mutate</span>(tesla,</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">Down=</span><span class="fu">case_when</span>(</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                  period<span class="sc">==</span><span class="fu">yearquarter</span>(<span class="st">"2022 Q2"</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The code above includes a dummy variable to capture the effect of a shutdown. Essentially, the variable is 1 whenever there was a shutdown and 0 otherwise. Now we can use the variable to estimate the TSLM model again:</p>
+<p>The <em>Down</em> variable, captures the impact of factory shutdowns on deliveries. Now, we can incorporate this information into our Time Series Linear Model (TSLM) to estimate Tesla’s deliveries more accurately:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> tesla <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
@@ -2440,7 +2542,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">I</span>(<span class="fu">trend</span>()<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">season</span>()<span class="sc">+</span>Down)</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The last step is to create a scenario where Tesla has a shutdown and one where there is no shutdown. To do this we can use the <code>scenarios()</code> function and create a new data set for forecasting that includes four periods in which the dummy is 1 (factory has a shutdown) and four periods where the dummy is 0 (factory has no shutdown).</p>
+<p>Next, let’s explore two possible scenarios: one where Tesla undergoes a factory shutdown and another where production continues uninterrupted. Using the <code>scenarios()</code> function, we can create a dataset for forecasting over the next four periods, simulating both situations:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Down_Scenario <span class="ot">&lt;-</span> <span class="fu">scenarios</span>(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Factory_Down =</span> <span class="fu">new_data</span>(tesla, <span class="dv">4</span>) <span class="sc">|&gt;</span></span>
@@ -2449,7 +2551,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Down=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>)),</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"Scenario"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can now plot the new forecast with scenarios.</p>
+<p>Finally, we can visualize how each scenario affects Tesla’s future delivery forecasts. Whether Tesla experiences another factory shutdown or keeps production running smoothly, this analysis will help us better understand the potential outcomes.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(deliveries) <span class="sc">+</span> </span>
@@ -2459,10 +2561,14 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Tesla Car Deliveries Forecasts"</span>,</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Scenario Forecast"</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ETS_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<p>The new forecast of 429,404 is now closer to the reported delivery number of 435,059. The analyst consensus estimate was 454,809. For the 4th quarter of 2023 the analyst consensus was 480,500, which is inline with the forecast of the LSS model (about 480,000). The 95% confidence interval of [422,553, 537,182] is retrieved using the <code>hilo()</code> function.</p>
+</div>
+<p>The new forecast of 429,404 is now closer to the reported delivery number of 435,059 for Q3 2023 when compared to the analyst consensus estimate of 454,809. For the 4th quarter of 2023 the analyst consensus was 480,500, which is inline with the forecast of the LSS model (about 480,000). The 95% confidence interval of [422,553, 537,182] is retrieved using the <code>hilo()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">new_data=</span>Down_Scenario) <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="fu">unpack_hilo</span>(<span class="st">"95%"</span>) <span class="sc">%&gt;%</span></span>
@@ -2472,24 +2578,23 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">`</span><span class="at">95%_lower</span><span class="st">`</span>,<span class="st">`</span><span class="at">95%_upper</span><span class="st">`</span>),</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">decimals =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<div id="gmobirplct" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gmobirplct table {
+<div id="fnodmmdosv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fnodmmdosv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gmobirplct thead, #gmobirplct tbody, #gmobirplct tfoot, #gmobirplct tr, #gmobirplct td, #gmobirplct th {
+#fnodmmdosv thead, #fnodmmdosv tbody, #fnodmmdosv tfoot, #fnodmmdosv tr, #fnodmmdosv td, #fnodmmdosv th {
   border-style: none;
 }
 
-#gmobirplct p {
+#fnodmmdosv p {
   margin: 0;
   padding: 0;
 }
 
-#gmobirplct .gt_table {
+#fnodmmdosv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2515,12 +2620,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#gmobirplct .gt_caption {
+#fnodmmdosv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gmobirplct .gt_title {
+#fnodmmdosv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2532,7 +2637,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#gmobirplct .gt_subtitle {
+#fnodmmdosv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2544,7 +2649,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#gmobirplct .gt_heading {
+#fnodmmdosv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2556,13 +2661,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#gmobirplct .gt_bottom_border {
+#fnodmmdosv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gmobirplct .gt_col_headings {
+#fnodmmdosv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2577,7 +2682,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#gmobirplct .gt_col_heading {
+#fnodmmdosv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2597,7 +2702,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#gmobirplct .gt_column_spanner_outer {
+#fnodmmdosv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2609,15 +2714,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#gmobirplct .gt_column_spanner_outer:first-child {
+#fnodmmdosv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gmobirplct .gt_column_spanner_outer:last-child {
+#fnodmmdosv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gmobirplct .gt_column_spanner {
+#fnodmmdosv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2629,11 +2734,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#gmobirplct .gt_spanner_row {
+#fnodmmdosv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gmobirplct .gt_group_heading {
+#fnodmmdosv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2659,7 +2764,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#gmobirplct .gt_empty_group_heading {
+#fnodmmdosv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2674,15 +2779,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#gmobirplct .gt_from_md > :first-child {
+#fnodmmdosv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gmobirplct .gt_from_md > :last-child {
+#fnodmmdosv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gmobirplct .gt_row {
+#fnodmmdosv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2701,7 +2806,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#gmobirplct .gt_stub {
+#fnodmmdosv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2714,7 +2819,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#gmobirplct .gt_stub_row_group {
+#fnodmmdosv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2728,15 +2833,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#gmobirplct .gt_row_group_first td {
+#fnodmmdosv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gmobirplct .gt_row_group_first th {
+#fnodmmdosv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gmobirplct .gt_summary_row {
+#fnodmmdosv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2746,16 +2851,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#gmobirplct .gt_first_summary_row {
+#fnodmmdosv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gmobirplct .gt_first_summary_row.thick {
+#fnodmmdosv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gmobirplct .gt_last_summary_row {
+#fnodmmdosv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2765,7 +2870,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#gmobirplct .gt_grand_summary_row {
+#fnodmmdosv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2775,7 +2880,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#gmobirplct .gt_first_grand_summary_row {
+#fnodmmdosv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2785,7 +2890,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#gmobirplct .gt_last_grand_summary_row_top {
+#fnodmmdosv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2795,11 +2900,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#gmobirplct .gt_striped {
+#fnodmmdosv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gmobirplct .gt_table_body {
+#fnodmmdosv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2808,7 +2913,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#gmobirplct .gt_footnotes {
+#fnodmmdosv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2822,7 +2927,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#gmobirplct .gt_footnote {
+#fnodmmdosv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2831,7 +2936,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#gmobirplct .gt_sourcenotes {
+#fnodmmdosv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2845,7 +2950,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#gmobirplct .gt_sourcenote {
+#fnodmmdosv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2853,122 +2958,137 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#gmobirplct .gt_left {
+#fnodmmdosv .gt_left {
   text-align: left;
 }
 
-#gmobirplct .gt_center {
+#fnodmmdosv .gt_center {
   text-align: center;
 }
 
-#gmobirplct .gt_right {
+#fnodmmdosv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gmobirplct .gt_font_normal {
+#fnodmmdosv .gt_font_normal {
   font-weight: normal;
 }
 
-#gmobirplct .gt_font_bold {
+#fnodmmdosv .gt_font_bold {
   font-weight: bold;
 }
 
-#gmobirplct .gt_font_italic {
+#fnodmmdosv .gt_font_italic {
   font-style: italic;
 }
 
-#gmobirplct .gt_super {
+#fnodmmdosv .gt_super {
   font-size: 65%;
 }
 
-#gmobirplct .gt_footnote_marks {
+#fnodmmdosv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gmobirplct .gt_asterisk {
+#fnodmmdosv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gmobirplct .gt_indent_1 {
+#fnodmmdosv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gmobirplct .gt_indent_2 {
+#fnodmmdosv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gmobirplct .gt_indent_3 {
+#fnodmmdosv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gmobirplct .gt_indent_4 {
+#fnodmmdosv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gmobirplct .gt_indent_5 {
+#fnodmmdosv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Down">Down</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="period">period</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id=".mean">.mean</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="95%_lower">95%_lower</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="95%_upper">95%_upper</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="Down" class="gt_row gt_right">1</td>
-<td headers="period" class="gt_row gt_center">2023 Q3</td>
-<td headers=".mean" class="gt_row gt_right">429.40</td>
-<td headers="95%_lower" class="gt_row gt_right">373.00</td>
-<td headers="95%_upper" class="gt_row gt_right">485.81</td></tr>
-    <tr><td headers="Down" class="gt_row gt_right">1</td>
-<td headers="period" class="gt_row gt_center">2023 Q4</td>
-<td headers=".mean" class="gt_row gt_right">479.87</td>
-<td headers="95%_lower" class="gt_row gt_right">422.55</td>
-<td headers="95%_upper" class="gt_row gt_right">537.18</td></tr>
-    <tr><td headers="Down" class="gt_row gt_right">1</td>
-<td headers="period" class="gt_row gt_center">2024 Q1</td>
-<td headers=".mean" class="gt_row gt_right">497.35</td>
-<td headers="95%_lower" class="gt_row gt_right">439.66</td>
-<td headers="95%_upper" class="gt_row gt_right">555.04</td></tr>
-    <tr><td headers="Down" class="gt_row gt_right">1</td>
-<td headers="period" class="gt_row gt_center">2024 Q2</td>
-<td headers=".mean" class="gt_row gt_right">537.02</td>
-<td headers="95%_lower" class="gt_row gt_right">480.78</td>
-<td headers="95%_upper" class="gt_row gt_right">593.27</td></tr>
-    <tr><td headers="Down" class="gt_row gt_right">0</td>
-<td headers="period" class="gt_row gt_center">2023 Q3</td>
-<td headers=".mean" class="gt_row gt_right">496.03</td>
-<td headers="95%_lower" class="gt_row gt_right">451.89</td>
-<td headers="95%_upper" class="gt_row gt_right">540.16</td></tr>
-    <tr><td headers="Down" class="gt_row gt_right">0</td>
-<td headers="period" class="gt_row gt_center">2023 Q4</td>
-<td headers=".mean" class="gt_row gt_right">546.49</td>
-<td headers="95%_lower" class="gt_row gt_right">500.98</td>
-<td headers="95%_upper" class="gt_row gt_right">592.00</td></tr>
-    <tr><td headers="Down" class="gt_row gt_right">0</td>
-<td headers="period" class="gt_row gt_center">2024 Q1</td>
-<td headers=".mean" class="gt_row gt_right">563.97</td>
-<td headers="95%_lower" class="gt_row gt_right">517.60</td>
-<td headers="95%_upper" class="gt_row gt_right">610.35</td></tr>
-    <tr><td headers="Down" class="gt_row gt_right">0</td>
-<td headers="period" class="gt_row gt_center">2024 Q2</td>
-<td headers=".mean" class="gt_row gt_right">603.65</td>
-<td headers="95%_lower" class="gt_row gt_right">554.66</td>
-<td headers="95%_upper" class="gt_row gt_right">652.64</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="Down" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Down</th>
+<th id="period" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">period</th>
+<th id=".mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">.mean</th>
+<th id="95%_lower" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">95%_lower</th>
+<th id="95%_upper" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">95%_upper</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Down">1</td>
+<td class="gt_row gt_center" headers="period">2023 Q3</td>
+<td class="gt_row gt_right" headers=".mean">429.40</td>
+<td class="gt_row gt_right" headers="95%_lower">373.00</td>
+<td class="gt_row gt_right" headers="95%_upper">485.81</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Down">1</td>
+<td class="gt_row gt_center" headers="period">2023 Q4</td>
+<td class="gt_row gt_right" headers=".mean">479.87</td>
+<td class="gt_row gt_right" headers="95%_lower">422.55</td>
+<td class="gt_row gt_right" headers="95%_upper">537.18</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Down">1</td>
+<td class="gt_row gt_center" headers="period">2024 Q1</td>
+<td class="gt_row gt_right" headers=".mean">497.35</td>
+<td class="gt_row gt_right" headers="95%_lower">439.66</td>
+<td class="gt_row gt_right" headers="95%_upper">555.04</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Down">1</td>
+<td class="gt_row gt_center" headers="period">2024 Q2</td>
+<td class="gt_row gt_right" headers=".mean">537.02</td>
+<td class="gt_row gt_right" headers="95%_lower">480.78</td>
+<td class="gt_row gt_right" headers="95%_upper">593.27</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Down">0</td>
+<td class="gt_row gt_center" headers="period">2023 Q3</td>
+<td class="gt_row gt_right" headers=".mean">496.03</td>
+<td class="gt_row gt_right" headers="95%_lower">451.89</td>
+<td class="gt_row gt_right" headers="95%_upper">540.16</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Down">0</td>
+<td class="gt_row gt_center" headers="period">2023 Q4</td>
+<td class="gt_row gt_right" headers=".mean">546.49</td>
+<td class="gt_row gt_right" headers="95%_lower">500.98</td>
+<td class="gt_row gt_right" headers="95%_upper">592.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Down">0</td>
+<td class="gt_row gt_center" headers="period">2024 Q1</td>
+<td class="gt_row gt_right" headers=".mean">563.97</td>
+<td class="gt_row gt_right" headers="95%_lower">517.60</td>
+<td class="gt_row gt_right" headers="95%_upper">610.35</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Down">0</td>
+<td class="gt_row gt_center" headers="period">2024 Q2</td>
+<td class="gt_row gt_right" headers=".mean">603.65</td>
+<td class="gt_row gt_right" headers="95%_lower">554.66</td>
+<td class="gt_row gt_right" headers="95%_upper">652.64</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2991,7 +3111,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-FPP3" class="csl-entry" role="listitem">
 Hyndman, Rob. 2021. <em>Forecasting Principles and Practice</em>. Otexts. <a href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a>.
 </div>
@@ -3081,10 +3201,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -3094,8 +3231,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -3107,7 +3253,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -3151,6 +3420,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -3176,6 +3446,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -3237,17 +3533,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Benchmarks.html" class="pagination-link">
+      <a href="./Benchmarks.html" class="pagination-link" aria-label="Model Benchmarks">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Model Benchmarks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ARIMA.html" class="pagination-link">
+      <a href="./ARIMA.html" class="pagination-link" aria-label="ARIMA">
         <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ARIMA</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

@@ -255,7 +255,9 @@ fit %>%
 
 ## Scenarios
 
-On 10/09/23 Tesla reported 435,059 deliveries for Q3 2023. On the previous earning call, Tesla warned investors that factories would be shutdown to accommodate the production of a new type of vehicle (highland model 3). Since a similar shutdown occurred on Q2 2022, we can use this information to get a more accurate prediction.
+On October 9, 2023, Tesla announced 435,059 deliveries for Q3, signaling strong performance. However, during the previous earnings call, Tesla had already cautioned investors about potential delivery impacts due to planned factory shutdowns and upgrades. These shutdowns are necessary to retool production lines for their upcoming vehicles, the Highland Model 3 and Cybertruck. Interestingly, a similar factory shutdown occurred in Q2 2022, giving us valuable historical data to make more precise predictions.
+
+To factor in the effect of these shutdowns, we can introduce a dummy variable, where we assign a value of 1 during shutdown quarters and 0 otherwise. Here's the code:
 
 ```{r}
 tesla<-mutate(tesla,
@@ -265,7 +267,7 @@ tesla<-mutate(tesla,
 
 ```
 
-The code above includes a dummy variable to capture the effect of a shutdown. Essentially, the variable is 1 whenever there was a shutdown and 0 otherwise. Now we can use the variable to estimate the TSLM model again:
+The *Down* variable, captures the impact of factory shutdowns on deliveries. Now, we can incorporate this information into our Time Series Linear Model (TSLM) to estimate Tesla’s deliveries more accurately:
 
 ```{r}
 fit <- tesla %>%
@@ -276,7 +278,7 @@ fit <- tesla %>%
 
 ```
 
-The last step is to create a scenario where Tesla has a shutdown and one where there is no shutdown. To do this we can use the `scenarios()` function and create a new data set for forecasting that includes four periods in which the dummy is 1 (factory has a shutdown) and four periods where the dummy is 0 (factory has no shutdown).
+Next, let's explore two possible scenarios: one where Tesla undergoes a factory shutdown and another where production continues uninterrupted. Using the `scenarios()` function, we can create a dataset for forecasting over the next four periods, simulating both situations:
 
 ```{r}
 Down_Scenario <- scenarios(
@@ -287,7 +289,7 @@ Down_Scenario <- scenarios(
   names_to = "Scenario")
 ```
 
-We can now plot the new forecast with scenarios.
+Finally, we can visualize how each scenario affects Tesla’s future delivery forecasts. Whether Tesla experiences another factory shutdown or keeps production running smoothly, this analysis will help us better understand the potential outcomes. 
 
 ```{r}
 tesla %>%
@@ -299,7 +301,7 @@ tesla %>%
        subtitle = "Scenario Forecast") + theme_classic()
 ```
 
-The new forecast of 429,404 is now closer to the reported delivery number of 435,059. The analyst consensus estimate was 454,809. For the 4th quarter of 2023 the analyst consensus was 480,500, which is inline with the forecast of the LSS model (about 480,000). The 95% confidence interval of [422,553, 537,182] is retrieved using the `hilo()` function.  
+The new forecast of 429,404 is now closer to the reported delivery number of 435,059 for Q3 2023 when compared to the analyst consensus estimate of 454,809. For the 4th quarter of 2023 the analyst consensus was 480,500, which is inline with the forecast of the LSS model (about 480,000). The 95% confidence interval of \[422,553, 537,182\] is retrieved using the `hilo()` function.
 
 ```{r}
 fit %>% forecast(new_data=Down_Scenario) %>%
