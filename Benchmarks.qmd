@@ -300,3 +300,33 @@ In this module you have been introduced to the general procedure in forecasting 
 -   Perform cross validation.
 
 -   Select models with the AIC, AICc or BIC.
+
+
+## Exercises
+
+1. The Japanese government has hired you to forecast their total population. The Japanese government is hoping to inform their policy to better allocate resources, and plan for future needs. You can find population data here: <https://jagelves.github.io/Data/UNPOP.csv>
+Use the NAIVE, TSLM model with a simple trends, and a TSLM model with quadratic trend, to provide a four year forecast. Which method provides the best forecast?
+
+<details>
+
+<summary>Suggested Answer</summary>
+
+
+</details>
+
+2. Fertility rates are crucial because they directly impact population growth and demographic structure. Low fertility rates can lead to an aging population, shrinking workforce, and challenges in sustaining economic growth and social welfare programs. To maintain a stable population in the U.S., the total fertility rate (TFR) needs to be around 2.1 children per woman (i.e. the replacement rate) If the TFR falls below this level for an extended period, the population may decline without immigration. Use the data found here:
+<https://jagelves.github.io/Data/UNPOP.csv> to plot the fertility rate for the US from 1960-2022 and the current replacement rate. What is the two year projected fertility rate when using a simple linear trend? How does this change when using a quadratic trend?
+
+<details>
+
+
+
+</details>
+
+3. Grocers Inc. purchases avocados at market price and sells them in their stores for $3 each. Using the avocado price data found here: <https://jagelves.github.io/Data/avocado2020-2023.csv>, calculate the forecasted margin for the company over the next 4 weeks using a simple mean, the NAIVE and simple trend model with seasonality.
+
+<details>
+
+
+
+</details>
