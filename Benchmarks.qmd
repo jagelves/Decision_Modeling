@@ -305,12 +305,36 @@ In this module you have been introduced to the general procedure in forecasting 
 ## Exercises
 
 1. The Japanese government has hired you to forecast their total population. The Japanese government is hoping to inform their policy to better allocate resources, and plan for future needs. You can find population data here: <https://jagelves.github.io/Data/UNPOP.csv>
-Use the NAIVE, TSLM model with a simple trends, and a TSLM model with quadratic trend, to provide a four year forecast. Which method provides the best forecast?
+Use the TSLM model with a simple trend and a TSLM model with quadratic trend. Which model has the better BIC? Provide a four year forecast of the best model. Is the population expected to go up or down?
 
 <details>
 
 <summary>Suggested Answer</summary>
+Here is code to obtain the AIC, AICc and BIC:
 
+```{r}
+rm(list=ls())
+library(tidyverse)
+library(fpp3)
+
+data<-read_csv("https://jagelves.github.io/Data/UNPOP.csv")
+
+data %>% filter(ISO3=="JPN") %>% 
+  select(Year, Total_Population,ISO3) %>% 
+  as_tsibble(index=Year,key=ISO3) -> JAP_ts
+
+JAP_ts %>% model(TSLML=TSLM(Total_Population~trend()),
+                 TSLMQ=TSLM(Total_Population~trend()+I(trend()^2))) -> fit
+
+fit %>% glance() %>%
+  select('.model',"AIC","AICc","BIC")
+```
+
+For the forecast we can use the `forecast()` function:
+
+```{r}
+fit %>% forecast(h=4) %>% filter(.model=="TSLMQ")
+```
 
 </details>
 
