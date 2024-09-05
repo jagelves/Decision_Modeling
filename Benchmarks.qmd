@@ -312,7 +312,7 @@ Use the TSLM model with a simple trend and a TSLM model with quadratic trend. Wh
 <summary>Suggested Answer</summary>
 Here is code to obtain the AIC, AICc and BIC:
 
-```{r}
+```{r warning=FALSE}
 rm(list=ls())
 library(tidyverse)
 library(fpp3)
@@ -339,18 +339,50 @@ fit %>% forecast(h=4) %>% filter(.model=="TSLMQ")
 </details>
 
 2. Fertility rates are crucial because they directly impact population growth and demographic structure. Low fertility rates can lead to an aging population, shrinking workforce, and challenges in sustaining economic growth and social welfare programs. To maintain a stable population in the U.S., the total fertility rate (TFR) needs to be around 2.1 children per woman (i.e. the replacement rate) If the TFR falls below this level for an extended period, the population may decline without immigration. Use the data found here:
-<https://jagelves.github.io/Data/UNPOP.csv> to plot the fertility rate for the US from 1960-2022 and the current replacement rate. What is the two year projected fertility rate when using a simple linear trend? How does this change when using a quadratic trend?
+<https://jagelves.github.io/Data/UNPOP.csv> to plot the fertility rate for the US from 1960-2023 and the current replacement rate. What is the two year projected fertility rate when using a simple linear trend? How does this change when using a quadratic trend?
 
 <details>
+<summary>Suggested Answer</summary>
+To graph the fertility rate we can use the following code:
+```{r warning = FALSE, message=FALSE}
 
+rm(list=ls())
+library(tidyverse)
+library(fpp3)
+library(ggthemes)
 
+data<-read_csv("https://jagelves.github.io/Data/UNPOP.csv")
 
+data %>% filter(ISO3=="USA") %>% 
+  select(Year, Total_Fertility_Rate,ISO3) %>% 
+  as_tsibble(index=Year,key=ISO3) -> USFert
+
+USFert %>% 
+  autoplot(.vars=Total_Fertility_Rate) + theme_clean() +
+  geom_hline(yintercept = 2.1, lty=2) +
+  labs(title="Total Fertility Rate in the US.",
+       x="", y="")
+```
+
+The two year projections are retrieved with the following code:
+
+```{r}
+USFert %>% model(TSLML=TSLM(Total_Fertility_Rate~trend()),
+                 TSLMQ=TSLM(Total_Fertility_Rate~trend()+I(trend()^2))) -> fit
+
+fit %>% forecast(h=2) 
+```
+If the linear trend is assumed to continue, in two years time the projected fertility rate will go down to 1.35. However, if you assume a quadratic trend, the total fertility rate is expected to increase closing the gap to the replacement rate.
 </details>
 
 3. Grocers Inc. purchases avocados at market price and sells them in their stores for $3 each. Using the avocado price data found here: <https://jagelves.github.io/Data/avocado2020-2023.csv>, calculate the forecasted margin for the company over the next 4 weeks using a simple mean, the NAIVE and simple trend model with seasonality.
 
 <details>
+<summary>Suggested Answer</summary>
 
+Forecasts of the price of avocados can be obtained with the following code:
 
+```{r}
 
+```
 </details>
