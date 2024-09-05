@@ -210,3 +210,67 @@ SB_ts %>% model(STL=STL(APrice ~ trend() + season(),
 ```
 
 </details>
+
+2. Use the dataset found below:
+https://jagelves.github.io/Data/BTC_USD.csv
+This dataset has daily Bitcoin prices for the past few years but you should focus only on 2024. Your task is to calculate two types of moving averages using the *Adj Close* variable, the 50-day and 200-day moving averages. After calculating these averages, you will graph the data and identify the number of times a Golden Cross and a Death Cross have occurred. A Golden Cross is a bullish signal, indicating that a stock's price might continue to rise. It occurs when a shorter-term moving average (like the 50-day moving average) crosses above a longer-term moving average (like the 200-day moving average). A Death Cross is the opposite, representing a bearish signal and continuation to the downside. It happens when a shorter-term moving average (50-day) crosses below a longer-term moving average (200-day). How many times did these indicators guide investors correctly?
+
+
+<details>
+
+<summary>Suggested Answer</summary>
+
+Start by importing the data and defining a tsibble:
+```{r message=FALSE}
+library(tidyverse)
+library(fpp3)
+
+BTC<-read_csv("https://jagelves.github.io/Data/BTC_USD.csv")
+
+BTC_ts <- BTC %>%
+  mutate(Date = mdy(Date)) %>% 
+  as_tsibble(index=Date) -> BTC_ts
+
+BTC_ts %>% filter_index("2024-01-01"~.) -> BTC_ts
+
+```
+
+We can now create the moving averages by using the `slide_dbl()` function.
+
+```{r}
+BTC_ts %>% 
+  mutate(MA50=slider::slide_dbl(`Adj Close`,mean,
+                              .before=20, .after=30, 
+                              .complete=F)) %>% 
+  mutate(MA200=slider::slide_dbl(`Adj Close`,mean,
+                              .before=100, .after=100, 
+                              .complete=F))-> BTC_ts
+```
+
+Now we can plot using the `ggplot2` package:
+
+```{r}
+library(ggthemes)
+BTC_ts %>% autoplot(.vars=`Adj Close`,col="blue",alpha=0.5) +
+  autolayer(object = BTC_ts,MA50) +
+  autolayer(object = BTC_ts,MA200,col="red") +
+  theme_clean() +
+  labs(title= "BTC Price 2024",
+       x="",y="")
+
+```
+The graph shows a golden cross at the beginning of March and a death cross mid June. The golden cross was followed by an increase in the price of BTC, and the death cross was followed by a decline in the price of BTC.
+</details>
+
+
+3. The data file:
+https://jagelves.github.io/Data/ElectricityBill.csv
+contains energy consumption from a typical U.S. household. Import the data, graph and perform STL decomposition.
+
+<details>
+
+<summary>Suggested Answer</summary>
+
+
+
+</details>
