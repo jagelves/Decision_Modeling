@@ -304,8 +304,8 @@ In this module you have been introduced to the general procedure in forecasting 
 
 ## Exercises
 
-1. The Japanese government has hired you to forecast their total population by 2030 so that they can better allocate resources, and plan for future needs. You can find population data here: <https://jagelves.github.io/Data/UNPOP.csv>
-Use the TSLM model with a simple trend and a TSLM model with quadratic trend. Which model has the better BIC? Provide a your estimate using the best model. Is the population expected to go up or down?
+1. You've been tasked by the Japanese government with an important mission: forecast the country’s population by 2030. Your projections will help them effectively allocate resources and plan for future demands. To accomplish this, you'll rely on population data available at the following link: <https://jagelves.github.io/Data/UNPOP.csv>
+Build two models using the TSLM approach. One with a simple linear trend and another with a quadratic trend (use `I(trend()^2)` in R to incorporate a quadratic term). Compare the models by calculating their BIC (Bayesian Information Criterion), which will help you identify which model is more accurate. Provide your population estimate for 2030 using the model with the lower BIC. Based on your findings, determine whether Japan’s population is expected to increase or decrease by 2030.
 
 <details>
 
@@ -366,7 +366,7 @@ USFert %>%
 
 The two year projections are retrieved with the following code:
 
-```{r}
+```{r message=FALSE}
 USFert %>% model(TSLML=TSLM(Total_Fertility_Rate~trend()),
                  TSLMLog=TSLM(log(Total_Fertility_Rate)~trend())) -> fit
 
@@ -374,7 +374,7 @@ fit %>% forecast(h=2)
 ```
 If the linear trend is assumed to continue, in two years the projected fertility rate will go down to 1.35. However, if we perform the log transformation, the total fertility rate is expected to fall at a slower rate and reach 1.54 in two years. Below is a graph of the models and projections:
 
-```{r}
+```{r message=FALSE}
 fit %>% forecast(h=2) %>% autoplot(level=NULL) +
   autolayer(USFert,Total_Fertility_Rate) + theme_clean() +
   autolayer(fit %>% augment() %>% filter(.model=="TSLML"),.fitted, col="red") +
@@ -385,14 +385,44 @@ fit %>% forecast(h=2) %>% autoplot(level=NULL) +
 ```
 </details>
 
-3. Grocers Inc. purchases avocados at market price and sells them in their stores for $3 each. Using the avocado price data found here: <https://jagelves.github.io/Data/avocado2020-2023.csv>, calculate the forecasted margin for the company over the next 4 weeks using a simple mean, the NAIVE and simple trend model with seasonality.
+3. Grocers Inc. purchases avocados at Richmond/Norfolk's market price and sells them in their stores for $1.5 each. Using the avocado price data found here: <https://jagelves.github.io/Data/avocado2020-2023.csv>, forecast margin for the company over the next 4 weeks using a simple mean, the NAIVE and simple trend. Use only data from W2 2023 onward.
 
 <details>
 <summary>Suggested Answer</summary>
 
-Forecasts of the price of avocados can be obtained with the following code:
+We can start by doing some data wrangling. Load the data, select variables, get the appropriate dates and create the tsibble:
 
-```{r}
+```{r message=FALSE}
+rm(list=ls())
+library(tidyverse)
+library(fpp3)
+
+avo<-read_csv("https://jagelves.github.io/Data/avocado2020-2023.csv")
+
+avo %>% select(Geography,Date, Type, AveragePrice) %>% 
+  filter(Geography=="Richmond/Norfolk") %>% 
+  filter(Type=="Conventional") %>% 
+  mutate(Date=mdy(Date)) %>% 
+  mutate(Date=yearweek(Date)) %>% 
+  select(Date,AveragePrice) %>% 
+  distinct(Date, .keep_all = TRUE) %>% 
+  arrange(Date) %>% 
+  as_tsibble(index=Date) %>% 
+  filter_index("2023 W2"~.) -> avo_ts
+
+```
+
+We can now build our models and forecast the price. Below we also report the margin calculation:
+
+```{r message=FALSE}
+avo_ts %>% model(MEAN=MEAN(AveragePrice),
+                 NAIVE=NAIVE(AveragePrice),
+                 TSLM=TSLM(AveragePrice~trend())) -> fit
+
+fit %>% forecast(h=4) %>% 
+  as_tibble() %>% 
+  select(Date,.model,.mean) %>% 
+  mutate(Margin=(1.5-.mean)/1.5)
 
 ```
 </details>
