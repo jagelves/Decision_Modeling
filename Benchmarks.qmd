@@ -304,8 +304,8 @@ In this module you have been introduced to the general procedure in forecasting 
 
 ## Exercises
 
-1. The Japanese government has hired you to forecast their total population. The Japanese government is hoping to inform their policy to better allocate resources, and plan for future needs. You can find population data here: <https://jagelves.github.io/Data/UNPOP.csv>
-Use the TSLM model with a simple trend and a TSLM model with quadratic trend. Which model has the better BIC? Provide a four year forecast of the best model. Is the population expected to go up or down?
+1. The Japanese government has hired you to forecast their total population by 2030 so that they can better allocate resources, and plan for future needs. You can find population data here: <https://jagelves.github.io/Data/UNPOP.csv>
+Use the TSLM model with a simple trend and a TSLM model with quadratic trend. Which model has the better BIC? Provide a your estimate using the best model. Is the population expected to go up or down?
 
 <details>
 
@@ -333,13 +333,13 @@ fit %>% glance() %>%
 For the forecast we can use the `forecast()` function:
 
 ```{r}
-fit %>% forecast(h=4) %>% filter(.model=="TSLMQ")
+fit %>% forecast(h=7) %>% filter(.model=="TSLMQ")
 ```
-
+The population is expected to go down to 122,868 people. This represents a decrease of `r round((124371-122868)/124371*100,2)`%.
 </details>
 
 2. Fertility rates are crucial because they directly impact population growth and demographic structure. Low fertility rates can lead to an aging population, shrinking workforce, and challenges in sustaining economic growth and social welfare programs. To maintain a stable population in the U.S., the total fertility rate (TFR) needs to be around 2.1 children per woman (i.e. the replacement rate) If the TFR falls below this level for an extended period, the population may decline without immigration. Use the data found here:
-<https://jagelves.github.io/Data/UNPOP.csv> to plot the fertility rate for the US from 1960-2023 and the current replacement rate. What is the two year projected fertility rate when using a simple linear trend? How does this change when using a quadratic trend?
+<https://jagelves.github.io/Data/UNPOP.csv> to plot the fertility rate for the US from 1960-2023 and the current replacement rate. What is the two year projected fertility rate when using a simple linear trend? How does this change when running the same model with a log transformation on the fertility variable?
 
 <details>
 <summary>Suggested Answer</summary>
@@ -368,11 +368,21 @@ The two year projections are retrieved with the following code:
 
 ```{r}
 USFert %>% model(TSLML=TSLM(Total_Fertility_Rate~trend()),
-                 TSLMQ=TSLM(Total_Fertility_Rate~trend()+I(trend()^2))) -> fit
+                 TSLMLog=TSLM(log(Total_Fertility_Rate)~trend())) -> fit
 
 fit %>% forecast(h=2) 
 ```
-If the linear trend is assumed to continue, in two years time the projected fertility rate will go down to 1.35. However, if you assume a quadratic trend, the total fertility rate is expected to increase closing the gap to the replacement rate.
+If the linear trend is assumed to continue, in two years the projected fertility rate will go down to 1.35. However, if we perform the log transformation, the total fertility rate is expected to fall at a slower rate and reach 1.54 in two years. Below is a graph of the models and projections:
+
+```{r}
+fit %>% forecast(h=2) %>% autoplot(level=NULL) +
+  autolayer(USFert,Total_Fertility_Rate) + theme_clean() +
+  autolayer(fit %>% augment() %>% filter(.model=="TSLML"),.fitted, col="red") +
+  autolayer(fit %>% augment() %>% filter(.model=="TSLMLog"),.fitted, col="#008080") +
+  labs(title="Total Fertility Rate in the US.",
+       x="", y="")
+
+```
 </details>
 
 3. Grocers Inc. purchases avocados at market price and sells them in their stores for $3 each. Using the avocado price data found here: <https://jagelves.github.io/Data/avocado2020-2023.csv>, calculate the forecasted margin for the company over the next 4 weeks using a simple mean, the NAIVE and simple trend model with seasonality.
