@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -100,7 +101,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -109,6 +116,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -118,6 +126,33 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-sidebar floating">
@@ -126,12 +161,12 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ARIMA.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ARIMA</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ARIMA.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ARIMA</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -141,7 +176,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Decision Modeling</a> 
@@ -211,7 +246,7 @@ div.csl-indent {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -262,7 +297,9 @@ div.csl-indent {
   </div>
   
 
+
 </header>
+
 
 <p>This section will introduce essential ideas and metrics to analyze time series further. Concepts such as white noise, stationarity, autocorrelation, and partial autocorrelation form the building blocks of one of time series most recognized models–the ARIMA model. The section then applies the AR(1), MA(1), and generalized ARIMA models.</p>
 <section id="preliminaries" class="level2" data-number="7.1">
@@ -285,7 +322,11 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">lwd=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>,</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha=</span><span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>A very unpredictable and ragged pattern is shown in the graph above. The series behaves erratically but fluctuates around a mean of zero and keeps a standard deviation of one. Given the unpredictability of the white noise process, the best one can do is to describe it by its mean and standard deviation.</p>
@@ -297,7 +338,11 @@ We can generate a white noise process by using the normal distribution with a me
 <p>In general, before modeling and forecasting, we will check whether the series is stationary (i.e., has no trend and is homoskedastic). To eliminate the trend in the series we will use the first difference of the series. We can do this in R by using the <code>difference()</code> function. For example consider Tesla’s quarterly vehicle deliveries.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Deliveries have been on an upward trend as the company is currently scaling its production, and demand is strong. This series is not stationary since it crosses the mean (blue line) once and never revisits it. That is, the mean is not constant and changes with time. It is possible to make the series stationary by finding differences (i.e.&nbsp;the change in deliveries from quarter to quarter). Below is the graph of the first difference.</p>
@@ -308,7 +353,11 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Q1 2016 - Q4 2022"</span>,<span class="at">x=</span><span class="st">""</span>,<span class="at">y=</span><span class="st">""</span>) <span class="sc">+</span> </span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(<span class="fu">difference</span>(tesla<span class="sc">$</span>deliveries), <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">lwd=</span><span class="dv">1</span>, <span class="at">alpha=</span><span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The series now fluctuates closer to the mean, but unlike the white noise process behaves less erratic. You will notice that in some periods the change in deliveries from quarter to quarter is high. For example, following the lows at the beginning of the year, deliveries seem to increase sharply. There seems to be correlations between the quarters (time dependencies).</p>
@@ -323,7 +372,11 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Box-Cox Transformation of Tesla's Vehicle Deliveries"</span>,</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Q1 2016 - Q4 2022"</span>,<span class="at">x=</span><span class="st">""</span>,<span class="at">y=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The transformation has made the series a bit more homoskedastic (variance is more uniform) than the series without the transformation. It is important to note that both transformations (differencing and box-cox) can be undone by using an inverse function. Hence, we can always return the series to its original form. Luckily, <code>fable</code> does this automatically for us when we forecast a model.</p>
@@ -334,7 +387,6 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
 <div id="qqlghnfucn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#qqlghnfucn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -775,26 +827,27 @@ We can generate a white noise process by using the normal distribution with a me
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>Stationarity Tests</strong></td>
-    </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="kpss_stat">kpss_stat</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="kpss_pvalue">kpss_pvalue</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="ndiffs">ndiffs</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="kpss_stat" class="gt_row gt_center">0.991</td>
-<td headers="kpss_pvalue" class="gt_row gt_center">0.010</td>
-<td headers="ndiffs" class="gt_row gt_center">2</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Stationarity Tests</strong></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id="kpss_stat" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">kpss_stat</th>
+<th id="kpss_pvalue" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">kpss_pvalue</th>
+<th id="ndiffs" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">ndiffs</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="kpss_stat">0.991</td>
+<td class="gt_row gt_center" headers="kpss_pvalue">0.010</td>
+<td class="gt_row gt_center" headers="ndiffs">2</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -823,7 +876,11 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">title=</span><span class="st">"ACF Personal Income Growth in California"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The plot shows that the correlation of the series with its first lag is strongest. That is, positive income growth in the previous period correlates with positive income growth in the current period. The plot also shows continuous decay in the strength of the correlation as the lags get larger. A positive income growth two or three periods ago still positively influences the current period’s income growth, but less than the immediate previous period. The blue lines determine which autocorrelations are statistically different from zero (significant) at the 5% level. As you can see, lags 1-4 are positively correlated with the series and are statistically significant.</p>
@@ -832,7 +889,11 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>wn <span class="sc">%&gt;%</span> <span class="fu">ACF</span>(x) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">"ACF"</span>) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>, <span class="at">title=</span><span class="st">"ACF White Noise Process"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Interestingly, lag 14 shows a positive correlation with the series. It is important to note that correlations can happen by chance even if we construct the series from a random process.</p>
@@ -847,7 +908,11 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">"PACF"</span>) <span class="sc">+</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>, <span class="at">title=</span><span class="st">"PACF Personal Income Growth In California"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The graph shows that the series has a strong correlation only with its first lag. Specifically, lag 2, 3, and 4 seemed to have been correlated with the series (see ACF), but this was mainly because of the influence of lag 1.</p>
@@ -856,7 +921,11 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wn <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(x) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">"PACF"</span>) <span class="sc">+</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>, <span class="at">title=</span><span class="st">"PACF White Noise Process"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In sum, white noise processes are unpredictable and we can only describe them by their mean and standard deviation. Series that have patterns in their ACF or PACF can be modeled using ARIMA. Below we illustrate how to model Personal Income Growth in California with an AR(1) model.</p>
@@ -885,14 +954,22 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tsibble</span>(<span class="at">y=</span>y,<span class="at">period=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">length</span>(y)),<span class="at">index=</span>period) <span class="sc">%&gt;%</span> <span class="fu">ACF</span>(<span class="at">lag_max =</span> <span class="dv">12</span>, y) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()<span class="sc">+</span><span class="fu">theme_bw</span>()<span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>, <span class="at">title=</span><span class="st">"ACF For Simulated AR(1) phi=0.7, c=1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Note the resemblance of the ACF of the simulated data to that of the personal income growth. There is a decaying ACF described by a strong correlation of lag one and subsequent lower correlations as the lags get larger. Now let’s take a look at the PACF.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tsibble</span>(<span class="at">y=</span>y,<span class="at">period=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">length</span>(y)),<span class="at">index=</span>period) <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(<span class="at">lag_max =</span> <span class="dv">12</span>, y) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()<span class="sc">+</span><span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>,<span class="at">y=</span><span class="st">"PACF"</span>,                         <span class="at">title=</span><span class="st">"PACF For Simulated AR(1) phi=0.7, c=1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Once again, we can see the resemblance if we compare the PACF to the one in personal income growth. Specifically, there is one significant spike at lag one, and all other partial autocorrelations are not statistically different from zero. The patterns in the ACF and PACF confirm that we can model personal income growth with an AR(1) process.</p>
@@ -907,7 +984,6 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
 <div id="qruhctfgyf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#qruhctfgyf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1348,50 +1424,57 @@ We can generate a white noise process by using the normal distribution with a me
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>Model Coefficients For PI Growth</strong></td>
-    </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".model">.model</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="term">term</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="estimate">estimate</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="std.error">std.error</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="statistic">statistic</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="p.value">p.value</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers=".model" class="gt_row gt_center">AR1</td>
-<td headers="term" class="gt_row gt_center">constant</td>
-<td headers="estimate" class="gt_row gt_center">1.80</td>
-<td headers="std.error" class="gt_row gt_center">0.82</td>
-<td headers="statistic" class="gt_row gt_center">2.19</td>
-<td headers="p.value" class="gt_row gt_center">0.04</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">AR1</td>
-<td headers="term" class="gt_row gt_center">ar1</td>
-<td headers="estimate" class="gt_row gt_center">0.70</td>
-<td headers="std.error" class="gt_row gt_center">0.12</td>
-<td headers="statistic" class="gt_row gt_center">5.80</td>
-<td headers="p.value" class="gt_row gt_center">0.00</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">LS</td>
-<td headers="term" class="gt_row gt_center">(Intercept)</td>
-<td headers="estimate" class="gt_row gt_center">9.19</td>
-<td headers="std.error" class="gt_row gt_center">0.80</td>
-<td headers="statistic" class="gt_row gt_center">11.50</td>
-<td headers="p.value" class="gt_row gt_center">0.00</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">LS</td>
-<td headers="term" class="gt_row gt_center">trend()</td>
-<td headers="estimate" class="gt_row gt_center">−0.17</td>
-<td headers="std.error" class="gt_row gt_center">0.04</td>
-<td headers="statistic" class="gt_row gt_center">−4.43</td>
-<td headers="p.value" class="gt_row gt_center">0.00</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Coefficients For PI Growth</strong></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">term</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">estimate</th>
+<th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">std.error</th>
+<th id="statistic" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">statistic</th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">p.value</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">AR1</td>
+<td class="gt_row gt_center" headers="term">constant</td>
+<td class="gt_row gt_center" headers="estimate">1.80</td>
+<td class="gt_row gt_center" headers="std.error">0.82</td>
+<td class="gt_row gt_center" headers="statistic">2.19</td>
+<td class="gt_row gt_center" headers="p.value">0.04</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model">AR1</td>
+<td class="gt_row gt_center" headers="term">ar1</td>
+<td class="gt_row gt_center" headers="estimate">0.70</td>
+<td class="gt_row gt_center" headers="std.error">0.12</td>
+<td class="gt_row gt_center" headers="statistic">5.80</td>
+<td class="gt_row gt_center" headers="p.value">0.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">LS</td>
+<td class="gt_row gt_center" headers="term">(Intercept)</td>
+<td class="gt_row gt_center" headers="estimate">9.19</td>
+<td class="gt_row gt_center" headers="std.error">0.80</td>
+<td class="gt_row gt_center" headers="statistic">11.50</td>
+<td class="gt_row gt_center" headers="p.value">0.00</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model">LS</td>
+<td class="gt_row gt_center" headers="term">trend()</td>
+<td class="gt_row gt_center" headers="estimate">−0.17</td>
+<td class="gt_row gt_center" headers="std.error">0.04</td>
+<td class="gt_row gt_center" headers="statistic">−4.43</td>
+<td class="gt_row gt_center" headers="p.value">0.00</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1405,7 +1488,11 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"ACF for Model Errors of AR(1) and LS"</span>,</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The ACF of the errors from the AR(1) model resemble white noise. This suggests that we have correctly identified the systematic component of the series. In other words, there is nothing left to model since the errors are entirely random. This is not the case for the LS model since we still observe some significant spikes (lag 1 and lag 13) in the ACF function.</p>
@@ -1413,7 +1500,11 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>errors_PI <span class="sc">%&gt;%</span> <span class="fu">select</span>(.resid) <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(.resid) <span class="sc">%&gt;%</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The PACF once again shows no pattern for the residuals of the AR(1) model and some significant lags for the LS model. This further confirms that the AR(1) model correctly identifies the data generating process in the time series.</p>
@@ -1426,7 +1517,6 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
 <div id="qrjaztasyq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#qrjaztasyq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1867,35 +1957,38 @@ We can generate a white noise process by using the normal distribution with a me
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>Model Fit Measures</strong></td>
-    </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".model">.model</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="sigma2">sigma2</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="AIC">AIC</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="AICc">AICc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="BIC">BIC</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers=".model" class="gt_row gt_center">AR1</td>
-<td headers="sigma2" class="gt_row gt_center">4.30</td>
-<td headers="AIC" class="gt_row gt_center">−20.25</td>
-<td headers="AICc" class="gt_row gt_center">−19.89</td>
-<td headers="BIC" class="gt_row gt_center">−17.09</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">LS</td>
-<td headers="sigma2" class="gt_row gt_center">5.51</td>
-<td headers="AIC" class="gt_row gt_center">65.35</td>
-<td headers="AICc" class="gt_row gt_center">66.10</td>
-<td headers="BIC" class="gt_row gt_center">70.10</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Fit Measures</strong></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id="sigma2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">sigma2</th>
+<th id="AIC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">AIC</th>
+<th id="AICc" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">AICc</th>
+<th id="BIC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">BIC</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">AR1</td>
+<td class="gt_row gt_center" headers="sigma2">4.30</td>
+<td class="gt_row gt_center" headers="AIC">−20.25</td>
+<td class="gt_row gt_center" headers="AICc">−19.89</td>
+<td class="gt_row gt_center" headers="BIC">−17.09</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model">LS</td>
+<td class="gt_row gt_center" headers="sigma2">5.51</td>
+<td class="gt_row gt_center" headers="AIC">65.35</td>
+<td class="gt_row gt_center" headers="AICc">66.10</td>
+<td class="gt_row gt_center" headers="BIC">70.10</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1906,7 +1999,6 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
 <div id="eyfdyfiqjw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#eyfdyfiqjw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -2347,50 +2439,53 @@ We can generate a white noise process by using the normal distribution with a me
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="10" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>Accuracy Measures</strong></td>
-    </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".model">.model</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".type">.type</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="ME">ME</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="RMSE">RMSE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MAE">MAE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MPE">MPE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MAPE">MAPE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MASE">MASE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="RMSSE">RMSSE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="ACF1">ACF1</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers=".model" class="gt_row gt_center">AR1</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">−1.51</td>
-<td headers="RMSE" class="gt_row gt_center">3.47</td>
-<td headers="MAE" class="gt_row gt_center">2.45</td>
-<td headers="MPE" class="gt_row gt_center">−115.69</td>
-<td headers="MAPE" class="gt_row gt_center">156.61</td>
-<td headers="MASE" class="gt_row gt_center">NaN</td>
-<td headers="RMSSE" class="gt_row gt_center">NaN</td>
-<td headers="ACF1" class="gt_row gt_center">0.33</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">LS</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">2.60</td>
-<td headers="RMSE" class="gt_row gt_center">4.43</td>
-<td headers="MAE" class="gt_row gt_center">3.87</td>
-<td headers="MPE" class="gt_row gt_center">22.50</td>
-<td headers="MAPE" class="gt_row gt_center">106.69</td>
-<td headers="MASE" class="gt_row gt_center">NaN</td>
-<td headers="RMSSE" class="gt_row gt_center">NaN</td>
-<td headers="ACF1" class="gt_row gt_center">0.48</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="10" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Accuracy Measures</strong></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id=".type" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.type</th>
+<th id="ME" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">ME</th>
+<th id="RMSE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">RMSE</th>
+<th id="MAE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MAE</th>
+<th id="MPE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MPE</th>
+<th id="MAPE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MAPE</th>
+<th id="MASE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MASE</th>
+<th id="RMSSE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">RMSSE</th>
+<th id="ACF1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">ACF1</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">AR1</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">−1.51</td>
+<td class="gt_row gt_center" headers="RMSE">3.47</td>
+<td class="gt_row gt_center" headers="MAE">2.45</td>
+<td class="gt_row gt_center" headers="MPE">−115.69</td>
+<td class="gt_row gt_center" headers="MAPE">156.61</td>
+<td class="gt_row gt_center" headers="MASE">NaN</td>
+<td class="gt_row gt_center" headers="RMSSE">NaN</td>
+<td class="gt_row gt_center" headers="ACF1">0.33</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model">LS</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">2.60</td>
+<td class="gt_row gt_center" headers="RMSE">4.43</td>
+<td class="gt_row gt_center" headers="MAE">3.87</td>
+<td class="gt_row gt_center" headers="MPE">22.50</td>
+<td class="gt_row gt_center" headers="MAPE">106.69</td>
+<td class="gt_row gt_center" headers="MASE">NaN</td>
+<td class="gt_row gt_center" headers="RMSSE">NaN</td>
+<td class="gt_row gt_center" headers="ACF1">0.48</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2402,7 +2497,11 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Personal Income Growth AR(1) Forecast Accuracy"</span>,</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="at">subtitle=</span><span class="st">"1970-2021"</span>, <span class="at">y=</span><span class="st">""</span>,<span class="at">x=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2415,7 +2514,6 @@ We can generate a white noise process by using the normal distribution with a me
 </center>
 <p><br></p>
 <p>where <span class="math inline">\(\mu\)</span> is the mean of the time series, and <span class="math inline">\(\epsilon\)</span> is the error term. As with the AR model, further error term lags could be included in the MA. An MA process with highest lag of <span class="math inline">\(q\)</span> is called an MA(q) process. The MA process assumes that the current observation of a time series is a linear combination of the weighted sum of past error terms. The error terms capture the unpredictable and random fluctuations in the time series that are not accounted for by the AR model. Below we simulate an MA(1) process and generate the ACF and PACF plots.</p>
-<div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">13</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>e_t<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">300</span>,<span class="dv">0</span>,<span class="fl">0.5</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>y_t<span class="ot">=</span><span class="dv">2</span><span class="fl">+0.95</span><span class="sc">*</span>dplyr<span class="sc">::</span><span class="fu">lag</span>(e_t)<span class="sc">+</span>e_t</span>
@@ -2425,14 +2523,13 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tsibble</span>(<span class="at">y=</span>y_t,<span class="at">period=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">length</span>(y_t)),<span class="at">index=</span>period) <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(<span class="at">lag_max =</span> <span class="dv">12</span>, y) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()<span class="sc">+</span><span class="fu">theme_bw</span>()<span class="sc">+</span></span>
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>, <span class="at">title=</span><span class="st">"PACF For Simulated MA(1)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid"></p>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" style="width:50.0%"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid"></p>
-</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid" style="width:50.0%"></p>
 </div>
 </div>
 </div>
@@ -2450,11 +2547,14 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"Monthly (1953-2008)"</span>,</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Interestingly, the graph above looks like white noise. A very ragged and unpredictable pattern that fluctuates around a mean of approximately zero. Let’s take a look at the ACF and PACF.</p>
-<div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tsibble</span>(treasury, <span class="at">index =</span> period) <span class="sc">%&gt;%</span> </span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ACF</span>(<span class="at">lag_max =</span> <span class="dv">12</span>, changetreasury) <span class="sc">%&gt;%</span> </span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()<span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
@@ -2464,14 +2564,13 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">PACF</span>(<span class="at">lag_max =</span> <span class="dv">12</span>, changetreasury) <span class="sc">%&gt;%</span> </span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()<span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>, <span class="at">title=</span><span class="st">"PACF for TCM5Y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid"></p>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" style="width:50.0%"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid"></p>
-</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid" style="width:50.0%"></p>
 </div>
 </div>
 </div>
@@ -2519,7 +2618,6 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
 <div id="hteoemoica" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#hteoemoica table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -2960,102 +3058,120 @@ We can generate a white noise process by using the normal distribution with a me
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>Model Coefficients For The Avocado Data</strong></td>
-    </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="geography">geography</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".model">.model</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="term">term</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="estimate">estimate</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="std.error">std.error</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="statistic">statistic</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="p.value">p.value</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">ETS</td>
-<td headers="term" class="gt_row gt_center">alpha</td>
-<td headers="estimate" class="gt_row gt_center">0.6461</td>
-<td headers="std.error" class="gt_row gt_center">NA</td>
-<td headers="statistic" class="gt_row gt_center">NA</td>
-<td headers="p.value" class="gt_row gt_center">NA</td></tr>
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">ETS</td>
-<td headers="term" class="gt_row gt_center">l[0]</td>
-<td headers="estimate" class="gt_row gt_center">1.2082</td>
-<td headers="std.error" class="gt_row gt_center">NA</td>
-<td headers="statistic" class="gt_row gt_center">NA</td>
-<td headers="p.value" class="gt_row gt_center">NA</td></tr>
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">ARIMA</td>
-<td headers="term" class="gt_row gt_center">ar1</td>
-<td headers="estimate" class="gt_row gt_center">0.9220</td>
-<td headers="std.error" class="gt_row gt_center">0.1097</td>
-<td headers="statistic" class="gt_row gt_center">8.4033</td>
-<td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">ARIMA</td>
-<td headers="term" class="gt_row gt_center">ar2</td>
-<td headers="estimate" class="gt_row gt_center">−0.7364</td>
-<td headers="std.error" class="gt_row gt_center">0.1135</td>
-<td headers="statistic" class="gt_row gt_center">−6.4873</td>
-<td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">ARIMA</td>
-<td headers="term" class="gt_row gt_center">ma1</td>
-<td headers="estimate" class="gt_row gt_center">−1.1478</td>
-<td headers="std.error" class="gt_row gt_center">0.0807</td>
-<td headers="statistic" class="gt_row gt_center">−14.2160</td>
-<td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">ARIMA</td>
-<td headers="term" class="gt_row gt_center">ma2</td>
-<td headers="estimate" class="gt_row gt_center">0.8490</td>
-<td headers="std.error" class="gt_row gt_center">0.0966</td>
-<td headers="statistic" class="gt_row gt_center">8.7888</td>
-<td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">AR1</td>
-<td headers="term" class="gt_row gt_center">ar1</td>
-<td headers="estimate" class="gt_row gt_center">0.8816</td>
-<td headers="std.error" class="gt_row gt_center">0.0350</td>
-<td headers="statistic" class="gt_row gt_center">25.2051</td>
-<td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">AR1</td>
-<td headers="term" class="gt_row gt_center">constant</td>
-<td headers="estimate" class="gt_row gt_center">0.1971</td>
-<td headers="std.error" class="gt_row gt_center">0.0097</td>
-<td headers="statistic" class="gt_row gt_center">20.3814</td>
-<td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">LS</td>
-<td headers="term" class="gt_row gt_center">(Intercept)</td>
-<td headers="estimate" class="gt_row gt_center">1.4856</td>
-<td headers="std.error" class="gt_row gt_center">0.0391</td>
-<td headers="statistic" class="gt_row gt_center">38.0158</td>
-<td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
-    <tr><td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".model" class="gt_row gt_center">LS</td>
-<td headers="term" class="gt_row gt_center">trend()</td>
-<td headers="estimate" class="gt_row gt_center">0.0022</td>
-<td headers="std.error" class="gt_row gt_center">0.0004</td>
-<td headers="statistic" class="gt_row gt_center">5.8702</td>
-<td headers="p.value" class="gt_row gt_center">0.0000</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Coefficients For The Avocado Data</strong></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id="geography" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">geography</th>
+<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">term</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">estimate</th>
+<th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">std.error</th>
+<th id="statistic" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">statistic</th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">p.value</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".model">ETS</td>
+<td class="gt_row gt_center" headers="term">alpha</td>
+<td class="gt_row gt_center" headers="estimate">0.6461</td>
+<td class="gt_row gt_center" headers="std.error">NA</td>
+<td class="gt_row gt_center" headers="statistic">NA</td>
+<td class="gt_row gt_center" headers="p.value">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".model">ETS</td>
+<td class="gt_row gt_center" headers="term">l[0]</td>
+<td class="gt_row gt_center" headers="estimate">1.2082</td>
+<td class="gt_row gt_center" headers="std.error">NA</td>
+<td class="gt_row gt_center" headers="statistic">NA</td>
+<td class="gt_row gt_center" headers="p.value">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".model">ARIMA</td>
+<td class="gt_row gt_center" headers="term">ar1</td>
+<td class="gt_row gt_center" headers="estimate">0.9220</td>
+<td class="gt_row gt_center" headers="std.error">0.1097</td>
+<td class="gt_row gt_center" headers="statistic">8.4033</td>
+<td class="gt_row gt_center" headers="p.value">0.0000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".model">ARIMA</td>
+<td class="gt_row gt_center" headers="term">ar2</td>
+<td class="gt_row gt_center" headers="estimate">−0.7364</td>
+<td class="gt_row gt_center" headers="std.error">0.1135</td>
+<td class="gt_row gt_center" headers="statistic">−6.4873</td>
+<td class="gt_row gt_center" headers="p.value">0.0000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".model">ARIMA</td>
+<td class="gt_row gt_center" headers="term">ma1</td>
+<td class="gt_row gt_center" headers="estimate">−1.1478</td>
+<td class="gt_row gt_center" headers="std.error">0.0807</td>
+<td class="gt_row gt_center" headers="statistic">−14.2160</td>
+<td class="gt_row gt_center" headers="p.value">0.0000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".model">ARIMA</td>
+<td class="gt_row gt_center" headers="term">ma2</td>
+<td class="gt_row gt_center" headers="estimate">0.8490</td>
+<td class="gt_row gt_center" headers="std.error">0.0966</td>
+<td class="gt_row gt_center" headers="statistic">8.7888</td>
+<td class="gt_row gt_center" headers="p.value">0.0000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".model">AR1</td>
+<td class="gt_row gt_center" headers="term">ar1</td>
+<td class="gt_row gt_center" headers="estimate">0.8816</td>
+<td class="gt_row gt_center" headers="std.error">0.0350</td>
+<td class="gt_row gt_center" headers="statistic">25.2051</td>
+<td class="gt_row gt_center" headers="p.value">0.0000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".model">AR1</td>
+<td class="gt_row gt_center" headers="term">constant</td>
+<td class="gt_row gt_center" headers="estimate">0.1971</td>
+<td class="gt_row gt_center" headers="std.error">0.0097</td>
+<td class="gt_row gt_center" headers="statistic">20.3814</td>
+<td class="gt_row gt_center" headers="p.value">0.0000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".model">LS</td>
+<td class="gt_row gt_center" headers="term">(Intercept)</td>
+<td class="gt_row gt_center" headers="estimate">1.4856</td>
+<td class="gt_row gt_center" headers="std.error">0.0391</td>
+<td class="gt_row gt_center" headers="statistic">38.0158</td>
+<td class="gt_row gt_center" headers="p.value">0.0000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".model">LS</td>
+<td class="gt_row gt_center" headers="term">trend()</td>
+<td class="gt_row gt_center" headers="estimate">0.0022</td>
+<td class="gt_row gt_center" headers="std.error">0.0004</td>
+<td class="gt_row gt_center" headers="statistic">5.8702</td>
+<td class="gt_row gt_center" headers="p.value">0.0000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
 <p>The models suggested by the algorithms are fairly simple. The ETS model suggested is a SES with a smoothing parameter of about <span class="math inline">\(0.65\)</span>. As for the ARIMA model, an ARIMA(2,0,2) process is suggested. Below we plot the ACF and the PACF of the average price of avocados.</p>
-<div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>calits_train <span class="sc">%&gt;%</span> <span class="fu">ACF</span>(<span class="at">lag_max=</span><span class="dv">12</span>, average_price) <span class="sc">%&gt;%</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>()<span class="sc">+</span><span class="fu">theme_bw</span>()<span class="sc">+</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>, <span class="at">title=</span><span class="st">"ACF For Avocado Average Price"</span>)</span>
@@ -3063,14 +3179,13 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>calits_train <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(<span class="at">lag_max=</span><span class="dv">12</span>, average_price) <span class="sc">%&gt;%</span></span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>()<span class="sc">+</span><span class="fu">theme_bw</span>()<span class="sc">+</span></span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>, <span class="at">title=</span><span class="st">"PACF For Avocado Average Price"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid"></p>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" style="width:50.0%"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid"></p>
-</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid" style="width:50.0%"></p>
 </div>
 </div>
 </div>
@@ -3083,7 +3198,11 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Jan 4, 2015 - Dec 2, 2018"</span>,</span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Interestingly, the AR(1) and the LS model perform the best. The LS model overestimates the test data, while the AR(1) underestimates it. One could imagine combining the forecasts of these models to obtain a better one.</p>
@@ -3104,7 +3223,11 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Jan 4, 2015 - Dec 2, 2018"</span>,</span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The plot illustrates how the ensemble fits the test data better than each model individually. Let’s confirm the accuracy of the ensemble to the test set by calculating some measures.</p>
@@ -3113,7 +3236,6 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
 <div id="dumhutkrlq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#dumhutkrlq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -3554,86 +3676,95 @@ We can generate a white noise process by using the normal distribution with a me
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="11" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>Model Fit</strong></td>
-    </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".model">.model</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="geography">geography</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id=".type">.type</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="ME">ME</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="RMSE">RMSE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MAE">MAE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MPE">MPE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MAPE">MAPE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="MASE">MASE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="RMSSE">RMSSE</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col" id="ACF1">ACF1</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers=".model" class="gt_row gt_center">AR1</td>
-<td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">0.16</td>
-<td headers="RMSE" class="gt_row gt_center">0.21</td>
-<td headers="MAE" class="gt_row gt_center">0.16</td>
-<td headers="MPE" class="gt_row gt_center">8.65</td>
-<td headers="MAPE" class="gt_row gt_center">8.65</td>
-<td headers="MASE" class="gt_row gt_center">1.63</td>
-<td headers="RMSSE" class="gt_row gt_center">1.49</td>
-<td headers="ACF1" class="gt_row gt_center">0.50</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">ARIMA</td>
-<td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">0.16</td>
-<td headers="RMSE" class="gt_row gt_center">0.20</td>
-<td headers="MAE" class="gt_row gt_center">0.16</td>
-<td headers="MPE" class="gt_row gt_center">8.20</td>
-<td headers="MAPE" class="gt_row gt_center">8.20</td>
-<td headers="MASE" class="gt_row gt_center">1.55</td>
-<td headers="RMSSE" class="gt_row gt_center">1.46</td>
-<td headers="ACF1" class="gt_row gt_center">0.51</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">ETS</td>
-<td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">0.20</td>
-<td headers="RMSE" class="gt_row gt_center">0.23</td>
-<td headers="MAE" class="gt_row gt_center">0.20</td>
-<td headers="MPE" class="gt_row gt_center">10.39</td>
-<td headers="MAPE" class="gt_row gt_center">10.39</td>
-<td headers="MASE" class="gt_row gt_center">1.95</td>
-<td headers="RMSSE" class="gt_row gt_center">1.69</td>
-<td headers="ACF1" class="gt_row gt_center">0.50</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center" style="background-color: #90EE90;">Ensemble</td>
-<td headers="geography" class="gt_row gt_center" style="background-color: #90EE90;">California</td>
-<td headers=".type" class="gt_row gt_center" style="background-color: #90EE90;">Test</td>
-<td headers="ME" class="gt_row gt_center" style="background-color: #90EE90;">0.03</td>
-<td headers="RMSE" class="gt_row gt_center" style="background-color: #90EE90;">0.13</td>
-<td headers="MAE" class="gt_row gt_center" style="background-color: #90EE90;">0.10</td>
-<td headers="MPE" class="gt_row gt_center" style="background-color: #90EE90;">1.38</td>
-<td headers="MAPE" class="gt_row gt_center" style="background-color: #90EE90;">5.26</td>
-<td headers="MASE" class="gt_row gt_center" style="background-color: #90EE90;">0.98</td>
-<td headers="RMSSE" class="gt_row gt_center" style="background-color: #90EE90;">0.92</td>
-<td headers="ACF1" class="gt_row gt_center" style="background-color: #90EE90;">0.51</td></tr>
-    <tr><td headers=".model" class="gt_row gt_center">LS</td>
-<td headers="geography" class="gt_row gt_center">California</td>
-<td headers=".type" class="gt_row gt_center">Test</td>
-<td headers="ME" class="gt_row gt_center">−0.10</td>
-<td headers="RMSE" class="gt_row gt_center">0.16</td>
-<td headers="MAE" class="gt_row gt_center">0.14</td>
-<td headers="MPE" class="gt_row gt_center">−5.88</td>
-<td headers="MAPE" class="gt_row gt_center">7.78</td>
-<td headers="MASE" class="gt_row gt_center">1.37</td>
-<td headers="RMSSE" class="gt_row gt_center">1.14</td>
-<td headers="ACF1" class="gt_row gt_center">0.52</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="11" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Fit</strong></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id="geography" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">geography</th>
+<th id=".type" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.type</th>
+<th id="ME" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">ME</th>
+<th id="RMSE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">RMSE</th>
+<th id="MAE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MAE</th>
+<th id="MPE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MPE</th>
+<th id="MAPE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MAPE</th>
+<th id="MASE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MASE</th>
+<th id="RMSSE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">RMSSE</th>
+<th id="ACF1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">ACF1</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">AR1</td>
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">0.16</td>
+<td class="gt_row gt_center" headers="RMSE">0.21</td>
+<td class="gt_row gt_center" headers="MAE">0.16</td>
+<td class="gt_row gt_center" headers="MPE">8.65</td>
+<td class="gt_row gt_center" headers="MAPE">8.65</td>
+<td class="gt_row gt_center" headers="MASE">1.63</td>
+<td class="gt_row gt_center" headers="RMSSE">1.49</td>
+<td class="gt_row gt_center" headers="ACF1">0.50</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model">ARIMA</td>
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">0.16</td>
+<td class="gt_row gt_center" headers="RMSE">0.20</td>
+<td class="gt_row gt_center" headers="MAE">0.16</td>
+<td class="gt_row gt_center" headers="MPE">8.20</td>
+<td class="gt_row gt_center" headers="MAPE">8.20</td>
+<td class="gt_row gt_center" headers="MASE">1.55</td>
+<td class="gt_row gt_center" headers="RMSSE">1.46</td>
+<td class="gt_row gt_center" headers="ACF1">0.51</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">ETS</td>
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">0.20</td>
+<td class="gt_row gt_center" headers="RMSE">0.23</td>
+<td class="gt_row gt_center" headers="MAE">0.20</td>
+<td class="gt_row gt_center" headers="MPE">10.39</td>
+<td class="gt_row gt_center" headers="MAPE">10.39</td>
+<td class="gt_row gt_center" headers="MASE">1.95</td>
+<td class="gt_row gt_center" headers="RMSSE">1.69</td>
+<td class="gt_row gt_center" headers="ACF1">0.50</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=".model" style="background-color: #90EE90">Ensemble</td>
+<td class="gt_row gt_center" headers="geography" style="background-color: #90EE90">California</td>
+<td class="gt_row gt_center" headers=".type" style="background-color: #90EE90">Test</td>
+<td class="gt_row gt_center" headers="ME" style="background-color: #90EE90">0.03</td>
+<td class="gt_row gt_center" headers="RMSE" style="background-color: #90EE90">0.13</td>
+<td class="gt_row gt_center" headers="MAE" style="background-color: #90EE90">0.10</td>
+<td class="gt_row gt_center" headers="MPE" style="background-color: #90EE90">1.38</td>
+<td class="gt_row gt_center" headers="MAPE" style="background-color: #90EE90">5.26</td>
+<td class="gt_row gt_center" headers="MASE" style="background-color: #90EE90">0.98</td>
+<td class="gt_row gt_center" headers="RMSSE" style="background-color: #90EE90">0.92</td>
+<td class="gt_row gt_center" headers="ACF1" style="background-color: #90EE90">0.51</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers=".model">LS</td>
+<td class="gt_row gt_center" headers="geography">California</td>
+<td class="gt_row gt_center" headers=".type">Test</td>
+<td class="gt_row gt_center" headers="ME">−0.10</td>
+<td class="gt_row gt_center" headers="RMSE">0.16</td>
+<td class="gt_row gt_center" headers="MAE">0.14</td>
+<td class="gt_row gt_center" headers="MPE">−5.88</td>
+<td class="gt_row gt_center" headers="MAPE">7.78</td>
+<td class="gt_row gt_center" headers="MASE">1.37</td>
+<td class="gt_row gt_center" headers="RMSSE">1.14</td>
+<td class="gt_row gt_center" headers="ACF1">0.52</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3659,7 +3790,7 @@ We can generate a white noise process by using the normal distribution with a me
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-GGR" class="csl-entry" role="listitem">
 Gonzalez, Gloria. 2013. <em>Forecasting for Economics and Business</em>. Pearson.
 </div>
@@ -3755,10 +3886,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -3768,8 +3916,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -3781,7 +3938,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -3825,6 +4105,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -3850,6 +4131,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -3911,17 +4218,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ETS.html" class="pagination-link">
+      <a href="./ETS.html" class="pagination-link" aria-label="ETS">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ETS</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
+      <a href="./references.html" class="pagination-link" aria-label="References">
         <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 
