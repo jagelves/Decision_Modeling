@@ -334,7 +334,7 @@ In this module you have been introduced to ETS model. Particularly you have lear
 
 ## Exercises
 
-1. Tesla Energy is rapidly expanding its footprint in renewable energy and energy storage solutions, with innovations like the Powerwall, Megapack, and Solar Roof driving the company forward. Tesla's energy storage systems are gaining traction in both residential and large-scale utility markets, while its vision of Virtual Power Plants (VPPs) is revolutionizing how power is managed and distributed.
+1. Tesla is rapidly expanding its footprint in renewable energy and energy storage solutions, with innovations like the Powerwall, Megapack, and Solar Roof driving the company forward. Tesla's energy storage systems are gaining traction in both residential and large-scale utility markets, while its vision of Virtual Power Plants (VPPs) is revolutionizing how power is managed and distributed.
 
     Tesla is forecasting strong growth in energy deployment as they continue to scale their products and enter new markets. You have been asked to help forecast Tesla Energy’s deployment for Q4 2024, using historical quarterly data on energy storage and solar deployments from previous years.
 
@@ -407,11 +407,13 @@ Elec %>% mutate(Date=yearmonth(paste(Year, Month, sep = "-"))) %>%
   select(Date,`Bill Amount`) %>% 
   as_tsibble(index=Date)-> Elec_ts
 
-train<-Elec_ts %>% filter_index(.~"2023 Jul")
+pre<-Elec_ts %>% filter_index(.~"2023 Jul")
 
-train %>% model(ETS=ETS(`Bill Amount`~error("A") + trend("A") + season("A"))) -> fitp
+pre %>% model(ETS=ETS(`Bill Amount`~error("A") + trend("A") + season("A"))) -> fitp
 
-fitp %>% forecast(h=12) %>% as_tibble() %>% select(Date,.mean) -> NoMach
+fitp %>% forecast(h=12) %>% 
+  as_tibble() %>% select(Date,.mean) -> NoMach
+
 Elec_ts %>% filter_index("2023 Aug"~.) %>% 
   as_tibble()  -> Mach
   
@@ -420,6 +422,68 @@ sum(Mach$`Bill Amount`- NoMach$.mean)
 ``` 
 
 
-Following this analysis, the ice cream shop has paid an additional 649 dollars.
+Following this analysis, the ice cream shop has paid an additional 649 dollars. Below is a graph that visualizes the difference:
+
+```{r}
+library(ggthemes)
+Elec_ts %>% autoplot(`Bill Amount`) + theme_clean() +
+  geom_vline(xintercept=as.Date("2023-06-01"), lty=2, col="blue") +
+  labs(x="", title="Electric Bill in Dollars",
+       subtitle="Forecast in blue") +
+  autolayer(forecast(fitp,h=12), level=NULL)
+
+```
+</details>
+2. Refer back to question 1, where your task is to estimate the extra cost in energy of a machine. Use the entire data set and forecast as scenario where the machine is kept and one where the machine is sold. Change the model to a TSLM with linear trend and seasonality. How much extra would the ice cream shop pay if they kept the machine? 
+
+<details>
+
+<summary>Suggested Answer</summary>
+
+Create a dummy variable that tags the dates when the new machine was in operation and fit the TSLM model:
+
+```{r}
+Elec_ts<-mutate(Elec_ts,
+                Down=case_when(
+                  Date>=yearmonth("2023 7") ~ 1,
+                  TRUE ~ 0))
+
+Elec_ts %>%
+  model(
+    LM2 = TSLM(`Bill Amount`~trend()+season()+Down)) -> fit2
+
+```
+Now we can create a new tsibble with data that assumes the new machine and no new machine with the `scenarios()` function.
+
+```{r}
+Mach <- scenarios(
+  New_Mach = new_data(Elec_ts, 12) %>% 
+    mutate(Down=rep(1,12)),
+  Old_Mach = new_data(Elec_ts, 12) %>% 
+    mutate(Down=rep(0,12)),
+  names_to = "Scenario")
+```
+Lastly, we can use this new data to forecast with our model:
+
+```{r}
+forecast(fit2,new_data=Mach) ->est
+as_tibble(est) %>% group_by(Down) %>% 
+  summarise(Sum=sum(.mean)) %>% pull(Sum) %>% diff()
+```
+It will cost the ice cream shop an additional 535 dollars in energy consumption to keep the machine. Below is a graph of the two scenarios:
+```{r}
+Elec_ts %>%
+  autoplot(`Bill Amount`) + 
+  autolayer(forecast(fit2,new_data=Mach),
+            level=NULL)+ theme_classic() +
+  labs(x="Months", y="",
+       title = "Energy Consumption",
+       subtitle = "Scenario Forecast") + theme_clean()
+
+```
 
 </details>
+
+
+
+3. 
