@@ -301,15 +301,14 @@ In this module you have been introduced to the general procedure in forecasting 
 
 -   Select models with the AIC, AICc or BIC.
 
-
 ## Exercises
 
-1. You've been tasked by the Japanese government with an important mission: forecast the country’s population by 2030. Your projections will help them effectively allocate resources and plan for future demands. To accomplish this, you'll rely on population data available at the following link: <https://jagelves.github.io/Data/UNPOP.csv>
-Build two models using the TSLM approach. One with a simple linear trend and another with a quadratic trend (use `I(trend()^2)` in R to incorporate a quadratic term). Compare the models by calculating their BIC (Bayesian Information Criterion), which will help you identify which model is more accurate. Provide your population estimate for 2030 using the model with the lower BIC. Based on your findings, determine whether Japan’s population is expected to increase or decrease by 2030.
+1.  You've been tasked by the Japanese government with an important mission: forecast the country’s population by 2030. Your projections will help them effectively allocate resources and plan for future demands. To accomplish this, you'll rely on population data available at the following link: <https://jagelves.github.io/Data/UNPOP.csv> Build two models using the TSLM approach. One with a simple linear trend and another with a quadratic trend (use `I(trend()^2)` in R to incorporate a quadratic term). Compare the models by calculating their BIC (Bayesian Information Criterion), which will help you identify which model is more accurate. Provide your population estimate for 2030 using the model with the lower BIC. Based on your findings, determine whether Japan’s population is expected to increase or decrease by 2030.
 
 <details>
 
 <summary>Suggested Answer</summary>
+
 Here is code to obtain the AIC, AICc and BIC:
 
 ```{r warning=FALSE}
@@ -335,15 +334,19 @@ For the forecast we can use the `forecast()` function:
 ```{r}
 fit %>% forecast(h=7) %>% filter(.model=="TSLMQ")
 ```
+
 The population is expected to go down to 122,868 people. This represents a decrease of `r round((124371-122868)/124371*100,2)`%.
+
 </details>
 
-2. Fertility rates are crucial because they directly impact population growth and demographic structure. Low fertility rates can lead to an aging population, shrinking workforce, and challenges in sustaining economic growth and social welfare programs. To maintain a stable population in the U.S., the total fertility rate (TFR) needs to be around 2.1 children per woman (i.e. the replacement rate) If the TFR falls below this level for an extended period, the population may decline without immigration. Use the data found here:
-<https://jagelves.github.io/Data/UNPOP.csv> to plot the fertility rate for the US from 1960-2023 and the current replacement rate. What is the two year projected fertility rate when using a simple linear trend? How does this change when running the same model with a log transformation on the fertility variable?
+2.  Fertility rates are crucial because they directly impact population growth and demographic structure. Low fertility rates can lead to an aging population, shrinking workforce, and challenges in sustaining economic growth and social welfare programs. To maintain a stable population in the U.S., the total fertility rate (TFR) needs to be around 2.1 children per woman (i.e. the replacement rate) If the TFR falls below this level for an extended period, the population may decline without immigration. Use the data found here: <https://jagelves.github.io/Data/UNPOP.csv> to plot the fertility rate for the US from 1960-2023 and the current replacement rate. What is the two year projected fertility rate when using a simple linear trend? How does this change when running the same model with a log transformation on the fertility variable?
 
 <details>
+
 <summary>Suggested Answer</summary>
+
 To graph the fertility rate we can use the following code:
+
 ```{r warning = FALSE, message=FALSE}
 
 rm(list=ls())
@@ -372,6 +375,7 @@ USFert %>% model(TSLML=TSLM(Total_Fertility_Rate~trend()),
 
 fit %>% forecast(h=2) 
 ```
+
 If the linear trend is assumed to continue, in two years the projected fertility rate will go down to 1.35. However, if we perform the log transformation, the total fertility rate is expected to fall at a slower rate and reach 1.54 in two years. Below is a graph of the models and projections:
 
 ```{r message=FALSE}
@@ -383,11 +387,49 @@ fit %>% forecast(h=2) %>% autoplot(level=NULL) +
        x="", y="")
 
 ```
+
 </details>
 
-3. Grocers Inc. purchases avocados at Richmond/Norfolk's market price and sells them in their stores for $1.5 each. Using the avocado price data found here: <https://jagelves.github.io/Data/avocado2020-2023.csv>, forecast margin for the company over the next 4 weeks using a simple mean, the NAIVE and simple trend. Use only data from W2 2023 onward.
+3. Refer back to Problem 2, where your task is to forecast the fertility rate. For both the linear and logarithmic models you've developed, calculate the RMSE (Root Mean Squared Error) using the model's fitted values. Use the `augment()` function to extract the residuals for each model, then square these residuals, average them and finally take the square root. Based on the RMSE, determine which model provides a better fit for the data.
 
 <details>
+<summary>Suggested Answer</summary>
+
+To obtain the residuals and perform the calculation you can use the code below. First obtain the RMSE for the Linear model:
+```{r}
+fit %>% augment() %>% filter(.model=="TSLML") %>%
+  pull(.resid) %>% `^`(2) %>% mean() %>% sqrt()
+```
+Then we can apply the same code for the Logarithmic model:
+```{r}
+fit %>% augment() %>% filter(.model=="TSLMLog") %>%
+  pull(.resid) %>% `^`(2) %>% mean() %>% sqrt()
+```
+If we follow the RMSE, the logarithmic model fits the data better.
+
+</details>
+
+4. Refer back to Problem 2, where your task is to forecast the fertility rate. For both the linear and logarithmic models you've developed, perform cross-validation. Initialize the cross-validation with eight observations and use a step of one. Which model performs better according to the RMSE?
+
+
+<details>
+<summary>Suggested Answer</summary>
+
+To perform leave-one_out cross validation, we initialize the process with eight observations and set the step size to one. The cross validation forecasts one period ahead. The code below performs the cross validation:
+```{r warning=FALSE}
+USFert %>%
+  stretch_tsibble(.init = 8, .step = 1) %>% 
+  model(TSLML=TSLM(Total_Fertility_Rate~trend()),
+        TSLMLog=TSLM(log(Total_Fertility_Rate)~trend())) %>% forecast(h=1) %>% accuracy(USFert) %>% 
+  select(.model,RMSE)
+```
+Following the RMSE, the TSLMLog model performs the best according to the RMSE.
+</details>
+
+5.  Grocers Inc. purchases avocados at Richmond/Norfolk's market price and sells them in their stores for \$1.5 each. Using the avocado price data found here: <https://jagelves.github.io/Data/avocado2020-2023.csv>, forecast margin for the company over the next 4 weeks using a simple mean, the NAIVE and simple trend. Use only data from W2 2023 onward.
+
+<details>
+
 <summary>Suggested Answer</summary>
 
 We can start by doing some data wrangling. Load the data, select variables, get the appropriate dates and create the tsibble:
@@ -425,4 +467,5 @@ fit %>% forecast(h=4) %>%
   mutate(Margin=(1.5-.mean)/1.5)
 
 ```
+
 </details>
