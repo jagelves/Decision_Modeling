@@ -369,7 +369,7 @@ To obtain the information criterion we can use the `glance()` function:
 fit %>% glance() %>% select(.model,AIC:BIC)
 ```
 
-Forecasts are obtained with the `forecast()` function setting h=4.
+Forecasts are obtained with the `forecast()` function setting *h=4*.
 
 ```{r}
 fit %>% forecast(h=4) %>%
@@ -383,5 +383,43 @@ fit %>% forecast(h=4) %>% autoplot(level=NULL)+
   autolayer(storage_ts,EnergyStorage) + theme_clean()
 ```
 
-Forecast suggest that energy deployment will go down relative to last quarter. However, if we compare to a year ago, energy deployment is expected to increase.
+Forecast suggest that energy deployment will go down relative to last quarter. However, if we compare the same quarter a year ago, energy deployment is expected to increase.
+
+</details>
+
+2. Ice Cream Heaven is a small ice cream shop that has recently purchased a new ice cream-making machine to expand its production and meet increased demand during the summer months. The machine was installed in July 2023, and while it has helped boost production, it has also increased the shop's energy consumption.
+
+    The owners of Ice Cream Heaven want to estimate how much more they are paying in energy bills due to this new machine. They have historical monthly energy consumption data before and after the machine was installed and want to forecast what their energy consumption would have been without the machine to compare it with the actual values. Use the data found here: <http://jagelves.github.io/Data/ElectricityBill.csv> and an ETS model with all additive components to provide your estimate.
+    
+<details>
+
+<summary>Suggested Answer</summary>
+
+The code below provides an estimate by forecasting the months of August 2023 onward with an ETS model with additive terms.
+
+```{r message=FALSE}
+library(tidyverse)
+library(fpp3)
+rm(list=ls())
+Elec<-read_csv("http://jagelves.github.io/Data/ElectricityBill.csv")
+
+Elec %>% mutate(Date=yearmonth(paste(Year, Month, sep = "-"))) %>% 
+  select(Date,`Bill Amount`) %>% 
+  as_tsibble(index=Date)-> Elec_ts
+
+train<-Elec_ts %>% filter_index(.~"2023 Jul")
+
+train %>% model(ETS=ETS(`Bill Amount`~error("A") + trend("A") + season("A"))) -> fitp
+
+fitp %>% forecast(h=12) %>% as_tibble() %>% select(Date,.mean) -> NoMach
+Elec_ts %>% filter_index("2023 Aug"~.) %>% 
+  as_tibble()  -> Mach
+  
+sum(Mach$`Bill Amount`- NoMach$.mean)
+
+``` 
+
+
+Following this analysis, the ice cream shop has paid an additional 649 dollars.
+
 </details>
