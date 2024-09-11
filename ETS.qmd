@@ -484,6 +484,67 @@ Elec_ts %>%
 
 </details>
 
+3. Delta Airlines relies heavily on maintaining high load factors (the percentage of seats filled on flights) to maximize profitability and optimize operational efficiency. Accurately forecasting load factors helps Delta plan routes, set prices, and allocate resources effectively.
+
+Delta has ask for you to forecast the load factor the next four periods using historical data and two different time series models: the ETS model (algorithmic) and the TSLM model (with seasonality and trend). By doing so, you will help Delta better anticipate future demand and optimize its flight operations.
+
+You can find the load factor data here: <https://jagelves.github.io/Data/AirlinesLoad.csv> Evaluate both models based on their RMSE on the test set (January 2022 to December 2023). Choose the model with the lowest RMSE as the best method for forecasting. Using the chosen model, forecast Delta’s load factor for the next four months (January 2024 to April 2024).
+
+<details>
+
+<summary>Suggested Answer</summary>
+
+Here is the R code to complete the task. Start by loading the data and creating the tsibble.
+```{r message=FALSE}
+library(tidyverse)
+library(fpp3)
+library(ggthemes)
+rm(list=ls())
+Load<-read_csv("http://jagelves.github.io/Data/AirlinesLoad.csv")
+
+Load %>% mutate(Date=yearmonth(paste(Year, Month, sep = "-"))) %>% 
+  filter(Airline=="Delta") %>% 
+  select(Date,LF_total) %>% as_tsibble(index=Date) -> Load_ts
+
+```
+
+Now we can create the train and test sets with the dates provided:
+```{r}
+Load_ts %>% filter_index("2022 Jan"~"2023 Dec") -> train
+Load_ts %>% filter_index("Jan 2024"~.) -> test
+```
+
+Next, estimate both models and compare the accuracy of their predictions on the test set:
+
+```{r}
+train %>% 
+  model(TSLM=TSLM(LF_total~trend()+season()),
+        ETS=ETS(LF_total)) -> fit
+
+fit %>% forecast(test) %>% 
+  accuracy(test)
+```
+
+It seems like the algorithmic ETS performs better. Finally,
+let's forecast the series using the algorithmic ETS model:
+
+```{r}
+Load_ts %>% 
+  model(ETS=ETS(LF_total)) %>% 
+  forecast(h=4)
+```
+
+Here is the graph:
+
+```{r}
+Load_ts %>% 
+  model(ETS=ETS(LF_total)) %>% 
+  forecast(h=4) %>% autoplot(level=95) +
+  autolayer(train) + autolayer(test,lty=2) +
+   theme_clean() + 
+  labs(title="Delta Airlines Load Factors",
+       x="",y="")
+```
 
 
-3. 
+</details>
