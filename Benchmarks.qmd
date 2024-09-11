@@ -390,32 +390,38 @@ fit %>% forecast(h=2) %>% autoplot(level=NULL) +
 
 </details>
 
-3. Refer back to Problem 2, where your task is to forecast the fertility rate. For both the linear and logarithmic models you've developed, calculate the RMSE (Root Mean Squared Error) using the model's fitted values. Use the `augment()` function to extract the residuals for each model, then square these residuals, average them and finally take the square root. Based on the RMSE, determine which model provides a better fit for the data.
+3.  Refer back to Problem 2, where your task is to forecast the fertility rate. For both the linear and logarithmic models you've developed, calculate the RMSE (Root Mean Squared Error) using the models' fitted values. Use the `augment()` function to extract the residuals for each model, then square these residuals, average them and finally take the square root. Based on the RMSE, determine which model provides a better fit for the data.
 
 <details>
+
 <summary>Suggested Answer</summary>
 
 To obtain the residuals and perform the calculation you can use the code below. First obtain the RMSE for the Linear model:
+
 ```{r}
 fit %>% augment() %>% filter(.model=="TSLML") %>%
   pull(.resid) %>% `^`(2) %>% mean() %>% sqrt()
 ```
+
 Then we can apply the same code for the Logarithmic model:
+
 ```{r}
 fit %>% augment() %>% filter(.model=="TSLMLog") %>%
   pull(.resid) %>% `^`(2) %>% mean() %>% sqrt()
 ```
+
 If we follow the RMSE, the logarithmic model fits the data better.
 
 </details>
 
-4. Refer back to Problem 2, where your task is to forecast the fertility rate. For both the linear and logarithmic models you've developed, perform cross-validation. Initialize the cross-validation with eight observations and use a step of one. Which model performs better according to the RMSE?
-
+4.  Refer back to Problem 2, where your task is to forecast the fertility rate. For both the linear and logarithmic models you've developed, perform leave-one-out cross-validation. Initialize the cross-validation with eight observations and use a step of one. Which model performs better according to the RMSE?
 
 <details>
+
 <summary>Suggested Answer</summary>
 
-To perform leave-one_out cross validation, we initialize the process with eight observations and set the step size to one. The cross validation forecasts one period ahead. The code below performs the cross validation:
+To perform leave-one-out cross validation, we initialize the process with eight observations and set the step size to one. The cross validation forecasts one period ahead. The code below performs the cross validation:
+
 ```{r warning=FALSE}
 USFert %>%
   stretch_tsibble(.init = 8, .step = 1) %>% 
@@ -423,7 +429,9 @@ USFert %>%
         TSLMLog=TSLM(log(Total_Fertility_Rate)~trend())) %>% forecast(h=1) %>% accuracy(USFert) %>% 
   select(.model,RMSE)
 ```
-Following the RMSE, the TSLMLog model performs the best according to the RMSE.
+
+Following the RMSE, the TSLMLog model performs the best.
+
 </details>
 
 5.  Grocers Inc. purchases avocados at Richmond/Norfolk's market price and sells them in their stores for \$1.5 each. Using the avocado price data found here: <https://jagelves.github.io/Data/avocado2020-2023.csv>, forecast margin for the company over the next 4 weeks using a simple mean, the NAIVE and simple trend. Use only data from W2 2023 onward.
