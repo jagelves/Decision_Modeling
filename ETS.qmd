@@ -434,7 +434,7 @@ Elec_ts %>% autoplot(`Bill Amount`) + theme_clean() +
 
 ```
 </details>
-2. Refer back to question 1, where your task is to estimate the extra cost in energy of a machine. Use the entire data set and forecast as scenario where the machine is kept and one where the machine is sold. Change the model to a TSLM with linear trend and seasonality. How much extra would the ice cream shop pay if they kept the machine? 
+3. Refer back to question 2, where your task is to estimate the extra cost in energy of a machine. Use the entire data set and forecast as scenario where the machine is kept and one where the machine is sold. Change the model to a TSLM with linear trend and seasonality. How much extra would the ice cream shop pay if they kept the machine? 
 
 <details>
 
@@ -484,7 +484,7 @@ Elec_ts %>%
 
 </details>
 
-3. Delta Airlines relies heavily on maintaining high load factors (the percentage of seats filled on flights) to maximize profitability and optimize operational efficiency. Accurately forecasting load factors helps Delta plan routes, set prices, and allocate resources effectively.
+4. Delta Airlines relies heavily on maintaining high load factors (the percentage of seats filled on flights) to maximize profitability and optimize operational efficiency. Accurately forecasting load factors helps Delta plan routes, set prices, and allocate resources effectively.
 
     Delta has ask for you to forecast the load factor the next four periods using historical data and two different time series models: the ETS model (algorithmic) and the TSLM model (with seasonality and trend). By doing so, you will help Delta better anticipate future demand and optimize its flight operations.
 
@@ -522,7 +522,7 @@ train %>%
         ETS=ETS(LF_total)) -> fit
 
 fit %>% forecast(test) %>% 
-  accuracy(test)
+  accuracy(test) %>% select(.model,RMSE)
 ```
 
 It seems like the algorithmic ETS performs better. Finally,
@@ -540,7 +540,7 @@ Here is the graph:
 Load_ts %>% 
   model(ETS=ETS(LF_total)) %>% 
   forecast(h=4) %>% autoplot(level=95) +
-  autolayer(train) + autolayer(test,lty=2) +
+  autolayer(train,LF_total) + autolayer(test,LF_total,lty=2) +
    theme_clean() + 
   labs(title="Delta Airlines Load Factors",
        x="",y="")
