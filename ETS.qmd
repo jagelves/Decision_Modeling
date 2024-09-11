@@ -289,7 +289,7 @@ Down_Scenario <- scenarios(
   names_to = "Scenario")
 ```
 
-Finally, we can visualize how each scenario affects Tesla’s future delivery forecasts. Whether Tesla experiences another factory shutdown or keeps production running smoothly, this analysis will help us better understand the potential outcomes. 
+Finally, we can visualize how each scenario affects Tesla’s future delivery forecasts. Whether Tesla experiences another factory shutdown or keeps production running smoothly, this analysis will help us better understand the potential outcomes.
 
 ```{r}
 tesla %>%
@@ -331,3 +331,57 @@ In this module you have been introduced to ETS model. Particularly you have lear
 -   Identify when ETS model is superior to other model by using the cross validation and information criterion.
 
 -   Forecast time series with the ETS model.
+
+## Exercises
+
+1. Tesla Energy is rapidly expanding its footprint in renewable energy and energy storage solutions, with innovations like the Powerwall, Megapack, and Solar Roof driving the company forward. Tesla's energy storage systems are gaining traction in both residential and large-scale utility markets, while its vision of Virtual Power Plants (VPPs) is revolutionizing how power is managed and distributed.
+
+    Tesla is forecasting strong growth in energy deployment as they continue to scale their products and enter new markets. You have been asked to help forecast Tesla Energy’s deployment for Q4 2024, using historical quarterly data on energy storage and solar deployments from previous years.
+
+    You can find data on Tesla’s quarterly energy deployment (in megawatt hours) here: <https://jagelves.github.io/Data/teslaE.csv>
+
+    Forecast Tesla Energy's deployment for the next four quarters using an ETS model with all additive terms, a TSLM model with linear trend and seasonality, and a TSLM model with quadratic trend and seasonality. Evaluate model performance using the information criterion. Finally, provide your forecast for the upcoming quarters with a graph. What is your expectation for next quarter? Does energy deployment go up or down relative to last quarter? What about when you compare to the same quarter last year?
+
+<details>
+
+<summary>Suggested Answer</summary>
+We can use the code below to develop the models:
+```{r message=FALSE}
+library(tidyverse)
+library(fpp3)
+library(ggthemes)
+rm(list=ls())
+storage<-read_csv("http://jagelves.github.io/Data/teslaE.csv")
+
+storage %>%
+  mutate(Date=yearquarter(Date)) %>%
+  as_tsibble(index=Date) -> storage_ts
+
+storage_ts %>%
+  model(LM=TSLM(EnergyStorage~trend()+season()),
+        LM2=TSLM(EnergyStorage~trend()+I(trend()^2)+season()),
+        ETS=ETS(EnergyStorage~error("A") + trend("A") + season("A"))) ->fit
+```
+
+To obtain the information criterion we can use the `glance()` function:
+
+```{r}
+fit %>% glance() %>% select(.model,AIC:BIC)
+```
+
+Forecasts are obtained with the `forecast()` function setting h=4.
+
+```{r}
+fit %>% forecast(h=4) %>%
+  hilo(95)
+```
+
+Finally, the graph is obtained using the `autoplot()` and `autolayer()` functions:
+
+```{r}
+fit %>% forecast(h=4) %>% autoplot(level=NULL)+
+  autolayer(storage_ts,EnergyStorage) + theme_clean()
+```
+
+Forecast suggest that energy deployment will go down relative to last quarter. However, if we compare to a year ago, energy deployment is expected to increase.
+</details>
