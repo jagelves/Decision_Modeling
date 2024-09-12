@@ -628,4 +628,61 @@ forecast(fit2,new_data=Int) %>% autoplot(level=95) +
 ```
 </details>
 
+4. Rising U.S. household debt is concerning because it increases financial strain on families, reduces disposable income, and heightens vulnerability to interest rate hikes. It raises the risk of defaults and bankruptcies, potentially destabilizing financial institutions and the broader economy. Additionally, higher debt levels can slow consumer spending and economic growth, while also creating risks in the housing market, making the economy more fragile during downturns. Use the data found here: <https://jagelves.github.io/Data/USDebt.csv> to forecast the US total debt of households using ARIMA. Start by graphing the ACF and PACF, then suggest two ARIMA models and let the algorithm choose the third. Calculate the BIC for the three models and select the model with the lowest BIC. Forecast the series into the future. By what date does the model predict the US Household debt reaches 20 trillion dollars?
+
+<details>
+
+<summary>Suggested Answer</summary>
+Start by loading the data and packages:
+```{r message=FALSE}
+rm(list=ls())
+
+library(fpp3)
+library(tidyverse)
+library(ggthemes)
+data<-read_csv("https://jagelves.github.io/Data/USDebt.csv")
+
+data %>% mutate(Quarter=yearquarter(Quarter)) %>% 
+  as_tsibble(index=Quarter) -> data_ts
+```
+Now we can plot the ACF and the PACF. Since the series seems non-stationary, we'll go ahead and plot the differenced series:
+
+```{r, fig.show='hold',out.width = '100%'}
+#| layout-ncol: 2
+data_ts %>% ACF(diff(Total)) %>% autoplot()
+data_ts %>% PACF(diff(Total)) %>% autoplot()
+```
+
+Looking at the graphs, we suggest using an AR1 model or AR3 model. Next, estimate the models:
+
+```{r}
+data_ts %>% 
+  model(AR3=ARIMA(Total~pdq(3,1,0)),
+        AR1=ARIMA(Total~pdq(1,1,0)),
+        ARIMA=ARIMA(Total)) -> fit
+```
+Now we can observe the residuals:
+
+```{r}
+fit %>% augment() %>% ACF(.resid) %>% autoplot()
+```
+Both the algorithmic model and the AR3 residuals look like white noise. Let's look at the BIC:
+
+```{r}
+fit %>% glance() %>% select(.model,BIC)
+```
+The AR3 model has the lowest BIC, so we choose this model for our forecast. Below is a graph of the forecast:
+
+```{r}
+fit %>% forecast(h=20) %>% 
+  as_tsibble() %>% filter(.model=="AR3") %>% 
+  autoplot(.mean, col="blue", lty=2) +
+  autolayer(data_ts,Total) + theme_clean() +
+  labs(title="US Consumer Debt",
+       subtitle="Trillion of Dollars",
+       x="",y="") +
+  geom_hline(yintercept=20,lty=2)
+```
+If all things remain constant we should expect the Household debt to reach 20 trillion dollar by Q2 2028.
+</details>
 
