@@ -2527,10 +2527,10 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" style="width:50.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid" style="width:50.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </div>
@@ -2568,10 +2568,10 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" style="width:50.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid" style="width:50.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </div>
@@ -3183,10 +3183,10 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" style="width:50.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid" style="width:50.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </div>
@@ -3816,10 +3816,10 @@ Suggested Answer
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" style="width:50.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-39-2.png" class="img-fluid" style="width:50.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-39-2.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </div>
@@ -3833,14 +3833,56 @@ Suggested Answer
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" style="width:80.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid" style="width:80.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </div>
 The are no significant spikes. We can conclude that the errors resemble white noise.
+</details>
+<ol start="2" type="1">
+<li>Recall problem 1 in chapter 6 (<a href="./ETS.html#exercises6">ExercisesETS</a>), where you are tasked to forecast Tesla’s energy deployment. Use the entire data found here: <a href="http://jagelves.github.io/Data/ElectricityBill.csv" class="uri">http://jagelves.github.io/Data/ElectricityBill.csv</a> to estimate an ensemble of the TSLM model with linear trend and seasonality, and a TSLM model with quadratic trend and seasonality. Let the weight of the linear model be 30% and that of the quadratic model 70%. Graph the forecast for the next four periods of the three models.</li>
+</ol>
+<details>
+<summary>
+Suggested Answer
+</summary>
+<p>We can start by loading the packages, data, and creating a tsibble:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>storage<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"http://jagelves.github.io/Data/teslaE.csv"</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>storage <span class="sc">%&gt;%</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">yearquarter</span>(Date)) <span class="sc">%&gt;%</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index=</span>Date) <span class="ot">-&gt;</span> storage_ts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s now create the Linear and Quadratic models using TSLM. Then we can create the ensemble model by using the <code>mutate()</code> function and the given weights:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>storage_ts <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">LM=</span><span class="fu">TSLM</span>(EnergyStorage<span class="sc">~</span><span class="fu">trend</span>()<span class="sc">+</span><span class="fu">season</span>()),</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">LM2=</span><span class="fu">TSLM</span>(EnergyStorage<span class="sc">~</span><span class="fu">trend</span>()<span class="sc">+</span><span class="fu">I</span>(<span class="fu">trend</span>()<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">season</span>())) <span class="ot">-&gt;</span>fit</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Ensemble=</span><span class="fl">0.3</span><span class="sc">*</span>LM<span class="fl">+0.7</span><span class="sc">*</span>LM2) <span class="ot">-&gt;</span> fit2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now graph the forecast for each model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(<span class="at">level=</span><span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(storage_ts,EnergyStorage) <span class="sc">+</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </details>
 
 

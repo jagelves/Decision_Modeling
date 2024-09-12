@@ -295,7 +295,7 @@ The moving average (MA) process models time series by using past errors (random 
 
 where $\mu$ is the mean of the time series, and $\epsilon$ is the error term. As with the AR model, further error term lags could be included in the MA. An MA process with highest lag of $q$ is called an MA(q) process. The MA process assumes that the current observation of a time series is a linear combination of the weighted sum of past error terms. The error terms capture the unpredictable and random fluctuations in the time series that are not accounted for by the AR model. Below we simulate an MA(1) process and generate the ACF and PACF plots.
 
-```{r, fig.show='hold', out.width='50%'}
+```{r, fig.show='hold', out.width='100%'}
 #| layout-ncol: 2
 
 set.seed(13)
@@ -329,7 +329,7 @@ as_tsibble(treasury, index = period) %>%
 
 Interestingly, the graph above looks like white noise. A very ragged and unpredictable pattern that fluctuates around a mean of approximately zero. Let's take a look at the ACF and PACF.
 
-```{r, fig.show='hold',out.width = '50%'}
+```{r, fig.show='hold',out.width = '100%'}
 #| layout-ncol: 2
 
 as_tsibble(treasury, index = period) %>% 
@@ -406,7 +406,7 @@ gt() %>%
 
 The models suggested by the algorithms are fairly simple. The ETS model suggested is a SES with a smoothing parameter of about $0.65$. As for the ARIMA model, an ARIMA(2,0,2) process is suggested. Below we plot the ACF and the PACF of the average price of avocados.
 
-```{r, fig.show='hold',out.width = '50%'}
+```{r, fig.show='hold',out.width = '100%'}
 #| layout-ncol: 2
 
 calits_train %>% ACF(lag_max=12, average_price) %>%
@@ -519,7 +519,7 @@ Elec %>% mutate(Date=yearmonth(paste(Year, Month, sep = "-"))) %>%
 ```
 
 We can now graph the ACF and the PACF of the *Bill Amount* variable:
-```{r, fig.show='hold',out.width = '50%'}
+```{r, fig.show='hold',out.width = '100%'}
 #| layout-ncol: 2
 Elec_ts %>% ACF(`Bill Amount`,lag_max = 24) %>% autoplot()
 Elec_ts %>% PACF(`Bill Amount`,lag_max = 24) %>% autoplot()
@@ -530,10 +530,50 @@ Elec_ts %>% model(AR1=ARIMA(`Bill Amount`~pdq(1,0,0))) -> fit
 ```
 Now we can check the residuals and see if they resemble white noise:
 
-```{r, fig.show='hold',out.width = '80%'}
+```{r, fig.show='hold',out.width = '100%'}
 #| layout-ncol: 2
 fit %>% augment() %>% ACF(.resid,lag_max = 24) %>% autoplot()
 fit %>% augment() %>% PACF(.resid,lag_max = 24) %>% autoplot()
 ```
 The are no significant spikes. We can conclude that the errors resemble white noise.
+</details>
+
+2. Recall problem 1 in chapter 6 ([ExercisesETS](ETS.qmd#exercises6)), where you are tasked to forecast Tesla's energy deployment. Use the entire data found here: <http://jagelves.github.io/Data/ElectricityBill.csv> to estimate an ensemble of the TSLM model with linear trend and seasonality, and a TSLM model with quadratic trend and seasonality. Let the weight of the linear model be 30% and that of the quadratic model 70%. Graph the forecast for the next four periods of the three models.
+
+<details>
+
+<summary>Suggested Answer</summary>
+
+We can start by loading the packages, data, and creating a tsibble:
+```{r message=FALSE}
+library(tidyverse)
+library(fpp3)
+library(ggthemes)
+rm(list=ls())
+storage<-read_csv("http://jagelves.github.io/Data/teslaE.csv")
+
+storage %>%
+  mutate(Date=yearquarter(Date)) %>%
+  as_tsibble(index=Date) -> storage_ts
+```
+Let's now create the Linear and Quadratic models using TSLM. Then we can create the ensemble model by using the `mutate()` function and the given weights:
+
+```{r}
+storage_ts %>%
+  model(LM=TSLM(EnergyStorage~trend()+season()),
+        LM2=TSLM(EnergyStorage~trend()+I(trend()^2)+season())) ->fit
+
+fit %>% mutate(Ensemble=0.3*LM+0.7*LM2) -> fit2
+
+```
+
+We can now graph the forecast for each model:
+
+```{r}
+fit2 %>% forecast(h=4) %>% 
+  autoplot(level=NULL) +
+  autolayer(storage_ts,EnergyStorage) +
+  theme_clean()
+```
+
 </details>
