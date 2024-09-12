@@ -105,8 +105,7 @@ Autocorrelations are essential in time series analysis since they indicate the d
 
 <center>$\rho_{y_t,y_{t-k}}=\frac{cov(y_t,y_{y-k})}{sd(y_t)sd(y_{t-k})}$</center>
 
-<br>
-Let's illustrate the use of autocorrelations with an example. This time let's inspect personal income growth in the state of California. Below we load the data and create the train and test sets.
+<br> Let's illustrate the use of autocorrelations with an example. This time let's inspect personal income growth in the state of California. Below we load the data and create the train and test sets.
 
 ```{r, message=FALSE, warning=FALSE}
 library(fpp3)
@@ -433,6 +432,7 @@ fit %>% forecast(h=27) %>% autoplot(level=NULL) +
 Interestingly, the AR(1) and the LS model perform the best. The LS model overestimates the test data, while the AR(1) underestimates it. One could imagine combining the forecasts of these models to obtain a better one.
 
 ## Combination of Models (Ensembles)
+
 To create a combination of models we can use the *fit* object containing the mable. Specifically, any model in the *fit* object can be combined using a linear combination. The code below combines the AR(1) model and the LS model by finding a simple average between both models.
 
 ```{r}
@@ -449,6 +449,7 @@ fit2 %>% select(AR1,LS,Ensemble) %>%
        subtitle = "Jan 4, 2015 - Dec 2, 2018",
        x="")
 ```
+
 The plot illustrates how the ensemble fits the test data better than each model individually. Let's confirm the accuracy of the ensemble to the test set by calculating some measures.
 
 ```{r, results='hide'}
@@ -496,3 +497,43 @@ In this module you have been introduced to ARIMA model. Particularly you have le
 -   Model the ARIMA process using the `ARIMA()` function.
 
 -   Provide forecasts of the ARIMA process in R.
+
+## Exercises
+
+1. Recall problem 2 in chapter 6, where you are tasked to forecast the energy consumption of a new ice cream machine. Use the entire data found here: <http://jagelves.github.io/Data/ElectricityBill.csv> to estimate an AR1 model. Graph the ACF and PACF and confirm that an AR1 is appropriate. Check residuals from the model and confirm that they resemble white noise. Create a graph of the series and the forecast for four periods ahead.
+
+<details>
+
+<summary>Suggested Answer</summary>
+
+Let's start by loading the data and creating a tsibble:
+```{r message=FALSE}
+library(tidyverse)
+library(fpp3)
+rm(list=ls())
+Elec<-read_csv("http://jagelves.github.io/Data/ElectricityBill.csv")
+
+Elec %>% mutate(Date=yearmonth(paste(Year, Month, sep = "-"))) %>% 
+  select(Date,`Bill Amount`) %>% 
+  as_tsibble(index=Date)-> Elec_ts
+```
+
+We can now graph the ACF and the PACF of the *Bill Amount* variable:
+```{r, fig.show='hold',out.width = '50%'}
+#| layout-ncol: 2
+Elec_ts %>% ACF(lag_max = 12) %>% autoplot()
+Elec_ts %>% PACF(lag_max = 12) %>% autoplot()
+```
+There is a one spike at lag number one in the ACF and one spike in lag number one in the PACF. We could use both an AR1 or MA1 process to model the behavior. Let's estimate the AR1.
+```{r}
+Elec_ts %>% model(AR1=ARIMA(`Bill Amount`~pdq(1,0,0))) -> fit
+```
+Now we can check the residuals and see if they resemble white noise:
+
+```{r, fig.show='hold',out.width = '50%'}
+#| layout-ncol: 2
+fit %>% augment() %>% ACF(.resid) %>% autoplot()
+fit %>% augment() %>% PACF(.resid) %>% autoplot()
+```
+The are no significant spikes. We can conclude that the errors resemble white noise.
+</details>
