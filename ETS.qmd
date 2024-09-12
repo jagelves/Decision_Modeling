@@ -332,9 +332,10 @@ In this module you have been introduced to ETS model. Particularly you have lear
 
 -   Forecast time series with the ETS model.
 
-## Exercises
+## Exercises {#exercises6}
 
-1. Tesla is rapidly expanding its footprint in renewable energy and energy storage solutions, with innovations like the Powerwall, Megapack, and Solar Roof driving the company forward. Tesla's energy storage systems are gaining traction in both residential and large-scale utility markets, while its vision of Virtual Power Plants (VPPs) is revolutionizing how power is managed and distributed.
+
+1.  Tesla is rapidly expanding its footprint in renewable energy and energy storage solutions, with innovations like the Powerwall, Megapack, and Solar Roof driving the company forward. Tesla's energy storage systems are gaining traction in both residential and large-scale utility markets, while its vision of Virtual Power Plants (VPPs) is revolutionizing how power is managed and distributed.
 
     Tesla is forecasting strong growth in energy deployment as they continue to scale their products and enter new markets. You have been asked to help forecast Tesla Energy’s deployment for Q4 2024, using historical quarterly data on energy storage and solar deployments from previous years.
 
@@ -345,7 +346,9 @@ In this module you have been introduced to ETS model. Particularly you have lear
 <details>
 
 <summary>Suggested Answer</summary>
+
 We can use the code below to develop the models:
+
 ```{r message=FALSE}
 library(tidyverse)
 library(fpp3)
@@ -387,10 +390,10 @@ Forecast suggest that energy deployment will go down relative to last quarter. H
 
 </details>
 
-2. Ice Cream Heaven is a small ice cream shop that has recently purchased a new ice cream-making machine to expand its production and meet increased demand during the summer months. The machine was installed in July 2023, and while it has helped boost production, it has also increased the shop's energy consumption.
+2.  Ice Cream Heaven is a small ice cream shop that has recently purchased a new ice cream-making machine to expand its production and meet increased demand during the summer months. The machine was installed in July 2023, and while it has helped boost production, it has also increased the shop's energy consumption.
 
     The owners of Ice Cream Heaven want to estimate how much more they are paying in energy bills due to this new machine. They have historical monthly energy consumption data before and after the machine was installed and want to forecast what their energy consumption would have been without the machine to compare it with the actual values. Use the data found here: <http://jagelves.github.io/Data/ElectricityBill.csv> and an ETS model with all additive components to provide your estimate.
-    
+
 <details>
 
 <summary>Suggested Answer</summary>
@@ -419,8 +422,7 @@ Elec_ts %>% filter_index("2023 Aug"~.) %>%
   
 sum(Mach$`Bill Amount`- NoMach$.mean)
 
-``` 
-
+```
 
 Following this analysis, the ice cream shop has paid an additional 649 dollars. Below is a graph that visualizes the difference:
 
@@ -433,8 +435,10 @@ Elec_ts %>% autoplot(`Bill Amount`) + theme_clean() +
   autolayer(forecast(fitp,h=12), level=NULL)
 
 ```
+
 </details>
-3. Refer back to question 2, where your task is to estimate the extra cost in energy of a machine. Use the entire data set and forecast as scenario where the machine is kept and one where the machine is sold. Change the model to a TSLM with linear trend and seasonality. How much extra would the ice cream shop pay if they kept the machine? 
+
+3.  Refer back to question 2, where your task is to estimate the extra cost in energy of a machine. Use the entire data set and forecast as scenario where the machine is kept and one where the machine is sold. Change the model to a TSLM with linear trend and seasonality. How much extra would the ice cream shop pay if they kept the machine?
 
 <details>
 
@@ -453,6 +457,7 @@ Elec_ts %>%
     LM2 = TSLM(`Bill Amount`~trend()+season()+Down)) -> fit2
 
 ```
+
 Now we can create a new tsibble with data that assumes the new machine and no new machine with the `scenarios()` function.
 
 ```{r}
@@ -463,6 +468,7 @@ Mach <- scenarios(
     mutate(Down=rep(0,12)),
   names_to = "Scenario")
 ```
+
 Lastly, we can use this new data to forecast with our model:
 
 ```{r}
@@ -470,7 +476,9 @@ forecast(fit2,new_data=Mach) ->est
 as_tibble(est) %>% group_by(Down) %>% 
   summarise(Sum=sum(.mean)) %>% pull(Sum) %>% diff()
 ```
+
 It will cost the ice cream shop an additional 535 dollars in energy consumption to keep the machine. Below is a graph of the two scenarios:
+
 ```{r}
 Elec_ts %>%
   autoplot(`Bill Amount`) + 
@@ -484,7 +492,7 @@ Elec_ts %>%
 
 </details>
 
-4. Delta Airlines relies heavily on maintaining high load factors (the percentage of seats filled on flights) to maximize profitability and optimize operational efficiency. Accurately forecasting load factors helps Delta plan routes, set prices, and allocate resources effectively.
+4.  Delta Airlines relies heavily on maintaining high load factors (the percentage of seats filled on flights) to maximize profitability and optimize operational efficiency. Accurately forecasting load factors helps Delta plan routes, set prices, and allocate resources effectively.
 
     Delta has ask for you to forecast the load factor the next four periods using historical data and two different time series models: the ETS model (algorithmic) and the TSLM model (with seasonality and trend). By doing so, you will help Delta better anticipate future demand and optimize its flight operations.
 
@@ -495,6 +503,7 @@ Elec_ts %>%
 <summary>Suggested Answer</summary>
 
 Here is the R code to complete the task. Start by loading the data and creating the tsibble.
+
 ```{r message=FALSE}
 library(tidyverse)
 library(fpp3)
@@ -509,6 +518,7 @@ Load %>% mutate(Date=yearmonth(paste(Year, Month, sep = "-"))) %>%
 ```
 
 Now we can create the train and test sets with the dates provided:
+
 ```{r}
 Load_ts %>% filter_index("2022 Jan"~"2023 Dec") -> train
 Load_ts %>% filter_index("Jan 2024"~.) -> test
@@ -525,8 +535,7 @@ fit %>% forecast(test) %>%
   accuracy(test) %>% select(.model,RMSE)
 ```
 
-It seems like the algorithmic ETS performs better. Finally,
-let's forecast the series using the algorithmic ETS model:
+It seems like the algorithmic ETS performs better. Finally, let's forecast the series using the algorithmic ETS model:
 
 ```{r}
 Load_ts %>% 
@@ -545,6 +554,5 @@ Load_ts %>%
   labs(title="Delta Airlines Load Factors",
        x="",y="")
 ```
-
 
 </details>
