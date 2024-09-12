@@ -3811,14 +3811,8 @@ Suggested Answer
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index=</span>Date)<span class="ot">-&gt;</span> Elec_ts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now graph the ACF and the PACF of the <em>Bill Amount</em> variable:</p>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">ACF</span>(<span class="at">lag_max =</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Response variable not specified, automatically selected `var = Bill Amount`</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(<span class="at">lag_max =</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Response variable not specified, automatically selected `var = Bill Amount`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">ACF</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span>,<span class="at">lag_max =</span> <span class="dv">24</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span>,<span class="at">lag_max =</span> <span class="dv">24</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -3831,18 +3825,18 @@ Suggested Answer
 </div>
 <p>There is a one spike at lag number one in the ACF and one spike in lag number one in the PACF. We could use both an AR1 or MA1 process to model the behavior. Let’s estimate the AR1.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="at">AR1=</span><span class="fu">ARIMA</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span><span class="sc">~</span><span class="fu">pdq</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>))) <span class="ot">-&gt;</span> fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="at">AR1=</span><span class="fu">ARIMA</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span><span class="sc">~</span><span class="fu">pdq</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>))) <span class="ot">-&gt;</span> fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can check the residuals and see if they resemble white noise:</p>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">augment</span>() <span class="sc">%&gt;%</span> <span class="fu">ACF</span>(.resid) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">augment</span>() <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(.resid) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">augment</span>() <span class="sc">%&gt;%</span> <span class="fu">ACF</span>(.resid,<span class="at">lag_max =</span> <span class="dv">24</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">augment</span>() <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(.resid,<span class="at">lag_max =</span> <span class="dv">24</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" style="width:50.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" style="width:80.0%"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid" style="width:50.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid" style="width:80.0%"></p>
 </div>
 </div>
 </div>

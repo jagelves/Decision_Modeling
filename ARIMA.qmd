@@ -521,8 +521,8 @@ Elec %>% mutate(Date=yearmonth(paste(Year, Month, sep = "-"))) %>%
 We can now graph the ACF and the PACF of the *Bill Amount* variable:
 ```{r, fig.show='hold',out.width = '50%'}
 #| layout-ncol: 2
-Elec_ts %>% ACF(lag_max = 12) %>% autoplot()
-Elec_ts %>% PACF(lag_max = 12) %>% autoplot()
+Elec_ts %>% ACF(`Bill Amount`,lag_max = 24) %>% autoplot()
+Elec_ts %>% PACF(`Bill Amount`,lag_max = 24) %>% autoplot()
 ```
 There is a one spike at lag number one in the ACF and one spike in lag number one in the PACF. We could use both an AR1 or MA1 process to model the behavior. Let's estimate the AR1.
 ```{r}
@@ -530,10 +530,10 @@ Elec_ts %>% model(AR1=ARIMA(`Bill Amount`~pdq(1,0,0))) -> fit
 ```
 Now we can check the residuals and see if they resemble white noise:
 
-```{r, fig.show='hold',out.width = '50%'}
+```{r, fig.show='hold',out.width = '80%'}
 #| layout-ncol: 2
-fit %>% augment() %>% ACF(.resid) %>% autoplot()
-fit %>% augment() %>% PACF(.resid) %>% autoplot()
+fit %>% augment() %>% ACF(.resid,lag_max = 24) %>% autoplot()
+fit %>% augment() %>% PACF(.resid,lag_max = 24) %>% autoplot()
 ```
 The are no significant spikes. We can conclude that the errors resemble white noise.
 </details>
