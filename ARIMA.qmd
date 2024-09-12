@@ -500,7 +500,7 @@ In this module you have been introduced to ARIMA model. Particularly you have le
 
 ## Exercises
 
-1. Recall problem 2 in chapter 6, where you are tasked to forecast the energy consumption of a new ice cream machine. Use the entire data found here: <http://jagelves.github.io/Data/ElectricityBill.csv> to estimate an AR1 model. Graph the ACF and PACF and confirm that an AR1 is appropriate. Check residuals from the model and confirm that they resemble white noise. Create a graph of the series and the forecast for four periods ahead.
+1. Recall problem 2 in chapter 6 ([ExercisesETS](ETS.qmd#exercises6)), where you are tasked to forecast the energy consumption of a new ice cream machine. Use the entire data found here: <http://jagelves.github.io/Data/ElectricityBill.csv> to estimate an AR1 model. Graph the ACF and PACF and confirm that an AR1 is appropriate. Check residuals from the model and confirm that they resemble white noise. Create a graph of the series and the forecast for four periods ahead.
 
 <details>
 
