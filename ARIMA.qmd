@@ -577,3 +577,55 @@ fit2 %>% forecast(h=4) %>%
 ```
 
 </details>
+
+3. Using the monthly inflation data from this source: <https://jagelves.github.io/Data/Inflation.csv>, forecast the inflation rate for the next four months. First, use the ARIMA() function to let the model automatically select the best-fitting ARIMA model for the inflation data while incorporating the interest rate into the model with the command ARIMA(Inflation ~ InterestRate). Develop two scenarios: the Federal Reserve holds the interest rate steady at 5.33% over the next four months, and the Fed follows a decreasing schedule of 5.25%, 5.00%, 4.75%, and 4.50%. Identify the month the Fed reaches its target of 2% inflation in each scenario and determine which schedule achieves this target faster. Create a graph that shows each scenario and the target inflation rate.
+
+<details>
+
+<summary>Suggested Answer</summary>
+Start by loading the packages, data, and creating a tsibble:
+
+```{r}
+rm(list=ls())
+
+library(fpp3)
+library(tidyverse)
+library(ggthemes)
+data<-read_csv("https://jagelves.github.io/Data/Inflation.csv")
+
+data %>% mutate(Date=yearmonth(mdy(Date))) %>% 
+  as_tsibble(index=Date) -> data_ts
+```
+
+Next, create the model and the scenarios:
+
+```{r message=FALSE}
+data_ts %>% 
+  model(ARIMA=ARIMA(Inflation~InterestRate)) -> fit2
+
+Int <- scenarios(
+  Keep = new_data(data_ts, 4) %>% 
+    mutate(InterestRate=rep(5.33,4)),
+  Lower = new_data(data_ts, 4) %>% 
+    mutate(InterestRate=c(5.25,5.00,4.75,4.5)),
+  names_to = "Scenario")
+```
+
+Next we can report the forecasts:
+```{r}
+forecast(fit2,new_data=Int)
+```
+The forecasts show that if the Fed keeps the rate at 5.33%, the inflation will reach its goal sometime in November. However, if the Fed decides to lower rates, we are looking at some time in December. Lastly, we can plot our scenarios:
+
+```{r}
+forecast(fit2,new_data=Int) %>% autoplot(level=95) + 
+  autolayer(data_ts,Inflation) + 
+  theme_clean() + 
+  geom_hline(yintercept=2, lty=2) + 
+  labs(title="US Monthly Inflation Rate",
+       subtitle="Keep interest rate at 5.33% vs. 25 basis point reductions",
+       x="",y="")
+```
+</details>
+
+

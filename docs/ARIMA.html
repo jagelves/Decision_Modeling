@@ -3884,6 +3884,82 @@ Suggested Answer
 </div>
 </div>
 </details>
+<ol start="3" type="1">
+<li>Using the monthly inflation data from this source: <a href="https://jagelves.github.io/Data/Inflation.csv" class="uri">https://jagelves.github.io/Data/Inflation.csv</a>, forecast the inflation rate for the next four months. First, use the ARIMA() function to let the model automatically select the best-fitting ARIMA model for the inflation data while incorporating the interest rate into the model with the command ARIMA(Inflation ~ InterestRate). Develop two scenarios: the Federal Reserve holds the interest rate steady at 5.33% over the next four months, and the Fed follows a decreasing schedule of 5.25%, 5.00%, 4.75%, and 4.50%. Identify the month the Fed reaches its target of 2% inflation in each scenario and determine which schedule achieves this target faster. Create a graph that shows each scenario and the target inflation rate.</li>
+</ol>
+<details>
+<summary>
+Suggested Answer
+</summary>
+<p>Start by loading the packages, data, and creating a tsibble:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"https://jagelves.github.io/Data/Inflation.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 52 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Date
+dbl (3): Inflation, InterestRate, S&amp;Preturns
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">yearmonth</span>(<span class="fu">mdy</span>(Date))) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index=</span>Date) <span class="ot">-&gt;</span> data_ts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, create the model and the scenarios:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>data_ts <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">ARIMA=</span><span class="fu">ARIMA</span>(Inflation<span class="sc">~</span>InterestRate)) <span class="ot">-&gt;</span> fit2</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>Int <span class="ot">&lt;-</span> <span class="fu">scenarios</span>(</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Keep =</span> <span class="fu">new_data</span>(data_ts, <span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">InterestRate=</span><span class="fu">rep</span>(<span class="fl">5.33</span>,<span class="dv">4</span>)),</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Lower =</span> <span class="fu">new_data</span>(data_ts, <span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">InterestRate=</span><span class="fu">c</span>(<span class="fl">5.25</span>,<span class="fl">5.00</span>,<span class="fl">4.75</span>,<span class="fl">4.5</span>)),</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"Scenario"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next we can report the forecasts:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forecast</span>(fit2,<span class="at">new_data=</span>Int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A fable: 8 x 6 [1M]
+# Key:     Scenario, .model [2]
+  Scenario .model     Date    Inflation .mean InterestRate
+  &lt;chr&gt;    &lt;chr&gt;     &lt;mth&gt;       &lt;dist&gt; &lt;dbl&gt;        &lt;dbl&gt;
+1 Keep     ARIMA  2024 Sep N(2.2, 0.15)  2.17         5.33
+2 Keep     ARIMA  2024 Oct  N(2.1, 0.6)  2.13         5.33
+3 Keep     ARIMA  2024 Nov  N(1.9, 1.2)  1.94         5.33
+4 Keep     ARIMA  2024 Dec  N(1.6, 1.9)  1.60         5.33
+5 Lower    ARIMA  2024 Sep N(2.2, 0.15)  2.20         5.25
+6 Lower    ARIMA  2024 Oct  N(2.2, 0.6)  2.24         5   
+7 Lower    ARIMA  2024 Nov  N(2.1, 1.2)  2.14         4.75
+8 Lower    ARIMA  2024 Dec  N(1.9, 1.9)  1.88         4.5 </code></pre>
+</div>
+</div>
+<p>The forecasts show that if the Fed keeps the rate at 5.33%, the inflation will reach its goal sometime in November. However, if the Fed decides to lower rates, we are looking at some time in December. Lastly, we can plot our scenarios:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forecast</span>(fit2,<span class="at">new_data=</span>Int) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">level=</span><span class="dv">95</span>) <span class="sc">+</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(data_ts,Inflation) <span class="sc">+</span> </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>() <span class="sc">+</span> </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"US Monthly Inflation Rate"</span>,</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"Keep interest rate at 5.33% vs. 25 basis point reductions"</span>,</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>,<span class="at">y=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</details>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
