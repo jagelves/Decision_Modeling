@@ -250,13 +250,13 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
 </details>
 
-3.  PharmaCo is a pharmaceutical company considering whether to launch a new drug called "CureFast". The success of CureFast in the market depends on the drug's effectiveness in treating a particular condition. PharmaCo estimates that there is a 40% chance that the drug will be highly effective and thus successful in the market. If CureFast is successful, the company will earn a profit of 50 million. However, if the drug is not effective, PharmaCo will incur a loss of 20 million due to production, marketing, and other sunk costs.
+3.  PharmaCo is a pharmaceutical company considering whether to launch a new drug called "CureFast". The success of CureFast in the market depends on the drug's effectiveness in treating a particular condition. PharmaCo estimates that there is a 40% chance that the drug will be highly effective and thus successful in the market. If CureFast is successful, the company will earn a profit of 50 million. However, if the drug is not effective, PharmaCo will incur a loss of 20 million due to production, marketing, and other sunk costs. The company can always decide to not launch the drug. This option yields a profit of 0.
 
     Before deciding to launch the drug, PharmaCo can conduct a clinical trial at a cost of \$5 million. The clinical trial is not perfect and has the following characteristics:
 
     -   If the drug is truly effective, there is a 90% chance that the clinical trial will show positive results. If the drug is not effective, there is a 15% chance that the clinical trial will still show positive results.
 
-    Should PharmaCo conduct the clinical trial before deciding whether to launch CureFast, and what is the maximum amount they should pay for the trial?
+    Should PharmaCo launch the drug? Should they conduct the clinical trial? What is the maximum amount they should pay for the trial?
 
 <details>
 
