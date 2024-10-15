@@ -87,7 +87,20 @@ The model fit will be assessed by comparing the fitted values against observed v
 
 <center>$MSE = \frac{ \sum (\hat{y}_t-y_t)^2}{T}$</center>
 
-<br> How we decide to aggregate our errors will determine our measure of accuracy. For example, if we follow the same procedure as the one for MSE's but instead find the square root, we have calculated the RMSE. Below you will find a collection of accuracy measures for our benchmarks. You will notice that the Naive method provides the best results since all the accuracy metrics are the smallest. We highlighted these results and made the table more appealing using the `gt` library.
+<br> How we decide to aggregate our errors will determine our measure of accuracy. For example, if we follow the same procedure as the one for MSE's but instead find the square root, we have calculated the RMSE. Below you will find a collection of accuracy measures. 
+
+| **Measure**               | **Explanation**                                                                 | **Formula**                                  |
+|---------------------------|---------------------------------------------------------------------------------|----------------------------------------------|
+| **Mean Error (ME)**       | Measures the average bias in forecasts.                                         | $ME = \frac{1}{n} \sum_{t=1}^{n} (y_t - \hat{y}_t)$ |
+| **Root Mean Square Error (RMSE)** | Captures the square root of the average squared errors, emphasizing larger errors. | $RMSE = \sqrt{\frac{1}{n} \sum_{t=1}^{n} (y_t - \hat{y}_t)^2}$ |
+| **Mean Absolute Error (MAE)** | Reflects the average magnitude of errors without direction.                      | $MAE = \frac{1}{n} \sum_{t=1}^{n} |y_t - \hat{y}_t|$ |
+| **Mean Percentage Error (MPE)** | Shows the average forecast bias as a percentage.                             | $MPE = \frac{1}{n} \sum_{t=1}^{n} \frac{y_t - \hat{y}_t}{y_t} \times 100$ |
+| **Mean Absolute Scaled Error (MASE)** | Scales the MAE relative to the average MAE from a naïve forecast.               | $MASE = \frac{\text{MAE}}{\frac{1}{n-1} \sum_{t=2}^{n} |y_t - y_{t-1}|}$ |
+| **Root Mean Squared Scaled Error (RMSSE)** | Similar to RMSE but scaled by the error of a naïve forecast.                   | $RMSSE = \frac{RMSE}{\sqrt{\frac{1}{n-1} \sum_{t=2}^{n} (y_t - y_{t-1})^2}}$ |
+| **Autocorrelation at Lag 1 (ACF1)** | Measures the correlation of residuals with their lagged values.               | Calculated using the autocorrelation function for residuals at lag 1. |
+
+
+You will notice that the Naive method provides the best results since all the accuracy metrics are the smallest. We highlighted these results and made the table more appealing using the `gt` library.
 
 ```{r}
 accuracy(fit) %>% 
