@@ -275,7 +275,7 @@ Demand (units)	|Probability (%)|
 
 *Expected End Value 1 year (365 days): $48,293*
 
-*Bear Case (Q1): $823*
+*Bear Case (Q1): $13,642*
 
 *Base Case (Q2): $27,306*
 
