@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="J. Alejandro Gelves">
-<meta name="dcterms.date" content="2023-09-22">
 
-<title>Decision Modeling</title>
+<title>8&nbsp; Working With Time Series Data in R – Decision Modeling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Decisions.html" rel="next">
+<link href="./references.html" rel="next">
+<link href="./ARIMA.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -77,6 +110,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="site_libs/quarto-contrib/quarto-project/qmd-lab/closeread/closeread.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -88,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./First.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Working With Time Series Data in R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -115,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -163,7 +197,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./First.html" class="sidebar-item-text sidebar-link">
+  <a href="./First.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Working With Time Series Data in R</span></span></a>
   </div>
 </li>
@@ -178,40 +212,34 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
+document.addEventListener("DOMContentLoaded", function () {
+    // Create a button to toggle the TOC
+    const button = document.createElement("button");
+    button.innerText = "Toggle TOC";
+    button.classList.add("toc-toggle-button");
+    document.body.appendChild(button);
+
+    // Add event listener to toggle the TOC visibility
+    button.addEventListener("click", function () {
+        document.body.classList.toggle("show-toc");
+    });
+});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Decision Modeling</h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Working With Time Series Data in R</span></h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-body">
+<div class="quarto-title-meta column-page-right">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>J. Alejandro Gelves </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 22, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -221,17 +249,62 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="cr-section cr-column-screen sidebar-left">
+<div class="narrative-col">
+<div class="trigger new-trigger" data-focus-on="cr-pic">
+<div class="narrative">
+<p>When analyzing time series data in R there are some important steps to follow. Below is example code that loads BTC data and creates a time series object to analyze.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-features">
+<div class="narrative">
+<p>Be careful and always follow these steps.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-features">
+<div class="narrative">
+<p>Start by cleaning the directory and loading the necessary packages.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-features">
+<div class="narrative">
+<p>Continue by loading the data into R by using the <code>read_csv()</code> function and making sure you put the path in quotations.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-features">
+<div class="narrative">
+<p>Lastly, make sure that the <em>Date</em> variable is recognized in the format <em>month/day/year</em> by using the <code>mdy()</code> function and specifying it as the index for in the <code>tsibble()</code> function.</p>
+</div>
+</div>
+</div>
+<div class="sticky-col">
+<div class="sticky-col-stack">
+<div id="cr-features" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>BTC<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"https://jagelves.github.io/Data/BTC_USD.csv"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>BTC_ts <span class="ot">&lt;-</span> BTC <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">mdy</span>(Date)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> Date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="cr-pic" class="sticky">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="BTC.png" class="quarto-figure quarto-figure-center figure-img" style="width:60.0%" height="300"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1><p><img src="cover.png" title="Decision Modeling" class="quarto-cover-image img-fluid"></p>
-<p>Making informed decisions is crucial in a world of uncertainty and ever-changing dynamics. This book is a guide that explores decision analysis, simulation, and time series techniques using R. It is recommended for anyone seeking to learn data-driven approaches to predict outcomes, simulate scenarios, and make informed choices.</p>
-<p>In the book’s first part, we delve into decision analysis. Here, we explore various frameworks, such as decision trees and risk analysis, enabling us to assess our choices’ potential outcomes and consequences. We uncover strategies to quantify uncertainties, analyze trade-offs, and optimize decision paths. Real-world examples illustrate how these techniques are applied in business scenarios.</p>
-<p>The book’s second part deals with simulation. We create dynamic, virtual environments to mimic complex systems in business and evaluate multiple scenarios. Through Monte Carlo simulation, we unlock the power to predict outcomes and quantify the impacts of our decisions. Practical exercises and step-by-step guidance equip readers with the skills to build and analyze simulations, enabling them to gain deeper insights into the consequences of their choices.</p>
-<p>In the final part of this book, we introduce time series analysis. As time is fundamental in many domains, we explore techniques to extract meaningful patterns and forecast future values. The classical methods of ARIMA and ETS are introduced by illustrating their real-world applications in business. Readers will learn to navigate the intricacies of forecasting and leverage time series insights to enhance decision-making.</p>
-<p>Comments are welcomed at jagelves@wm.edu</p>
 
-
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -654,12 +727,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
+      <a href="./ARIMA.html" class="pagination-link" aria-label="ARIMA">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ARIMA</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Decisions.html" class="pagination-link" aria-label="Decisions Under Uncertainty">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Decisions Under Uncertainty</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
