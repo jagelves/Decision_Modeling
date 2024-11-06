@@ -222,7 +222,8 @@ chi_square_test <- chisq.test(observed, p = rep(1/num_categories, num_categories
 # Display the test results
 print(chi_square_test)
 ```
-**Chi-Square Statistic (X-squared)** measures the divergence between observed and expected frequencies. Since the observed distribution is the same as the expected frequency, the divergence is 0. The p-value indicates the probability of observing a Chi-Square statistic as extreme as, or more extreme than, the one computed, assuming the null hypothesis (that the distribution is uniform) is true. A small p-value (typically < 0.05) indicates that the observed distribution is significantly different from a uniform distribution. Since the the reported p-value is 1, we can't reject the null hypothesis and we vote in favor of ferry rides being uniformly distributed. 
+
+**Chi-Square Statistic (X-squared)** measures the divergence between observed and expected frequencies. Since the observed distribution is the same as the expected frequency, the divergence is 0. The p-value indicates the probability of observing a Chi-Square statistic as extreme as, or more extreme than, the one computed, assuming the null hypothesis (that the distribution is uniform) is true. A small p-value (typically \< 0.05) indicates that the observed distribution is significantly different from a uniform distribution. Since the the reported p-value is 1, we can't reject the null hypothesis and we vote in favor of ferry rides being uniformly distributed.
 
 Note that the Chi-Square test can be used for any discrete distribution or alternately as an approximation when the distributions are continuous. For testing normality (continuous distribution), other tests like the Shapiro-Wilk (`shapiro.test()` in R) or Kolmogorov-Smirnov (`ks.test()`) are more commonly used and better suited than the Chi-Square test.
 
@@ -361,7 +362,7 @@ data %>% group_by(Stock) %>%
 Lastly, we can now use the mean and the standard deviation of SPY to simulate four returns:
 
 ```{r}
-rnorm(4,0.00173,0.025667)
+rnorm(4,0.0008277559,0.01769385)
 ```
 
 </details>
@@ -409,6 +410,7 @@ chi_square_test <- chisq.test(x = observed, p = expected / sum(expected))
 print(chi_square_test)
 
 ```
+
 Given the large p-value, we can't reject the null and vote in favor a Poisson distribution. Now we can generate four simulated number of calls in a day by using the `rpois()` function and the estimated mean number of calls in a day.
 
 ```{r}
