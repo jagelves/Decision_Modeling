@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Decision Modeling - 7&nbsp; ARIMA</title>
+<title>7&nbsp; ARIMA – Decision Modeling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ed6da6eef3892af8a4b5ed59bfb951f5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -123,7 +123,7 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -161,13 +161,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ARIMA.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ARIMA</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -827,14 +827,23 @@ We can generate a white noise process by using the normal distribution with a me
 #qqlghnfucn .gt_indent_5 {
   text-indent: 25px;
 }
+
+#qqlghnfucn .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qqlghnfucn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Stationarity Tests</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="kpss_stat" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">kpss_stat</th>
 <th id="kpss_pvalue" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">kpss_pvalue</th>
 <th id="ndiffs" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">ndiffs</th>
@@ -842,7 +851,7 @@ We can generate a white noise process by using the normal distribution with a me
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_center" headers="kpss_stat">0.876</td>
+<td class="gt_row gt_center" headers="kpss_stat">0.946</td>
 <td class="gt_row gt_center" headers="kpss_pvalue">0.010</td>
 <td class="gt_row gt_center" headers="ndiffs">1</td>
 </tr>
@@ -1424,15 +1433,24 @@ We can generate a white noise process by using the normal distribution with a me
 #qruhctfgyf .gt_indent_5 {
   text-indent: 25px;
 }
+
+#qruhctfgyf .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qruhctfgyf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Coefficients For PI Growth</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
-<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<tr class="gt_col_headings even">
+<th id="a.model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
 <th id="term" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">term</th>
 <th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">estimate</th>
 <th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">std.error</th>
@@ -1957,15 +1975,24 @@ We can generate a white noise process by using the normal distribution with a me
 #qrjaztasyq .gt_indent_5 {
   text-indent: 25px;
 }
+
+#qrjaztasyq .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qrjaztasyq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Fit Measures</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
-<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<tr class="gt_col_headings even">
+<th id="a.model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
 <th id="sigma2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">sigma2</th>
 <th id="AIC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">AIC</th>
 <th id="AICc" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">AICc</th>
@@ -2439,16 +2466,25 @@ We can generate a white noise process by using the normal distribution with a me
 #eyfdyfiqjw .gt_indent_5 {
   text-indent: 25px;
 }
+
+#eyfdyfiqjw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#eyfdyfiqjw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="10" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Accuracy Measures</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
-<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
-<th id=".type" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.type</th>
+<tr class="gt_col_headings even">
+<th id="a.model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id="a.type" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.type</th>
 <th id="ME" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">ME</th>
 <th id="RMSE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">RMSE</th>
 <th id="MAE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MAE</th>
@@ -2527,10 +2563,10 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid"></p>
 </div>
 </div>
 </div>
@@ -2568,10 +2604,10 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid"></p>
 </div>
 </div>
 </div>
@@ -3058,16 +3094,25 @@ We can generate a white noise process by using the normal distribution with a me
 #hteoemoica .gt_indent_5 {
   text-indent: 25px;
 }
+
+#hteoemoica .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hteoemoica div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Coefficients For The Avocado Data</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="geography" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">geography</th>
-<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id="a.model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
 <th id="term" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">term</th>
 <th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">estimate</th>
 <th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">std.error</th>
@@ -3183,10 +3228,10 @@ We can generate a white noise process by using the normal distribution with a me
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid"></p>
 </div>
 </div>
 </div>
@@ -3676,17 +3721,26 @@ We can generate a white noise process by using the normal distribution with a me
 #dumhutkrlq .gt_indent_5 {
   text-indent: 25px;
 }
+
+#dumhutkrlq .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dumhutkrlq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="11" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Fit</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
-<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<tr class="gt_col_headings even">
+<th id="a.model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
 <th id="geography" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">geography</th>
-<th id=".type" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.type</th>
+<th id="a.type" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.type</th>
 <th id="ME" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">ME</th>
 <th id="RMSE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">RMSE</th>
 <th id="MAE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MAE</th>
@@ -3816,10 +3870,10 @@ Suggested Answer
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-39-2.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-39-2.png" class="img-fluid"></p>
 </div>
 </div>
 </div>
@@ -3833,14 +3887,14 @@ Suggested Answer
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid"></p>
 </div>
 </div>
 </div>
-The are no significant spikes. We can conclude that the errors resemble white noise.
+<p>The are no significant spikes. We can conclude that the errors resemble white noise.</p>
 </details>
 <ol start="2" type="1">
 <li>Recall problem 1 in chapter 6 (<a href="./ETS.html#exercises6">ExercisesETS</a>), where you are tasked to forecast Tesla’s energy deployment. Use the entire data found here: <a href="http://jagelves.github.io/Data/ElectricityBill.csv" class="uri">http://jagelves.github.io/Data/ElectricityBill.csv</a> to estimate an ensemble of the TSLM model with linear trend and seasonality, and a TSLM model with quadratic trend and seasonality. Let the weight of the linear model be 30% and that of the quadratic model 70%. Graph the forecast for the next four periods of the three models.</li>
@@ -3900,11 +3954,11 @@ Suggested Answer
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"https://jagelves.github.io/Data/Inflation.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 52 Columns: 4
+<pre><code>Rows: 54 Columns: 5
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr (1): Date
-dbl (3): Inflation, InterestRate, S&amp;Preturns
+dbl (4): Inflation, InterestRate, S&amp;Preturns, Unemployment
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -3930,16 +3984,17 @@ dbl (3): Inflation, InterestRate, S&amp;Preturns
 <div class="cell-output cell-output-stdout">
 <pre><code># A fable: 8 x 6 [1M]
 # Key:     Scenario, .model [2]
-  Scenario .model     Date    Inflation .mean InterestRate
-  &lt;chr&gt;    &lt;chr&gt;     &lt;mth&gt;       &lt;dist&gt; &lt;dbl&gt;        &lt;dbl&gt;
-1 Keep     ARIMA  2024 Sep N(2.2, 0.15)  2.17         5.33
-2 Keep     ARIMA  2024 Oct  N(2.1, 0.6)  2.13         5.33
-3 Keep     ARIMA  2024 Nov  N(1.9, 1.2)  1.94         5.33
-4 Keep     ARIMA  2024 Dec  N(1.6, 1.9)  1.60         5.33
-5 Lower    ARIMA  2024 Sep N(2.2, 0.15)  2.20         5.25
-6 Lower    ARIMA  2024 Oct  N(2.2, 0.6)  2.24         5   
-7 Lower    ARIMA  2024 Nov  N(2.1, 1.2)  2.14         4.75
-8 Lower    ARIMA  2024 Dec  N(1.9, 1.9)  1.88         4.5 </code></pre>
+  Scenario .model     Date
+  &lt;chr&gt;    &lt;chr&gt;     &lt;mth&gt;
+1 Keep     ARIMA  2024 Nov
+2 Keep     ARIMA  2024 Dec
+3 Keep     ARIMA  2025 Jan
+4 Keep     ARIMA  2025 Feb
+5 Lower    ARIMA  2024 Nov
+6 Lower    ARIMA  2024 Dec
+7 Lower    ARIMA  2025 Jan
+8 Lower    ARIMA  2025 Feb
+# ℹ 3 more variables: Inflation &lt;dist&gt;, .mean &lt;dbl&gt;, InterestRate &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>The forecasts show that if the Fed keeps the rate at 5.33%, the inflation will reach its goal sometime in November. However, if the Fed decides to lower rates, we are looking at some time in December. Lastly, we can plot our scenarios:</p>
@@ -3985,10 +4040,10 @@ Suggested Answer
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ARIMA_files/figure-html/unnamed-chunk-50-2.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="ARIMA_files/figure-html/unnamed-chunk-50-2.png" class="img-fluid"></p>
 </div>
 </div>
 </div>
@@ -4040,7 +4095,7 @@ Suggested Answer
 </div>
 </div>
 </div>
-If all things remain constant we should expect the Household debt to reach 20 trillion dollar by Q2 2028.
+<p>If all things remain constant we should expect the Household debt to reach 20 trillion dollar by Q2 2028.</p>
 </details>
 
 
@@ -4096,18 +4151,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -4139,7 +4183,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -4147,7 +4213,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

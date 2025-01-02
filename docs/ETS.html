@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Decision Modeling - 6&nbsp; ETS</title>
+<title>6&nbsp; ETS – Decision Modeling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ed6da6eef3892af8a4b5ed59bfb951f5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -123,7 +123,7 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -161,13 +161,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ETS.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ETS</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -388,23 +388,23 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="argjrgucdq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#argjrgucdq table {
+<div id="jgebvhivgf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jgebvhivgf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#argjrgucdq thead, #argjrgucdq tbody, #argjrgucdq tfoot, #argjrgucdq tr, #argjrgucdq td, #argjrgucdq th {
+#jgebvhivgf thead, #jgebvhivgf tbody, #jgebvhivgf tfoot, #jgebvhivgf tr, #jgebvhivgf td, #jgebvhivgf th {
   border-style: none;
 }
 
-#argjrgucdq p {
+#jgebvhivgf p {
   margin: 0;
   padding: 0;
 }
 
-#argjrgucdq .gt_table {
+#jgebvhivgf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -430,12 +430,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_caption {
+#jgebvhivgf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#argjrgucdq .gt_title {
+#jgebvhivgf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -447,7 +447,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#argjrgucdq .gt_subtitle {
+#jgebvhivgf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -459,7 +459,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#argjrgucdq .gt_heading {
+#jgebvhivgf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -471,13 +471,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_bottom_border {
+#jgebvhivgf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_col_headings {
+#jgebvhivgf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -492,7 +492,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_col_heading {
+#jgebvhivgf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,7 +512,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#argjrgucdq .gt_column_spanner_outer {
+#jgebvhivgf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -524,15 +524,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#argjrgucdq .gt_column_spanner_outer:first-child {
+#jgebvhivgf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#argjrgucdq .gt_column_spanner_outer:last-child {
+#jgebvhivgf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#argjrgucdq .gt_column_spanner {
+#jgebvhivgf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -544,11 +544,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#argjrgucdq .gt_spanner_row {
+#jgebvhivgf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#argjrgucdq .gt_group_heading {
+#jgebvhivgf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -574,7 +574,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#argjrgucdq .gt_empty_group_heading {
+#jgebvhivgf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -589,15 +589,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#argjrgucdq .gt_from_md > :first-child {
+#jgebvhivgf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#argjrgucdq .gt_from_md > :last-child {
+#jgebvhivgf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#argjrgucdq .gt_row {
+#jgebvhivgf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -616,7 +616,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#argjrgucdq .gt_stub {
+#jgebvhivgf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -629,7 +629,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#argjrgucdq .gt_stub_row_group {
+#jgebvhivgf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -643,15 +643,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#argjrgucdq .gt_row_group_first td {
+#jgebvhivgf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#argjrgucdq .gt_row_group_first th {
+#jgebvhivgf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#argjrgucdq .gt_summary_row {
+#jgebvhivgf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -661,16 +661,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#argjrgucdq .gt_first_summary_row {
+#jgebvhivgf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_first_summary_row.thick {
+#jgebvhivgf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#argjrgucdq .gt_last_summary_row {
+#jgebvhivgf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -680,7 +680,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_grand_summary_row {
+#jgebvhivgf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -690,7 +690,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#argjrgucdq .gt_first_grand_summary_row {
+#jgebvhivgf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -700,7 +700,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_last_grand_summary_row_top {
+#jgebvhivgf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -710,11 +710,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_striped {
+#jgebvhivgf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#argjrgucdq .gt_table_body {
+#jgebvhivgf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -723,7 +723,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_footnotes {
+#jgebvhivgf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -737,7 +737,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_footnote {
+#jgebvhivgf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -746,7 +746,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#argjrgucdq .gt_sourcenotes {
+#jgebvhivgf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -760,7 +760,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#argjrgucdq .gt_sourcenote {
+#jgebvhivgf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -768,75 +768,84 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#argjrgucdq .gt_left {
+#jgebvhivgf .gt_left {
   text-align: left;
 }
 
-#argjrgucdq .gt_center {
+#jgebvhivgf .gt_center {
   text-align: center;
 }
 
-#argjrgucdq .gt_right {
+#jgebvhivgf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#argjrgucdq .gt_font_normal {
+#jgebvhivgf .gt_font_normal {
   font-weight: normal;
 }
 
-#argjrgucdq .gt_font_bold {
+#jgebvhivgf .gt_font_bold {
   font-weight: bold;
 }
 
-#argjrgucdq .gt_font_italic {
+#jgebvhivgf .gt_font_italic {
   font-style: italic;
 }
 
-#argjrgucdq .gt_super {
+#jgebvhivgf .gt_super {
   font-size: 65%;
 }
 
-#argjrgucdq .gt_footnote_marks {
+#jgebvhivgf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#argjrgucdq .gt_asterisk {
+#jgebvhivgf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#argjrgucdq .gt_indent_1 {
+#jgebvhivgf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#argjrgucdq .gt_indent_2 {
+#jgebvhivgf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#argjrgucdq .gt_indent_3 {
+#jgebvhivgf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#argjrgucdq .gt_indent_4 {
+#jgebvhivgf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#argjrgucdq .gt_indent_5 {
+#jgebvhivgf .gt_indent_5 {
   text-indent: 25px;
+}
+
+#jgebvhivgf .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jgebvhivgf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
 }
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="9" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Cross Validation Models</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
-<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
-<th id=".type" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.type</th>
+<tr class="gt_col_headings even">
+<th id="a.model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id="a.type" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.type</th>
 <th id="ME" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">ME</th>
 <th id="RMSE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">RMSE</th>
 <th id="MAE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">MAE</th>
@@ -945,23 +954,23 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="yamdttxsfw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yamdttxsfw table {
+<div id="cgbzyhejlu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cgbzyhejlu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yamdttxsfw thead, #yamdttxsfw tbody, #yamdttxsfw tfoot, #yamdttxsfw tr, #yamdttxsfw td, #yamdttxsfw th {
+#cgbzyhejlu thead, #cgbzyhejlu tbody, #cgbzyhejlu tfoot, #cgbzyhejlu tr, #cgbzyhejlu td, #cgbzyhejlu th {
   border-style: none;
 }
 
-#yamdttxsfw p {
+#cgbzyhejlu p {
   margin: 0;
   padding: 0;
 }
 
-#yamdttxsfw .gt_table {
+#cgbzyhejlu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -987,12 +996,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_caption {
+#cgbzyhejlu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yamdttxsfw .gt_title {
+#cgbzyhejlu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1004,7 +1013,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#yamdttxsfw .gt_subtitle {
+#cgbzyhejlu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1016,7 +1025,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#yamdttxsfw .gt_heading {
+#cgbzyhejlu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1028,13 +1037,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_bottom_border {
+#cgbzyhejlu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_col_headings {
+#cgbzyhejlu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1049,7 +1058,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_col_heading {
+#cgbzyhejlu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1069,7 +1078,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#yamdttxsfw .gt_column_spanner_outer {
+#cgbzyhejlu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1081,15 +1090,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#yamdttxsfw .gt_column_spanner_outer:first-child {
+#cgbzyhejlu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yamdttxsfw .gt_column_spanner_outer:last-child {
+#cgbzyhejlu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yamdttxsfw .gt_column_spanner {
+#cgbzyhejlu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1101,11 +1110,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#yamdttxsfw .gt_spanner_row {
+#cgbzyhejlu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yamdttxsfw .gt_group_heading {
+#cgbzyhejlu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1131,7 +1140,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#yamdttxsfw .gt_empty_group_heading {
+#cgbzyhejlu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1146,15 +1155,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#yamdttxsfw .gt_from_md > :first-child {
+#cgbzyhejlu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yamdttxsfw .gt_from_md > :last-child {
+#cgbzyhejlu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yamdttxsfw .gt_row {
+#cgbzyhejlu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1173,7 +1182,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#yamdttxsfw .gt_stub {
+#cgbzyhejlu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1186,7 +1195,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#yamdttxsfw .gt_stub_row_group {
+#cgbzyhejlu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1200,15 +1209,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#yamdttxsfw .gt_row_group_first td {
+#cgbzyhejlu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yamdttxsfw .gt_row_group_first th {
+#cgbzyhejlu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yamdttxsfw .gt_summary_row {
+#cgbzyhejlu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1218,16 +1227,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#yamdttxsfw .gt_first_summary_row {
+#cgbzyhejlu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_first_summary_row.thick {
+#cgbzyhejlu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yamdttxsfw .gt_last_summary_row {
+#cgbzyhejlu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1237,7 +1246,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_grand_summary_row {
+#cgbzyhejlu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1247,7 +1256,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#yamdttxsfw .gt_first_grand_summary_row {
+#cgbzyhejlu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1257,7 +1266,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_last_grand_summary_row_top {
+#cgbzyhejlu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1267,11 +1276,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_striped {
+#cgbzyhejlu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yamdttxsfw .gt_table_body {
+#cgbzyhejlu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1280,7 +1289,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_footnotes {
+#cgbzyhejlu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1294,7 +1303,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_footnote {
+#cgbzyhejlu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1303,7 +1312,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#yamdttxsfw .gt_sourcenotes {
+#cgbzyhejlu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1317,7 +1326,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#yamdttxsfw .gt_sourcenote {
+#cgbzyhejlu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1325,73 +1334,82 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#yamdttxsfw .gt_left {
+#cgbzyhejlu .gt_left {
   text-align: left;
 }
 
-#yamdttxsfw .gt_center {
+#cgbzyhejlu .gt_center {
   text-align: center;
 }
 
-#yamdttxsfw .gt_right {
+#cgbzyhejlu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yamdttxsfw .gt_font_normal {
+#cgbzyhejlu .gt_font_normal {
   font-weight: normal;
 }
 
-#yamdttxsfw .gt_font_bold {
+#cgbzyhejlu .gt_font_bold {
   font-weight: bold;
 }
 
-#yamdttxsfw .gt_font_italic {
+#cgbzyhejlu .gt_font_italic {
   font-style: italic;
 }
 
-#yamdttxsfw .gt_super {
+#cgbzyhejlu .gt_super {
   font-size: 65%;
 }
 
-#yamdttxsfw .gt_footnote_marks {
+#cgbzyhejlu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yamdttxsfw .gt_asterisk {
+#cgbzyhejlu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yamdttxsfw .gt_indent_1 {
+#cgbzyhejlu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yamdttxsfw .gt_indent_2 {
+#cgbzyhejlu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yamdttxsfw .gt_indent_3 {
+#cgbzyhejlu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yamdttxsfw .gt_indent_4 {
+#cgbzyhejlu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yamdttxsfw .gt_indent_5 {
+#cgbzyhejlu .gt_indent_5 {
   text-indent: 25px;
+}
+
+#cgbzyhejlu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#cgbzyhejlu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
 }
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>LSS Model Coefficients</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="term" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">term</th>
 <th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">estimate</th>
 <th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">std.error</th>
@@ -1485,23 +1503,23 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="qxcwgbviwc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qxcwgbviwc table {
+<div id="fkumbfdwer" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fkumbfdwer table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qxcwgbviwc thead, #qxcwgbviwc tbody, #qxcwgbviwc tfoot, #qxcwgbviwc tr, #qxcwgbviwc td, #qxcwgbviwc th {
+#fkumbfdwer thead, #fkumbfdwer tbody, #fkumbfdwer tfoot, #fkumbfdwer tr, #fkumbfdwer td, #fkumbfdwer th {
   border-style: none;
 }
 
-#qxcwgbviwc p {
+#fkumbfdwer p {
   margin: 0;
   padding: 0;
 }
 
-#qxcwgbviwc .gt_table {
+#fkumbfdwer .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1527,12 +1545,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_caption {
+#fkumbfdwer .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qxcwgbviwc .gt_title {
+#fkumbfdwer .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1544,7 +1562,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#qxcwgbviwc .gt_subtitle {
+#fkumbfdwer .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1556,7 +1574,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#qxcwgbviwc .gt_heading {
+#fkumbfdwer .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1568,13 +1586,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_bottom_border {
+#fkumbfdwer .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_col_headings {
+#fkumbfdwer .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1589,7 +1607,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_col_heading {
+#fkumbfdwer .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1609,7 +1627,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#qxcwgbviwc .gt_column_spanner_outer {
+#fkumbfdwer .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1621,15 +1639,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#qxcwgbviwc .gt_column_spanner_outer:first-child {
+#fkumbfdwer .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qxcwgbviwc .gt_column_spanner_outer:last-child {
+#fkumbfdwer .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qxcwgbviwc .gt_column_spanner {
+#fkumbfdwer .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1641,11 +1659,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#qxcwgbviwc .gt_spanner_row {
+#fkumbfdwer .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qxcwgbviwc .gt_group_heading {
+#fkumbfdwer .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1671,7 +1689,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#qxcwgbviwc .gt_empty_group_heading {
+#fkumbfdwer .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1686,15 +1704,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#qxcwgbviwc .gt_from_md > :first-child {
+#fkumbfdwer .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qxcwgbviwc .gt_from_md > :last-child {
+#fkumbfdwer .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qxcwgbviwc .gt_row {
+#fkumbfdwer .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1713,7 +1731,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#qxcwgbviwc .gt_stub {
+#fkumbfdwer .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1726,7 +1744,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#qxcwgbviwc .gt_stub_row_group {
+#fkumbfdwer .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1740,15 +1758,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#qxcwgbviwc .gt_row_group_first td {
+#fkumbfdwer .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qxcwgbviwc .gt_row_group_first th {
+#fkumbfdwer .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qxcwgbviwc .gt_summary_row {
+#fkumbfdwer .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1758,16 +1776,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#qxcwgbviwc .gt_first_summary_row {
+#fkumbfdwer .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_first_summary_row.thick {
+#fkumbfdwer .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qxcwgbviwc .gt_last_summary_row {
+#fkumbfdwer .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1777,7 +1795,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_grand_summary_row {
+#fkumbfdwer .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1787,7 +1805,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#qxcwgbviwc .gt_first_grand_summary_row {
+#fkumbfdwer .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1797,7 +1815,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_last_grand_summary_row_top {
+#fkumbfdwer .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1807,11 +1825,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_striped {
+#fkumbfdwer .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qxcwgbviwc .gt_table_body {
+#fkumbfdwer .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1820,7 +1838,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_footnotes {
+#fkumbfdwer .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1834,7 +1852,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_footnote {
+#fkumbfdwer .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1843,7 +1861,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#qxcwgbviwc .gt_sourcenotes {
+#fkumbfdwer .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1857,7 +1875,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#qxcwgbviwc .gt_sourcenote {
+#fkumbfdwer .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1865,74 +1883,83 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#qxcwgbviwc .gt_left {
+#fkumbfdwer .gt_left {
   text-align: left;
 }
 
-#qxcwgbviwc .gt_center {
+#fkumbfdwer .gt_center {
   text-align: center;
 }
 
-#qxcwgbviwc .gt_right {
+#fkumbfdwer .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qxcwgbviwc .gt_font_normal {
+#fkumbfdwer .gt_font_normal {
   font-weight: normal;
 }
 
-#qxcwgbviwc .gt_font_bold {
+#fkumbfdwer .gt_font_bold {
   font-weight: bold;
 }
 
-#qxcwgbviwc .gt_font_italic {
+#fkumbfdwer .gt_font_italic {
   font-style: italic;
 }
 
-#qxcwgbviwc .gt_super {
+#fkumbfdwer .gt_super {
   font-size: 65%;
 }
 
-#qxcwgbviwc .gt_footnote_marks {
+#fkumbfdwer .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qxcwgbviwc .gt_asterisk {
+#fkumbfdwer .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qxcwgbviwc .gt_indent_1 {
+#fkumbfdwer .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qxcwgbviwc .gt_indent_2 {
+#fkumbfdwer .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qxcwgbviwc .gt_indent_3 {
+#fkumbfdwer .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qxcwgbviwc .gt_indent_4 {
+#fkumbfdwer .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qxcwgbviwc .gt_indent_5 {
+#fkumbfdwer .gt_indent_5 {
   text-indent: 25px;
+}
+
+#fkumbfdwer .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#fkumbfdwer div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
 }
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Fit Information Criterion</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
-<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<tr class="gt_col_headings even">
+<th id="a.model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
 <th id="AIC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">AIC</th>
 <th id="AICc" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">AICc</th>
 <th id="BIC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">BIC</th>
@@ -2000,23 +2027,23 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="zenbtnvral" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zenbtnvral table {
+<div id="gvcndjcxhm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gvcndjcxhm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zenbtnvral thead, #zenbtnvral tbody, #zenbtnvral tfoot, #zenbtnvral tr, #zenbtnvral td, #zenbtnvral th {
+#gvcndjcxhm thead, #gvcndjcxhm tbody, #gvcndjcxhm tfoot, #gvcndjcxhm tr, #gvcndjcxhm td, #gvcndjcxhm th {
   border-style: none;
 }
 
-#zenbtnvral p {
+#gvcndjcxhm p {
   margin: 0;
   padding: 0;
 }
 
-#zenbtnvral .gt_table {
+#gvcndjcxhm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2042,12 +2069,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_caption {
+#gvcndjcxhm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zenbtnvral .gt_title {
+#gvcndjcxhm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2059,7 +2086,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#zenbtnvral .gt_subtitle {
+#gvcndjcxhm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2071,7 +2098,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#zenbtnvral .gt_heading {
+#gvcndjcxhm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2083,13 +2110,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_bottom_border {
+#gvcndjcxhm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_col_headings {
+#gvcndjcxhm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2104,7 +2131,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_col_heading {
+#gvcndjcxhm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2124,7 +2151,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#zenbtnvral .gt_column_spanner_outer {
+#gvcndjcxhm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2136,15 +2163,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#zenbtnvral .gt_column_spanner_outer:first-child {
+#gvcndjcxhm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zenbtnvral .gt_column_spanner_outer:last-child {
+#gvcndjcxhm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zenbtnvral .gt_column_spanner {
+#gvcndjcxhm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2156,11 +2183,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#zenbtnvral .gt_spanner_row {
+#gvcndjcxhm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zenbtnvral .gt_group_heading {
+#gvcndjcxhm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2186,7 +2213,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#zenbtnvral .gt_empty_group_heading {
+#gvcndjcxhm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2201,15 +2228,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#zenbtnvral .gt_from_md > :first-child {
+#gvcndjcxhm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zenbtnvral .gt_from_md > :last-child {
+#gvcndjcxhm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zenbtnvral .gt_row {
+#gvcndjcxhm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2228,7 +2255,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#zenbtnvral .gt_stub {
+#gvcndjcxhm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2241,7 +2268,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#zenbtnvral .gt_stub_row_group {
+#gvcndjcxhm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2255,15 +2282,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#zenbtnvral .gt_row_group_first td {
+#gvcndjcxhm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zenbtnvral .gt_row_group_first th {
+#gvcndjcxhm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zenbtnvral .gt_summary_row {
+#gvcndjcxhm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2273,16 +2300,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#zenbtnvral .gt_first_summary_row {
+#gvcndjcxhm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_first_summary_row.thick {
+#gvcndjcxhm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zenbtnvral .gt_last_summary_row {
+#gvcndjcxhm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2292,7 +2319,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_grand_summary_row {
+#gvcndjcxhm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2302,7 +2329,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#zenbtnvral .gt_first_grand_summary_row {
+#gvcndjcxhm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2312,7 +2339,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_last_grand_summary_row_top {
+#gvcndjcxhm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2322,11 +2349,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_striped {
+#gvcndjcxhm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zenbtnvral .gt_table_body {
+#gvcndjcxhm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2335,7 +2362,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_footnotes {
+#gvcndjcxhm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2349,7 +2376,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_footnote {
+#gvcndjcxhm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2358,7 +2385,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#zenbtnvral .gt_sourcenotes {
+#gvcndjcxhm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2372,7 +2399,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#zenbtnvral .gt_sourcenote {
+#gvcndjcxhm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2380,77 +2407,86 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#zenbtnvral .gt_left {
+#gvcndjcxhm .gt_left {
   text-align: left;
 }
 
-#zenbtnvral .gt_center {
+#gvcndjcxhm .gt_center {
   text-align: center;
 }
 
-#zenbtnvral .gt_right {
+#gvcndjcxhm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zenbtnvral .gt_font_normal {
+#gvcndjcxhm .gt_font_normal {
   font-weight: normal;
 }
 
-#zenbtnvral .gt_font_bold {
+#gvcndjcxhm .gt_font_bold {
   font-weight: bold;
 }
 
-#zenbtnvral .gt_font_italic {
+#gvcndjcxhm .gt_font_italic {
   font-style: italic;
 }
 
-#zenbtnvral .gt_super {
+#gvcndjcxhm .gt_super {
   font-size: 65%;
 }
 
-#zenbtnvral .gt_footnote_marks {
+#gvcndjcxhm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zenbtnvral .gt_asterisk {
+#gvcndjcxhm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zenbtnvral .gt_indent_1 {
+#gvcndjcxhm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zenbtnvral .gt_indent_2 {
+#gvcndjcxhm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zenbtnvral .gt_indent_3 {
+#gvcndjcxhm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zenbtnvral .gt_indent_4 {
+#gvcndjcxhm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zenbtnvral .gt_indent_5 {
+#gvcndjcxhm .gt_indent_5 {
   text-indent: 25px;
+}
+
+#gvcndjcxhm .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gvcndjcxhm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
 }
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Forecasts</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="period" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">period</th>
 <th id="deliveries" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">deliveries</th>
-<th id=".mean" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.mean</th>
-<th id=".model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
+<th id="a.mean" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.mean</th>
+<th id="a.model" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold" scope="col">.model</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -2579,23 +2615,23 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">`</span><span class="at">95%_lower</span><span class="st">`</span>,<span class="st">`</span><span class="at">95%_upper</span><span class="st">`</span>),</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">decimals =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="ztjfpaiuhi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ztjfpaiuhi table {
+<div id="dcuepsapua" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dcuepsapua table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ztjfpaiuhi thead, #ztjfpaiuhi tbody, #ztjfpaiuhi tfoot, #ztjfpaiuhi tr, #ztjfpaiuhi td, #ztjfpaiuhi th {
+#dcuepsapua thead, #dcuepsapua tbody, #dcuepsapua tfoot, #dcuepsapua tr, #dcuepsapua td, #dcuepsapua th {
   border-style: none;
 }
 
-#ztjfpaiuhi p {
+#dcuepsapua p {
   margin: 0;
   padding: 0;
 }
 
-#ztjfpaiuhi .gt_table {
+#dcuepsapua .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2621,12 +2657,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_caption {
+#dcuepsapua .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ztjfpaiuhi .gt_title {
+#dcuepsapua .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2638,7 +2674,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#ztjfpaiuhi .gt_subtitle {
+#dcuepsapua .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2650,7 +2686,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#ztjfpaiuhi .gt_heading {
+#dcuepsapua .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2662,13 +2698,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_bottom_border {
+#dcuepsapua .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_col_headings {
+#dcuepsapua .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2683,7 +2719,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_col_heading {
+#dcuepsapua .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2703,7 +2739,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#ztjfpaiuhi .gt_column_spanner_outer {
+#dcuepsapua .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2715,15 +2751,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#ztjfpaiuhi .gt_column_spanner_outer:first-child {
+#dcuepsapua .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ztjfpaiuhi .gt_column_spanner_outer:last-child {
+#dcuepsapua .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ztjfpaiuhi .gt_column_spanner {
+#dcuepsapua .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2735,11 +2771,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#ztjfpaiuhi .gt_spanner_row {
+#dcuepsapua .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ztjfpaiuhi .gt_group_heading {
+#dcuepsapua .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2765,7 +2801,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#ztjfpaiuhi .gt_empty_group_heading {
+#dcuepsapua .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2780,15 +2816,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#ztjfpaiuhi .gt_from_md > :first-child {
+#dcuepsapua .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ztjfpaiuhi .gt_from_md > :last-child {
+#dcuepsapua .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ztjfpaiuhi .gt_row {
+#dcuepsapua .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2807,7 +2843,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#ztjfpaiuhi .gt_stub {
+#dcuepsapua .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2820,7 +2856,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#ztjfpaiuhi .gt_stub_row_group {
+#dcuepsapua .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2834,15 +2870,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#ztjfpaiuhi .gt_row_group_first td {
+#dcuepsapua .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ztjfpaiuhi .gt_row_group_first th {
+#dcuepsapua .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ztjfpaiuhi .gt_summary_row {
+#dcuepsapua .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2852,16 +2888,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#ztjfpaiuhi .gt_first_summary_row {
+#dcuepsapua .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_first_summary_row.thick {
+#dcuepsapua .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ztjfpaiuhi .gt_last_summary_row {
+#dcuepsapua .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2871,7 +2907,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_grand_summary_row {
+#dcuepsapua .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2881,7 +2917,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#ztjfpaiuhi .gt_first_grand_summary_row {
+#dcuepsapua .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2891,7 +2927,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_last_grand_summary_row_top {
+#dcuepsapua .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2901,11 +2937,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_striped {
+#dcuepsapua .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ztjfpaiuhi .gt_table_body {
+#dcuepsapua .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2914,7 +2950,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_footnotes {
+#dcuepsapua .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2928,7 +2964,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_footnote {
+#dcuepsapua .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2937,7 +2973,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#ztjfpaiuhi .gt_sourcenotes {
+#dcuepsapua .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2951,7 +2987,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#ztjfpaiuhi .gt_sourcenote {
+#dcuepsapua .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2959,75 +2995,84 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#ztjfpaiuhi .gt_left {
+#dcuepsapua .gt_left {
   text-align: left;
 }
 
-#ztjfpaiuhi .gt_center {
+#dcuepsapua .gt_center {
   text-align: center;
 }
 
-#ztjfpaiuhi .gt_right {
+#dcuepsapua .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ztjfpaiuhi .gt_font_normal {
+#dcuepsapua .gt_font_normal {
   font-weight: normal;
 }
 
-#ztjfpaiuhi .gt_font_bold {
+#dcuepsapua .gt_font_bold {
   font-weight: bold;
 }
 
-#ztjfpaiuhi .gt_font_italic {
+#dcuepsapua .gt_font_italic {
   font-style: italic;
 }
 
-#ztjfpaiuhi .gt_super {
+#dcuepsapua .gt_super {
   font-size: 65%;
 }
 
-#ztjfpaiuhi .gt_footnote_marks {
+#dcuepsapua .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ztjfpaiuhi .gt_asterisk {
+#dcuepsapua .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ztjfpaiuhi .gt_indent_1 {
+#dcuepsapua .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ztjfpaiuhi .gt_indent_2 {
+#dcuepsapua .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ztjfpaiuhi .gt_indent_3 {
+#dcuepsapua .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ztjfpaiuhi .gt_indent_4 {
+#dcuepsapua .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ztjfpaiuhi .gt_indent_5 {
+#dcuepsapua .gt_indent_5 {
   text-indent: 25px;
+}
+
+#dcuepsapua .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dcuepsapua div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
 }
 </style>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_col_headings">
+<tr class="gt_col_headings header">
 <th id="Down" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Down</th>
 <th id="period" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">period</th>
-<th id=".mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">.mean</th>
-<th id="95%_lower" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">95%_lower</th>
-<th id="95%_upper" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">95%_upper</th>
+<th id="a.mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">.mean</th>
+<th id="a95%_lower" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">95%_lower</th>
+<th id="a95%_upper" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">95%_upper</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -3147,9 +3192,9 @@ Suggested Answer
 <pre><code># A tibble: 3 × 4
   .model   AIC  AICc   BIC
   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 LM      14.4  26.4  18.2
-2 LM2     11.2  29.9  15.7
-3 ETS     59.1 104.   64.9</code></pre>
+1 LM      23.5  32.9  28.2
+2 LM2     14.2  28.2  19.7
+3 ETS     74.9 105.   81.8</code></pre>
 </div>
 </div>
 <p>Forecasts are obtained with the <code>forecast()</code> function setting <em>h=4</em>.</p>
@@ -3159,20 +3204,21 @@ Suggested Answer
 <div class="cell-output cell-output-stdout">
 <pre><code># A tsibble: 12 x 5 [1Q]
 # Key:       .model [3]
-   .model    Date EnergyStorage .mean                   `95%`
-   &lt;chr&gt;    &lt;qtr&gt;        &lt;dist&gt; &lt;dbl&gt;                  &lt;hilo&gt;
- 1 LM     2024 Q3     N(6.1, 3)  6.10 [2.716774,  9.486083]95
- 2 LM     2024 Q4     N(5.9, 3)  5.86 [2.480108,  9.249416]95
- 3 LM     2025 Q1   N(6.9, 3.1)  6.87 [3.407192, 10.336379]95
- 4 LM     2025 Q2   N(8.4, 3.1)  8.42 [4.952192, 11.881379]95
- 5 LM2    2024 Q3   N(8.1, 3.4)  8.11 [4.465782, 11.745374]95
- 6 LM2    2024 Q4   N(8.6, 4.4)  8.58 [4.472006, 12.680511]95
- 7 LM2    2025 Q1    N(10, 5.1)  9.97 [5.531357, 14.401500]95
- 8 LM2    2025 Q2    N(12, 6.9) 12.4  [7.256176, 17.535049]95
- 9 ETS    2024 Q3   N(6.6, 3.1)  6.59 [3.114998, 10.060041]95
-10 ETS    2024 Q4     N(6, 3.1)  5.98 [2.509588,  9.454631]95
-11 ETS    2025 Q1   N(6.7, 3.1)  6.65 [3.180104, 10.125147]95
-12 ETS    2025 Q2   N(8.1, 3.1)  8.06 [4.584554, 11.529598]95</code></pre>
+   .model    Date
+   &lt;chr&gt;    &lt;qtr&gt;
+ 1 LM     2025 Q1
+ 2 LM     2025 Q2
+ 3 LM     2025 Q3
+ 4 LM     2025 Q4
+ 5 LM2    2025 Q1
+ 6 LM2    2025 Q2
+ 7 LM2    2025 Q3
+ 8 LM2    2025 Q4
+ 9 ETS    2025 Q1
+10 ETS    2025 Q2
+11 ETS    2025 Q3
+12 ETS    2025 Q4
+# ℹ 3 more variables: EnergyStorage &lt;dist&gt;, .mean &lt;dbl&gt;, `95%` &lt;hilo&gt;</code></pre>
 </div>
 </div>
 <p>Finally, the graph is obtained using the <code>autoplot()</code> and <code>autolayer()</code> functions:</p>
@@ -3344,12 +3390,13 @@ Suggested Answer
 <div class="cell-output cell-output-stdout">
 <pre><code># A fable: 4 x 4 [1M]
 # Key:     .model [1]
-  .model     Date  LF_total .mean
-  &lt;chr&gt;     &lt;mth&gt;    &lt;dist&gt; &lt;dbl&gt;
-1 ETS    2024 May N(88, 16)  88.0
-2 ETS    2024 Jun N(92, 31)  92.5
-3 ETS    2024 Jul N(93, 47)  92.9
-4 ETS    2024 Aug N(91, 63)  91.0</code></pre>
+  .model     Date
+  &lt;chr&gt;     &lt;mth&gt;
+1 ETS    2024 May
+2 ETS    2024 Jun
+3 ETS    2024 Jul
+4 ETS    2024 Aug
+# ℹ 2 more variables: LF_total &lt;dist&gt;, .mean &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Here is the graph:</p>
@@ -3418,18 +3465,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -3461,7 +3497,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -3469,7 +3527,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

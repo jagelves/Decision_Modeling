@@ -500,13 +500,14 @@ In this module you have been introduced to ARIMA model. Particularly you have le
 
 ## Exercises
 
-1. Recall problem 2 in chapter 6 ([ExercisesETS](ETS.qmd#exercises6)), where you are tasked to forecast the energy consumption of a new ice cream machine. Use the entire data found here: <http://jagelves.github.io/Data/ElectricityBill.csv> to estimate an AR1 model. Graph the ACF and PACF and confirm that an AR1 is appropriate. Check residuals from the model and confirm that they resemble white noise. Create a graph of the series and the forecast for four periods ahead.
+1.  Recall problem 2 in chapter 6 ([ExercisesETS](ETS.qmd#exercises6)), where you are tasked to forecast the energy consumption of a new ice cream machine. Use the entire data found here: <http://jagelves.github.io/Data/ElectricityBill.csv> to estimate an AR1 model. Graph the ACF and PACF and confirm that an AR1 is appropriate. Check residuals from the model and confirm that they resemble white noise. Create a graph of the series and the forecast for four periods ahead.
 
 <details>
 
 <summary>Suggested Answer</summary>
 
 Let's start by loading the data and creating a tsibble:
+
 ```{r message=FALSE}
 library(tidyverse)
 library(fpp3)
@@ -519,15 +520,19 @@ Elec %>% mutate(Date=yearmonth(paste(Year, Month, sep = "-"))) %>%
 ```
 
 We can now graph the ACF and the PACF of the *Bill Amount* variable:
+
 ```{r, fig.show='hold',out.width = '100%'}
 #| layout-ncol: 2
 Elec_ts %>% ACF(`Bill Amount`,lag_max = 24) %>% autoplot()
 Elec_ts %>% PACF(`Bill Amount`,lag_max = 24) %>% autoplot()
 ```
+
 There is a one spike at lag number one in the ACF and one spike in lag number one in the PACF. We could use both an AR1 or MA1 process to model the behavior. Let's estimate the AR1.
+
 ```{r}
 Elec_ts %>% model(AR1=ARIMA(`Bill Amount`~pdq(1,0,0))) -> fit
 ```
+
 Now we can check the residuals and see if they resemble white noise:
 
 ```{r, fig.show='hold',out.width = '100%'}
@@ -535,16 +540,19 @@ Now we can check the residuals and see if they resemble white noise:
 fit %>% augment() %>% ACF(.resid,lag_max = 24) %>% autoplot()
 fit %>% augment() %>% PACF(.resid,lag_max = 24) %>% autoplot()
 ```
+
 The are no significant spikes. We can conclude that the errors resemble white noise.
+
 </details>
 
-2. Recall problem 1 in chapter 6 ([ExercisesETS](ETS.qmd#exercises6)), where you are tasked to forecast Tesla's energy deployment. Use the entire data found here: <http://jagelves.github.io/Data/ElectricityBill.csv> to estimate an ensemble of the TSLM model with linear trend and seasonality, and a TSLM model with quadratic trend and seasonality. Let the weight of the linear model be 30% and that of the quadratic model 70%. Graph the forecast for the next four periods of the three models.
+2.  Recall problem 1 in chapter 6 ([ExercisesETS](ETS.qmd#exercises6)), where you are tasked to forecast Tesla's energy deployment. Use the entire data found here: <http://jagelves.github.io/Data/ElectricityBill.csv> to estimate an ensemble of the TSLM model with linear trend and seasonality, and a TSLM model with quadratic trend and seasonality. Let the weight of the linear model be 30% and that of the quadratic model 70%. Graph the forecast for the next four periods of the three models.
 
 <details>
 
 <summary>Suggested Answer</summary>
 
 We can start by loading the packages, data, and creating a tsibble:
+
 ```{r message=FALSE}
 library(tidyverse)
 library(fpp3)
@@ -556,6 +564,7 @@ storage %>%
   mutate(Date=yearquarter(Date)) %>%
   as_tsibble(index=Date) -> storage_ts
 ```
+
 Let's now create the Linear and Quadratic models using TSLM. Then we can create the ensemble model by using the `mutate()` function and the given weights:
 
 ```{r}
@@ -578,11 +587,12 @@ fit2 %>% forecast(h=4) %>%
 
 </details>
 
-3. Using the monthly inflation data from this source: <https://jagelves.github.io/Data/Inflation.csv>, forecast the inflation rate for the next four months. First, use the ARIMA() function to let the model automatically select the best-fitting ARIMA model for the inflation data while incorporating the interest rate into the model with the command ARIMA(Inflation ~ InterestRate). Develop two scenarios: the Federal Reserve holds the interest rate steady at 5.33% over the next four months, and the Fed follows a decreasing schedule of 5.25%, 5.00%, 4.75%, and 4.50%. Identify the month the Fed reaches its target of 2% inflation in each scenario and determine which schedule achieves this target faster. Create a graph that shows each scenario and the target inflation rate.
+3.  Using the monthly inflation data from this source: <https://jagelves.github.io/Data/Inflation.csv>, forecast the inflation rate for the next four months. First, use the ARIMA() function to let the model automatically select the best-fitting ARIMA model for the inflation data while incorporating the interest rate into the model with the command ARIMA(Inflation \~ InterestRate). Develop two scenarios: the Federal Reserve holds the interest rate steady at 5.33% over the next four months, and the Fed follows a decreasing schedule of 5.25%, 5.00%, 4.75%, and 4.50%. Identify the month the Fed reaches its target of 2% inflation in each scenario and determine which schedule achieves this target faster. Create a graph that shows each scenario and the target inflation rate.
 
 <details>
 
 <summary>Suggested Answer</summary>
+
 Start by loading the packages, data, and creating a tsibble:
 
 ```{r}
@@ -612,9 +622,11 @@ Int <- scenarios(
 ```
 
 Next we can report the forecasts:
+
 ```{r}
 forecast(fit2,new_data=Int)
 ```
+
 The forecasts show that if the Fed keeps the rate at 5.33%, the inflation will reach its goal sometime in November. However, if the Fed decides to lower rates, we are looking at some time in December. Lastly, we can plot our scenarios:
 
 ```{r}
@@ -626,14 +638,17 @@ forecast(fit2,new_data=Int) %>% autoplot(level=95) +
        subtitle="Keep interest rate at 5.33% vs. 25 basis point reductions",
        x="",y="")
 ```
+
 </details>
 
-4. Rising U.S. household debt is concerning because it increases financial strain on families, reduces disposable income, and heightens vulnerability to interest rate hikes. It raises the risk of defaults and bankruptcies, potentially destabilizing financial institutions and the broader economy. Additionally, higher debt levels can slow consumer spending and economic growth, while also creating risks in the housing market, making the economy more fragile during downturns. Use the data found here: <https://jagelves.github.io/Data/USDebt.csv> to forecast the US total debt of households using ARIMA. Start by graphing the ACF and PACF, then suggest two ARIMA models and let the algorithm choose the third. Calculate the BIC for the three models and select the model with the lowest BIC. Forecast the series into the future. By what date does the model predict the US Household debt reaches 20 trillion dollars?
+4.  Rising U.S. household debt is concerning because it increases financial strain on families, reduces disposable income, and heightens vulnerability to interest rate hikes. It raises the risk of defaults and bankruptcies, potentially destabilizing financial institutions and the broader economy. Additionally, higher debt levels can slow consumer spending and economic growth, while also creating risks in the housing market, making the economy more fragile during downturns. Use the data found here: <https://jagelves.github.io/Data/USDebt.csv> to forecast the US total debt of households using ARIMA. Start by graphing the ACF and PACF, then suggest two ARIMA models and let the algorithm choose the third. Calculate the BIC for the three models and select the model with the lowest BIC. Forecast the series into the future. By what date does the model predict the US Household debt reaches 20 trillion dollars?
 
 <details>
 
 <summary>Suggested Answer</summary>
+
 Start by loading the data and packages:
+
 ```{r message=FALSE}
 rm(list=ls())
 
@@ -645,6 +660,7 @@ data<-read_csv("https://jagelves.github.io/Data/USDebt.csv")
 data %>% mutate(Quarter=yearquarter(Quarter)) %>% 
   as_tsibble(index=Quarter) -> data_ts
 ```
+
 Now we can plot the ACF and the PACF. Since the series seems non-stationary, we'll go ahead and plot the differenced series:
 
 ```{r, fig.show='hold',out.width = '100%'}
@@ -661,16 +677,19 @@ data_ts %>%
         AR1=ARIMA(Total~pdq(1,1,0)),
         ARIMA=ARIMA(Total)) -> fit
 ```
+
 Now we can observe the residuals:
 
 ```{r}
 fit %>% augment() %>% ACF(.resid) %>% autoplot()
 ```
+
 Both the algorithmic model and the AR3 residuals look like white noise. Let's look at the BIC:
 
 ```{r}
 fit %>% glance() %>% select(.model,BIC)
 ```
+
 The AR3 model has the lowest BIC, so we choose this model for our forecast. Below is a graph of the forecast:
 
 ```{r}
@@ -683,6 +702,7 @@ fit %>% forecast(h=20) %>%
        x="",y="") +
   geom_hline(yintercept=20,lty=2)
 ```
-If all things remain constant we should expect the Household debt to reach 20 trillion dollar by Q2 2028.
-</details>
 
+If all things remain constant we should expect the Household debt to reach 20 trillion dollar by Q2 2028.
+
+</details>
