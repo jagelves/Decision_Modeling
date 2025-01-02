@@ -314,7 +314,7 @@ window.Quarto = {
 </div>
 </div>
 <p><br> Decision trees are read from left to right. Notice that there are two main branches stemming from the first decision node (i.e., the first square to the left). You can decide to <em>Introduce</em> or <em>Not Introduce</em> the new production line. If you <em>Introduce</em>, you reach a probability node (i.e., the circle that leads to the success and failure branches) where chance determines success or failure at the probabilities given. In the end, your choice of introducing the new product line yields an expected monetary value of 1.8 million, whereas not introducing the line yields no payoff.</p>
-<p>To solve decision trees and find the optimal decision use <strong>backward induction</strong>. Starting from the right of the decision tree and working back to the left at each probability node calculate the EMV. At each decision node, take the maximum of EMV’s to identify the optimal decision. Applying this procedure to our simple example, we would start with the probability node that leads to the success and failure branches and calculate the EMV of 1.8 million (refer to <a href="#sec-EMV" class="quarto-xref"><span>Section 1.2</span></a>). Moving back to our initial decision, we now have the choice to <em>Introduce</em> or <em>Not Introduce</em>. In this case we should <em>Introduce</em>, since the resulting EMV (1.8) is higher than <em>Not Introduce</em> (0).</p>
+<p>To solve decision trees and find the optimal decision use <strong>backward induction</strong>. Starting from the right of the decision tree and working back to the left at each probability node calculate the EMV. At each decision node, take the maximum of EMV’s to identify the optimal decision. Applying this procedure to our simple example, we would start with the probability node that leads to the success and failure branches and calculate the EMV of 1.8 million (refer to <a href="#sec-EMV" class="quarto-xref"><span class="quarto-unresolved-ref">sec-EMV</span></a>). Moving back to our initial decision, we now have the choice to <em>Introduce</em> or <em>Not Introduce</em>. In this case we should <em>Introduce</em>, since the resulting EMV (1.8) is higher than <em>Not Introduce</em> (0).</p>
 </section>
 <section id="consulting-team" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="consulting-team"><span class="header-section-number">1.4</span> Consulting Team</h2>
@@ -447,7 +447,7 @@ window.Quarto = {
 </section>
 <section id="the-value-of-information" class="level2" data-number="1.8">
 <h2 data-number="1.8" class="anchored" data-anchor-id="the-value-of-information"><span class="header-section-number">1.8</span> The Value of Information</h2>
-<p>We are now faced with an important question. What is the value of the information provided by the consulting team? In other words, should the CEO hire the consultants? To answer this question, let’s start by calculating expected monetary value of the tree in <a href="#sec-Optimal" class="quarto-xref"><span>Section 1.7</span></a>:</p>
+<p>We are now faced with an important question. What is the value of the information provided by the consulting team? In other words, should the CEO hire the consultants? To answer this question, let’s start by calculating expected monetary value of the tree in <a href="#sec-Optimal" class="quarto-xref"><span class="quarto-unresolved-ref">sec-Optimal</span></a>:</p>
 <div class="pull-right-50 text-center">
 <p><span class="math inline">\(EMV=0.63(3.70)+0.37(-0.5)\)</span> </p>
 <p><span class="math inline">\(EMV=2.146\)</span> </p>
@@ -456,10 +456,10 @@ window.Quarto = {
 </section>
 <section id="readings" class="level2" data-number="1.9">
 <h2 data-number="1.9" class="anchored" data-anchor-id="readings"><span class="header-section-number">1.9</span> Readings</h2>
-<p>The readings for this chapter are mainly from <span class="citation" data-cites="PMS">Winston and Albright (<a href="references.html#ref-PMS" role="doc-biblioref">2019</a>)</span>. Chapter 9 provides an excellent introduction to decision models with a couple of solved problems using Excel. I recommend using R (as a calculator) instead of Excel, as this book mainly uses R. To construct decision trees in R, you can use <a href="https://www.rdocumentation.org/packages/DiagrammeR/versions/1.0.10/topics/mermaid">mermaid</a> along with <a href="https://Quarto.org">Quarto</a>. Some probability concepts are essential to review before you start reading the chapter. In particular, discrete random variables, expected value, conditional probability, probability rules, and Bayes’ theorem.</p>
+<p>The readings for this chapter are mainly from <span class="citation" data-cites="PMS">Winston and Albright (<a href="#ref-PMS" role="doc-biblioref">2019</a>)</span>. Chapter 9 provides an excellent introduction to decision models with a couple of solved problems using Excel. I recommend using R (as a calculator) instead of Excel, as this book mainly uses R. To construct decision trees in R, you can use <a href="https://www.rdocumentation.org/packages/DiagrammeR/versions/1.0.10/topics/mermaid">mermaid</a> along with <a href="https://Quarto.org">Quarto</a>. Some probability concepts are essential to review before you start reading the chapter. In particular, discrete random variables, expected value, conditional probability, probability rules, and Bayes’ theorem.</p>
 <ul>
-<li><p><span class="citation" data-cites="PMS">Winston and Albright (<a href="references.html#ref-PMS" role="doc-biblioref">2019</a>)</span> Chapters 9.1 (Introduction), 9.2 (Elements of Decision Analysis), 9.3 (Single-Stage Decision Problems) and 9.5 (Multistage Decision Problems). It is recommended you follow along in R as opposed to Excel (or Precision Tree Add-In).</p></li>
-<li><p><span class="citation" data-cites="JK">Jaggia and Kelly (<a href="references.html#ref-JK" role="doc-biblioref">2022</a>)</span> Chapter 4.1 (Fundamental Probability Concepts), 4.2 (Rules of Probability), 4.3 (Contingency Tables and Probabilities), and 4.4 (The Total Probability Rule and Bayes’ Theorem).</p></li>
+<li><p><span class="citation" data-cites="PMS">Winston and Albright (<a href="#ref-PMS" role="doc-biblioref">2019</a>)</span> Chapters 9.1 (Introduction), 9.2 (Elements of Decision Analysis), 9.3 (Single-Stage Decision Problems) and 9.5 (Multistage Decision Problems). It is recommended you follow along in R as opposed to Excel (or Precision Tree Add-In).</p></li>
+<li><p><span class="citation" data-cites="JK">Jaggia and Kelly (<a href="#ref-JK" role="doc-biblioref">2022</a>)</span> Chapter 4.1 (Fundamental Probability Concepts), 4.2 (Rules of Probability), 4.3 (Contingency Tables and Probabilities), and 4.4 (The Total Probability Rule and Bayes’ Theorem).</p></li>
 <li><p>Quarto: <a href="https://Quarto.org" class="uri">https://Quarto.org</a></p></li>
 <li><p>Mermaid in Quarto Document: <a href="https://quarto.org/docs/authoring/diagrams.html" class="uri">https://quarto.org/docs/authoring/diagrams.html</a></p></li>
 <li><p>Mermaid in R Script: <a href="https://www.rdocumentation.org/packages/DiagrammeR/versions/1.0.10/topics/mermaid" class="uri">https://www.rdocumentation.org/packages/DiagrammeR/versions/1.0.10/topics/mermaid</a></p></li>
@@ -634,7 +634,7 @@ Suggested Answer
 </section></main></div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-JK" class="csl-entry" role="listitem">
 Jaggia, Sanjiv, and Allison Kelly. 2022. <em>Business Statistics</em>. McGraw Hill.
 </div>
