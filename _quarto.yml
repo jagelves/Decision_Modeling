@@ -23,7 +23,7 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
-    include-in-header: custom-head.html
+    include-after: custom-tag.html
   pdf:
     documentclass: scrreprt
 
