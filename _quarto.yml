@@ -23,10 +23,8 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
-    analytics:
-      google: "G-ZBSHZ5F458" # Replace with your Google Analytics Measurement ID
+    include-in-header: custom-head.html
   pdf:
     documentclass: scrreprt
 
 editor: visual
-
