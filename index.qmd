@@ -8,4 +8,4 @@ The book's second part deals with simulation. We create dynamic, virtual environ
 
 In the final part of this book, we introduce time series analysis. As time is fundamental in many domains, we explore techniques to extract meaningful patterns and forecast future values. The classical methods of ARIMA and ETS are introduced by illustrating their real-world applications in business. Readers will learn to navigate the intricacies of forecasting and leverage time series insights to enhance decision-making.
 
-Comments are welcomed at jagelves\@wm.edu
+Comments are welcomed at jagelves\@wm.edu.
