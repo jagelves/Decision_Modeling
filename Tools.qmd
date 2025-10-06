@@ -162,8 +162,8 @@ weekends<- c(1459,1464,1408,1443,
 Now we can visualize the data for weekdays by creating a histogram.
 
 ```{r}
-hist(weekdays, main="Weekday Ferry Rides", xlab="",
-     ylab="Cars")
+hist(weekdays, main="Weekday Ferry Rides", xlab="Cars",
+     ylab="Frequency")
 ```
 
 This visual shows that ferry rides are uniformly distributed during the weekdays. Furthermore, if you were to graph the histogram for weekends, you will once again notice that the rides follow a uniform distribution. Using this information, we can now simulate data for week five using a for loop and a conditional.
