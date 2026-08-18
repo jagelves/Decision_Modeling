@@ -16,15 +16,15 @@ Given that the festival charges 20 dollars per entry, how much yellow-tail would
 
 The restaurant provides you with a lot of information which might be overwhelming at first glance. To make the task less daunting, we should organize/classify the information so that we can create a model. For many business problems, the data can be classified into the following parts:
 
--   The **inputs** have given fixed values and provide the model's basic structure. These are values that are most likely to be given and determined.
+- The **inputs** have given fixed values and provide the model's basic structure. These are values that are most likely to be given and determined.
 
--   The **decision variables** are values the decision maker controls. We are usually interested in finding the optimal level of this variable.
+- The **decision variables** are values the decision maker controls. We are usually interested in finding the optimal level of this variable.
 
--   The **calculated values** transform inputs and decision variables to other values that help describe our model. These make the model more informative and often are required to derive outputs.
+- The **calculated values** transform inputs and decision variables to other values that help describe our model. These make the model more informative and often are required to derive outputs.
 
--   The **random variables** are the primary source of uncertainty in the model. They are often modeled by sampling probability distributions.
+- The **random variables** are the primary source of uncertainty in the model. They are often modeled by sampling probability distributions.
 
--   The **outputs** are the ultimate values of interest; the inputs, decision variables, random variables, or calculated values determine them.
+- The **outputs** are the ultimate values of interest; the inputs, decision variables, random variables, or calculated values determine them.
 
 Below, you can see how we can classify and input the information in R.
 
@@ -153,19 +153,19 @@ Let's consider providing each guest with six or seven ounces of fish. How does t
 
 The readings for this chapter will introduce the application of simulation models to business. @PMS highlight the technical application of the models using Excel. It is recommended that you follow in R instead. @KI motivates the use of Monte Carlo simulation for managing project risks and uncertainties.
 
--   @PMS Chapter 10.3 (Simulation and the Flaw of Averages), and 10.4 (Simulation with Built-In Excel Tools). Example 10.4 (Additional Uncertainty at Walton Bookstore) It is recommended you follow along using R instead of Excel.
+- @PMS Chapter 10.3 (Simulation and the Flaw of Averages), and 10.4 (Simulation with Built-In Excel Tools). Example 10.4 (Additional Uncertainty at Walton Bookstore) It is recommended you follow along using R instead of Excel.
 
--   @KI
+- @KI
 
 ## Lessons Learned In This Chapter
 
--   Identify the parts of a simulation model.
+- Identify the parts of a simulation model.
 
--   Create a simulation model in R.
+- Create a simulation model in R.
 
--   Identify the Flaw of Averages.
+- Identify the Flaw of Averages.
 
--   Find optimal values in simulation models
+- Find optimal values in simulation models
 
 ## Exercises
 
@@ -219,10 +219,9 @@ Use 10,000 simulations to determine the optimal number of bottles to produce to 
 
 *Optimal Production Level: 200*
 
-*Expected Profit: ~\$334*
+*Expected Profit: \~\$334*
 
 *Five Number Summary: min:-250 Q1:229 Q2:415 Q3:500 max:547*
-
 
 </details>
 
@@ -230,21 +229,21 @@ Use 10,000 simulations to determine the optimal number of bottles to produce to 
 
     The key parameters for your investment are as follows:
 
-    -   *Stock Ticker:* SPY (S&P 500 ETF)
-    -   *Initial Investment:* \$1,000
-    -   *Average Yearly Return:* 10% (0.1)
-    -   *Standard Deviation of Yearly Returns:* 18% (0.18)
-    -   *Yearly Investment:* \$6,000
-    -   *Investment Period:* 20 years
+    - *Stock Ticker:* SPY (S&P 500 ETF)
+    - *Initial Investment:* \$1,000
+    - *Average Yearly Return:* 10% (0.1)
+    - *Standard Deviation of Yearly Returns:* 18% (0.18)
+    - *Yearly Investment:* \$6,000
+    - *Investment Period:* 20 years
 
     Run 10,000 simulations of your investment over 20 years. Each year, returns are normally distributed with the given average and standard deviation. Track the value of your investment at the end of each year. Calculate the following statistics for the investment value at the end of 20 years:
 
-    -   Average (mean) end value
-    -   Worst Case Scenario: Minimum
-    -   Bear Case: 25th percentile (Q1)
-    -   Base Case: Median (50th percentile)
-    -   Bull Case: 75th percentile (Q3)
-    -   Best Case Scenario: Maximum
+    - Average (mean) end value
+    - Worst Case Scenario: Minimum
+    - Bear Case: 25th percentile (Q1)
+    - Base Case: Median (50th percentile)
+    - Bull Case: 75th percentile (Q3)
+    - Best Case Scenario: Maximum
 
     Based on your simulation results, how much can you expect to have in your account after 20 years on average? What are the Bear, Base and Bull case predictions?
 
