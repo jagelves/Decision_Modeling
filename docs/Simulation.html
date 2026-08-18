@@ -297,7 +297,11 @@ window.Quarto = {
 </header>
 
 
-<p>In this module we will build our first business simulation model using R. We will start by identifying and defining the parts of the model as this provides the basic structure. We will then iterate our model several times so that we can obtain the distribution of expected outcomes. Finally, we will modify some of the model’s inputs, so that we can check the robustness of our results.</p>
+<p>In this module we will build our first business simulation model using R. We will start by identifying and defining the parts of the model as this provides the basic structure. We will then iterate our model several times so that we can obtain the distribution of expected outcomes. Finally, we will modify some of the model’s inputs, so that we can check the robustness of our results. Throughout, we will keep every scenario in a single tibble and let R evaluate all of them at once.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extraDistr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <section id="roll-with-it-sushi-needs-your-help" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="roll-with-it-sushi-needs-your-help"><span class="header-section-number">3.1</span> Roll With It Sushi Needs Your Help</h2>
 <p>Renowned for serving the freshest sushi in the city, Roll With It Sushi is hosting a yellow-tail festival. Every morning, the Sous-Chef purchases fish at the market and any unsold fish at the end of the day gets discarded.</p>
@@ -317,127 +321,303 @@ window.Quarto = {
 </ul>
 <p>Below, you can see how we can classify and input the information in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extraDistr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Order_Oz<span class="ot">&lt;-</span><span class="dv">160</span> <span class="co"># Decision Variable</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Price_Fish_Oz<span class="ot">&lt;-</span><span class="dv">9</span><span class="sc">/</span><span class="dv">16</span> <span class="co"># Input</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Price_Miso<span class="ot">&lt;-</span><span class="dv">300</span> <span class="co"># Input</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Entry_Fee<span class="ot">&lt;-</span><span class="dv">20</span> <span class="co"># Input</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Fish_Entitled_Oz<span class="ot">&lt;-</span><span class="dv">5</span> <span class="co">#Input</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Attendance<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">rtriang</span>(<span class="dv">1</span>,<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">30</span>),<span class="dv">0</span>) <span class="co"># Random Variable</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Demand<span class="ot">&lt;-</span>Attendance<span class="sc">*</span>Fish_Entitled_Oz <span class="co"># Calculated </span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Available<span class="ot">&lt;-</span>Order_Oz <span class="co"># Calculated</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Consumption<span class="ot">&lt;-</span><span class="fu">min</span>(Demand,Available) <span class="co">#Calculated</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Revenue<span class="ot">&lt;-</span>Consumption<span class="sc">/</span>Fish_Entitled_Oz<span class="sc">*</span>Entry_Fee<span class="co"># Calculated</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Cost<span class="ot">&lt;-</span>Order_Oz<span class="sc">*</span>Price_Fish_Oz<span class="sc">+</span>Price_Miso <span class="co">#Calculated</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Profit<span class="ot">&lt;-</span>Revenue<span class="sc">-</span>Cost <span class="co"># Outcome</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Order_Oz<span class="ot">&lt;-</span><span class="dv">160</span> <span class="co"># Decision Variable</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Price_Fish_Oz<span class="ot">&lt;-</span><span class="dv">9</span><span class="sc">/</span><span class="dv">16</span> <span class="co"># Input</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Price_Miso<span class="ot">&lt;-</span><span class="dv">300</span> <span class="co"># Input</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Entry_Fee<span class="ot">&lt;-</span><span class="dv">20</span> <span class="co"># Input</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Fish_Entitled_Oz<span class="ot">&lt;-</span><span class="dv">5</span> <span class="co">#Input</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Attendance<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">rtriang</span>(<span class="dv">1</span>,<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">30</span>),<span class="dv">0</span>) <span class="co"># Random Variable</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Demand<span class="ot">&lt;-</span>Attendance<span class="sc">*</span>Fish_Entitled_Oz <span class="co"># Calculated</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>Available<span class="ot">&lt;-</span>Order_Oz <span class="co"># Calculated</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>Consumption<span class="ot">&lt;-</span><span class="fu">min</span>(Demand,Available) <span class="co">#Calculated</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>Revenue<span class="ot">&lt;-</span>Consumption<span class="sc">/</span>Fish_Entitled_Oz<span class="sc">*</span>Entry_Fee<span class="co"># Calculated</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>Cost<span class="ot">&lt;-</span>Order_Oz<span class="sc">*</span>Price_Fish_Oz<span class="sc">+</span>Price_Miso <span class="co">#Calculated</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>Profit<span class="ot">&lt;-</span>Revenue<span class="sc">-</span>Cost <span class="co"># Outcome</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In the model above, you can see how the inputs have fixed values. These values were given to us by the restaurant and the restaurant has little or no control over them (the market price of the fish, the cost of making Miso soup, etc.). The random variable, captures the source of uncertainty (i.e., how many people attend the event). As you can see we have used here the <code>rtriang()</code> function from the <code>extraDistr</code> package to generate the attendance. We have chosen the triangle distribution since the restaurant has provided us with a lower limit (20), an upper limit (50), and a most likely case for attendance (30). Note also the use of the <code>set.seed()</code> function. This allows you to replicate the random numbers generated.</p>
-<p>The calculated variables combine inputs, the decision variable, and the random variable to provide insight on how much is fish is expected to be both consumed and available. They also help us determine the profit (output), which is our main guide in knowing whether the decision of ordering <span class="math inline">\(x\)</span> ounces of fish is the “best”.</p>
+<p>In the model above, you can see how the inputs have fixed values. These values were given to us by the restaurant and the restaurant has little or no control over them (the market price of the fish, the cost of making Miso soup, etc.). The random variable captures the source of uncertainty (i.e., how many people attend the event). As you can see we have used here the <code>rtriang()</code> function from the <code>extraDistr</code> package to generate the attendance. We have chosen the triangle distribution since the restaurant has provided us with a lower limit (20), an upper limit (50), and a most likely case for attendance (30). Note also the use of the <code>set.seed()</code> function. This allows you to replicate the random numbers generated.</p>
+<p>The calculated variables combine inputs, the decision variable, and the random variable to provide insight on how much fish is expected to be both consumed and available. They also help us determine the profit (output), which is our main guide in knowing whether the decision of ordering <span class="math inline">\(x\)</span> ounces of fish is the “best”.</p>
 </section>
 <section id="the-news-vendor-problem" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="the-news-vendor-problem"><span class="header-section-number">3.3</span> The News Vendor Problem</h2>
 <p>Note how the decision variable (Order_Oz) affects directly our outcome (Profit). We can see that it decreases the restaurant’s profit through costs, but also affects revenue through the amount of fish available. This is the heart of the problem. We don’t know how many people will attend, so if the restaurant orders too much fish their profits will go down because their costs are large. However, if they order too little then they will have to issue refunds, which decrease their revenue.</p>
-<p>As you observe the <em>Profit</em> formula in the code above, you’ll notice the use of the <code>min()</code> function. This function returns the minimum of the <em>Attendance</em> and <em>Consumption</em>. The intuition here is that the restaurant can only collect entry fees for people who consumed sushi when the attendance is greater than the amount of sushi available. Likewise, their revenue will be capped at the total amount of people who attended, even if they ordered plenty of fish.</p>
+<p>As you observe the <em>Profit</em> formula in the code above, you’ll notice the use of the <code>min()</code> function. This function returns the minimum of the <em>Demand</em> and <em>Available</em> values. The intuition here is that the restaurant can only collect entry fees for people who consumed sushi when the attendance is greater than the amount of sushi available. Likewise, their revenue will be capped at the total amount of people who attended, even if they ordered plenty of fish.</p>
 <p>The problem illustrated above is called the news vendor problem. The <strong>news vendor problem</strong> is a classic decision-making problem in operations research and economics that involves deciding how much of a product to order (and sometimes at what price to sell it). The problem is called the “news vendor” problem because it was originally used to model the decision-making process of a newspaper vendor trying to decide how many copies of a newspaper to order and at what price to sell them.</p>
 </section>
 <section id="law-of-large-numbers" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="law-of-large-numbers"><span class="header-section-number">3.4</span> Law of Large Numbers</h2>
 <p>Before we answer the question of how much fish to order, we must realize a couple of flaws of the model we have created. Mainly, we have run the simulation once and it is unlikely (although possible) that the attendance will be exactly the single value simulated by the <code>rtriang()</code> function (<span class="math inline">\(44\)</span>). Instead, we want to provide the restaurant with a set of eventualities. Worst case scenarios (low attendance), best case scenarios (high attendance), and most likely outcome for their decision. This is only possible if we generate several attendance numbers, and see how the profit (output) behaves.</p>
 <p>An additional problem is that if we tell the restaurant that the expected profit of ordering <span class="math inline">\(x\)</span> amount of fish is <span class="math inline">\(y\)</span>, we want to make sure that the average is not biased. Recall that as the sample size of a study increases, the average of the sample will converge towards the true population mean. In other words, as the number of simulations in our model increases, the estimate of the expected profit becomes more accurate. This is known as the <strong>Law of Large Numbers</strong>.</p>
-<p>The code below repeats the simulation several times, allowing for different attendance scenarios to arise. Although, there is not a set number of times one should run a simulation to get a good estimate of the mean (or distribution), computers are powerful enough to run thousands if not millions of simulations. Below we run the simulation 10,000 times for illustration purposes.</p>
+<p>The code below repeats the simulation several times, allowing for different attendance scenarios to arise. Although there is not a set number of times one should run a simulation to get a good estimate of the mean (or distribution), computers are powerful enough to run thousands if not millions of simulations. Below we run the simulation 10,000 times for illustration purposes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">10000</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>V_Order_Oz<span class="ot">&lt;-</span><span class="fu">rep</span>(Order_Oz,n)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>V_Price_Fish_Oz<span class="ot">&lt;-</span><span class="fu">rep</span>(Price_Fish_Oz,n)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>V_Price_Miso<span class="ot">&lt;-</span><span class="fu">rep</span>(Price_Miso,n)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>V_Entry_Fee<span class="ot">&lt;-</span><span class="fu">rep</span>(Entry_Fee,n)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>V_Fish_Entitled_Oz<span class="ot">&lt;-</span><span class="fu">rep</span>(Fish_Entitled_Oz,n)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>V_Attendance<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">rtriang</span>(n,<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">30</span>),<span class="dv">0</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>V_Demand<span class="ot">&lt;-</span>V_Attendance<span class="sc">*</span>V_Fish_Entitled_Oz</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Available<span class="ot">&lt;-</span>V_Order_Oz</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>V_Consumption<span class="ot">&lt;-</span><span class="fu">pmin</span>(V_Demand,Available) </span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>V_Revenue<span class="ot">&lt;-</span>V_Consumption<span class="sc">/</span>Fish_Entitled_Oz<span class="sc">*</span>Entry_Fee</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>V_Cost<span class="ot">&lt;-</span>Order_Oz<span class="sc">*</span>Price_Fish_Oz<span class="sc">+</span>Price_Miso</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>V_Profit<span class="ot">&lt;-</span>V_Revenue<span class="sc">-</span>V_Cost</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Sushi<span class="ot">&lt;-</span><span class="fu">tibble</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Attendance=</span><span class="fu">round</span>(<span class="fu">rtriang</span>(n,<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">30</span>),<span class="dv">0</span>),  <span class="co"># Random Variable</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Demand=</span>Attendance<span class="sc">*</span>Fish_Entitled_Oz,       <span class="co"># Calculated</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Available=</span>Order_Oz,                       <span class="co"># Calculated</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Consumption=</span><span class="fu">pmin</span>(Demand,Available),       <span class="co"># Calculated</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Revenue=</span>Consumption<span class="sc">/</span>Fish_Entitled_Oz<span class="sc">*</span>Entry_Fee, <span class="co"># Calculated</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Cost=</span>Order_Oz<span class="sc">*</span>Price_Fish_Oz<span class="sc">+</span>Price_Miso,   <span class="co"># Calculated</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Profit=</span>Revenue<span class="sc">-</span>Cost)                      <span class="co"># Outcome</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>Sushi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10,000 × 7
+   Attendance Demand Available Consumption Revenue  Cost Profit
+        &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1         30    150       160         150     600   390    210
+ 2         35    175       160         160     640   390    250
+ 3         22    110       160         110     440   390     50
+ 4         30    150       160         150     600   390    210
+ 5         20    100       160         100     400   390     10
+ 6         36    180       160         160     640   390    250
+ 7         31    155       160         155     620   390    230
+ 8         30    150       160         150     600   390    210
+ 9         35    175       160         160     640   390    250
+10         29    145       160         145     580   390    190
+# ℹ 9,990 more rows</code></pre>
 </div>
-<p>In the code above, you will notice that operations have been vectorized to avoid the use of for loops. For example, the order (<em>Order_Oz</em>) has been repeated 10000 times. By doing this, the inputs can now be combined with the randomly generated attendance (<em>V_Attendance</em>). Finally, note as well the use of the <code>pmin()</code> function instead of the <code>min()</code> function. This allows us to apply the <code>min()</code> function to each element (rows) of the vectors.</p>
-<p>From the simulation it seems like that the restaurant would make on average a profit of about <span class="math inline">\(211.5\)</span> dollars if they order <span class="math inline">\(160\)</span> ounces of fish. There are however, a couple of questions left unanswered. First, what are the other possible profits when ordering <span class="math inline">\(160\)</span> ounces? Second, is there another amount of fish that would give them a higher expected profit?</p>
+</div>
+<p>The model has not changed at all; only the number of rows has. The <code>tibble()</code> function builds a table one column at a time, and it has two properties that make it ideal for simulation. First, a column may refer to any column defined before it, so the model reads top to bottom exactly like the list of parts above. Second, a single value such as <em>Order_Oz</em> is recycled down the entire column, which is why the inputs and the decision variable do not need to be repeated ten thousand times by hand. Each of the <span class="math inline">\(10{,}000\)</span> rows is now one complete scenario for the festival.</p>
+<p>The one change worth highlighting is <code>pmin()</code> in place of <code>min()</code>. The <code>min()</code> function returns a single number, the smallest value it is given, which would collapse our whole column into one value. The <code>pmin()</code> function is the <em>parallel</em> minimum: it compares the vectors element by element and returns a vector of the same length, so each row gets its own minimum of demand and availability. Many R functions come in this pair; <code>pmax()</code> plays the same role for maxima.</p>
+<p>We can now summarise the results. The <code>summarise()</code> function collapses a tibble down to the statistics we ask for.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Sushi <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Expected_Profit=</span><span class="fu">mean</span>(Profit),</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">SD=</span><span class="fu">sd</span>(Profit),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Worst=</span><span class="fu">min</span>(Profit),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Best=</span><span class="fu">max</span>(Profit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  Expected_Profit    SD Worst  Best
+            &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1            211.  56.9    10   250</code></pre>
+</div>
+</div>
+<p>From the simulation it seems like the restaurant would make on average a profit of about <span class="math inline">\(211.5\)</span> dollars if they order <span class="math inline">\(160\)</span> ounces of fish. There are however, a couple of questions left unanswered. First, what are the other possible profits when ordering <span class="math inline">\(160\)</span> ounces? Second, is there another amount of fish that would give them a higher expected profit?</p>
 </section>
 <section id="flaw-of-averages" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="flaw-of-averages"><span class="header-section-number">3.5</span> Flaw Of Averages</h2>
 <p>To answer the first question we can generate a histogram of all the results of our simulation model. We can then report this to the restaurant and make them aware of all of the possible outcomes of ordering <span class="math inline">\(160\)</span> ounces of fish. Below, we show the histogram of our model’s outcomes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(V_Profit, <span class="at">main=</span><span class="st">"Expected Profits of an Order of 160 Ounces"</span>,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">""</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(V_Profit), <span class="at">lwd=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Sushi <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>Profit), <span class="at">bins=</span><span class="dv">30</span>, <span class="at">fill=</span><span class="st">"grey"</span>, <span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">mean</span>(Sushi<span class="sc">$</span>Profit), <span class="at">lwd=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Expected Profits of an Order of 160 Ounces"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Simulation_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Simulation_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>As you can see most of the outcomes are close to <span class="math inline">\(250\)</span> dollars. So a better recommendation to the restaurant would be to inform them that when ordering <span class="math inline">\(160\)</span> ounces, they will most likely get a profit of <span class="math inline">\(250\)</span> dollars. There is a small risk of them making less that <span class="math inline">\(100\)</span> dollars in profit, but that they should not expect more than <span class="math inline">\(250\)</span> dollars. The average in this case seems to be a poor predictor of what is expected as its frequency is not very large as shown in the histogram. This result is known as the flaw of averages.</p>
+<p>The plot is built in layers. The <code>ggplot()</code> function starts an empty canvas from our tibble, <code>geom_histogram()</code> adds the bars, and <code>aes()</code> tells R that the <em>Profit</em> column belongs on the horizontal axis. The <code>geom_vline()</code> layer draws the vertical line at the average, and <code>labs()</code> and <code>theme_classic()</code> control the labels and the overall appearance. Layers are added with <code>+</code>, and each one can be removed or changed without touching the others.</p>
+<p>As you can see most of the outcomes are close to <span class="math inline">\(250\)</span> dollars. So a better recommendation to the restaurant would be to inform them that when ordering <span class="math inline">\(160\)</span> ounces, they will most likely get a profit of <span class="math inline">\(250\)</span> dollars. There is a small risk of them making less than <span class="math inline">\(100\)</span> dollars in profit, but they should not expect more than <span class="math inline">\(250\)</span> dollars. The average in this case seems to be a poor predictor of what is expected as its frequency is not very large as shown in the histogram. This result is known as the flaw of averages.</p>
 <p><strong>The flaw of averages</strong>, also known as the “law of averages fallacy,” is the idea that the average value of a particular characteristic in a population can be used to represent the value of that characteristic for individual members of the population. This is often not the case because the average value can be misleading and does not take into account the variability and distribution of the characteristic within the population.</p>
 </section>
 <section id="optimal-order-amount" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="optimal-order-amount"><span class="header-section-number">3.6</span> Optimal Order Amount</h2>
-<p>Now to answer the main question, what should be the amount ordered of fish? To answer this question we will substitute several possible order options into our model and then retrieve the one that gives us the highest expected profit. We can easily do this in R with a for loop. Below is the code:</p>
+<p>Now to answer the main question, what should be the amount ordered of fish? To answer this question we will substitute several possible order options into our model and then retrieve the one that gives us the highest expected profit.</p>
+<p>If you have built this kind of model in a spreadsheet, the natural translation into R is a pair of loops: one that walks through each candidate order, and an inner one that walks through each of the <span class="math inline">\(100{,}000\)</span> scenarios, adding up profit as it goes. A <strong>for loop</strong> repeats a block of code once for each element of a vector. The code below does exactly that, and <code>system.time()</code> records how long it takes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Order_Oz<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">160</span>,<span class="dv">240</span>,<span class="dv">10</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Price_Fish_Oz<span class="ot">&lt;-</span><span class="dv">9</span><span class="sc">/</span><span class="dv">16</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Price_Miso<span class="ot">&lt;-</span><span class="dv">300</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Entry_Fee<span class="ot">&lt;-</span><span class="dv">20</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Fish_Entitled_Oz<span class="ot">&lt;-</span><span class="dv">5</span> </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>Profits<span class="ot">&lt;-</span><span class="fu">c</span>()</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> Order_Oz){</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">100000</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>V_Order_Oz<span class="ot">&lt;-</span><span class="fu">rep</span>(i,n)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>V_Price_Fish_Oz<span class="ot">&lt;-</span><span class="fu">rep</span>(Price_Fish_Oz,n)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>V_Price_Miso<span class="ot">&lt;-</span><span class="fu">rep</span>(Price_Miso,n)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>V_Entry_Fee<span class="ot">&lt;-</span><span class="fu">rep</span>(Entry_Fee,n)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>V_Fish_Entitled_Oz<span class="ot">&lt;-</span><span class="fu">rep</span>(Fish_Entitled_Oz,n)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>V_Attendance<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">rtriang</span>(n,<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">30</span>),<span class="dv">0</span>) </span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>V_Demand<span class="ot">&lt;-</span>V_Attendance<span class="sc">*</span>V_Fish_Entitled_Oz </span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>Available<span class="ot">&lt;-</span>V_Order_Oz</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>V_Profit<span class="ot">&lt;-</span><span class="fu">pmin</span>(V_Demand,Available)<span class="sc">/</span>V_Fish_Entitled_Oz<span class="sc">*</span>V_Entry_Fee<span class="sc">-</span>V_Order_Oz<span class="sc">*</span>V_Price_Fish_Oz<span class="sc">-</span>V_Price_Miso</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>Profits<span class="ot">&lt;-</span><span class="fu">c</span>(Profits,<span class="fu">mean</span>(V_Profit))</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>(results<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Order=</span>Order_Oz,<span class="at">Profits=</span>Profits))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Order_Options<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="dv">160</span>,<span class="dv">240</span>,<span class="dv">10</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">100000</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>loop_time<span class="ot">&lt;-</span><span class="fu">system.time</span>({</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  Profits<span class="ot">&lt;-</span><span class="fu">numeric</span>(<span class="fu">length</span>(Order_Options))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  k<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (Order <span class="cf">in</span> Order_Options){</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    total<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      Attendance<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">rtriang</span>(<span class="dv">1</span>,<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">30</span>),<span class="dv">0</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>      total<span class="ot">&lt;-</span>total <span class="sc">+</span> (<span class="fu">min</span>(Attendance<span class="sc">*</span>Fish_Entitled_Oz,Order)<span class="sc">/</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                        Fish_Entitled_Oz<span class="sc">*</span>Entry_Fee <span class="sc">-</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                        Order<span class="sc">*</span>Price_Fish_Oz <span class="sc">-</span> Price_Miso)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    Profits[k]<span class="ot">&lt;-</span>total<span class="sc">/</span>n</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    k<span class="ot">&lt;-</span>k<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>})[<span class="st">"elapsed"</span>]</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>loop_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Order  Profits
-1   160 212.0358
-2   170 225.7342
-3   180 235.1670
-4   190 240.7776
-5   200 243.1558
-6   210 242.8690
-7   220 240.4326
-8   230 236.4392
-9   240 231.4190</code></pre>
+<pre><code>elapsed 
+  1.501 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(Profits,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 212.04 225.54 234.74 240.56 243.16 242.43 240.51 236.34 231.17</code></pre>
 </div>
 </div>
-<p>This table suggests that ordering <span class="math inline">\(160\)</span> ounces is not optimal. Once again highlighting that the average attendance is not a good estimate of how much fish we should order. Instead, we can see that <span class="math inline">\(200\)</span> ounces of fish should be ordered (this feeds <span class="math inline">\(40\)</span> people) to maximize the expected profits (<span class="math inline">\(243\)</span> dollars).</p>
+<p>The <code>seq()</code> function generates the candidate orders from <span class="math inline">\(160\)</span> to <span class="math inline">\(240\)</span> in steps of <span class="math inline">\(10\)</span>. Everything after that is bookkeeping: an empty vector to hold the answers, a counter <em>k</em> to remember which slot to fill, and a running total that is reset for each order. Nine hundred thousand trips through the inner loop take about 1.5 seconds.</p>
+<p>Now consider the same problem the way R prefers to see it. Instead of nine separate simulations, we build <strong>one</strong> tibble with nine hundred thousand rows, where a column records which order that row belongs to. Every calculation is then applied to the whole table at once, and <code>group_by()</code> and <code>summarise()</code> split the results back out by order.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>vector_time<span class="ot">&lt;-</span><span class="fu">system.time</span>({</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  Sushi_Grid<span class="ot">&lt;-</span><span class="fu">tibble</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Order_Oz=</span><span class="fu">rep</span>(Order_Options, <span class="at">each=</span>n),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Attendance=</span><span class="fu">round</span>(<span class="fu">rtriang</span>(n<span class="sc">*</span><span class="fu">length</span>(Order_Options),<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">30</span>),<span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Demand=</span>Attendance<span class="sc">*</span>Fish_Entitled_Oz,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">Consumption=</span><span class="fu">pmin</span>(Demand,Order_Oz),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">Revenue=</span>Consumption<span class="sc">/</span>Fish_Entitled_Oz<span class="sc">*</span>Entry_Fee,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">Cost=</span>Order_Oz<span class="sc">*</span>Price_Fish_Oz<span class="sc">+</span>Price_Miso,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">Profit=</span>Revenue<span class="sc">-</span>Cost)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  results<span class="ot">&lt;-</span>Sushi_Grid <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Order_Oz) <span class="sc">%&gt;%</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Expected_Profit=</span><span class="fu">mean</span>(Profit))</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>})[<span class="st">"elapsed"</span>]</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>vector_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>elapsed 
+  0.095 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 2
+  Order_Oz Expected_Profit
+     &lt;dbl&gt;           &lt;dbl&gt;
+1      160            212.
+2      170            226.
+3      180            235.
+4      190            241.
+5      200            243.
+6      210            242.
+7      220            241.
+8      230            236.
+9      240            231.</code></pre>
+</div>
+</div>
+<p>The vectorized version takes about 0.09 seconds, roughly 16 times faster, and returns the same numbers. Three functions are doing the work. The <code>rep()</code> function with <code>each=n</code> repeats each candidate order <span class="math inline">\(100{,}000\)</span> times in a row, so the first hundred thousand rows are the <span class="math inline">\(160\)</span>-ounce scenario, the next hundred thousand are the <span class="math inline">\(170\)</span>-ounce scenario, and so on. The <code>mutate()</code> function adds the calculated columns, referring to other columns by name. Then <code>group_by(Order_Oz)</code> splits the table into nine groups and <code>summarise()</code> collapses each group into a single row containing its average profit.</p>
+<p>There is a second advantage that does not show up on the clock. The loop discarded every scenario as soon as it was added to the running total; all that survived was nine averages. The tibble is still sitting in memory with all nine hundred thousand scenarios in it, so any further question the restaurant asks can be answered without re-running anything.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Sushi_Grid <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Order_Oz) <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Expected_Profit=</span><span class="fu">mean</span>(Profit),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">Worst_Case=</span><span class="fu">quantile</span>(Profit,<span class="fl">0.05</span>),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Best_Case=</span><span class="fu">quantile</span>(Profit,<span class="fl">0.95</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Chance_Of_Loss=</span><span class="fu">mean</span>(Profit<span class="sc">&lt;</span><span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 5
+  Order_Oz Expected_Profit Worst_Case Best_Case Chance_Of_Loss
+     &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;
+1      160            212.       90        250         0      
+2      170            226.       84.4      284.        0      
+3      180            235.       78.8      319.        0.00064
+4      190            241.       73.1      353.        0.00094
+5      200            243.       67.5      388.        0.0009 
+6      210            242.       61.9      422.        0.00089
+7      220            241.       56.2      456.        0.00745
+8      230            236.       50.6      451.        0.00755
+9      240            231.       45        465         0.0071 </code></pre>
+</div>
+</div>
+<p>A picture makes the comparison easier to communicate. The <code>geom_line()</code> and <code>geom_point()</code> layers draw the expected profit at each candidate order.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Order_Oz,<span class="at">y=</span>Expected_Profit)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Expected Profit by Order Quantity"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Ounces Ordered"</span>, <span class="at">y=</span><span class="st">"Expected Profit"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Simulation_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This table suggests that ordering <span class="math inline">\(160\)</span> ounces is not optimal, once again highlighting that the average attendance is not a good estimate of how much fish we should order. Instead, we can see that <span class="math inline">\(200\)</span> ounces of fish should be ordered (this feeds <span class="math inline">\(40\)</span> people) to maximize the expected profits (<span class="math inline">\(243.16\)</span> dollars). Rather than reading the answer off the table by eye, we can ask for it directly with <code>slice_max()</code>, which keeps the row with the largest value of the column we name.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span> <span class="fu">slice_max</span>(Expected_Profit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  Order_Oz Expected_Profit
+     &lt;dbl&gt;           &lt;dbl&gt;
+1      200            243.</code></pre>
+</div>
+</div>
+<p>One word of caution about the grid approach: it holds every scenario in memory at once. Nine hundred thousand rows is nothing for a modern laptop, but if you were comparing a thousand order quantities you might prefer to simulate one order at a time and keep only the summary. The <code>map_dbl()</code> function from the tidyverse does this without the bookkeeping a loop requires. It applies a function to each element of a vector and returns a numeric vector of results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(Order_Options, <span class="cf">function</span>(Order){</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  Attendance<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">rtriang</span>(n,<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">30</span>),<span class="dv">0</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">pmin</span>(Attendance<span class="sc">*</span>Fish_Entitled_Oz,Order)<span class="sc">/</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>         Fish_Entitled_Oz<span class="sc">*</span>Entry_Fee <span class="sc">-</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>         Order<span class="sc">*</span>Price_Fish_Oz <span class="sc">-</span> Price_Miso)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 212.0358 225.5356 234.7398 240.5558 243.1574 242.4270 240.5060 236.3400
+[9] 231.1714</code></pre>
+</div>
+</div>
+<p>Notice that the body of the function is still fully vectorized; <code>map_dbl()</code> is only replacing the outer loop over the nine candidate orders. That is the general rule. Vectorize the part of the model that runs many times, and use the map family for the handful of cases that genuinely have to be handled one at a time.</p>
 </section>
 <section id="sensitivity-analysis" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="sensitivity-analysis"><span class="header-section-number">3.7</span> Sensitivity Analysis</h2>
-<p>What if the price of yellow-tail increases unexpectedly? What if the restaurant wishes to provide each guest with six ounces of fish instead of five? The model we have created above can accommodate these changes easily by just changing the input values. We can additionally, inform the restaurant how sensitive the results are to changes in key inputs or assumptions. This is the idea behind sensitivity analysis.</p>
+<p>What if the price of yellow-tail increases unexpectedly? What if the restaurant wishes to provide each guest with six ounces of fish instead of five? The model we have created above can accommodate these changes easily by just changing the input values. We can additionally inform the restaurant how sensitive the results are to changes in key inputs or assumptions. This is the idea behind sensitivity analysis.</p>
 <p><strong>Sensitivity analysis</strong> assesses the robustness of a model or decision by evaluating the impact of changes in certain key input variables on the output of the model or decision. Sensitivity analysis helps to identify which variables are most important and how sensitive the output is to changes in those variables.</p>
-<p>Let’s consider providing each guest with six or seven ounces of fish. How does this change our recommendation? When running our model with different amounts of fish provided, you’ll notice that when each guest gets six ounces of fish, the restaurant should order <span class="math inline">\(240\)</span> ounces yielding an expected profit of <span class="math inline">\(220\)</span> dollars. When each guest gets seven ounces of fish, the restaurant should order <span class="math inline">\(270\)</span> ounces which generates an expected profit of <span class="math inline">\(198\)</span> dollars. Perhaps providing each guest with more fish is a bad idea as profits are highly sensitive to every ounce increase.</p>
+<p>Let’s consider providing each guest with five, six, or seven ounces of fish. Because our model is already a table of scenarios, adding a second dimension is a matter of making the table bigger. The <code>expand_grid()</code> function creates every combination of the values it is given, which is exactly the set of scenarios we need: three serving sizes, times eighteen candidate orders, times fifty thousand replications.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">50000</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>Fish_Options<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>Order_Options<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="dv">150</span>,<span class="dv">320</span>,<span class="dv">10</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>Sensitivity<span class="ot">&lt;-</span><span class="fu">expand_grid</span>(<span class="at">Fish_Entitled_Oz=</span>Fish_Options,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Order_Oz=</span>Order_Options,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Replication=</span><span class="dv">1</span><span class="sc">:</span>n) <span class="sc">%&gt;%</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Attendance=</span><span class="fu">round</span>(<span class="fu">rtriang</span>(<span class="fu">n</span>(),<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">30</span>),<span class="dv">0</span>),</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">Demand=</span>Attendance<span class="sc">*</span>Fish_Entitled_Oz,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">Consumption=</span><span class="fu">pmin</span>(Demand,Order_Oz),</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">Profit=</span>Consumption<span class="sc">/</span>Fish_Entitled_Oz<span class="sc">*</span>Entry_Fee <span class="sc">-</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>           Order_Oz<span class="sc">*</span>Price_Fish_Oz <span class="sc">-</span> Price_Miso)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>Sensitivity_Results<span class="ot">&lt;-</span>Sensitivity <span class="sc">%&gt;%</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Fish_Entitled_Oz,Order_Oz) <span class="sc">%&gt;%</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Expected_Profit=</span><span class="fu">mean</span>(Profit), <span class="at">.groups=</span><span class="st">"drop"</span>)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>(Best<span class="ot">&lt;-</span>Sensitivity_Results <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Fish_Entitled_Oz) <span class="sc">%&gt;%</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_max</span>(Expected_Profit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+# Groups:   Fish_Entitled_Oz [3]
+  Fish_Entitled_Oz Order_Oz Expected_Profit
+             &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;
+1                5      200            242.
+2                6      240            221.
+3                7      280            198.</code></pre>
+</div>
+</div>
+<p>The <code>n()</code> function returns the number of rows in the tibble, so a single call to <code>rtriang()</code> fills all 2,700,000 scenarios with attendance draws. The <code>.groups="drop"</code> argument simply tells <code>summarise()</code> to hand back an ordinary ungrouped tibble, and <code>slice_max()</code> is applied within each serving size to return the best order quantity for each.</p>
+<p>When each guest gets six ounces of fish, the restaurant should order <span class="math inline">\(240\)</span> ounces, yielding an expected profit of <span class="math inline">\(221\)</span> dollars. When each guest gets seven ounces, the restaurant should order <span class="math inline">\(280\)</span> ounces, which generates an expected profit of <span class="math inline">\(198\)</span> dollars. Perhaps providing each guest with more fish is a bad idea, as profits are highly sensitive to every ounce increase.</p>
+<p>Plotting all three curves at once makes the point to a non-technical audience in a single image. Mapping the serving size to <code>col</code> inside <code>aes()</code> draws one line per group and adds a legend automatically.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Sensitivity_Results <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Order_Oz, <span class="at">y=</span>Expected_Profit,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">col=</span><span class="fu">factor</span>(Fish_Entitled_Oz))) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Sensitivity of Expected Profit to the Serving Size"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Ounces Ordered"</span>, <span class="at">y=</span><span class="st">"Expected Profit"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">col=</span><span class="st">"Ounces per Guest"</span>) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Simulation_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice how flat each curve is near its peak. The restaurant loses very little by ordering ten or twenty ounces on either side of the optimum, which is worth telling them: the recommendation is robust, and they do not need to hit the number exactly.</p>
 </section>
 <section id="readings" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="readings"><span class="header-section-number">3.8</span> Readings</h2>
@@ -451,9 +631,10 @@ window.Quarto = {
 <h2 data-number="3.9" class="anchored" data-anchor-id="lessons-learned-in-this-chapter"><span class="header-section-number">3.9</span> Lessons Learned In This Chapter</h2>
 <ul>
 <li><p>Identify the parts of a simulation model.</p></li>
-<li><p>Create a simulation model in R.</p></li>
+<li><p>Create a simulation model in R by storing every scenario in a tibble.</p></li>
 <li><p>Identify the Flaw of Averages.</p></li>
-<li><p>Find optimal values in simulation models</p></li>
+<li><p>Find optimal values in simulation models with <code>group_by()</code> and <code>summarise()</code>.</p></li>
+<li><p>Run a sensitivity analysis over several inputs at once with <code>expand_grid()</code>.</p></li>
 </ul>
 </section>
 <section id="exercises" class="level2" data-number="3.10">
@@ -461,7 +642,7 @@ window.Quarto = {
 <ol type="1">
 <li><p>Apple is preparing to launch a special edition smartphone accessory designed exclusively for its latest iPhone. This accessory is only compatible with this specific model, and the company anticipates that demand will peak during the first 12 months following the smartphone’s release. After this period, a new model of the smartphone is expected to be released, rendering the accessory obsolete. The company estimates that demand for the accessory during the twelve-month period is governed by the probability distribution in the table below.</p>
 <p>The production involves a fixed cost of 20,000 dollars, with a variable cost of 15 dollars per unit produced. Each accessory is sold for 100 dollars. However, any unsold units after the twelve-month period will have no value, as they are not compatible with the newest iPhone.</p>
-<p>The company is considering producing 10,000 units of the accessory. Using a simulation with 100,000 replications, calculate the expected profit and standard deviation. Additionally, determine the range within which the company can be 90% certain that the actual profit from selling the accessory during the twelve-month period will fall.</p></li>
+<p>The company is considering producing 10,000 units of the accessory. Using a simulation with 100,000 replications, calculate the expected profit and standard deviation. Additionally, determine the range within which the company can be 90% certain that the actual profit from selling the accessory during the twelve-month period will fall. Build the simulation as a single tibble and use <code>sample()</code> with the <em>prob</em> argument to draw the demands.</p></li>
 </ol>
 <table class="caption-top table">
 <thead>
@@ -503,7 +684,7 @@ Suggested Answer
 </details>
 <ol start="2" type="1">
 <li><p>Alaska Airlines is preparing for the peak holiday travel season and needs to decide how many seats to overbook on the SEA-SFO route. Overbooking is expected in the airline industry, as some passengers typically do not show up for their flights. The airline has data indicating that the number of no-show passengers on this route follows a normal distribution with a mean of 20 and a standard deviation of 5.</p>
-<p>If the airline does not overbook enough seats, empty seats result in lost revenue, as the cost of an unused seat is estimated to be $300. However, if the airline overbooks too many seats, it may need to compensate bumped passengers with vouchers worth $600 each. Use 10,000 simulations to determine the optimal number of seats to overbook to minimize the airline’s expected cost. Try possible values from 10 to 30 in increments of 5.</p></li>
+<p>If the airline does not overbook enough seats, empty seats result in lost revenue, as the cost of an unused seat is estimated to be $300. However, if the airline overbooks too many seats, it may need to compensate bumped passengers with vouchers worth $600 each. Use 10,000 simulations to determine the optimal number of seats to overbook to minimize the airline’s expected cost. Try possible values from 10 to 30 in increments of 5. Use <code>expand_grid()</code> to lay out every combination of overbooking level and simulation, <code>case_when()</code> to assign the cost of each scenario, and <code>group_by()</code> with <code>summarise()</code> to compare the levels.</p></li>
 </ol>
 <details>
 <summary>
@@ -515,7 +696,7 @@ Suggested Answer
 <ol start="3" type="1">
 <li>In August, Bronco Wine Company must decide how many bottles of next year’s vintage wine to order. Each bottle costs the winery <span class="math inline">\(7.50\)</span> and sells for <span class="math inline">\(10\)</span>. After January 1, all unsold bottles will be returned to the supplier for a refund of <span class="math inline">\(2.50\)</span> per bottle. Bronco believes that the number of bottles it can sell by January 1 follows a uniform distribution with a mean of 200, a maximum value of 300, and a minimum value of 100. The maximum number of bottles Bronco’s supplier can provide is uncertain and follows a normal distribution with a mean of 200 and a standard deviation of 50. Once Bronco places an order, the supplier will charge <span class="math inline">\(7.50\)</span> per bottle if they can supply the entire order; otherwise, they will charge <span class="math inline">\(7.25\)</span> per bottle. Bronco wants to use simulation to analyze the resulting profit for various order quantities.</li>
 </ol>
-<p>Use 10,000 simulations to determine the optimal number of bottles to produce to maximize the winery’s expected profit. Create a five number summary to describe the distribution of profits at the optimal number of bottles.</p>
+<p>Use 10,000 simulations to determine the optimal number of bottles to produce to maximize the winery’s expected profit. Note that this model has two random variables, which simply means two random columns in the same tibble. Create a five number summary to describe the distribution of profits at the optimal number of bottles.</p>
 <details>
 <summary>
 Suggested Answer
@@ -535,7 +716,7 @@ Suggested Answer
 <li><em>Yearly Investment:</em> $6,000</li>
 <li><em>Investment Period:</em> 20 years</li>
 </ul>
-<p>Run 10,000 simulations of your investment over 20 years. Each year, returns are normally distributed with the given average and standard deviation. Track the value of your investment at the end of each year. Calculate the following statistics for the investment value at the end of 20 years:</p>
+<p>Run 10,000 simulations of your investment over 20 years. Each year, returns are normally distributed with the given average and standard deviation. Track the value of your investment at the end of each year. This model is path dependent, so build a tibble with one row per simulation-year, group it by simulation, and use <code>accumulate()</code> inside <code>mutate()</code> to carry the balance forward. Calculate the following statistics for the investment value at the end of 20 years:</p>
 <ul>
 <li>Average (mean) end value</li>
 <li>Worst Case Scenario: Minimum</li>
@@ -556,7 +737,7 @@ Suggested Answer
 <p><em>Bull Case: $476,000</em></p>
 </details>
 <ol start="5" type="1">
-<li>You are tasked with simulating the price of BTC (Bitcoin) over one year using Brownian motion and plotting the result. Brownian motion is a mathematical model used to describe random motion, often applied in finance to simulate stock price movements. In particular, the returns of a stock are described by the following equation: <span class="math inline">\(\text{returns} = (\mu - 0.5 \times \sigma^2) \times dt + \sigma \times \sqrt{dt} \times \epsilon\)</span>; where <span class="math inline">\(\epsilon\)</span> is a random shock drawn from a standard normal distribution, <span class="math inline">\(\mu\)</span> is the expected annual return, <span class="math inline">\(\sigma^2\)</span> is the variance of returns, and <span class="math inline">\(dt = 1/365\)</span>. Assume that the starting Bitcoin price is 50,000 dollars, with an average return of 40% and standard deviation of 100%. Let the path of Bitcoin be given by: <span class="math inline">\(Price=S0*cumprod(1+returns)\)</span>; where <span class="math inline">\(S0\)</span> is the initial price. Generate 1000 price paths using Brownian motion (set seed to 150). Report the mean, bear (Q1), base (Q2) and bull cases (Q3) of the final prices after 1 year.</li>
+<li>You are tasked with simulating the price of BTC (Bitcoin) over one year using Brownian motion and plotting the result. Brownian motion is a mathematical model used to describe random motion, often applied in finance to simulate stock price movements. In particular, the returns of a stock are described by the following equation: <span class="math inline">\(\text{returns} = (\mu - 0.5 \times \sigma^2) \times dt + \sigma \times \sqrt{dt} \times \epsilon\)</span>; where <span class="math inline">\(\epsilon\)</span> is a random shock drawn from a standard normal distribution, <span class="math inline">\(\mu\)</span> is the expected annual return, <span class="math inline">\(\sigma^2\)</span> is the variance of returns, and <span class="math inline">\(dt = 1/365\)</span>. Assume that the starting Bitcoin price is 50,000 dollars, with an average return of 40% and standard deviation of 100%. Let the path of Bitcoin be given by: <span class="math inline">\(Price=S0*cumprod(1+returns)\)</span>; where <span class="math inline">\(S0\)</span> is the initial price. Generate 1000 price paths using Brownian motion (set seed to 150). Because the price accumulates multiplicatively with no contributions, <code>cumprod()</code> handles the path within each simulation, so a <code>group_by()</code> and <code>mutate()</code> is all that is required. Report the mean, bear (Q1), base (Q2) and bull cases (Q3) of the final prices after 1 year.</li>
 </ol>
 <details>
 <summary>

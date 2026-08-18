@@ -1,6 +1,11 @@
 # Simulation in R
 
-In this module we will build our first business simulation model using R. We will start by identifying and defining the parts of the model as this provides the basic structure. We will then iterate our model several times so that we can obtain the distribution of expected outcomes. Finally, we will modify some of the model's inputs, so that we can check the robustness of our results.
+In this module we will build our first business simulation model using R. We will start by identifying and defining the parts of the model as this provides the basic structure. We will then iterate our model several times so that we can obtain the distribution of expected outcomes. Finally, we will modify some of the model's inputs, so that we can check the robustness of our results. Throughout, we will keep every scenario in a single tibble and let R evaluate all of them at once.
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(extraDistr)
+```
 
 ## Roll With It Sushi Needs Your Help
 
@@ -16,20 +21,19 @@ Given that the festival charges 20 dollars per entry, how much yellow-tail would
 
 The restaurant provides you with a lot of information which might be overwhelming at first glance. To make the task less daunting, we should organize/classify the information so that we can create a model. For many business problems, the data can be classified into the following parts:
 
-- The **inputs** have given fixed values and provide the model's basic structure. These are values that are most likely to be given and determined.
+-   The **inputs** have given fixed values and provide the model's basic structure. These are values that are most likely to be given and determined.
 
-- The **decision variables** are values the decision maker controls. We are usually interested in finding the optimal level of this variable.
+-   The **decision variables** are values the decision maker controls. We are usually interested in finding the optimal level of this variable.
 
-- The **calculated values** transform inputs and decision variables to other values that help describe our model. These make the model more informative and often are required to derive outputs.
+-   The **calculated values** transform inputs and decision variables to other values that help describe our model. These make the model more informative and often are required to derive outputs.
 
-- The **random variables** are the primary source of uncertainty in the model. They are often modeled by sampling probability distributions.
+-   The **random variables** are the primary source of uncertainty in the model. They are often modeled by sampling probability distributions.
 
-- The **outputs** are the ultimate values of interest; the inputs, decision variables, random variables, or calculated values determine them.
+-   The **outputs** are the ultimate values of interest; the inputs, decision variables, random variables, or calculated values determine them.
 
 Below, you can see how we can classify and input the information in R.
 
 ```{r}
-library(extraDistr)
 Order_Oz<-160 # Decision Variable
 
 Price_Fish_Oz<-9/16 # Input
@@ -40,7 +44,7 @@ Fish_Entitled_Oz<-5 #Input
 set.seed(20)
 Attendance<-round(rtriang(1,20,50,30),0) # Random Variable
 
-Demand<-Attendance*Fish_Entitled_Oz # Calculated 
+Demand<-Attendance*Fish_Entitled_Oz # Calculated
 Available<-Order_Oz # Calculated
 Consumption<-min(Demand,Available) #Calculated
 Revenue<-Consumption/Fish_Entitled_Oz*Entry_Fee# Calculated
@@ -48,15 +52,15 @@ Cost<-Order_Oz*Price_Fish_Oz+Price_Miso #Calculated
 Profit<-Revenue-Cost # Outcome
 ```
 
-In the model above, you can see how the inputs have fixed values. These values were given to us by the restaurant and the restaurant has little or no control over them (the market price of the fish, the cost of making Miso soup, etc.). The random variable, captures the source of uncertainty (i.e., how many people attend the event). As you can see we have used here the `rtriang()` function from the `extraDistr` package to generate the attendance. We have chosen the triangle distribution since the restaurant has provided us with a lower limit (20), an upper limit (50), and a most likely case for attendance (30). Note also the use of the `set.seed()` function. This allows you to replicate the random numbers generated.
+In the model above, you can see how the inputs have fixed values. These values were given to us by the restaurant and the restaurant has little or no control over them (the market price of the fish, the cost of making Miso soup, etc.). The random variable captures the source of uncertainty (i.e., how many people attend the event). As you can see we have used here the `rtriang()` function from the `extraDistr` package to generate the attendance. We have chosen the triangle distribution since the restaurant has provided us with a lower limit (20), an upper limit (50), and a most likely case for attendance (30). Note also the use of the `set.seed()` function. This allows you to replicate the random numbers generated.
 
-The calculated variables combine inputs, the decision variable, and the random variable to provide insight on how much is fish is expected to be both consumed and available. They also help us determine the profit (output), which is our main guide in knowing whether the decision of ordering $x$ ounces of fish is the "best".
+The calculated variables combine inputs, the decision variable, and the random variable to provide insight on how much fish is expected to be both consumed and available. They also help us determine the profit (output), which is our main guide in knowing whether the decision of ordering $x$ ounces of fish is the "best".
 
 ## The News Vendor Problem
 
 Note how the decision variable (Order_Oz) affects directly our outcome (Profit). We can see that it decreases the restaurant's profit through costs, but also affects revenue through the amount of fish available. This is the heart of the problem. We don't know how many people will attend, so if the restaurant orders too much fish their profits will go down because their costs are large. However, if they order too little then they will have to issue refunds, which decrease their revenue.
 
-As you observe the *Profit* formula in the code above, you'll notice the use of the `min()` function. This function returns the minimum of the *Attendance* and *Consumption*. The intuition here is that the restaurant can only collect entry fees for people who consumed sushi when the attendance is greater than the amount of sushi available. Likewise, their revenue will be capped at the total amount of people who attended, even if they ordered plenty of fish.
+As you observe the *Profit* formula in the code above, you'll notice the use of the `min()` function. This function returns the minimum of the *Demand* and *Available* values. The intuition here is that the restaurant can only collect entry fees for people who consumed sushi when the attendance is greater than the amount of sushi available. Likewise, their revenue will be capped at the total amount of people who attended, even if they ordered plenty of fish.
 
 The problem illustrated above is called the news vendor problem. The **news vendor problem** is a classic decision-making problem in operations research and economics that involves deciding how much of a product to order (and sometimes at what price to sell it). The problem is called the "news vendor" problem because it was originally used to model the decision-making process of a newspaper vendor trying to decide how many copies of a newspaper to order and at what price to sell them.
 
@@ -66,106 +70,225 @@ Before we answer the question of how much fish to order, we must realize a coupl
 
 An additional problem is that if we tell the restaurant that the expected profit of ordering $x$ amount of fish is $y$, we want to make sure that the average is not biased. Recall that as the sample size of a study increases, the average of the sample will converge towards the true population mean. In other words, as the number of simulations in our model increases, the estimate of the expected profit becomes more accurate. This is known as the **Law of Large Numbers**.
 
-The code below repeats the simulation several times, allowing for different attendance scenarios to arise. Although, there is not a set number of times one should run a simulation to get a good estimate of the mean (or distribution), computers are powerful enough to run thousands if not millions of simulations. Below we run the simulation 10,000 times for illustration purposes.
+The code below repeats the simulation several times, allowing for different attendance scenarios to arise. Although there is not a set number of times one should run a simulation to get a good estimate of the mean (or distribution), computers are powerful enough to run thousands if not millions of simulations. Below we run the simulation 10,000 times for illustration purposes.
 
 ```{r}
 n<-10000
-V_Order_Oz<-rep(Order_Oz,n)
-V_Price_Fish_Oz<-rep(Price_Fish_Oz,n)
-V_Price_Miso<-rep(Price_Miso,n)
-V_Entry_Fee<-rep(Entry_Fee,n)
-V_Fish_Entitled_Oz<-rep(Fish_Entitled_Oz,n)
-
 set.seed(12)
-V_Attendance<-round(rtriang(n,20,50,30),0)
-V_Demand<-V_Attendance*V_Fish_Entitled_Oz
-Available<-V_Order_Oz
 
-V_Consumption<-pmin(V_Demand,Available) 
-V_Revenue<-V_Consumption/Fish_Entitled_Oz*Entry_Fee
-V_Cost<-Order_Oz*Price_Fish_Oz+Price_Miso
-V_Profit<-V_Revenue-V_Cost
+Sushi<-tibble(
+  Attendance=round(rtriang(n,20,50,30),0),  # Random Variable
+  Demand=Attendance*Fish_Entitled_Oz,       # Calculated
+  Available=Order_Oz,                       # Calculated
+  Consumption=pmin(Demand,Available),       # Calculated
+  Revenue=Consumption/Fish_Entitled_Oz*Entry_Fee, # Calculated
+  Cost=Order_Oz*Price_Fish_Oz+Price_Miso,   # Calculated
+  Profit=Revenue-Cost)                      # Outcome
+
+Sushi
 ```
 
-In the code above, you will notice that operations have been vectorized to avoid the use of for loops. For example, the order (*Order_Oz*) has been repeated 10000 times. By doing this, the inputs can now be combined with the randomly generated attendance (*V_Attendance*). Finally, note as well the use of the `pmin()` function instead of the `min()` function. This allows us to apply the `min()` function to each element (rows) of the vectors.
+The model has not changed at all; only the number of rows has. The `tibble()` function builds a table one column at a time, and it has two properties that make it ideal for simulation. First, a column may refer to any column defined before it, so the model reads top to bottom exactly like the list of parts above. Second, a single value such as *Order_Oz* is recycled down the entire column, which is why the inputs and the decision variable do not need to be repeated ten thousand times by hand. Each of the $10{,}000$ rows is now one complete scenario for the festival.
 
-From the simulation it seems like that the restaurant would make on average a profit of about $`r round(mean(V_Profit),2)`$ dollars if they order $160$ ounces of fish. There are however, a couple of questions left unanswered. First, what are the other possible profits when ordering $160$ ounces? Second, is there another amount of fish that would give them a higher expected profit?
+The one change worth highlighting is `pmin()` in place of `min()`. The `min()` function returns a single number, the smallest value it is given, which would collapse our whole column into one value. The `pmin()` function is the *parallel* minimum: it compares the vectors element by element and returns a vector of the same length, so each row gets its own minimum of demand and availability. Many R functions come in this pair; `pmax()` plays the same role for maxima.
+
+We can now summarise the results. The `summarise()` function collapses a tibble down to the statistics we ask for.
+
+```{r}
+Sushi %>% summarise(Expected_Profit=mean(Profit),
+                    SD=sd(Profit),
+                    Worst=min(Profit),
+                    Best=max(Profit))
+```
+
+From the simulation it seems like the restaurant would make on average a profit of about $`r round(mean(Sushi$Profit),2)`$ dollars if they order $160$ ounces of fish. There are however, a couple of questions left unanswered. First, what are the other possible profits when ordering $160$ ounces? Second, is there another amount of fish that would give them a higher expected profit?
 
 ## Flaw Of Averages
 
 To answer the first question we can generate a histogram of all the results of our simulation model. We can then report this to the restaurant and make them aware of all of the possible outcomes of ordering $160$ ounces of fish. Below, we show the histogram of our model's outcomes.
 
 ```{r}
-hist(V_Profit, main="Expected Profits of an Order of 160 Ounces",
-     xlab="")
-abline(v=mean(V_Profit), lwd=2)
+Sushi %>% ggplot() +
+  geom_histogram(aes(x=Profit), bins=30, fill="grey", col="black") +
+  geom_vline(xintercept=mean(Sushi$Profit), lwd=1) +
+  labs(title="Expected Profits of an Order of 160 Ounces",
+       x="", y="Frequency") +
+  theme_classic()
 ```
 
-As you can see most of the outcomes are close to $250$ dollars. So a better recommendation to the restaurant would be to inform them that when ordering $160$ ounces, they will most likely get a profit of $250$ dollars. There is a small risk of them making less that $100$ dollars in profit, but that they should not expect more than $250$ dollars. The average in this case seems to be a poor predictor of what is expected as its frequency is not very large as shown in the histogram. This result is known as the flaw of averages.
+The plot is built in layers. The `ggplot()` function starts an empty canvas from our tibble, `geom_histogram()` adds the bars, and `aes()` tells R that the *Profit* column belongs on the horizontal axis. The `geom_vline()` layer draws the vertical line at the average, and `labs()` and `theme_classic()` control the labels and the overall appearance. Layers are added with `+`, and each one can be removed or changed without touching the others.
+
+As you can see most of the outcomes are close to $250$ dollars. So a better recommendation to the restaurant would be to inform them that when ordering $160$ ounces, they will most likely get a profit of $250$ dollars. There is a small risk of them making less than $100$ dollars in profit, but they should not expect more than $250$ dollars. The average in this case seems to be a poor predictor of what is expected as its frequency is not very large as shown in the histogram. This result is known as the flaw of averages.
 
 **The flaw of averages**, also known as the "law of averages fallacy," is the idea that the average value of a particular characteristic in a population can be used to represent the value of that characteristic for individual members of the population. This is often not the case because the average value can be misleading and does not take into account the variability and distribution of the characteristic within the population.
 
 ## Optimal Order Amount
 
-Now to answer the main question, what should be the amount ordered of fish? To answer this question we will substitute several possible order options into our model and then retrieve the one that gives us the highest expected profit. We can easily do this in R with a for loop. Below is the code:
+Now to answer the main question, what should be the amount ordered of fish? To answer this question we will substitute several possible order options into our model and then retrieve the one that gives us the highest expected profit.
+
+If you have built this kind of model in a spreadsheet, the natural translation into R is a pair of loops: one that walks through each candidate order, and an inner one that walks through each of the $100{,}000$ scenarios, adding up profit as it goes. A **for loop** repeats a block of code once for each element of a vector. The code below does exactly that, and `system.time()` records how long it takes.
 
 ```{r}
-
-Order_Oz=seq(160,240,10)
-Price_Fish_Oz<-9/16 
-Price_Miso<-300 
-Entry_Fee<-20 
-Fish_Entitled_Oz<-5 
-
-Profits<-c()
-
-for (i in Order_Oz){
+Order_Options<-seq(160,240,10)
 n<-100000
-V_Order_Oz<-rep(i,n)
-V_Price_Fish_Oz<-rep(Price_Fish_Oz,n)
-V_Price_Miso<-rep(Price_Miso,n)
-V_Entry_Fee<-rep(Entry_Fee,n)
-V_Fish_Entitled_Oz<-rep(Fish_Entitled_Oz,n)
 
-set.seed(12)
-V_Attendance<-round(rtriang(n,20,50,30),0) 
-V_Demand<-V_Attendance*V_Fish_Entitled_Oz 
-Available<-V_Order_Oz
+loop_time<-system.time({
+  set.seed(12)
+  Profits<-numeric(length(Order_Options))
+  k<-1
+  for (Order in Order_Options){
+    total<-0
+    for (j in 1:n){
+      Attendance<-round(rtriang(1,20,50,30),0)
+      total<-total + (min(Attendance*Fish_Entitled_Oz,Order)/
+                        Fish_Entitled_Oz*Entry_Fee -
+                        Order*Price_Fish_Oz - Price_Miso)
+    }
+    Profits[k]<-total/n
+    k<-k+1
+  }
+})["elapsed"]
 
-V_Profit<-pmin(V_Demand,Available)/V_Fish_Entitled_Oz*V_Entry_Fee-V_Order_Oz*V_Price_Fish_Oz-V_Price_Miso
-Profits<-c(Profits,mean(V_Profit))
-}
-
-(results<-data.frame(Order=Order_Oz,Profits=Profits))
+loop_time
+round(Profits,2)
 ```
 
-This table suggests that ordering $160$ ounces is not optimal. Once again highlighting that the average attendance is not a good estimate of how much fish we should order. Instead, we can see that $200$ ounces of fish should be ordered (this feeds $40$ people) to maximize the expected profits ($243$ dollars).
+The `seq()` function generates the candidate orders from $160$ to $240$ in steps of $10$. Everything after that is bookkeeping: an empty vector to hold the answers, a counter *k* to remember which slot to fill, and a running total that is reset for each order. Nine hundred thousand trips through the inner loop take about `r round(loop_time,2)` seconds.
+
+Now consider the same problem the way R prefers to see it. Instead of nine separate simulations, we build **one** tibble with nine hundred thousand rows, where a column records which order that row belongs to. Every calculation is then applied to the whole table at once, and `group_by()` and `summarise()` split the results back out by order.
+
+```{r}
+vector_time<-system.time({
+  set.seed(12)
+  Sushi_Grid<-tibble(
+    Order_Oz=rep(Order_Options, each=n),
+    Attendance=round(rtriang(n*length(Order_Options),20,50,30),0)) %>%
+    mutate(Demand=Attendance*Fish_Entitled_Oz,
+           Consumption=pmin(Demand,Order_Oz),
+           Revenue=Consumption/Fish_Entitled_Oz*Entry_Fee,
+           Cost=Order_Oz*Price_Fish_Oz+Price_Miso,
+           Profit=Revenue-Cost)
+
+  results<-Sushi_Grid %>% group_by(Order_Oz) %>%
+    summarise(Expected_Profit=mean(Profit))
+})["elapsed"]
+
+vector_time
+results
+```
+
+The vectorized version takes about `r round(vector_time,2)` seconds, roughly `r round(loop_time/vector_time)` times faster, and returns the same numbers. Three functions are doing the work. The `rep()` function with `each=n` repeats each candidate order $100{,}000$ times in a row, so the first hundred thousand rows are the $160$-ounce scenario, the next hundred thousand are the $170$-ounce scenario, and so on. The `mutate()` function adds the calculated columns, referring to other columns by name. Then `group_by(Order_Oz)` splits the table into nine groups and `summarise()` collapses each group into a single row containing its average profit.
+
+There is a second advantage that does not show up on the clock. The loop discarded every scenario as soon as it was added to the running total; all that survived was nine averages. The tibble is still sitting in memory with all nine hundred thousand scenarios in it, so any further question the restaurant asks can be answered without re-running anything.
+
+```{r}
+Sushi_Grid %>% group_by(Order_Oz) %>%
+  summarise(Expected_Profit=mean(Profit),
+            Worst_Case=quantile(Profit,0.05),
+            Best_Case=quantile(Profit,0.95),
+            Chance_Of_Loss=mean(Profit<0))
+```
+
+A picture makes the comparison easier to communicate. The `geom_line()` and `geom_point()` layers draw the expected profit at each candidate order.
+
+```{r}
+results %>% ggplot(aes(x=Order_Oz,y=Expected_Profit)) +
+  geom_line() +
+  geom_point() +
+  labs(title="Expected Profit by Order Quantity",
+       x="Ounces Ordered", y="Expected Profit") +
+  theme_classic()
+```
+
+This table suggests that ordering $160$ ounces is not optimal, once again highlighting that the average attendance is not a good estimate of how much fish we should order. Instead, we can see that $200$ ounces of fish should be ordered (this feeds $40$ people) to maximize the expected profits ($`r round(max(results$Expected_Profit),2)`$ dollars). Rather than reading the answer off the table by eye, we can ask for it directly with `slice_max()`, which keeps the row with the largest value of the column we name.
+
+```{r}
+results %>% slice_max(Expected_Profit)
+```
+
+One word of caution about the grid approach: it holds every scenario in memory at once. Nine hundred thousand rows is nothing for a modern laptop, but if you were comparing a thousand order quantities you might prefer to simulate one order at a time and keep only the summary. The `map_dbl()` function from the tidyverse does this without the bookkeeping a loop requires. It applies a function to each element of a vector and returns a numeric vector of results.
+
+```{r}
+set.seed(12)
+map_dbl(Order_Options, function(Order){
+  Attendance<-round(rtriang(n,20,50,30),0)
+  mean(pmin(Attendance*Fish_Entitled_Oz,Order)/
+         Fish_Entitled_Oz*Entry_Fee -
+         Order*Price_Fish_Oz - Price_Miso)
+})
+```
+
+Notice that the body of the function is still fully vectorized; `map_dbl()` is only replacing the outer loop over the nine candidate orders. That is the general rule. Vectorize the part of the model that runs many times, and use the map family for the handful of cases that genuinely have to be handled one at a time.
 
 ## Sensitivity Analysis
 
-What if the price of yellow-tail increases unexpectedly? What if the restaurant wishes to provide each guest with six ounces of fish instead of five? The model we have created above can accommodate these changes easily by just changing the input values. We can additionally, inform the restaurant how sensitive the results are to changes in key inputs or assumptions. This is the idea behind sensitivity analysis.
+What if the price of yellow-tail increases unexpectedly? What if the restaurant wishes to provide each guest with six ounces of fish instead of five? The model we have created above can accommodate these changes easily by just changing the input values. We can additionally inform the restaurant how sensitive the results are to changes in key inputs or assumptions. This is the idea behind sensitivity analysis.
 
 **Sensitivity analysis** assesses the robustness of a model or decision by evaluating the impact of changes in certain key input variables on the output of the model or decision. Sensitivity analysis helps to identify which variables are most important and how sensitive the output is to changes in those variables.
 
-Let's consider providing each guest with six or seven ounces of fish. How does this change our recommendation? When running our model with different amounts of fish provided, you'll notice that when each guest gets six ounces of fish, the restaurant should order $240$ ounces yielding an expected profit of $220$ dollars. When each guest gets seven ounces of fish, the restaurant should order $270$ ounces which generates an expected profit of $198$ dollars. Perhaps providing each guest with more fish is a bad idea as profits are highly sensitive to every ounce increase.
+Let's consider providing each guest with five, six, or seven ounces of fish. Because our model is already a table of scenarios, adding a second dimension is a matter of making the table bigger. The `expand_grid()` function creates every combination of the values it is given, which is exactly the set of scenarios we need: three serving sizes, times eighteen candidate orders, times fifty thousand replications.
+
+```{r}
+n<-50000
+Fish_Options<-c(5,6,7)
+Order_Options<-seq(150,320,10)
+
+set.seed(12)
+Sensitivity<-expand_grid(Fish_Entitled_Oz=Fish_Options,
+                         Order_Oz=Order_Options,
+                         Replication=1:n) %>%
+  mutate(Attendance=round(rtriang(n(),20,50,30),0),
+         Demand=Attendance*Fish_Entitled_Oz,
+         Consumption=pmin(Demand,Order_Oz),
+         Profit=Consumption/Fish_Entitled_Oz*Entry_Fee -
+           Order_Oz*Price_Fish_Oz - Price_Miso)
+
+Sensitivity_Results<-Sensitivity %>%
+  group_by(Fish_Entitled_Oz,Order_Oz) %>%
+  summarise(Expected_Profit=mean(Profit), .groups="drop")
+
+(Best<-Sensitivity_Results %>% group_by(Fish_Entitled_Oz) %>%
+    slice_max(Expected_Profit))
+```
+
+The `n()` function returns the number of rows in the tibble, so a single call to `rtriang()` fills all `r format(nrow(Sensitivity), big.mark=",")` scenarios with attendance draws. The `.groups="drop"` argument simply tells `summarise()` to hand back an ordinary ungrouped tibble, and `slice_max()` is applied within each serving size to return the best order quantity for each.
+
+When each guest gets six ounces of fish, the restaurant should order $`r Best$Order_Oz[2]`$ ounces, yielding an expected profit of $`r round(Best$Expected_Profit[2])`$ dollars. When each guest gets seven ounces, the restaurant should order $`r Best$Order_Oz[3]`$ ounces, which generates an expected profit of $`r round(Best$Expected_Profit[3])`$ dollars. Perhaps providing each guest with more fish is a bad idea, as profits are highly sensitive to every ounce increase.
+
+Plotting all three curves at once makes the point to a non-technical audience in a single image. Mapping the serving size to `col` inside `aes()` draws one line per group and adds a legend automatically.
+
+```{r}
+Sensitivity_Results %>%
+  ggplot(aes(x=Order_Oz, y=Expected_Profit,
+             col=factor(Fish_Entitled_Oz))) +
+  geom_line() +
+  labs(title="Sensitivity of Expected Profit to the Serving Size",
+       x="Ounces Ordered", y="Expected Profit",
+       col="Ounces per Guest") +
+  theme_classic()
+```
+
+Notice how flat each curve is near its peak. The restaurant loses very little by ordering ten or twenty ounces on either side of the optimum, which is worth telling them: the recommendation is robust, and they do not need to hit the number exactly.
 
 ## Readings
 
 The readings for this chapter will introduce the application of simulation models to business. @PMS highlight the technical application of the models using Excel. It is recommended that you follow in R instead. @KI motivates the use of Monte Carlo simulation for managing project risks and uncertainties.
 
-- @PMS Chapter 10.3 (Simulation and the Flaw of Averages), and 10.4 (Simulation with Built-In Excel Tools). Example 10.4 (Additional Uncertainty at Walton Bookstore) It is recommended you follow along using R instead of Excel.
+-   @PMS Chapter 10.3 (Simulation and the Flaw of Averages), and 10.4 (Simulation with Built-In Excel Tools). Example 10.4 (Additional Uncertainty at Walton Bookstore) It is recommended you follow along using R instead of Excel.
 
-- @KI
+-   @KI
 
 ## Lessons Learned In This Chapter
 
-- Identify the parts of a simulation model.
+-   Identify the parts of a simulation model.
 
-- Create a simulation model in R.
+-   Create a simulation model in R by storing every scenario in a tibble.
 
-- Identify the Flaw of Averages.
+-   Identify the Flaw of Averages.
 
-- Find optimal values in simulation models
+-   Find optimal values in simulation models with `group_by()` and `summarise()`.
+
+-   Run a sensitivity analysis over several inputs at once with `expand_grid()`.
 
 ## Exercises
 
@@ -173,7 +296,7 @@ The readings for this chapter will introduce the application of simulation model
 
     The production involves a fixed cost of 20,000 dollars, with a variable cost of 15 dollars per unit produced. Each accessory is sold for 100 dollars. However, any unsold units after the twelve-month period will have no value, as they are not compatible with the newest iPhone.
 
-    The company is considering producing 10,000 units of the accessory. Using a simulation with 100,000 replications, calculate the expected profit and standard deviation. Additionally, determine the range within which the company can be 90% certain that the actual profit from selling the accessory during the twelve-month period will fall.
+    The company is considering producing 10,000 units of the accessory. Using a simulation with 100,000 replications, calculate the expected profit and standard deviation. Additionally, determine the range within which the company can be 90% certain that the actual profit from selling the accessory during the twelve-month period will fall. Build the simulation as a single tibble and use `sample()` with the *prob* argument to draw the demands.
 
 | Demand (units) | Probability (%) |
 |:--------------:|:---------------:|
@@ -197,7 +320,7 @@ The readings for this chapter will introduce the application of simulation model
 
 2.  Alaska Airlines is preparing for the peak holiday travel season and needs to decide how many seats to overbook on the SEA-SFO route. Overbooking is expected in the airline industry, as some passengers typically do not show up for their flights. The airline has data indicating that the number of no-show passengers on this route follows a normal distribution with a mean of 20 and a standard deviation of 5.
 
-    If the airline does not overbook enough seats, empty seats result in lost revenue, as the cost of an unused seat is estimated to be \$300. However, if the airline overbooks too many seats, it may need to compensate bumped passengers with vouchers worth \$600 each. Use 10,000 simulations to determine the optimal number of seats to overbook to minimize the airline's expected cost. Try possible values from 10 to 30 in increments of 5.
+    If the airline does not overbook enough seats, empty seats result in lost revenue, as the cost of an unused seat is estimated to be \$300. However, if the airline overbooks too many seats, it may need to compensate bumped passengers with vouchers worth \$600 each. Use 10,000 simulations to determine the optimal number of seats to overbook to minimize the airline's expected cost. Try possible values from 10 to 30 in increments of 5. Use `expand_grid()` to lay out every combination of overbooking level and simulation, `case_when()` to assign the cost of each scenario, and `group_by()` with `summarise()` to compare the levels.
 
 <details>
 
@@ -211,7 +334,7 @@ The readings for this chapter will introduce the application of simulation model
 
 3.  In August, Bronco Wine Company must decide how many bottles of next year’s vintage wine to order. Each bottle costs the winery $7.50$ and sells for $10$. After January 1, all unsold bottles will be returned to the supplier for a refund of $2.50$ per bottle. Bronco believes that the number of bottles it can sell by January 1 follows a uniform distribution with a mean of 200, a maximum value of 300, and a minimum value of 100. The maximum number of bottles Bronco’s supplier can provide is uncertain and follows a normal distribution with a mean of 200 and a standard deviation of 50. Once Bronco places an order, the supplier will charge $7.50$ per bottle if they can supply the entire order; otherwise, they will charge $7.25$ per bottle. Bronco wants to use simulation to analyze the resulting profit for various order quantities.
 
-Use 10,000 simulations to determine the optimal number of bottles to produce to maximize the winery’s expected profit. Create a five number summary to describe the distribution of profits at the optimal number of bottles.
+Use 10,000 simulations to determine the optimal number of bottles to produce to maximize the winery’s expected profit. Note that this model has two random variables, which simply means two random columns in the same tibble. Create a five number summary to describe the distribution of profits at the optimal number of bottles.
 
 <details>
 
@@ -219,9 +342,10 @@ Use 10,000 simulations to determine the optimal number of bottles to produce to 
 
 *Optimal Production Level: 200*
 
-*Expected Profit: \~\$334*
+*Expected Profit: ~\$334*
 
 *Five Number Summary: min:-250 Q1:229 Q2:415 Q3:500 max:547*
+
 
 </details>
 
@@ -229,21 +353,21 @@ Use 10,000 simulations to determine the optimal number of bottles to produce to 
 
     The key parameters for your investment are as follows:
 
-    - *Stock Ticker:* SPY (S&P 500 ETF)
-    - *Initial Investment:* \$1,000
-    - *Average Yearly Return:* 10% (0.1)
-    - *Standard Deviation of Yearly Returns:* 18% (0.18)
-    - *Yearly Investment:* \$6,000
-    - *Investment Period:* 20 years
+    -   *Stock Ticker:* SPY (S&P 500 ETF)
+    -   *Initial Investment:* \$1,000
+    -   *Average Yearly Return:* 10% (0.1)
+    -   *Standard Deviation of Yearly Returns:* 18% (0.18)
+    -   *Yearly Investment:* \$6,000
+    -   *Investment Period:* 20 years
 
-    Run 10,000 simulations of your investment over 20 years. Each year, returns are normally distributed with the given average and standard deviation. Track the value of your investment at the end of each year. Calculate the following statistics for the investment value at the end of 20 years:
+    Run 10,000 simulations of your investment over 20 years. Each year, returns are normally distributed with the given average and standard deviation. Track the value of your investment at the end of each year. This model is path dependent, so build a tibble with one row per simulation-year, group it by simulation, and use `accumulate()` inside `mutate()` to carry the balance forward. Calculate the following statistics for the investment value at the end of 20 years:
 
-    - Average (mean) end value
-    - Worst Case Scenario: Minimum
-    - Bear Case: 25th percentile (Q1)
-    - Base Case: Median (50th percentile)
-    - Bull Case: 75th percentile (Q3)
-    - Best Case Scenario: Maximum
+    -   Average (mean) end value
+    -   Worst Case Scenario: Minimum
+    -   Bear Case: 25th percentile (Q1)
+    -   Base Case: Median (50th percentile)
+    -   Bull Case: 75th percentile (Q3)
+    -   Best Case Scenario: Maximum
 
     Based on your simulation results, how much can you expect to have in your account after 20 years on average? What are the Bear, Base and Bull case predictions?
 
@@ -261,7 +385,7 @@ Use 10,000 simulations to determine the optimal number of bottles to produce to 
 
 </details>
 
-5.  You are tasked with simulating the price of BTC (Bitcoin) over one year using Brownian motion and plotting the result. Brownian motion is a mathematical model used to describe random motion, often applied in finance to simulate stock price movements. In particular, the returns of a stock are described by the following equation: $\text{returns} = (\mu - 0.5 \times \sigma^2) \times dt + \sigma \times \sqrt{dt} \times \epsilon$; where $\epsilon$ is a random shock drawn from a standard normal distribution, $\mu$ is the expected annual return, $\sigma^2$ is the variance of returns, and $dt = 1/365$. Assume that the starting Bitcoin price is 50,000 dollars, with an average return of 40% and standard deviation of 100%. Let the path of Bitcoin be given by: $Price=S0*cumprod(1+returns)$; where $S0$ is the initial price. Generate 1000 price paths using Brownian motion (set seed to 150). Report the mean, bear (Q1), base (Q2) and bull cases (Q3) of the final prices after 1 year.
+5.  You are tasked with simulating the price of BTC (Bitcoin) over one year using Brownian motion and plotting the result. Brownian motion is a mathematical model used to describe random motion, often applied in finance to simulate stock price movements. In particular, the returns of a stock are described by the following equation: $\text{returns} = (\mu - 0.5 \times \sigma^2) \times dt + \sigma \times \sqrt{dt} \times \epsilon$; where $\epsilon$ is a random shock drawn from a standard normal distribution, $\mu$ is the expected annual return, $\sigma^2$ is the variance of returns, and $dt = 1/365$. Assume that the starting Bitcoin price is 50,000 dollars, with an average return of 40% and standard deviation of 100%. Let the path of Bitcoin be given by: $Price=S0*cumprod(1+returns)$; where $S0$ is the initial price. Generate 1000 price paths using Brownian motion (set seed to 150). Because the price accumulates multiplicatively with no contributions, `cumprod()` handles the path within each simulation, so a `group_by()` and `mutate()` is all that is required. Report the mean, bear (Q1), base (Q2) and bull cases (Q3) of the final prices after 1 year.
 
 <details>
 
