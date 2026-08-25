@@ -16,14 +16,13 @@ You can ask an AI to solve almost every technical problem in this book. It will 
 
 That is not a reason to stop learning. It is a reason to be clear about what you are learning. The value of an analyst was never in producing the calculation. It was in knowing which calculation to produce, whether the answer can be trusted, and what to do about it. AI has made that always-true thing obvious.
 
-This chapter describes seven skills that the assignments in this book are
-designed to build. They are ordered the way a real analysis moves: from a vague situation, to a model, to a defended recommendation.
+This chapter describes seven skills that the assignments in this book are designed to build. They are ordered the way a real analysis moves: from a vague situation, to a model, to a defended recommendation.
 
 ## 1. Framing the problem
 
-**What it is.** Turning a messy situation into a well-posed decision: identifying what is actually being chosen, what the objective is, which quantities are constraints and which are variables, and what can safely be left out.
+Turning a messy situation into a well-posed decision: identifying what is actually being chosen, what the objective is, which quantities are constraints and which are variables, and what can safely be left out.
 
-**Why it matters.** This is the skill AI is worst at, because it has no way to know that the problem it was handed is the wrong one. Ask it to minimize cost and it will minimize cost. It will not stop to ask whether cost was the right objective, or whether the real constraint is a loading dock that can only handle three trucks a day. Most modeling failures in practice are not arithmetic failures. They are failures to model the right thing.
+This is the skill AI is worst at, because it has no way to know that the problem it was handed is the wrong one. Ask it to minimize cost and it will minimize cost. It will not stop to ask whether cost was the right objective, or whether the real constraint is a loading dock that can only handle three trucks a day. Most modeling failures in practice are not arithmetic failures. They are failures to model the right thing.
 
 **Examples.**
 
@@ -33,9 +32,9 @@ designed to build. They are ordered the way a real analysis moves: from a vague 
 
 ## 2. Reconciling evidence from different sources
 
-**What it is.** Pulling information from several places. A data set, an industry report, a manager's estimate, a published study. Working out what to believe when they disagree.
+Pulling information from several places. A data set, an industry report, a manager's estimate, a published study. Working out what to believe when they disagree.
 
-**Why it matters.** Real inputs conflict. Your point-of-sale data says average demand is 180 ounces; the chef says "about 200 on a good night"; a trade publication reports a category-wide decline. None of these is simply *the* number. Deciding what goes into the model requires judgment about how each source was produced, what it measures, and who had an incentive to shade it. An AI given three numbers will average them or pick one. Neither is analysis.
+Real inputs conflict. Your point-of-sale data says average demand is 180 ounces; the chef says "about 200 on a good night"; a trade publication reports a category-wide decline. None of these is simply *the* number. Deciding what goes into the model requires judgment about how each source was produced, what it measures, and who had an incentive to shade it. An AI given three numbers will average them or pick one. Neither is analysis.
 
 **Examples.**
 
@@ -45,10 +44,9 @@ designed to build. They are ordered the way a real analysis moves: from a vague 
 
 ## 3. Directing the AI
 
-**What it is.** Using AI prospectively to explore possibilities you specify
-rather than retrospectively, as a lookup for what has already been written.
+Using AI prospectively to explore possibilities you specify rather than retrospectively, as a lookup for what has already been written.
 
-**Why it matters.** A language model is trained on the past. Left to itself it returns the conventional treatment of a problem: the standard model, the usual assumptions, the textbook answer. That is genuinely useful, and it is also a ceiling. The interesting work is in the direction you choose to push: *what if demand and price are correlated?* *What if we could reorder mid-week?* *Show me the version of this model where the constraint is labor, not inventory.* The model can execute any of those. It will rarely propose them.
+A language model is trained on the past. Left to itself it returns the conventional treatment of a problem: the standard model, the usual assumptions, the textbook answer. That is genuinely useful, and it is also a ceiling. The interesting work is in the direction you choose to push: *what if demand and price are correlated?* *What if we could reorder mid-week?* *Show me the version of this model where the constraint is labor, not inventory.* The model can execute any of those. It will rarely propose them.
 
 **Examples.**
 
@@ -58,11 +56,9 @@ rather than retrospectively, as a lookup for what has already been written.
 
 ## 4. Verifying the analysis
 
-**What it is.** Auditing a result you did not produce by hand. Checking whether a constraint was silently dropped, a distribution misapplied, a sign flipped, a number invented.
+Auditing a result you did not produce by hand. Checking whether a constraint was silently dropped, a distribution misapplied, a sign flipped, a number invented.
 
-**Why it matters.** AI output is fluent, and fluency reads as correctness. A
-simulation with a subtly wrong distribution produces a clean histogram and a
-plausible expected value; nothing about the output announces the error. To catch it you need enough technical fluency of your own to referee the work. This is the practical reason the mechanics in this book still matter: **you cannot verify what you could not, in principle, do yourself.**
+AI output is fluent, and fluency reads as correctness. A simulation with a subtly wrong distribution produces a clean histogram and a plausible expected value; nothing about the output announces the error. To catch it you need enough technical fluency of your own to referee the work. This is the practical reason the mechanics in this book still matter: **you cannot verify what you could not, in principle, do yourself.**
 
 **Examples.**
 
@@ -74,9 +70,9 @@ plausible expected value; nothing about the output announces the error. To catch
 
 ## 5. Testing how much the answer depends on its assumptions
 
-**What it is.** Asking not "what is the answer?" but "how wrong would my inputs have to be before I would change my decision?"
+Asking not "what is the answer?" but "how wrong would my inputs have to be before I would change my decision?"
 
-**Why it matters.** A point estimate is a fragile thing to hand a decision maker. What they need to know is whether the recommendation survives being wrong. Two models can produce the same optimum while one of them is flat for fifty units in either direction and the other falls off a cliff. Those are not the same recommendation, and only sensitivity analysis distinguishes them. This is also the part of an analysis that is hardest to obtain from a single prompt, because it requires knowing which assumptions are worth stressing.
+A point estimate is a fragile thing to hand a decision maker. What they need to know is whether the recommendation survives being wrong. Two models can produce the same optimum while one of them is flat for fifty units in either direction and the other falls off a cliff. Those are not the same recommendation, and only sensitivity analysis distinguishes them. This is also the part of an analysis that is hardest to obtain from a single prompt, because it requires knowing which assumptions are worth stressing.
 
 **Examples.**
 
@@ -86,50 +82,38 @@ plausible expected value; nothing about the output announces the error. To catch
 
 ## 6. Making the decision
 
-**What it is.** Converting analysis into a choice, under uncertainty, when the analysis does not fully determine the answer.
+Converting analysis into a choice, under uncertainty, when the analysis does not fully determine the answer.
 
-**Why it matters.** Analysis narrows options; it rarely eliminates them. Two
-alternatives with nearly identical expected values may differ sharply in
-downside risk, reversibility, or how they interact with what the organization is already committed to. Choosing between them requires a view about risk tolerance and about what matters. Those are not properties of the data. An AI asked to decide will either pick the highest expected value or hedge. Neither is a decision; the first is a rule and the second is an evasion.
+Analysis narrows options; it rarely eliminates them. Two alternatives with nearly identical expected values may differ sharply in downside risk, reversibility, or how they interact with what the organization is already committed to. Choosing between them requires a view about risk tolerance and about what matters. Those are not properties of the data. An AI asked to decide will either pick the highest expected value or hedge. Neither is a decision; the first is a rule and the second is an evasion.
 
 **Examples.**
 
-- Option A has an expected profit of $240 with a 5% chance of a serious loss. 
-Option B has an expected profit of $232 and no realistic downside. There is no formula that settles this. It depends on whether the business can absorb the bad outcome, which is a fact about the business, not about the model.
+- Option A has an expected profit of \$240 with a 5% chance of a serious loss. Option B has an expected profit of \$232 and no realistic downside. There is no formula that settles this. It depends on whether the business can absorb the bad outcome, which is a fact about the business, not about the model.
 
 - Deciding not to decide yet is a decision, and sometimes the right one, but only if you can say what information would change your mind and what it costs to get it. "Let's gather more data" without that is procrastination in analytical clothing.
 
 ## 7. Defending the recommendation
 
-**What it is.** Explaining and standing behind a recommendation in front of
-someone who is skeptical, better informed than you about the business, and
-looking for the flaw.
+Explaining and standing behind a recommendation in front of someone who is skeptical, better informed than you about the business, and looking for the flaw.
 
-**Why it matters.** The AI produces the analysis; a person owns the call. When a manager asks "why should I believe this?", the answer cannot be "the model said so." You need to be able to state your assumptions, name the weakest link in your own reasoning, and say what would have to be true for you to be wrong. Analysts who can do this get their recommendations adopted. Analysts who cannot are treated as a calculator with opinions.
+The AI produces the analysis; a person owns the call. When a manager asks "why should I believe this?", the answer cannot be "the model said so." You need to be able to state your assumptions, name the weakest link in your own reasoning, and say what would have to be true for you to be wrong. Analysts who can do this get their recommendations adopted. Analysts who cannot are treated as a calculator with opinions.
 
 **Examples.**
 
-- Lead with the decision and the reason, not the method: "Order 200 ounces,
-because expected profit is highest there and it stays within 3% of the best possible across every demand scenario we considered." The methodology comes after, if asked.
-  
+- Lead with the decision and the reason, not the method: "Order 200 ounces, because expected profit is highest there and it stays within 3% of the best possible across every demand scenario we considered." The methodology comes after, if asked.
+
 - Volunteer the weak point before it is found. "The number I am least sure about is cost per ounce; if it is closer to 7 than 5, the answer moves to 280." This reads as competence, not doubt — and it is far better than having your audience discover it for you.
 
 ## How this shows up in your work
 
-Because AI can produce a correct final answer, the final answer is no longer
-sufficient evidence that you learned anything. The assignments in this book
-therefore ask for more than the answer:
+Because AI can produce a correct final answer, the final answer is no longer sufficient evidence that you learned anything. The assignments in this book therefore ask for more than the answer:
 
 - **Show the reasoning, including the wrong turns.** The model you rejected and why is often worth more than the model you kept.
 
-- **Expect to critique, not only to build.** Some assignments hand you an
-  analysis that is wrong in a specific, findable way and ask you to locate it.
-  
+- **Expect to critique, not only to build.** Some assignments hand you an analysis that is wrong in a specific, findable way and ask you to locate it.
+
 - **Expect to justify assumptions.** Not "I assumed demand is normal" but why that is defensible here, and what changes if it is not.
 
 - **Expect to be asked what would change your mind.** For any recommendation you make, be ready to name the input that would have to move, and by how much.
 
-Using AI on this work is not cheating. Handing in something you cannot explain, verify, or defend is a different matter, and it is also, in
-professional terms, the fastest way to become unnecessary. The skill is not
-avoiding the tool. It is being the person in the room who knows whether the tool is right.
-
+Using AI on this work is not cheating. Handing in something you cannot explain, verify, or defend is a different matter, and it is also, in professional terms, the fastest way to become unnecessary. The skill is not avoiding the tool. It is being the person in the room who knows whether the tool is right.

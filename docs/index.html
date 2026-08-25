@@ -245,8 +245,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="framing-the-problem" class="level2">
 <h2 class="anchored" data-anchor-id="framing-the-problem">1. Framing the problem</h2>
-<p><strong>What it is.</strong> Turning a messy situation into a well-posed decision: identifying what is actually being chosen, what the objective is, which quantities are constraints and which are variables, and what can safely be left out.</p>
-<p><strong>Why it matters.</strong> This is the skill AI is worst at, because it has no way to know that the problem it was handed is the wrong one. Ask it to minimize cost and it will minimize cost. It will not stop to ask whether cost was the right objective, or whether the real constraint is a loading dock that can only handle three trucks a day. Most modeling failures in practice are not arithmetic failures. They are failures to model the right thing.</p>
+<p>Turning a messy situation into a well-posed decision: identifying what is actually being chosen, what the objective is, which quantities are constraints and which are variables, and what can safely be left out.</p>
+<p>This is the skill AI is worst at, because it has no way to know that the problem it was handed is the wrong one. Ask it to minimize cost and it will minimize cost. It will not stop to ask whether cost was the right objective, or whether the real constraint is a loading dock that can only handle three trucks a day. Most modeling failures in practice are not arithmetic failures. They are failures to model the right thing.</p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>A restaurant owner says “I’m losing money on catering.” The decision might be how to price catering, or which catering jobs to accept, or whether to exit catering, or whether to hire a second van. These are four different models with four different answers. Choosing among them is your job, not the model’s.</p></li>
@@ -255,8 +255,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="reconciling-evidence-from-different-sources" class="level2">
 <h2 class="anchored" data-anchor-id="reconciling-evidence-from-different-sources">2. Reconciling evidence from different sources</h2>
-<p><strong>What it is.</strong> Pulling information from several places. A data set, an industry report, a manager’s estimate, a published study. Working out what to believe when they disagree.</p>
-<p><strong>Why it matters.</strong> Real inputs conflict. Your point-of-sale data says average demand is 180 ounces; the chef says “about 200 on a good night”; a trade publication reports a category-wide decline. None of these is simply <em>the</em> number. Deciding what goes into the model requires judgment about how each source was produced, what it measures, and who had an incentive to shade it. An AI given three numbers will average them or pick one. Neither is analysis.</p>
+<p>Pulling information from several places. A data set, an industry report, a manager’s estimate, a published study. Working out what to believe when they disagree.</p>
+<p>Real inputs conflict. Your point-of-sale data says average demand is 180 ounces; the chef says “about 200 on a good night”; a trade publication reports a category-wide decline. None of these is simply <em>the</em> number. Deciding what goes into the model requires judgment about how each source was produced, what it measures, and who had an incentive to shade it. An AI given three numbers will average them or pick one. Neither is analysis.</p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>Two forecasts of next quarter’s demand differ by 15%. Before averaging them, ask what each is conditioning on. If one assumes the new location opens on schedule and the other does not, the disagreement is not about forecasting. It is about a fact you can go check.</p></li>
@@ -265,8 +265,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="directing-the-ai" class="level2">
 <h2 class="anchored" data-anchor-id="directing-the-ai">3. Directing the AI</h2>
-<p><strong>What it is.</strong> Using AI prospectively to explore possibilities you specify rather than retrospectively, as a lookup for what has already been written.</p>
-<p><strong>Why it matters.</strong> A language model is trained on the past. Left to itself it returns the conventional treatment of a problem: the standard model, the usual assumptions, the textbook answer. That is genuinely useful, and it is also a ceiling. The interesting work is in the direction you choose to push: <em>what if demand and price are correlated?</em> <em>What if we could reorder mid-week?</em> <em>Show me the version of this model where the constraint is labor, not inventory.</em> The model can execute any of those. It will rarely propose them.</p>
+<p>Using AI prospectively to explore possibilities you specify rather than retrospectively, as a lookup for what has already been written.</p>
+<p>A language model is trained on the past. Left to itself it returns the conventional treatment of a problem: the standard model, the usual assumptions, the textbook answer. That is genuinely useful, and it is also a ceiling. The interesting work is in the direction you choose to push: <em>what if demand and price are correlated?</em> <em>What if we could reorder mid-week?</em> <em>Show me the version of this model where the constraint is labor, not inventory.</em> The model can execute any of those. It will rarely propose them.</p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>Weak prompt: “How do I model inventory for a restaurant?” You get the standard newsvendor treatment. Strong prompt: “Extend the newsvendor model so that unsold inventory has 40% salvage value on the following day, and show me how the optimal order changes as salvage value goes from 0 to 100%.” Now the AI is doing work you directed.</p></li>
@@ -275,8 +275,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="verifying-the-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="verifying-the-analysis">4. Verifying the analysis</h2>
-<p><strong>What it is.</strong> Auditing a result you did not produce by hand. Checking whether a constraint was silently dropped, a distribution misapplied, a sign flipped, a number invented.</p>
-<p><strong>Why it matters.</strong> AI output is fluent, and fluency reads as correctness. A simulation with a subtly wrong distribution produces a clean histogram and a plausible expected value; nothing about the output announces the error. To catch it you need enough technical fluency of your own to referee the work. This is the practical reason the mechanics in this book still matter: <strong>you cannot verify what you could not, in principle, do yourself.</strong></p>
+<p>Auditing a result you did not produce by hand. Checking whether a constraint was silently dropped, a distribution misapplied, a sign flipped, a number invented.</p>
+<p>AI output is fluent, and fluency reads as correctness. A simulation with a subtly wrong distribution produces a clean histogram and a plausible expected value; nothing about the output announces the error. To catch it you need enough technical fluency of your own to referee the work. This is the practical reason the mechanics in this book still matter: <strong>you cannot verify what you could not, in principle, do yourself.</strong></p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>Sanity-check the extremes. If you order zero ounces, is profit zero? If you order far more than any plausible demand, does profit fall at the rate of the cost per ounce? Boundary cases are cheap to check and catch a surprising share of errors.</p></li>
@@ -286,8 +286,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="testing-how-much-the-answer-depends-on-its-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="testing-how-much-the-answer-depends-on-its-assumptions">5. Testing how much the answer depends on its assumptions</h2>
-<p><strong>What it is.</strong> Asking not “what is the answer?” but “how wrong would my inputs have to be before I would change my decision?”</p>
-<p><strong>Why it matters.</strong> A point estimate is a fragile thing to hand a decision maker. What they need to know is whether the recommendation survives being wrong. Two models can produce the same optimum while one of them is flat for fifty units in either direction and the other falls off a cliff. Those are not the same recommendation, and only sensitivity analysis distinguishes them. This is also the part of an analysis that is hardest to obtain from a single prompt, because it requires knowing which assumptions are worth stressing.</p>
+<p>Asking not “what is the answer?” but “how wrong would my inputs have to be before I would change my decision?”</p>
+<p>A point estimate is a fragile thing to hand a decision maker. What they need to know is whether the recommendation survives being wrong. Two models can produce the same optimum while one of them is flat for fifty units in either direction and the other falls off a cliff. Those are not the same recommendation, and only sensitivity analysis distinguishes them. This is also the part of an analysis that is hardest to obtain from a single prompt, because it requires knowing which assumptions are worth stressing.</p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>In the sushi model, the optimal order changes substantially when the cost per ounce moves from 5 to 6 to 7. That means the cost input is doing a great deal of work, and it is worth spending real effort to pin it down before committing to an order quantity.</p></li>
@@ -296,8 +296,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="making-the-decision" class="level2">
 <h2 class="anchored" data-anchor-id="making-the-decision">6. Making the decision</h2>
-<p><strong>What it is.</strong> Converting analysis into a choice, under uncertainty, when the analysis does not fully determine the answer.</p>
-<p><strong>Why it matters.</strong> Analysis narrows options; it rarely eliminates them. Two alternatives with nearly identical expected values may differ sharply in downside risk, reversibility, or how they interact with what the organization is already committed to. Choosing between them requires a view about risk tolerance and about what matters. Those are not properties of the data. An AI asked to decide will either pick the highest expected value or hedge. Neither is a decision; the first is a rule and the second is an evasion.</p>
+<p>Converting analysis into a choice, under uncertainty, when the analysis does not fully determine the answer.</p>
+<p>Analysis narrows options; it rarely eliminates them. Two alternatives with nearly identical expected values may differ sharply in downside risk, reversibility, or how they interact with what the organization is already committed to. Choosing between them requires a view about risk tolerance and about what matters. Those are not properties of the data. An AI asked to decide will either pick the highest expected value or hedge. Neither is a decision; the first is a rule and the second is an evasion.</p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>Option A has an expected profit of $240 with a 5% chance of a serious loss. Option B has an expected profit of $232 and no realistic downside. There is no formula that settles this. It depends on whether the business can absorb the bad outcome, which is a fact about the business, not about the model.</p></li>
@@ -306,8 +306,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="defending-the-recommendation" class="level2">
 <h2 class="anchored" data-anchor-id="defending-the-recommendation">7. Defending the recommendation</h2>
-<p><strong>What it is.</strong> Explaining and standing behind a recommendation in front of someone who is skeptical, better informed than you about the business, and looking for the flaw.</p>
-<p><strong>Why it matters.</strong> The AI produces the analysis; a person owns the call. When a manager asks “why should I believe this?”, the answer cannot be “the model said so.” You need to be able to state your assumptions, name the weakest link in your own reasoning, and say what would have to be true for you to be wrong. Analysts who can do this get their recommendations adopted. Analysts who cannot are treated as a calculator with opinions.</p>
+<p>Explaining and standing behind a recommendation in front of someone who is skeptical, better informed than you about the business, and looking for the flaw.</p>
+<p>The AI produces the analysis; a person owns the call. When a manager asks “why should I believe this?”, the answer cannot be “the model said so.” You need to be able to state your assumptions, name the weakest link in your own reasoning, and say what would have to be true for you to be wrong. Analysts who can do this get their recommendations adopted. Analysts who cannot are treated as a calculator with opinions.</p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>Lead with the decision and the reason, not the method: “Order 200 ounces, because expected profit is highest there and it stays within 3% of the best possible across every demand scenario we considered.” The methodology comes after, if asked.</p></li>
