@@ -104,16 +104,3 @@ The AI produces the analysis; a person owns the call. When a manager asks "why s
 
 - Volunteer the weak point before it is found. "The number I am least sure about is cost per ounce; if it is closer to 7 than 5, the answer moves to 280." This reads as competence, not doubt — and it is far better than having your audience discover it for you.
 
-## How this shows up in your work
-
-Because AI can produce a correct final answer, the final answer is no longer sufficient evidence that you learned anything. The assignments in this book therefore ask for more than the answer:
-
-- **Show the reasoning, including the wrong turns.** The model you rejected and why is often worth more than the model you kept.
-
-- **Expect to critique, not only to build.** Some assignments hand you an analysis that is wrong in a specific, findable way and ask you to locate it.
-
-- **Expect to justify assumptions.** Not "I assumed demand is normal" but why that is defensible here, and what changes if it is not.
-
-- **Expect to be asked what would change your mind.** For any recommendation you make, be ready to name the input that would have to move, and by how much.
-
-Using AI on this work is not cheating. Handing in something you cannot explain, verify, or defend is a different matter, and it is also, in professional terms, the fastest way to become unnecessary. The skill is not avoiding the tool. It is being the person in the room who knows whether the tool is right.
