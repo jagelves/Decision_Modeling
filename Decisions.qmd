@@ -330,7 +330,7 @@ Which path should Meridian take? What is the maximum the board should pay for a 
 
 *Keep the M9: 0.55(42) + 0.45(6) = 23.1 + 2.7 = **25.8 million**.*
 
-*Retire it now: the M3 waiting list means demand is known, so this path has no chance node and pays **26 million with certainty.*
+*Retire it now: the M3 waiting list means demand is known, so this path has no chance node and pays **26 million**, with certainty.*
 
 *One more year: the funding environment is revealed before the second decision, so at that node the company takes the better branch rather than an average. Under a strong environment it keeps the M9 for 38, under a weak environment it converts for 22. The expected value is 0.55(38) + 0.45(22) - 4 = 20.9 + 9.9 - 4 = **26.8 million**.*
 
