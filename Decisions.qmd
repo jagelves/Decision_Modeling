@@ -15,8 +15,8 @@ Decision models are crucial in business because they provide a structured approa
 
 Imagine you are the CEO of the Shopaholic Retail Company, and you are considering whether to launch a new product line. You have conducted market research and have estimated two possible outcomes based on customer demand and competition.
 
--   **Success Scenario:** If the new product line is well-received by customers and captures a significant market share, you anticipate an annual profit of \$5 million.
--   **Failure Scenario:** If the new product line fails to gain traction in the market, you estimate an annual loss of \$3 million due to production costs and missed opportunities.
+- **Success Scenario:** If the new product line is well-received by customers and captures a significant market share, you anticipate an annual profit of \$5 million.
+- **Failure Scenario:** If the new product line fails to gain traction in the market, you estimate an annual loss of \$3 million due to production costs and missed opportunities.
 
 In this decision, you face uncertainty regarding customer preferences, market conditions, and competitive dynamics. The new product line's success or failure will determine your company's financial outcome. Determining how to adequately assess the risks involved in this decision and the potential outcomes is of importance.
 
@@ -194,27 +194,27 @@ This EMV is higher than the EMV of making the decision without the consultants (
 
 The readings for this chapter are mainly from @PMS. Chapter 9 provides an excellent introduction to decision models with a couple of solved problems using Excel. I recommend using R (as a calculator) instead of Excel, as this book mainly uses R. To construct decision trees in R, you can use [mermaid](https://www.rdocumentation.org/packages/DiagrammeR/versions/1.0.10/topics/mermaid) along with [Quarto](https://Quarto.org). Some probability concepts are essential to review before you start reading the chapter. In particular, discrete random variables, expected value, conditional probability, probability rules, and Bayes' theorem.
 
--   @PMS Chapters 9.1 (Introduction), 9.2 (Elements of Decision Analysis), 9.3 (Single-Stage Decision Problems) and 9.5 (Multistage Decision Problems). It is recommended you follow along in R as opposed to Excel (or Precision Tree Add-In).
+- @PMS Chapters 9.1 (Introduction), 9.2 (Elements of Decision Analysis), 9.3 (Single-Stage Decision Problems) and 9.5 (Multistage Decision Problems). It is recommended you follow along in R as opposed to Excel (or Precision Tree Add-In).
 
--   @JK Chapter 4.1 (Fundamental Probability Concepts), 4.2 (Rules of Probability), 4.3 (Contingency Tables and Probabilities), and 4.4 (The Total Probability Rule and Bayes' Theorem).
+- @JK Chapter 4.1 (Fundamental Probability Concepts), 4.2 (Rules of Probability), 4.3 (Contingency Tables and Probabilities), and 4.4 (The Total Probability Rule and Bayes' Theorem).
 
--   Quarto: <https://Quarto.org>
+- Quarto: <https://Quarto.org>
 
--   Mermaid in Quarto Document: <https://quarto.org/docs/authoring/diagrams.html>
+- Mermaid in Quarto Document: <https://quarto.org/docs/authoring/diagrams.html>
 
--   Mermaid in R Script: <https://www.rdocumentation.org/packages/DiagrammeR/versions/1.0.10/topics/mermaid>
+- Mermaid in R Script: <https://www.rdocumentation.org/packages/DiagrammeR/versions/1.0.10/topics/mermaid>
 
 ## Lessons Learned In This Chapter
 
--   Use the concept of Expected Monetary Value to rank decisions involving uncertainty.
+- Use the concept of Expected Monetary Value to rank decisions involving uncertainty.
 
--   Use Decision Trees to map the business decision process.
+- Use Decision Trees to map the business decision process.
 
--   Apply backward induction to solve decision problems.
+- Apply backward induction to solve decision problems.
 
--   Apply the Law of Total Probability and Bayes' Theorem to update probabilities.
+- Apply the Law of Total Probability and Bayes' Theorem to update probabilities.
 
--   Determine the price of information.
+- Determine the price of information.
 
 ## Exercises
 
@@ -226,18 +226,6 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 | Expand Plant | 250,000 | -50,000  | -75,000  |
 |  Do Nothing  | 50,000  |    0     | -30,000  |
 
-<details>
-
-<summary>Calculation Video</summary>
-
-::: {.video}
-<video controls width="100%">
-  <source src="Tesla.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-:::
-
-</details>
 
 <details>
 
@@ -247,9 +235,6 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
 </details>
 
-
-
-
 2.  Frontier Airlines is considering purchasing a new airplane from an aircraft manufacturer. The manufacturer offers the airplane for 50 million. The airline estimates that, if the airplane is purchased, it could generate an additional revenue of 120 million over its operational lifetime. However, this is contingent on the condition that the airline industry remains stable and demand for flights remains high, which the airline estimates has a 70% probability of occurring.
 
     If the industry faces a downturn (a 30% probability), the airline estimates it will only be able to generate \$30 million in revenue from the airplane over its lifetime.
@@ -257,19 +242,7 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
     Alternatively, the airline has the option to lease an older model airplane for 10 million. The older airplane would generate \$40 million in revenue over its lifetime, regardless of industry conditions.
 
     Should the airline purchase the new airplane or lease the older model?
-    
-<details>
 
-<summary>Calculation Video</summary>
-
-::: {.video}
-<video controls width="100%">
-  <source src="Frontier.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-:::
-
-</details>
 
 <details>
 
@@ -283,22 +256,9 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
     Before deciding to launch the drug, PharmaCo can conduct a clinical trial at a cost of \$5 million. The clinical trial is not perfect and has the following characteristics:
 
-    -   If the drug is truly effective, there is a 90% chance that the clinical trial will show positive results. If the drug is not effective, there is a 15% chance that the clinical trial will still show positive results.
+    - If the drug is truly effective, there is a 90% chance that the clinical trial will show positive results. If the drug is not effective, there is a 15% chance that the clinical trial will still show positive results.
 
     Should PharmaCo launch the drug? Should they conduct the clinical trial? What is the maximum amount they should pay for the trial?
-
-<details>
-
-<summary>Calculation Video</summary>
-
-::: {.video}
-<video controls width="100%">
-  <source src="Pharma.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-:::
-
-</details>
 
 <details>
 
@@ -318,19 +278,6 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
 <details>
 
-<summary>Calculation Video</summary>
-
-::: {.video}
-<video controls width="100%">
-  <source src="Joao.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-:::
-
-</details>
-
-<details>
-
 <summary>Suggested Answer</summary>
 
 *Without the test, the expected value is -200,000 pounds. With the perfect test, the expected value is 2,400,000 pounds. We **recommend Arsenal go with the test and sign the player**. The club can pay up to 5,400,000 pounds for the test.*
@@ -339,13 +286,13 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
 5.  The Crypto Gains investment firm is planning to invest in Bitcoin to diversify its portfolio. The firm knows that it will need 50 Bitcoins six months from now to meet its investment strategy. The company can buy the Bitcoins at the market price six months from now or purchase a futures contract now. The contract guarantees delivery of the Bitcoins in six months, and the cost of purchasing it will be based on today’s market price. Assume that the possible Bitcoin futures contracts available for purchase are for 25 Bitcoins or 50 Bitcoins only. No futures contracts can be purchased or sold in the intervening months; thus, Crypto Gains' possible decisions are to:
 
--   Purchase a futures contract for 50 Bitcoins now.
+- Purchase a futures contract for 50 Bitcoins now.
 
--   Purchase a futures contract for 25 Bitcoins now and purchase 25 Bitcoins in six months at market price.
+- Purchase a futures contract for 25 Bitcoins now and purchase 25 Bitcoins in six months at market price.
 
--   Purchase all 50 Bitcoins needed in six months at the market price.
+- Purchase all 50 Bitcoins needed in six months at the market price.
 
-    The price of Bitcoin bought now for delivery in six months is 30,000 dollars per Bitcoin. The transaction cost for 25-Bitcoin and 50-Bitcoin future contracts are 1,500 and 2,800 dollars, respectively. Finally, the company has assessed the probability distribution for the possible Bitcoin prices six months from now in dollars per Bitcoin. The table below contains the possible prices and the corresponding probabilities. Which investment strategy should Crypto Gains pursue to minimize risk and potential costs while securing the necessary Bitcoins?
+  The price of Bitcoin bought now for delivery in six months is 30,000 dollars per Bitcoin. The transaction cost for 25-Bitcoin and 50-Bitcoin future contracts are 1,500 and 2,800 dollars, respectively. Finally, the company has assessed the probability distribution for the possible Bitcoin prices six months from now in dollars per Bitcoin. The table below contains the possible prices and the corresponding probabilities. Which investment strategy should Crypto Gains pursue to minimize risk and potential costs while securing the necessary Bitcoins?
 
 |  Price   | Probability |
 |:--------:|:-----------:|
@@ -355,18 +302,6 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 | \$32,500 |    0.15     |
 | \$34,000 |    0.10     |
 
-<details>
-
-<summary>Calculation Video</summary>
-
-::: {.video}
-<video controls width="100%">
-  <source src="Bitcoin.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-:::
-
-</details>
 
 <details>
 
