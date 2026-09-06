@@ -334,6 +334,6 @@ Which path should Meridian take? What is the maximum the board should pay for a 
 
 *One more year: the funding environment is revealed before the second decision, so at that node the company takes the better branch rather than an average. Under a strong environment it keeps the M9 for 38, under a weak environment it converts for 22. The expected value is 0.55(38) + 0.45(22) - 4 = 20.9 + 9.9 - 4 = **26.8 million**.*
 
-*We **recommend Meridian run the M9 for one final year and then decide**. Note how narrow the margin is. The recommendation reverses if the probability of a strong funding environment falls below 50% (retire now) or rises above 60% (keep the M9). Under perfect information the expected value is 0.55(42) + 0.45(26) = 34.8 million, so the board should pay at most **8 million for a forecast revealing the funding environment.*
+*We **recommend Meridian run the M9 for one final year and then decide**. Note how narrow the margin is. The recommendation reverses if the probability of a strong funding environment falls below 50% (retire now) or rises above 60% (keep the M9). Under perfect information the expected value is 0.55(42) + 0.45(26) = 34.8 million, so the board should pay at most 8 million for a forecast revealing the funding environment.*
 
 </details>
