@@ -182,7 +182,13 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
   <ul class="collapse">
-  <li><a href="#sec-working-with-ai" id="toc-sec-working-with-ai" class="nav-link" data-scroll-target="#sec-working-with-ai">Working with AI</a></li>
+  <li><a href="#sec-working-with-ai" id="toc-sec-working-with-ai" class="nav-link" data-scroll-target="#sec-working-with-ai">Working with AI</a>
+  <ul class="collapse">
+  <li><a href="#why-bother" id="toc-why-bother" class="nav-link" data-scroll-target="#why-bother">Why bother</a></li>
+  <li><a href="#which-skills-survive" id="toc-which-skills-survive" class="nav-link" data-scroll-target="#which-skills-survive">Which skills survive</a></li>
+  <li><a href="#how-to-use-this-book" id="toc-how-to-use-this-book" class="nav-link" data-scroll-target="#how-to-use-this-book">How to use this book</a></li>
+  <li><a href="#the-seven-skills" id="toc-the-seven-skills" class="nav-link" data-scroll-target="#the-seven-skills">The seven skills</a></li>
+  </ul></li>
   <li><a href="#framing-the-problem" id="toc-framing-the-problem" class="nav-link" data-scroll-target="#framing-the-problem">1. Framing the problem</a></li>
   <li><a href="#reconciling-evidence-from-different-sources" id="toc-reconciling-evidence-from-different-sources" class="nav-link" data-scroll-target="#reconciling-evidence-from-different-sources">2. Reconciling evidence from different sources</a></li>
   <li><a href="#directing-the-ai" id="toc-directing-the-ai" class="nav-link" data-scroll-target="#directing-the-ai">3. Directing the AI</a></li>
@@ -231,16 +237,44 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="preface" class="level1 unnumbered">
 <h1 class="unnumbered">Preface</h1><p><img src="cover.png" title="Decision Modeling" class="quarto-cover-image img-fluid"></p>
-<p>Making informed decisions is crucial in a world of uncertainty and ever-changing dynamics. This book is a guide that explores decision analysis, simulation, and time series techniques using R. It is recommended for anyone seeking to learn data-driven approaches to predict outcomes, simulate scenarios, and make informed choices.</p>
-<p>In the book’s first part, we delve into decision analysis. Here, we explore various frameworks, such as decision trees and risk analysis, enabling us to assess our choices’ potential outcomes and consequences. We uncover strategies to quantify uncertainties, analyze trade-offs, and optimize decision paths. Real-world examples illustrate how these techniques are applied in business scenarios.</p>
-<p>The book’s second part deals with simulation. We create dynamic, virtual environments to mimic complex systems in business and evaluate multiple scenarios. Through Monte Carlo simulation, we unlock the power to predict outcomes and quantify the impacts of our decisions. Practical exercises and step-by-step guidance equip readers with the skills to build and analyze simulations, enabling them to gain deeper insights into the consequences of their choices.</p>
-<p>In the final part of this book, we introduce time series analysis. As time is fundamental in many domains, we explore techniques to extract meaningful patterns and forecast future values. The classical methods of ARIMA and ETS are introduced by illustrating their real-world applications in business. Readers will learn to navigate the intricacies of forecasting and leverage time series insights to enhance decision-making.</p>
+<p>This book is about making decisions under uncertainty, using R. It is for anyone who has to commit to a course of action without knowing how things will turn out, which is most people with a business problem in front of them.</p>
+<p>It has three parts. The first covers decision analysis: decision trees, risk analysis, and the frameworks for weighing options when the outcome is not yours to control. The second covers simulation, mostly Monte Carlo, where you build a small artificial version of a situation and run it enough times to see the range of things that could happen. The third covers time series, where the question is what a pattern over time can tell you about what comes next, using ARIMA and ETS. Business examples run throughout, and every chapter has problems to work.</p>
 <p>Comments are welcomed at jagelves@wm.edu.</p>
 <section id="sec-working-with-ai" class="level2">
 <h2 class="anchored" data-anchor-id="sec-working-with-ai">Working with AI</h2>
 <p>You can ask an AI to solve almost every technical problem in this book. It will build the simulation, set up the optimization, run the regression, and explain the output. It will usually be right, and when it is wrong it will be wrong confidently and fluently.</p>
-<p>That is not a reason to stop learning. It is a reason to be clear about what you are learning. The value of an analyst was never in producing the calculation. It was in knowing which calculation to produce, whether the answer can be trusted, and what to do about it. AI has made that always-true thing obvious.</p>
-<p>This chapter describes seven skills that the assignments in this book are designed to build. They are ordered the way a real analysis moves: from a vague situation, to a model, to a defended recommendation.</p>
+<p>So the first question to settle is why you should do any of this yourself.</p>
+<section id="why-bother" class="level3">
+<h3 class="anchored" data-anchor-id="why-bother">Why bother</h3>
+<p>If you have used a capable model, you have probably already drawn a conclusion about exercises like the ones in this book. The machine writes the code faster than you will. It explains the output more clearly than your notes do. Doing the work by hand starts to feel like ceremony, something the course requires rather than something you need. Students in this position usually comply. They finish the assignment and privately write it off.</p>
+<p>That judgment is correct about the thing being measured and wrong about the thing that matters. The purpose of the work was never the answer it produced. It is that working through it changes what you are able to see afterward.</p>
+<p>You might fairly answer that you have outsourced things before and been fine. Almost nobody navigates by memory anymore. The map in your head never formed, and you have not missed it.</p>
+<p>That is true, and the reason it is true is worth understanding, because it does not carry over. Directions are safe to hand off because you always know when you need them. You are lost or you are not. The tool sits there at the exact moment of need, and asking costs nothing. Outsourcing works whenever you can reliably tell that the moment has arrived.</p>
+<p>Judgment is the opposite case. The moment you need it is the moment nothing appears to be wrong. Consider signing a loan because the monthly payment fits your budget. Nothing in that number prompts you to ask what the loan costs in total. There is no alarm, no point at which you think to consult anyone, because from the inside it looks like a decision that has already been made correctly. Someone with a feel for how interest accumulates would have paused. Not because they ran the calculation, but because the figure did not sit right.</p>
+<p>That pause is the whole thing, and it cannot be delegated. You cannot ask a machine whether something is off if nothing strikes you as off. The trigger has to be in you, and it is built by having done the work often enough that wrong answers start to feel wrong.</p>
+<p>Everything in this book works the same way. Build a few models yourself and you start to notice when a result is off before you can say why. You develop a sense of which approach fits a situation, which is not available to someone reading the output of a machine that chose for them.</p>
+<p>The difficulty is that this payoff is invisible from where you are standing. It arrives later, in a form you will not be able to trace back to any particular assignment, and it cannot be demonstrated to anyone who does not already have it. You are being asked to invest in a capacity you cannot yet perceive, while the machine’s advantage is obvious today. That is a hard trade to accept on someone else’s word, and I am aware that I am asking you to accept it.</p>
+<p>The risk if you do not is worth naming plainly. A conclusion like this rarely stays confined to one assignment. A student who decides the exercise is theater soon decides the same about the course, the degree, their career and effort as a whole. It is possible to complete every assignment in a program while forming none of the judgment it was designed to build, and to arrive at the end with a transcript and no capability, which is the outcome nobody checks for.</p>
+</section>
+<section id="which-skills-survive" class="level3">
+<h3 class="anchored" data-anchor-id="which-skills-survive">Which skills survive</h3>
+<p>There is a simple test for whether a skill is worth building. Imagine a system that will perform any analytical task you can specify, correctly, on request. Not the AI you have used, which still makes mistakes, but a version with none of the current limitations. Then ask of anything you might learn: is it still worth knowing?</p>
+<p>The test is useful because it sorts. Skills whose value comes from doing cognitive work faster or more reliably than a machine do not pass. Nobody competes with a calculator at arithmetic, and nobody should try to compete with a model at writing code. What passes falls into two groups.</p>
+<p>The first group survives because a machine cannot supply it. Framing a problem requires knowing what you actually want, and no system can know that for you. Making a decision under uncertainty requires a view about risk that is a fact about you and your organization, not a property of the data. Defending a recommendation requires someone who can be held responsible for it, and a model cannot be held responsible for anything. These three are the spine of the book.</p>
+<p>The second group survives for a different reason. These skills do not pass as tasks you will perform, but they pass as the thing that makes the first group possible. Go back to the restaurant owner. Pricing catering, screening which jobs to accept, exiting the line, buying a second van: choosing among those four means knowing what each one would involve, what it would require you to assume, and where each would break. Somebody who has never built a pricing model has no view about whether pricing is the right frame here. They are not choosing. They are picking a phrase.</p>
+<p>This is the part that gets missed. You cannot have preferences about a model you do not understand. The technical chapters are not here so you can compete with the machine at producing the model, and they are not only here so you can check its work. They are here because the durable skills, framing and deciding and defending, are unreachable without them. Judgment about a thing requires having made one.</p>
+<p>The same work builds the reflex described earlier. You will not spend your career recomputing rows of a simulation by hand. You will spend it looking at results produced by something else and needing to know, quickly and without deliberation, whether to trust them. That instinct comes from having done the mechanics, even though the mechanics themselves can be delegated.</p>
+</section>
+<section id="how-to-use-this-book" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-use-this-book">How to use this book</h3>
+<p>The order matters more than it used to. Work each problem yourself before you hand any part of it to a model. Not because using AI is cheating, and not because I intend to check, but because the capacities described above only form under first exposure. Once you have seen the machine produce the answer, that particular problem can no longer build anything in you. Something has been spent that cannot be recovered.</p>
+<p>After you have made your own attempt, use the AI freely and aggressively. Ask it to extend the model. Ask it for three formulations you did not think of. Ask it to argue against your conclusion. Used at that point it multiplies what you already have. Used before, it substitutes for what you do not have yet, and you will not notice the substitution.</p>
+<p>The last thing to say is that judgment is calibrated against other people. You will not learn to frame a problem well until someone who knows the situation tells you that you framed it wrong, and you will not learn to defend a recommendation until you have done it in front of someone looking for the flaw. A conversation with a model, however good, cannot supply either. It has no stake in the outcome and it will not push back on you the way a skeptical manager will. Take the parts of a course that involve other people seriously. They are the parts that do not have a substitute.</p>
+</section>
+<section id="the-seven-skills" class="level3">
+<h3 class="anchored" data-anchor-id="the-seven-skills">The seven skills</h3>
+<p>What follows are the seven skills the assignments in this book are designed to build. They are ordered the way a real analysis moves, from a vague situation, to a model, to a defended recommendation.</p>
+</section>
 </section>
 <section id="framing-the-problem" class="level2">
 <h2 class="anchored" data-anchor-id="framing-the-problem">1. Framing the problem</h2>
@@ -265,7 +299,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="directing-the-ai" class="level2">
 <h2 class="anchored" data-anchor-id="directing-the-ai">3. Directing the AI</h2>
 <p>Using AI prospectively to explore possibilities you specify rather than retrospectively, as a lookup for what has already been written.</p>
-<p>A language model is trained on the past. Left to itself it returns the conventional treatment of a problem: the standard model, the usual assumptions, the textbook answer. That is genuinely useful, and it is also a ceiling. The interesting work is in the direction you choose to push: <em>what if demand and price are correlated?</em> <em>What if we could reorder mid-week?</em> <em>Show me the version of this model where the constraint is labor, not inventory.</em> The model can execute any of those. It will rarely propose them.</p>
+<p>A language model is trained on the past. Left to itself it returns the conventional treatment of a problem: the standard model, the usual assumptions, the textbook answer. That is genuinely useful, and it is also a ceiling. The interesting work is in the direction you choose to push. <em>What if demand and price are correlated?</em> <em>What if we could reorder mid-week?</em> <em>Show me the version of this model where the constraint is labor, not inventory.</em> The model can execute any of those. It will rarely propose them.</p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>Weak prompt: “How do I model inventory for a restaurant?” You get the standard newsvendor treatment. Strong prompt: “Extend the newsvendor model so that unsold inventory has 40% salvage value on the following day, and show me how the optimal order changes as salvage value goes from 0 to 100%.” Now the AI is doing work you directed.</p></li>
@@ -276,10 +310,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="verifying-the-analysis">4. Verifying the analysis</h2>
 <p>Auditing a result you did not produce by hand. Checking whether a constraint was silently dropped, a distribution misapplied, a sign flipped, a number invented.</p>
 <p>AI output is fluent, and fluency reads as correctness. A simulation with a subtly wrong distribution produces a clean histogram and a plausible expected value; nothing about the output announces the error. To catch it you need enough technical fluency of your own to referee the work. This is the practical reason the mechanics in this book still matter: <strong>you cannot verify what you could not, in principle, do yourself.</strong></p>
+<p>The habits below will eventually stop being procedures you run and become reflexes you have. That is the point of them. Auditing happens in real time, in a meeting, while someone is presenting. You cannot look up the instinct that something is wrong, because the instinct is what sends you to look.</p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>Sanity-check the extremes. If you order zero ounces, is profit zero? If you order far more than any plausible demand, does profit fall at the rate of the cost per ounce? Boundary cases are cheap to check and catch a surprising share of errors.</p></li>
-<li><p>Check the shape, not just the number. Expected profit as a function of order quantity should rise, peak, and fall. If your grid search returns an “optimum” at the edge of the range you searched, you have almost certainly not found an optimum — you have found the end of your grid.</p></li>
+<li><p>Check the shape, not just the number. Expected profit as a function of order quantity should rise, peak, and fall. If your grid search returns an “optimum” at the edge of the range you searched, you have almost certainly not found an optimum. You have found the end of your grid.</p></li>
 <li><p>Recompute one cell by hand. One row of a simulation, one term of an objective function. If it matches, your confidence in the other 99,999 rows is earned rather than assumed.</p></li>
 </ul>
 </section>
@@ -296,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="making-the-decision" class="level2">
 <h2 class="anchored" data-anchor-id="making-the-decision">6. Making the decision</h2>
 <p>Converting analysis into a choice, under uncertainty, when the analysis does not fully determine the answer.</p>
-<p>Analysis narrows options; it rarely eliminates them. Two alternatives with nearly identical expected values may differ sharply in downside risk, reversibility, or how they interact with what the organization is already committed to. Choosing between them requires a view about risk tolerance and about what matters. Those are not properties of the data. An AI asked to decide will either pick the highest expected value or hedge. Neither is a decision; the first is a rule and the second is an evasion.</p>
+<p>Analysis narrows options; it rarely eliminates them. Two alternatives with nearly identical expected values may differ sharply in downside risk, reversibility, or how they interact with what the organization is already committed to. Choosing between them requires a view about risk tolerance and about what matters. Those are not properties of the data. An AI asked to decide will either pick the highest expected value or hedge. Neither is a decision. The first is a rule and the second is an evasion.</p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>Option A has an expected profit of $240 with a 5% chance of a serious loss. Option B has an expected profit of $232 and no realistic downside. There is no formula that settles this. It depends on whether the business can absorb the bad outcome, which is a fact about the business, not about the model.</p></li>
@@ -307,10 +342,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="defending-the-recommendation">7. Defending the recommendation</h2>
 <p>Explaining and standing behind a recommendation in front of someone who is skeptical, better informed than you about the business, and looking for the flaw.</p>
 <p>The AI produces the analysis; a person owns the call. When a manager asks “why should I believe this?”, the answer cannot be “the model said so.” You need to be able to state your assumptions, name the weakest link in your own reasoning, and say what would have to be true for you to be wrong. Analysts who can do this get their recommendations adopted. Analysts who cannot are treated as a calculator with opinions.</p>
+<p>This is the skill with the longest shelf life, and the reason is worth stating. However capable these systems become, accountability does not transfer to them. Someone has to be answerable for the choice, and that someone will be you.</p>
 <p><strong>Examples.</strong></p>
 <ul>
 <li><p>Lead with the decision and the reason, not the method: “Order 200 ounces, because expected profit is highest there and it stays within 3% of the best possible across every demand scenario we considered.” The methodology comes after, if asked.</p></li>
-<li><p>Volunteer the weak point before it is found. “The number I am least sure about is cost per ounce; if it is closer to 7 than 5, the answer moves to 280.” This reads as competence, not doubt — and it is far better than having your audience discover it for you.</p></li>
+<li><p>Volunteer the weak point before it is found. “The number I am least sure about is cost per ounce; if it is closer to 7 than 5, the answer moves to 280.” This reads as competence rather than doubt, and it is far better than having your audience discover it for you.</p></li>
 </ul>
 
 
