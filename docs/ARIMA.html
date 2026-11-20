@@ -280,6 +280,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#arima" id="toc-arima" class="nav-link" data-scroll-target="#arima"><span class="header-section-number">7.4</span> ARIMA</a>
   <ul class="collapse">
+  <li><a href="#choosing-p-and-q" id="toc-choosing-p-and-q" class="nav-link" data-scroll-target="#choosing-p-and-q">Choosing p and q</a></li>
   <li><a href="#revisiting-chilangos-restaurant" id="toc-revisiting-chilangos-restaurant" class="nav-link" data-scroll-target="#revisiting-chilangos-restaurant">Revisiting Chilango’s Restaurant</a></li>
   </ul></li>
   <li><a href="#combination-of-models-ensembles" id="toc-combination-of-models-ensembles" class="nav-link" data-scroll-target="#combination-of-models-ensembles"><span class="header-section-number">7.5</span> Combination of Models (Ensembles)</a></li>
@@ -860,7 +861,7 @@ We can generate a white noise process by using the normal distribution with a me
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_center" headers="kpss_stat">0.946</td>
+<td class="gt_row gt_center" headers="kpss_stat">1.117</td>
 <td class="gt_row gt_center" headers="kpss_pvalue">0.010</td>
 <td class="gt_row gt_center" headers="ndiffs">1</td>
 </tr>
@@ -1003,23 +1004,23 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="qruhctfgyf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qruhctfgyf table {
+<div id="tfgyfllqrj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tfgyfllqrj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qruhctfgyf thead, #qruhctfgyf tbody, #qruhctfgyf tfoot, #qruhctfgyf tr, #qruhctfgyf td, #qruhctfgyf th {
+#tfgyfllqrj thead, #tfgyfllqrj tbody, #tfgyfllqrj tfoot, #tfgyfllqrj tr, #tfgyfllqrj td, #tfgyfllqrj th {
   border-style: none;
 }
 
-#qruhctfgyf p {
+#tfgyfllqrj p {
   margin: 0;
   padding: 0;
 }
 
-#qruhctfgyf .gt_table {
+#tfgyfllqrj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1045,12 +1046,12 @@ We can generate a white noise process by using the normal distribution with a me
   border-left-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_caption {
+#tfgyfllqrj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qruhctfgyf .gt_title {
+#tfgyfllqrj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1062,7 +1063,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-width: 0;
 }
 
-#qruhctfgyf .gt_subtitle {
+#tfgyfllqrj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1074,7 +1075,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-top-width: 0;
 }
 
-#qruhctfgyf .gt_heading {
+#tfgyfllqrj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1086,13 +1087,13 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_bottom_border {
+#tfgyfllqrj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_col_headings {
+#tfgyfllqrj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1107,7 +1108,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_col_heading {
+#tfgyfllqrj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1127,7 +1128,7 @@ We can generate a white noise process by using the normal distribution with a me
   overflow-x: hidden;
 }
 
-#qruhctfgyf .gt_column_spanner_outer {
+#tfgyfllqrj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1139,15 +1140,15 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 4px;
 }
 
-#qruhctfgyf .gt_column_spanner_outer:first-child {
+#tfgyfllqrj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qruhctfgyf .gt_column_spanner_outer:last-child {
+#tfgyfllqrj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qruhctfgyf .gt_column_spanner {
+#tfgyfllqrj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1159,11 +1160,11 @@ We can generate a white noise process by using the normal distribution with a me
   width: 100%;
 }
 
-#qruhctfgyf .gt_spanner_row {
+#tfgyfllqrj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qruhctfgyf .gt_group_heading {
+#tfgyfllqrj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1189,7 +1190,7 @@ We can generate a white noise process by using the normal distribution with a me
   text-align: left;
 }
 
-#qruhctfgyf .gt_empty_group_heading {
+#tfgyfllqrj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1204,15 +1205,15 @@ We can generate a white noise process by using the normal distribution with a me
   vertical-align: middle;
 }
 
-#qruhctfgyf .gt_from_md > :first-child {
+#tfgyfllqrj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qruhctfgyf .gt_from_md > :last-child {
+#tfgyfllqrj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qruhctfgyf .gt_row {
+#tfgyfllqrj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1231,7 +1232,7 @@ We can generate a white noise process by using the normal distribution with a me
   overflow-x: hidden;
 }
 
-#qruhctfgyf .gt_stub {
+#tfgyfllqrj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1244,7 +1245,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#qruhctfgyf .gt_stub_row_group {
+#tfgyfllqrj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1258,15 +1259,15 @@ We can generate a white noise process by using the normal distribution with a me
   vertical-align: top;
 }
 
-#qruhctfgyf .gt_row_group_first td {
+#tfgyfllqrj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qruhctfgyf .gt_row_group_first th {
+#tfgyfllqrj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qruhctfgyf .gt_summary_row {
+#tfgyfllqrj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1276,16 +1277,16 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#qruhctfgyf .gt_first_summary_row {
+#tfgyfllqrj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_first_summary_row.thick {
+#tfgyfllqrj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qruhctfgyf .gt_last_summary_row {
+#tfgyfllqrj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1295,7 +1296,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_grand_summary_row {
+#tfgyfllqrj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1305,7 +1306,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#qruhctfgyf .gt_first_grand_summary_row {
+#tfgyfllqrj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1315,7 +1316,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-top-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_last_grand_summary_row_top {
+#tfgyfllqrj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1325,11 +1326,11 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_striped {
+#tfgyfllqrj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qruhctfgyf .gt_table_body {
+#tfgyfllqrj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1338,7 +1339,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_footnotes {
+#tfgyfllqrj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1352,7 +1353,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_footnote {
+#tfgyfllqrj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1361,7 +1362,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#qruhctfgyf .gt_sourcenotes {
+#tfgyfllqrj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1375,7 +1376,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#qruhctfgyf .gt_sourcenote {
+#tfgyfllqrj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1383,72 +1384,72 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#qruhctfgyf .gt_left {
+#tfgyfllqrj .gt_left {
   text-align: left;
 }
 
-#qruhctfgyf .gt_center {
+#tfgyfllqrj .gt_center {
   text-align: center;
 }
 
-#qruhctfgyf .gt_right {
+#tfgyfllqrj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qruhctfgyf .gt_font_normal {
+#tfgyfllqrj .gt_font_normal {
   font-weight: normal;
 }
 
-#qruhctfgyf .gt_font_bold {
+#tfgyfllqrj .gt_font_bold {
   font-weight: bold;
 }
 
-#qruhctfgyf .gt_font_italic {
+#tfgyfllqrj .gt_font_italic {
   font-style: italic;
 }
 
-#qruhctfgyf .gt_super {
+#tfgyfllqrj .gt_super {
   font-size: 65%;
 }
 
-#qruhctfgyf .gt_footnote_marks {
+#tfgyfllqrj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qruhctfgyf .gt_asterisk {
+#tfgyfllqrj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qruhctfgyf .gt_indent_1 {
+#tfgyfllqrj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qruhctfgyf .gt_indent_2 {
+#tfgyfllqrj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qruhctfgyf .gt_indent_3 {
+#tfgyfllqrj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qruhctfgyf .gt_indent_4 {
+#tfgyfllqrj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qruhctfgyf .gt_indent_5 {
+#tfgyfllqrj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qruhctfgyf .katex-display {
+#tfgyfllqrj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qruhctfgyf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tfgyfllqrj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1523,7 +1524,7 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 </div>
 </div>
-<p>The ACF of the errors from the AR(1) model resemble white noise. This suggests that we have correctly identified the systematic component of the series. In other words, there is nothing left to model since the errors are entirely random. This is not the case for the LS model since we still observe some significant spikes (lag 1 and lag 13) in the ACF function.</p>
+<p>The ACF of the errors from the AR(1) model resemble white noise. This suggests that we have correctly identified the systematic component of the series. In other words, there is nothing left to model since the errors are entirely random. This is not the case for the LS model since we still observe some significant spikes (lag 1 and lag 13) in the ACF function. You can think of the AR(1) term as “subtracting” the lag-one correlation from the series: the part of the ACF and PACF that <span class="math inline">\(\phi y_{t-1}\)</span> reproduces is removed, and only what it cannot reproduce stays in the errors. We return to this idea with an interactive lab in the ARIMA section below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>errors_PI <span class="sc">%&gt;%</span> <span class="fu">select</span>(.resid) <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(.resid) <span class="sc">%&gt;%</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1545,23 +1546,23 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="qrjaztasyq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qrjaztasyq table {
+<div id="yqujmtzeyf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yqujmtzeyf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qrjaztasyq thead, #qrjaztasyq tbody, #qrjaztasyq tfoot, #qrjaztasyq tr, #qrjaztasyq td, #qrjaztasyq th {
+#yqujmtzeyf thead, #yqujmtzeyf tbody, #yqujmtzeyf tfoot, #yqujmtzeyf tr, #yqujmtzeyf td, #yqujmtzeyf th {
   border-style: none;
 }
 
-#qrjaztasyq p {
+#yqujmtzeyf p {
   margin: 0;
   padding: 0;
 }
 
-#qrjaztasyq .gt_table {
+#yqujmtzeyf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1587,12 +1588,12 @@ We can generate a white noise process by using the normal distribution with a me
   border-left-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_caption {
+#yqujmtzeyf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qrjaztasyq .gt_title {
+#yqujmtzeyf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1604,7 +1605,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-width: 0;
 }
 
-#qrjaztasyq .gt_subtitle {
+#yqujmtzeyf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1616,7 +1617,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-top-width: 0;
 }
 
-#qrjaztasyq .gt_heading {
+#yqujmtzeyf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1628,13 +1629,13 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_bottom_border {
+#yqujmtzeyf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_col_headings {
+#yqujmtzeyf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1649,7 +1650,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_col_heading {
+#yqujmtzeyf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1669,7 +1670,7 @@ We can generate a white noise process by using the normal distribution with a me
   overflow-x: hidden;
 }
 
-#qrjaztasyq .gt_column_spanner_outer {
+#yqujmtzeyf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1681,15 +1682,15 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 4px;
 }
 
-#qrjaztasyq .gt_column_spanner_outer:first-child {
+#yqujmtzeyf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qrjaztasyq .gt_column_spanner_outer:last-child {
+#yqujmtzeyf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qrjaztasyq .gt_column_spanner {
+#yqujmtzeyf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1701,11 +1702,11 @@ We can generate a white noise process by using the normal distribution with a me
   width: 100%;
 }
 
-#qrjaztasyq .gt_spanner_row {
+#yqujmtzeyf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qrjaztasyq .gt_group_heading {
+#yqujmtzeyf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1731,7 +1732,7 @@ We can generate a white noise process by using the normal distribution with a me
   text-align: left;
 }
 
-#qrjaztasyq .gt_empty_group_heading {
+#yqujmtzeyf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1746,15 +1747,15 @@ We can generate a white noise process by using the normal distribution with a me
   vertical-align: middle;
 }
 
-#qrjaztasyq .gt_from_md > :first-child {
+#yqujmtzeyf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qrjaztasyq .gt_from_md > :last-child {
+#yqujmtzeyf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qrjaztasyq .gt_row {
+#yqujmtzeyf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1773,7 +1774,7 @@ We can generate a white noise process by using the normal distribution with a me
   overflow-x: hidden;
 }
 
-#qrjaztasyq .gt_stub {
+#yqujmtzeyf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1786,7 +1787,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#qrjaztasyq .gt_stub_row_group {
+#yqujmtzeyf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1800,15 +1801,15 @@ We can generate a white noise process by using the normal distribution with a me
   vertical-align: top;
 }
 
-#qrjaztasyq .gt_row_group_first td {
+#yqujmtzeyf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qrjaztasyq .gt_row_group_first th {
+#yqujmtzeyf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qrjaztasyq .gt_summary_row {
+#yqujmtzeyf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1818,16 +1819,16 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#qrjaztasyq .gt_first_summary_row {
+#yqujmtzeyf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_first_summary_row.thick {
+#yqujmtzeyf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qrjaztasyq .gt_last_summary_row {
+#yqujmtzeyf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1837,7 +1838,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_grand_summary_row {
+#yqujmtzeyf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1847,7 +1848,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#qrjaztasyq .gt_first_grand_summary_row {
+#yqujmtzeyf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1857,7 +1858,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-top-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_last_grand_summary_row_top {
+#yqujmtzeyf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1867,11 +1868,11 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_striped {
+#yqujmtzeyf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qrjaztasyq .gt_table_body {
+#yqujmtzeyf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1880,7 +1881,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_footnotes {
+#yqujmtzeyf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1894,7 +1895,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_footnote {
+#yqujmtzeyf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1903,7 +1904,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#qrjaztasyq .gt_sourcenotes {
+#yqujmtzeyf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1917,7 +1918,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#qrjaztasyq .gt_sourcenote {
+#yqujmtzeyf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1925,72 +1926,72 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#qrjaztasyq .gt_left {
+#yqujmtzeyf .gt_left {
   text-align: left;
 }
 
-#qrjaztasyq .gt_center {
+#yqujmtzeyf .gt_center {
   text-align: center;
 }
 
-#qrjaztasyq .gt_right {
+#yqujmtzeyf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qrjaztasyq .gt_font_normal {
+#yqujmtzeyf .gt_font_normal {
   font-weight: normal;
 }
 
-#qrjaztasyq .gt_font_bold {
+#yqujmtzeyf .gt_font_bold {
   font-weight: bold;
 }
 
-#qrjaztasyq .gt_font_italic {
+#yqujmtzeyf .gt_font_italic {
   font-style: italic;
 }
 
-#qrjaztasyq .gt_super {
+#yqujmtzeyf .gt_super {
   font-size: 65%;
 }
 
-#qrjaztasyq .gt_footnote_marks {
+#yqujmtzeyf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qrjaztasyq .gt_asterisk {
+#yqujmtzeyf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qrjaztasyq .gt_indent_1 {
+#yqujmtzeyf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qrjaztasyq .gt_indent_2 {
+#yqujmtzeyf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qrjaztasyq .gt_indent_3 {
+#yqujmtzeyf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qrjaztasyq .gt_indent_4 {
+#yqujmtzeyf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qrjaztasyq .gt_indent_5 {
+#yqujmtzeyf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qrjaztasyq .katex-display {
+#yqujmtzeyf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qrjaztasyq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yqujmtzeyf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2036,23 +2037,23 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="eyfdyfiqjw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#eyfdyfiqjw table {
+<div id="ucwqjesnna" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ucwqjesnna table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#eyfdyfiqjw thead, #eyfdyfiqjw tbody, #eyfdyfiqjw tfoot, #eyfdyfiqjw tr, #eyfdyfiqjw td, #eyfdyfiqjw th {
+#ucwqjesnna thead, #ucwqjesnna tbody, #ucwqjesnna tfoot, #ucwqjesnna tr, #ucwqjesnna td, #ucwqjesnna th {
   border-style: none;
 }
 
-#eyfdyfiqjw p {
+#ucwqjesnna p {
   margin: 0;
   padding: 0;
 }
 
-#eyfdyfiqjw .gt_table {
+#ucwqjesnna .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2078,12 +2079,12 @@ We can generate a white noise process by using the normal distribution with a me
   border-left-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_caption {
+#ucwqjesnna .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#eyfdyfiqjw .gt_title {
+#ucwqjesnna .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2095,7 +2096,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-width: 0;
 }
 
-#eyfdyfiqjw .gt_subtitle {
+#ucwqjesnna .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2107,7 +2108,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-top-width: 0;
 }
 
-#eyfdyfiqjw .gt_heading {
+#ucwqjesnna .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2119,13 +2120,13 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_bottom_border {
+#ucwqjesnna .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_col_headings {
+#ucwqjesnna .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2140,7 +2141,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_col_heading {
+#ucwqjesnna .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2160,7 +2161,7 @@ We can generate a white noise process by using the normal distribution with a me
   overflow-x: hidden;
 }
 
-#eyfdyfiqjw .gt_column_spanner_outer {
+#ucwqjesnna .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2172,15 +2173,15 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 4px;
 }
 
-#eyfdyfiqjw .gt_column_spanner_outer:first-child {
+#ucwqjesnna .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#eyfdyfiqjw .gt_column_spanner_outer:last-child {
+#ucwqjesnna .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#eyfdyfiqjw .gt_column_spanner {
+#ucwqjesnna .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2192,11 +2193,11 @@ We can generate a white noise process by using the normal distribution with a me
   width: 100%;
 }
 
-#eyfdyfiqjw .gt_spanner_row {
+#ucwqjesnna .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#eyfdyfiqjw .gt_group_heading {
+#ucwqjesnna .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2222,7 +2223,7 @@ We can generate a white noise process by using the normal distribution with a me
   text-align: left;
 }
 
-#eyfdyfiqjw .gt_empty_group_heading {
+#ucwqjesnna .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2237,15 +2238,15 @@ We can generate a white noise process by using the normal distribution with a me
   vertical-align: middle;
 }
 
-#eyfdyfiqjw .gt_from_md > :first-child {
+#ucwqjesnna .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#eyfdyfiqjw .gt_from_md > :last-child {
+#ucwqjesnna .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#eyfdyfiqjw .gt_row {
+#ucwqjesnna .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2264,7 +2265,7 @@ We can generate a white noise process by using the normal distribution with a me
   overflow-x: hidden;
 }
 
-#eyfdyfiqjw .gt_stub {
+#ucwqjesnna .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2277,7 +2278,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#eyfdyfiqjw .gt_stub_row_group {
+#ucwqjesnna .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2291,15 +2292,15 @@ We can generate a white noise process by using the normal distribution with a me
   vertical-align: top;
 }
 
-#eyfdyfiqjw .gt_row_group_first td {
+#ucwqjesnna .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#eyfdyfiqjw .gt_row_group_first th {
+#ucwqjesnna .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#eyfdyfiqjw .gt_summary_row {
+#ucwqjesnna .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2309,16 +2310,16 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#eyfdyfiqjw .gt_first_summary_row {
+#ucwqjesnna .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_first_summary_row.thick {
+#ucwqjesnna .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#eyfdyfiqjw .gt_last_summary_row {
+#ucwqjesnna .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2328,7 +2329,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_grand_summary_row {
+#ucwqjesnna .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2338,7 +2339,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#eyfdyfiqjw .gt_first_grand_summary_row {
+#ucwqjesnna .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2348,7 +2349,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-top-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_last_grand_summary_row_top {
+#ucwqjesnna .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2358,11 +2359,11 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_striped {
+#ucwqjesnna .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#eyfdyfiqjw .gt_table_body {
+#ucwqjesnna .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2371,7 +2372,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_footnotes {
+#ucwqjesnna .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2385,7 +2386,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_footnote {
+#ucwqjesnna .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2394,7 +2395,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#eyfdyfiqjw .gt_sourcenotes {
+#ucwqjesnna .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2408,7 +2409,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#eyfdyfiqjw .gt_sourcenote {
+#ucwqjesnna .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2416,72 +2417,72 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#eyfdyfiqjw .gt_left {
+#ucwqjesnna .gt_left {
   text-align: left;
 }
 
-#eyfdyfiqjw .gt_center {
+#ucwqjesnna .gt_center {
   text-align: center;
 }
 
-#eyfdyfiqjw .gt_right {
+#ucwqjesnna .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#eyfdyfiqjw .gt_font_normal {
+#ucwqjesnna .gt_font_normal {
   font-weight: normal;
 }
 
-#eyfdyfiqjw .gt_font_bold {
+#ucwqjesnna .gt_font_bold {
   font-weight: bold;
 }
 
-#eyfdyfiqjw .gt_font_italic {
+#ucwqjesnna .gt_font_italic {
   font-style: italic;
 }
 
-#eyfdyfiqjw .gt_super {
+#ucwqjesnna .gt_super {
   font-size: 65%;
 }
 
-#eyfdyfiqjw .gt_footnote_marks {
+#ucwqjesnna .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#eyfdyfiqjw .gt_asterisk {
+#ucwqjesnna .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#eyfdyfiqjw .gt_indent_1 {
+#ucwqjesnna .gt_indent_1 {
   text-indent: 5px;
 }
 
-#eyfdyfiqjw .gt_indent_2 {
+#ucwqjesnna .gt_indent_2 {
   text-indent: 10px;
 }
 
-#eyfdyfiqjw .gt_indent_3 {
+#ucwqjesnna .gt_indent_3 {
   text-indent: 15px;
 }
 
-#eyfdyfiqjw .gt_indent_4 {
+#ucwqjesnna .gt_indent_4 {
   text-indent: 20px;
 }
 
-#eyfdyfiqjw .gt_indent_5 {
+#ucwqjesnna .gt_indent_5 {
   text-indent: 25px;
 }
 
-#eyfdyfiqjw .katex-display {
+#ucwqjesnna .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#eyfdyfiqjw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ucwqjesnna div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2631,7 +2632,465 @@ We can generate a white noise process by using the normal distribution with a me
 <li>Integrated (I): The “I” part is about making the time series stationary. It means we take the differences between consecutive observations to remove trends or seasonality.</li>
 <li>Moving Average (MA): The “MA” part means that the future values also depend on the past prediction errors (residuals). If the model predicted a value that was too high or too low in the past, it will try to correct that in the future predictions.</li>
 </ul>
-<p>ARIMA combines these three components to forecast future values in a time series by considering its own past, removing trends, and accounting for past errors in predictions. In terms of notation, an ARIMA(1,1,2), will perform the first difference of the series, and estimate the model with an AR(1) and MA(2) component. Below we estimate the ARIMA model.</p>
+<p>ARIMA combines these three components to forecast future values in a time series by considering its own past, removing trends, and accounting for past errors in predictions. In terms of notation, an ARIMA(1,1,2), will perform the first difference of the series, and estimate the model with an AR(1) and MA(2) component. Below we first discuss how to choose p and q, and then estimate an ARIMA model.</p>
+<section id="choosing-p-and-q" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="choosing-p-and-q">Choosing p and q</h3>
+<p>Before estimating an ARIMA model we must choose how many AR terms (p) and how many MA terms (q) to include. The ACF and PACF are the main tools for this choice, because each process leaves a recognizable signature on them:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Process</th>
+<th style="text-align: left;">ACF</th>
+<th style="text-align: left;">PACF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">AR(p)</td>
+<td style="text-align: left;">Decays gradually (may alternate in sign or oscillate)</td>
+<td style="text-align: left;">Cuts off: significant spikes up to lag p, then nothing</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MA(q)</td>
+<td style="text-align: left;">Cuts off: significant spikes up to lag q, then nothing</td>
+<td style="text-align: left;">Decays gradually (may alternate in sign)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ARMA(p,q)</td>
+<td style="text-align: left;">Decays gradually</td>
+<td style="text-align: left;">Decays gradually</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White noise</td>
+<td style="text-align: left;">No significant spikes</td>
+<td style="text-align: left;">No significant spikes</td>
+</tr>
+</tbody>
+</table>
+<p>The AR(1) and MA(1) simulations earlier in this chapter are the simplest cases of the first two rows. Real data are noisier than these textbook patterns, so the table gives us a starting guess, not a final answer. The final answer comes from checking the errors.</p>
+<p>A useful way to think about any ARIMA model is that it splits the series into two parts:</p>
+<center>
+<span class="math inline">\(y_t = \underbrace{c + \phi_1 y_{t-1} + \dots + \phi_p y_{t-p} + \theta_1 \epsilon_{t-1} + \dots + \theta_q \epsilon_{t-q}}_{\text{what the model explains}} + \underbrace{\epsilon_t}_{\text{what is left over}}\)</span>
+</center>
+<p><br></p>
+<p>Every AR or MA term we include is a tool for reproducing part of the correlation pattern we see in the ACF and PACF. Once the model is estimated, that part of the pattern is “subtracted” from the series, and only what the model could not reproduce stays behind in the errors <span class="math inline">\(\epsilon_t\)</span>. This gives a simple rule for judging our choice of p and q:</p>
+<ul>
+<li><strong>Too few terms:</strong> some of the correlation is not modeled, so it stays in the errors. The ACF and PACF of the residuals will still show significant spikes, typically at the lags we left out.</li>
+<li><strong>The right terms:</strong> all of the systematic correlation is captured and the residuals look like white noise. There is nothing left to model.</li>
+<li><strong>Too many terms:</strong> the residuals also look like white noise, but the extra coefficients add nothing except estimation noise. Between two models with white-noise residuals, we prefer the simpler one, which is the one with the lower BIC.</li>
+</ul>
+<p>Besides looking at the residual ACF, we can test formally whether a group of residual autocorrelations is jointly zero with the <strong>Ljung-Box test</strong>. A large p-value (above 0.05) means we cannot reject that the errors are white noise. In R, the test is applied to the residuals of a fitted model with <code>augment(fit) %&gt;% features(.innov, ljung_box, lag = 10)</code>.</p>
+<p>The lab below lets you practice this process. It generates a mystery series from a random AR, MA, or ARMA process. Row 1 shows the series with its ACF and PACF. When you choose an AR order and an MA order, the model is fitted to the series and row 2 shows the ACF and PACF that your model can reproduce. The same pattern appears as orange dots on top of the series correlations in row 1, so you can see how much of each bar your model accounts for. Row 3 shows the residuals: what is left after your model’s part has been removed. All correlation panels share the same scale, so you can compare them directly from top to bottom.</p>
+<style>
+.arma-lab {
+  --surface-1: #fcfcfb;
+  --surface-2: #f3f2ef;
+  --border: #dedcd6;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #7a7974;
+  --ink: #3b3a37;          /* sample ACF/PACF lollipops (like fpp3) */
+  --model: #eb6834;        /* what the chosen ARMA(p,q) explains */
+  --resid: #2a78d6;        /* residuals */
+  --band: #2a78d6;         /* significance bounds */
+  --alert: #e34948;        /* residual spike outside the bounds */
+  --good: #008300;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px 12px;
+  margin: 1.5rem 0;
+}
+.arma-lab h4 { margin: 0 0 4px; font-size: 1.05rem; }
+.arma-lab .sub { color: var(--text-secondary); font-size: .88rem; margin: 0 0 12px; }
+.arma-lab .controls {
+  display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
+  background: var(--surface-2); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px;
+}
+.arma-lab .controls label { font-size: .88rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+.arma-lab .order { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: #fff; }
+.arma-lab .order button {
+  border: 0; background: transparent; padding: 3px 10px; font-size: .88rem; cursor: pointer; color: var(--text-primary);
+  border-right: 1px solid var(--border);
+}
+.arma-lab .order button:last-child { border-right: 0; }
+.arma-lab .order button.on { background: var(--text-primary); color: #fff; }
+.arma-lab .btn {
+  border: 1px solid var(--border); background: #fff; border-radius: 6px; padding: 4px 12px;
+  font-size: .88rem; cursor: pointer; color: var(--text-primary);
+}
+.arma-lab .btn:hover, .arma-lab .order button:hover:not(.on) { background: #eceae5; }
+.arma-lab .spacer { flex: 1; }
+.arma-lab .row { margin-top: 10px; }
+.arma-lab .row-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 2px; }
+.arma-lab .row-head b { font-size: .95rem; }
+.arma-lab .row-head span { font-size: .82rem; color: var(--text-secondary); }
+.arma-lab .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+@media (max-width: 720px) { .arma-lab .grid3 { grid-template-columns: 1fr; } }
+.arma-lab .modelbox { font-size: .84rem; color: var(--text-secondary); padding: 6px 4px 0 4px; line-height: 1.45; }
+.arma-lab .modelbox .eq { display: block; margin: 4px 0 8px; padding: 6px 8px; background: var(--surface-2); border-radius: 6px; line-height: 1.6; }
+.arma-lab svg { width: 100%; height: auto; display: block; }
+.arma-lab svg text { font-size: 10px; fill: var(--text-muted); }
+.arma-lab svg text.ttl { font-size: 11px; fill: var(--text-secondary); font-weight: 600; }
+.arma-lab .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: .8rem; color: var(--text-secondary); margin: 2px 0 0; }
+.arma-lab .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+.arma-lab .legend i.line { width: 14px; height: 0; border-radius: 0; border-top: 2px dashed var(--band); vertical-align: 3px; }
+.arma-lab .eq { font-family: SFMono-Regular, Menlo, Consolas, monospace; font-size: .82rem; color: var(--text-primary); }
+.arma-lab .verdict { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; font-size: .88rem; margin-top: 6px;
+  padding: 8px 12px; border-radius: 8px; background: var(--surface-2); }
+.arma-lab .verdict .tag { font-weight: 600; }
+.arma-lab .verdict .tag.ok { color: var(--good); }
+.arma-lab .verdict .tag.bad { color: var(--alert); }
+.arma-lab .truth { font-size: .88rem; color: var(--text-secondary); }
+.arma-lab .truth b { color: var(--text-primary); }
+.arma-lab .tip { position: absolute; pointer-events: none; background: #0b0b0b; color: #fff; font-size: 12px;
+  padding: 4px 8px; border-radius: 5px; white-space: nowrap; opacity: 0; transition: opacity .08s; z-index: 10; }
+</style>
+
+<div class="arma-lab" id="arma-lab">
+  <h4 class="anchored">ARMA identification lab</h4>
+  <p class="sub">A mystery series is generated from a random AR, MA or ARMA process. Read its ACF and PACF, choose the AR order (p) and MA order (q), and watch what your model takes out of the series and what it leaves behind in the errors.</p>
+
+  <div class="controls">
+    <label>AR order (p) <span class="order" data-k="p"></span></label>
+    <label>MA order (q) <span class="order" data-k="q"></span></label>
+    <span class="spacer"></span>
+    <button class="btn" data-act="reveal">Reveal true process</button>
+    <button class="btn" data-act="new">New mystery series</button>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><b>1 · The series</b><span>Bars: sample ACF/PACF of the data. Orange dots: the part your ARMA(p,q) accounts for.</span></div>
+    <div class="grid3"><div data-plot="y"></div><div data-plot="yacf"></div><div data-plot="ypacf"></div></div>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><b>2 · Your model</b><span>The correlation pattern your chosen ARMA(p,q) can reproduce (fitted to the data).</span></div>
+    <div class="grid3"><div class="modelbox" data-out="eq"></div><div data-plot="macf"></div><div data-plot="mpacf"></div></div>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><b>3 · What is left in the errors</b><span>Residuals of your model. Anything you did not model shows up here.</span></div>
+    <div class="grid3"><div data-plot="e"></div><div data-plot="eacf"></div><div data-plot="epacf"></div></div>
+    <div class="verdict" data-out="verdict"></div>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:var(--ink)"></i>Series</span>
+    <span><i style="background:var(--model)"></i>Implied by your model</span>
+    <span><i style="background:var(--resid)"></i>Residuals</span>
+    <span><i style="background:var(--alert)"></i>Residual spike outside bounds</span>
+    <span><i class="line"></i>±1.96/√T significance bounds</span>
+  </div>
+  <p class="truth" data-out="truth"></p>
+  <div class="tip"></div>
+</div>
+
+<script>
+(function () {
+  const root = document.getElementById('arma-lab');
+  if (!root) return;
+  const T = 300, LAGS = 20, LB_LAG = 10, MAXORD = 3;
+  const W = 300, H = 150, M = { l: 30, r: 8, t: 18, b: 20 };
+  const css = getComputedStyle(root);
+  const C = k => css.getPropertyValue('--' + k).trim();
+  const tip = root.querySelector('.tip');
+
+  // ---------- random numbers ----------
+  const randn = () => { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const unif = (a, b) => a + (b - a) * Math.random();
+  const sgn = () => (Math.random() < 0.5 ? -1 : 1);
+
+  // ---------- partial autocorrelations <-> coefficients (keeps AR stationary / MA invertible) ----------
+  function kappaToPoly(kap) {          // Levinson recursion: returns a with 1 - a1 z - ... having roots outside unit circle
+    let a = [];
+    for (let k = 0; k < kap.length; k++) {
+      const n = a.slice();
+      for (let j = 0; j < k; j++) n[j] = a[j] - kap[k] * a[k - 1 - j];
+      n[k] = kap[k]; a = n;
+    }
+    return a;
+  }
+
+  // ---------- simulate ARMA ----------
+  function simulate(phi, theta, n) {
+    const burn = 200, N = n + burn, y = new Array(N).fill(0), e = new Array(N);
+    for (let t = 0; t < N; t++) {
+      e[t] = randn();
+      let v = e[t];
+      for (let i = 0; i < phi.length; i++) if (t - 1 - i >= 0) v += phi[i] * y[t - 1 - i];
+      for (let j = 0; j < theta.length; j++) if (t - 1 - j >= 0) v += theta[j] * e[t - 1 - j];
+      y[t] = v;
+    }
+    return y.slice(burn);
+  }
+
+  // ---------- ACF / PACF ----------
+  function acf(x, K) {
+    const n = x.length, m = x.reduce((a, b) => a + b, 0) / n;
+    let d = 0; for (const v of x) d += (v - m) ** 2;
+    const r = [];
+    for (let k = 1; k <= K; k++) { let s = 0; for (let t = 0; t < n - k; t++) s += (x[t] - m) * (x[t + k] - m); r.push(s / d); }
+    return r;
+  }
+  function pacfFromAcf(r) {            // Durbin-Levinson; r = [rho1..rhoK]
+    const K = r.length, out = []; let prev = [];
+    for (let k = 1; k <= K; k++) {
+      let num = r[k - 1], den = 1;
+      for (let j = 1; j < k; j++) { num -= prev[j - 1] * r[k - 1 - j]; den -= prev[j - 1] * r[j - 1]; }
+      const pkk = num / den, cur = [];
+      for (let j = 1; j < k; j++) cur.push(prev[j - 1] - pkk * prev[k - 1 - j]);
+      cur.push(pkk); out.push(pkk); prev = cur;
+    }
+    return out;
+  }
+  function theoAcf(phi, theta, K) {    // via psi weights
+    const J = 600, psi = [1];
+    for (let j = 1; j < J; j++) {
+      let v = j <= theta.length ? theta[j - 1] : 0;
+      for (let i = 1; i <= Math.min(j, phi.length); i++) v += phi[i - 1] * psi[j - i];
+      psi.push(v);
+    }
+    const g = k => { let s = 0; for (let j = 0; j + k < J; j++) s += psi[j] * psi[j + k]; return s; };
+    const g0 = g(0), r = [];
+    for (let k = 1; k <= K; k++) r.push(g(k) / g0);
+    return r;
+  }
+
+  // ---------- fit ARMA(p,q) by conditional sum of squares ----------
+  function residuals(z, phi, theta) {
+    const n = z.length, e = new Array(n).fill(0);
+    for (let t = 0; t < n; t++) {
+      let v = z[t];
+      for (let i = 0; i < phi.length; i++) if (t - 1 - i >= 0) v -= phi[i] * z[t - 1 - i];
+      for (let j = 0; j < theta.length; j++) if (t - 1 - j >= 0) v -= theta[j] * e[t - 1 - j];
+      e[t] = v;
+    }
+    return e;
+  }
+  function unpack(u, p, q) {
+    const phi = kappaToPoly(u.slice(0, p).map(Math.tanh));
+    const theta = kappaToPoly(u.slice(p).map(Math.tanh)).map(v => -v);
+    return { phi, theta };
+  }
+  function nelderMead(f, x0, iters) {
+    const n = x0.length; if (!n) return x0;
+    let S = [x0.slice()];
+    for (let i = 0; i < n; i++) { const x = x0.slice(); x[i] += 0.5; S.push(x); }
+    let F = S.map(f);
+    for (let it = 0; it < iters; it++) {
+      const idx = F.map((v, i) => i).sort((a, b) => F[a] - F[b]); S = idx.map(i => S[i]); F = idx.map(i => F[i]);
+      if (Math.abs(F[n] - F[0]) < 1e-10 * (1 + Math.abs(F[0]))) break;
+      const c = new Array(n).fill(0);
+      for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) c[j] += S[i][j] / n;
+      const pt = a => c.map((v, j) => v + a * (S[n][j] - v));
+      const xr = pt(-1), fr = f(xr);
+      if (fr < F[0]) { const xe = pt(-2), fe = f(xe); if (fe < fr) { S[n] = xe; F[n] = fe; } else { S[n] = xr; F[n] = fr; } }
+      else if (fr < F[n - 1]) { S[n] = xr; F[n] = fr; }
+      else {
+        const xc = pt(0.5), fc = f(xc);
+        if (fc < F[n]) { S[n] = xc; F[n] = fc; }
+        else for (let i = 1; i <= n; i++) { S[i] = S[i].map((v, j) => S[0][j] + 0.5 * (v - S[0][j])); F[i] = f(S[i]); }
+      }
+    }
+    let b = 0; for (let i = 1; i <= n; i++) if (F[i] < F[b]) b = i;
+    return S[b];
+  }
+  function fit(y, p, q) {
+    const mu = y.reduce((a, b) => a + b, 0) / y.length, z = y.map(v => v - mu);
+    const sse = u => { const { phi, theta } = unpack(u, p, q); const e = residuals(z, phi, theta);
+      let s = 0; for (let t = p; t < e.length; t++) s += e[t] * e[t]; return s; };
+    let best = null;
+    const starts = [new Array(p + q).fill(0), new Array(p + q).fill(0).map(() => unif(-1, 1)), new Array(p + q).fill(0).map(() => unif(-1, 1))];
+    for (const s of starts) { const u = nelderMead(sse, s, 1500), v = sse(u); if (!best || v < best.v) best = { u, v }; }
+    const { phi, theta } = unpack(best.u, p, q);
+    const e = residuals(z, phi, theta).slice(p);
+    const n = e.length, k = p + q + 1;
+    const bic = n * Math.log(best.v / n) + k * Math.log(n);
+    return { mu, phi, theta, e, bic };
+  }
+
+  // ---------- Ljung-Box ----------
+  function lnGamma(x) { const c = [76.18009172947146, -86.50532032941677, 24.01409824083091, -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5];
+    let y = x, t = x + 5.5; t -= (x + 0.5) * Math.log(t); let s = 1.000000000190015; for (const v of c) s += v / ++y; return -t + Math.log(2.5066282746310005 * s / x); }
+  function gammaQ(a, x) {             // upper regularized incomplete gamma
+    if (x <= 0) return 1;
+    if (x < a + 1) { let ap = a, sum = 1 / a, del = sum; for (let i = 0; i < 300; i++) { ap++; del *= x / ap; sum += del; if (Math.abs(del) < Math.abs(sum) * 1e-12) break; }
+      return 1 - sum * Math.exp(-x + a * Math.log(x) - lnGamma(a)); }
+    let b = x + 1 - a, c = 1e300, d = 1 / b, h = d;
+    for (let i = 1; i < 300; i++) { const an = -i * (i - a); b += 2; d = an * d + b; if (Math.abs(d) < 1e-300) d = 1e-300; c = b + an / c; if (Math.abs(c) < 1e-300) c = 1e-300; d = 1 / d; const del = d * c; h *= del; if (Math.abs(del - 1) < 1e-12) break; }
+    return Math.exp(-x + a * Math.log(x) - lnGamma(a)) * h;
+  }
+  function ljungBox(r, n, h, df) { let Q = 0; for (let k = 1; k <= h; k++) Q += r[k - 1] ** 2 / (n - k); Q *= n * (n + 2);
+    return { Q, p: gammaQ(Math.max(df, 1) / 2, Q / 2) }; }
+
+  // ---------- random "true" process ----------
+  function randomProcess() {
+    const kinds = ['AR1', 'AR1', 'AR2', 'MA1', 'MA1', 'MA2', 'ARMA11', 'WN'];
+    const kind = kinds[Math.floor(Math.random() * kinds.length)];
+    const k1 = () => sgn() * unif(0.5, 0.85);
+    let phi = [], theta = [];
+    if (kind === 'AR1') phi = [k1()];
+    if (kind === 'AR2') phi = kappaToPoly([sgn() * unif(0.4, 0.8), sgn() * unif(0.45, 0.75)]);
+    if (kind === 'MA1') theta = [k1()];
+    if (kind === 'MA2') theta = kappaToPoly([sgn() * unif(0.4, 0.8), sgn() * unif(0.45, 0.75)]).map(v => -v);
+    if (kind === 'ARMA11') { do { phi = [k1()]; theta = [sgn() * unif(0.4, 0.8)]; } while (Math.abs(phi[0] + theta[0]) < 0.7); }
+    return { phi, theta };
+  }
+
+  // ---------- drawing ----------
+  const NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function svg(title) { const s = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': title });
+    el('text', { x: M.l, y: 11, class: 'ttl' }, s).textContent = title; return s; }
+  function showTip(evt, html) { const b = root.getBoundingClientRect(); tip.innerHTML = html; tip.style.opacity = 1;
+    tip.style.left = (evt.clientX - b.left + 12) + 'px'; tip.style.top = (evt.clientY - b.top - 28) + 'px'; }
+  function hideTip() { tip.style.opacity = 0; }
+
+  function corrPlot(host, title, vals, opts) {
+    opts = opts || {};
+    const s = svg(title), pw = W - M.l - M.r, ph = H - M.t - M.b;
+    const bound = 1.96 / Math.sqrt(opts.n || T);
+    let ymax = opts.ymax || Math.max(0.3, bound * 1.4, ...vals.map(Math.abs), ...(opts.overlay || []).map(Math.abs));
+    ymax = Math.min(1, Math.ceil(ymax * 10) / 10);
+    const y = v => M.t + ph / 2 - (v / ymax) * (ph / 2), x = k => M.l + (k - 0.5) * pw / LAGS;
+    // grid / axes
+    for (const v of [-ymax, 0, ymax]) {
+      el('line', { x1: M.l, x2: W - M.r, y1: y(v), y2: y(v), stroke: v === 0 ? C('text-muted') : C('border'), 'stroke-width': 1 }, s);
+      el('text', { x: M.l - 4, y: y(v) + 3, 'text-anchor': 'end' }, s).textContent = v.toFixed(1);
+    }
+    for (const k of [1, 5, 10, 15, 20]) el('text', { x: x(k), y: H - 6, 'text-anchor': 'middle' }, s).textContent = k;
+    for (const v of [bound, -bound]) el('line', { x1: M.l, x2: W - M.r, y1: y(v), y2: y(v), stroke: C('band'), 'stroke-width': 1.2, 'stroke-dasharray': '4 3' }, s);
+    // bars
+    vals.forEach((v, i) => {
+      const k = i + 1, out = Math.abs(v) > bound;
+      const col = opts.color === 'resid' ? (out ? C('alert') : C('resid')) : C(opts.color || 'ink');
+      el('line', { x1: x(k), x2: x(k), y1: y(0), y2: y(v), stroke: col, 'stroke-width': 3, 'stroke-linecap': 'round' }, s);
+    });
+    // overlay (model-implied)
+    if (opts.overlay) opts.overlay.forEach((v, i) => el('circle', { cx: x(i + 1), cy: y(v), r: 3.6, fill: C('model'), stroke: C('surface-1'), 'stroke-width': 1.5 }, s));
+    // hover targets
+    vals.forEach((v, i) => {
+      const k = i + 1, r = el('rect', { x: x(k) - pw / LAGS / 2, y: M.t, width: pw / LAGS, height: ph, fill: 'transparent' }, s);
+      let html = `Lag ${k}: <b>${v.toFixed(3)}</b>`;
+      if (opts.overlay) html += `<br>model: ${opts.overlay[i].toFixed(3)}`;
+      if (Math.abs(v) > bound) html += `<br>outside ±${bound.toFixed(3)}`;
+      r.addEventListener('mousemove', ev => showTip(ev, html)); r.addEventListener('mouseleave', hideTip);
+    });
+    host.replaceChildren(s);
+  }
+
+  function linePlot(host, title, v, color) {
+    const s = svg(title), pw = W - M.l - M.r, ph = H - M.t - M.b, n = v.length;
+    const lo = Math.min(...v), hi = Math.max(...v), pad = (hi - lo) * 0.05 || 1;
+    const y = a => M.t + ph - (a - lo + pad) / (hi - lo + 2 * pad) * ph, x = i => M.l + i * pw / (n - 1);
+    const ticks = [lo, (lo + hi) / 2, hi];
+    for (const t of ticks) { el('line', { x1: M.l, x2: W - M.r, y1: y(t), y2: y(t), stroke: C('border') }, s);
+      el('text', { x: M.l - 4, y: y(t) + 3, 'text-anchor': 'end' }, s).textContent = (Math.abs(t) < 0.05 ? 0 : t).toFixed(1); }
+    el('text', { x: M.l, y: H - 6 }, s).textContent = '1';
+    el('text', { x: W - M.r, y: H - 6, 'text-anchor': 'end' }, s).textContent = n;
+    el('path', { d: v.map((a, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(a).toFixed(1)).join(''), fill: 'none', stroke: C(color), 'stroke-width': 1.2, 'stroke-linejoin': 'round' }, s);
+    host.replaceChildren(s);
+  }
+
+  // ---------- state & render ----------
+  let truth, y, yacf, ypacf, revealed = false;
+  const state = { p: 0, q: 0 };
+  const plot = k => root.querySelector(`[data-plot="${k}"]`), out = k => root.querySelector(`[data-out="${k}"]`);
+  const fmt = v => (v >= 0 ? '+ ' : '− ') + Math.abs(v).toFixed(2);
+  const name = (p, q, truth) => p && q ? `ARMA(${p},${q})` : p ? `AR(${p})` : q ? `MA(${q})` : truth ? 'White noise' : 'mean-only model';
+  function equation(mu, phi, theta) {
+    let s = `y<sub>t</sub> = ${mu.toFixed(2)}`;
+    phi.forEach((v, i) => s += ` ${fmt(v)}·(y<sub>t−${i + 1}</sub> − μ)`);
+    theta.forEach((v, j) => s += ` ${fmt(v)}·e<sub>t−${j + 1}</sub>`);
+    return s;
+  }
+
+  function newSeries() {
+    truth = randomProcess();
+    const mu = Math.round(unif(-5, 20));
+    // Redraw (rarely needed) so that the true model itself leaves white-noise errors:
+    // keeps the lesson clean despite the test's ~5% false-alarm rate.
+    for (let tries = 0; tries < 25; tries++) {
+      y = simulate(truth.phi, truth.theta, T).map(v => v + mu);
+      const p0 = truth.phi.length, q0 = truth.theta.length, f0 = fit(y, p0, q0);
+      if (ljungBox(acf(f0.e, LAGS), f0.e.length, LB_LAG, LB_LAG - p0 - q0).p > 0.1) break;
+    }
+    yacf = acf(y, LAGS); ypacf = pacfFromAcf(yacf);
+    revealed = false;
+    linePlot(plot('y'), 'Mystery series y', y, 'ink');
+    render();
+  }
+
+  function render() {
+    const { p, q } = state, f = fit(y, p, q);
+    const macf = theoAcf(f.phi, f.theta, LAGS), mpacf = pacfFromAcf(macf);
+    const eacf = acf(f.e, LAGS), epacf = pacfFromAcf(eacf), n = f.e.length, bound = 1.96 / Math.sqrt(n);
+    // one shared y-scale for all six correlation panels, so rows can be compared directly
+    const ymax = Math.max(0.3, ...[yacf, ypacf, macf, mpacf, eacf, epacf].flat().map(Math.abs));
+    corrPlot(plot('yacf'), 'ACF of y', yacf, { overlay: macf, ymax });
+    corrPlot(plot('ypacf'), 'PACF of y', ypacf, { overlay: mpacf, ymax });
+    const zero = p + q === 0;
+    corrPlot(plot('macf'), `ACF implied by your ${name(p, q)}`, macf, { color: 'model', ymax });
+    corrPlot(plot('mpacf'), `PACF implied by your ${name(p, q)}`, mpacf, { color: 'model', ymax });
+    out('eq').innerHTML = `<b style="color:var(--text-primary)">Fitted ${name(p, q)}${zero ? ' (ARMA(0,0))' : ''}</b>` +
+      `<span class="eq">${equation(f.mu, f.phi, f.theta)} + e<sub>t</sub></span>` +
+      (zero ? 'No AR or MA terms: the model is only the mean, so it explains none of the correlation and the errors carry the whole pattern of the series.'
+            : `The orange pattern is what these ${p + q} coefficient${p + q > 1 ? 's' : ''} can explain. Whatever part of the series ACF/PACF they cannot reproduce stays in the errors below.`);
+
+    linePlot(plot('e'), 'Residuals e = y − ŷ', f.e, 'resid');
+    corrPlot(plot('eacf'), 'ACF of residuals', eacf, { color: 'resid', n, ymax });
+    corrPlot(plot('epacf'), 'PACF of residuals', epacf, { color: 'resid', n, ymax });
+
+    const lb = ljungBox(eacf, n, LB_LAG, LB_LAG - p - q);
+    const spikes = eacf.slice(0, LB_LAG).filter(v => Math.abs(v) > bound).length;
+    const ok = lb.p > 0.05;
+    out('verdict').innerHTML =
+      `<span class="tag ${ok ? 'ok' : 'bad'}">${ok ? '✓ Errors look like white noise' : '✗ Pattern still left in the errors'}</span>` +
+      `<span>Ljung-Box (lag ${LB_LAG}): Q = ${lb.Q.toFixed(1)}, p-value ${lb.p < 0.001 ? '< 0.001' : '= ' + lb.p.toFixed(3)}</span>` +
+      `<span>ACF spikes outside bounds (lags 1–${LB_LAG}): ${spikes}</span>` +
+      `<span>BIC: ${f.bic.toFixed(1)}</span>`;
+    out('truth').innerHTML = revealed
+      ? `True process: <b>${name(truth.phi.length, truth.theta.length, true)}</b>` +
+        (truth.phi.length ? ` with φ = [${truth.phi.map(v => v.toFixed(2)).join(', ')}]` : '') +
+        (truth.theta.length ? `${truth.phi.length ? ' and' : ' with'} θ = [${truth.theta.map(v => v.toFixed(2)).join(', ')}]` : '') +
+        `. If two choices both leave white-noise errors, prefer the one with the lower BIC.`
+      : 'Tip: start with p = 0 and q = 0, then add terms one at a time and watch the residual spikes disappear.';
+  }
+
+  // controls
+  root.querySelectorAll('.order').forEach(box => {
+    const k = box.dataset.k;
+    for (let i = 0; i <= MAXORD; i++) {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = i;
+      if (i === state[k]) b.classList.add('on');
+      b.addEventListener('click', () => { state[k] = i; box.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); render(); });
+      box.appendChild(b);
+    }
+  });
+  root.querySelector('[data-act="new"]').addEventListener('click', newSeries);
+  root.querySelector('[data-act="reveal"]').addEventListener('click', () => { revealed = true; render(); });
+  newSeries();
+})();
+</script>
+<p>Some things to try:</p>
+<ol type="1">
+<li>Start with p = 0 and q = 0. The model is just the mean, so it explains none of the correlation, and the residual ACF and PACF are identical to those of the series. Everything is left in the errors.</li>
+<li>Use the table above to make a first guess from the series ACF and PACF. Add one term at a time and watch the red spikes in the residual panels disappear as the orange dots fill in the series bars.</li>
+<li>Choose an order that is too small (for example, an AR(1) when the PACF shows two spikes). The spike you did not model remains in the residuals and the Ljung-Box test fails.</li>
+<li>Choose an order that is too large (for example, p = 3 and q = 2). The residuals still look like white noise, but the BIC is higher than for the simpler model that also passes. More terms are not better if they explain nothing new.</li>
+<li>Click <strong>Reveal true process</strong> to check your answer, then generate a new series and try again.</li>
+</ol>
+<p>Note that the correlations do not literally subtract bar by bar (the ACF of the residuals is not exactly the series ACF minus the model ACF), but the idea holds: the correlation your model reproduces is removed, and the correlation it does not reproduce stays in the errors.</p>
+</section>
 <section id="revisiting-chilangos-restaurant" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="revisiting-chilangos-restaurant">Revisiting Chilango’s Restaurant</h3>
 <p>Let’s apply the ARIMA model to the avocado data. The code below loads the data and creates the training and test set.</p>
@@ -3181,7 +3640,7 @@ We can generate a white noise process by using the normal distribution with a me
 <td class="gt_row gt_center" headers="term">ma2</td>
 <td class="gt_row gt_center" headers="estimate">0.8490</td>
 <td class="gt_row gt_center" headers="std.error">0.0966</td>
-<td class="gt_row gt_center" headers="statistic">8.7888</td>
+<td class="gt_row gt_center" headers="statistic">8.7889</td>
 <td class="gt_row gt_center" headers="p.value">0.0000</td>
 </tr>
 <tr class="odd">
@@ -3291,23 +3750,23 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="dumhutkrlq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dumhutkrlq table {
+<div id="utkrlqmbin" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#utkrlqmbin table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dumhutkrlq thead, #dumhutkrlq tbody, #dumhutkrlq tfoot, #dumhutkrlq tr, #dumhutkrlq td, #dumhutkrlq th {
+#utkrlqmbin thead, #utkrlqmbin tbody, #utkrlqmbin tfoot, #utkrlqmbin tr, #utkrlqmbin td, #utkrlqmbin th {
   border-style: none;
 }
 
-#dumhutkrlq p {
+#utkrlqmbin p {
   margin: 0;
   padding: 0;
 }
 
-#dumhutkrlq .gt_table {
+#utkrlqmbin .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3333,12 +3792,12 @@ We can generate a white noise process by using the normal distribution with a me
   border-left-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_caption {
+#utkrlqmbin .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dumhutkrlq .gt_title {
+#utkrlqmbin .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3350,7 +3809,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-width: 0;
 }
 
-#dumhutkrlq .gt_subtitle {
+#utkrlqmbin .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3362,7 +3821,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-top-width: 0;
 }
 
-#dumhutkrlq .gt_heading {
+#utkrlqmbin .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3374,13 +3833,13 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_bottom_border {
+#utkrlqmbin .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_col_headings {
+#utkrlqmbin .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3395,7 +3854,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_col_heading {
+#utkrlqmbin .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3415,7 +3874,7 @@ We can generate a white noise process by using the normal distribution with a me
   overflow-x: hidden;
 }
 
-#dumhutkrlq .gt_column_spanner_outer {
+#utkrlqmbin .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3427,15 +3886,15 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 4px;
 }
 
-#dumhutkrlq .gt_column_spanner_outer:first-child {
+#utkrlqmbin .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dumhutkrlq .gt_column_spanner_outer:last-child {
+#utkrlqmbin .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dumhutkrlq .gt_column_spanner {
+#utkrlqmbin .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3447,11 +3906,11 @@ We can generate a white noise process by using the normal distribution with a me
   width: 100%;
 }
 
-#dumhutkrlq .gt_spanner_row {
+#utkrlqmbin .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dumhutkrlq .gt_group_heading {
+#utkrlqmbin .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3477,7 +3936,7 @@ We can generate a white noise process by using the normal distribution with a me
   text-align: left;
 }
 
-#dumhutkrlq .gt_empty_group_heading {
+#utkrlqmbin .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3492,15 +3951,15 @@ We can generate a white noise process by using the normal distribution with a me
   vertical-align: middle;
 }
 
-#dumhutkrlq .gt_from_md > :first-child {
+#utkrlqmbin .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dumhutkrlq .gt_from_md > :last-child {
+#utkrlqmbin .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dumhutkrlq .gt_row {
+#utkrlqmbin .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3519,7 +3978,7 @@ We can generate a white noise process by using the normal distribution with a me
   overflow-x: hidden;
 }
 
-#dumhutkrlq .gt_stub {
+#utkrlqmbin .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3532,7 +3991,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#dumhutkrlq .gt_stub_row_group {
+#utkrlqmbin .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3546,15 +4005,15 @@ We can generate a white noise process by using the normal distribution with a me
   vertical-align: top;
 }
 
-#dumhutkrlq .gt_row_group_first td {
+#utkrlqmbin .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dumhutkrlq .gt_row_group_first th {
+#utkrlqmbin .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dumhutkrlq .gt_summary_row {
+#utkrlqmbin .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3564,16 +4023,16 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#dumhutkrlq .gt_first_summary_row {
+#utkrlqmbin .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_first_summary_row.thick {
+#utkrlqmbin .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dumhutkrlq .gt_last_summary_row {
+#utkrlqmbin .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3583,7 +4042,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_grand_summary_row {
+#utkrlqmbin .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3593,7 +4052,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#dumhutkrlq .gt_first_grand_summary_row {
+#utkrlqmbin .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3603,7 +4062,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-top-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_last_grand_summary_row_top {
+#utkrlqmbin .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3613,11 +4072,11 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_striped {
+#utkrlqmbin .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dumhutkrlq .gt_table_body {
+#utkrlqmbin .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3626,7 +4085,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-bottom-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_footnotes {
+#utkrlqmbin .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3640,7 +4099,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_footnote {
+#utkrlqmbin .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3649,7 +4108,7 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#dumhutkrlq .gt_sourcenotes {
+#utkrlqmbin .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3663,7 +4122,7 @@ We can generate a white noise process by using the normal distribution with a me
   border-right-color: #D3D3D3;
 }
 
-#dumhutkrlq .gt_sourcenote {
+#utkrlqmbin .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3671,72 +4130,72 @@ We can generate a white noise process by using the normal distribution with a me
   padding-right: 5px;
 }
 
-#dumhutkrlq .gt_left {
+#utkrlqmbin .gt_left {
   text-align: left;
 }
 
-#dumhutkrlq .gt_center {
+#utkrlqmbin .gt_center {
   text-align: center;
 }
 
-#dumhutkrlq .gt_right {
+#utkrlqmbin .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dumhutkrlq .gt_font_normal {
+#utkrlqmbin .gt_font_normal {
   font-weight: normal;
 }
 
-#dumhutkrlq .gt_font_bold {
+#utkrlqmbin .gt_font_bold {
   font-weight: bold;
 }
 
-#dumhutkrlq .gt_font_italic {
+#utkrlqmbin .gt_font_italic {
   font-style: italic;
 }
 
-#dumhutkrlq .gt_super {
+#utkrlqmbin .gt_super {
   font-size: 65%;
 }
 
-#dumhutkrlq .gt_footnote_marks {
+#utkrlqmbin .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dumhutkrlq .gt_asterisk {
+#utkrlqmbin .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dumhutkrlq .gt_indent_1 {
+#utkrlqmbin .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dumhutkrlq .gt_indent_2 {
+#utkrlqmbin .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dumhutkrlq .gt_indent_3 {
+#utkrlqmbin .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dumhutkrlq .gt_indent_4 {
+#utkrlqmbin .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dumhutkrlq .gt_indent_5 {
+#utkrlqmbin .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dumhutkrlq .katex-display {
+#utkrlqmbin .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dumhutkrlq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#utkrlqmbin div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3849,6 +4308,7 @@ We can generate a white noise process by using the normal distribution with a me
 <ul>
 <li><p>Apply autocorrelations, partial autocorrelations, stationarity and white noise to model time series.</p></li>
 <li><p>Identify the AR(1) and MA(1) processes using the ACF and PACF.</p></li>
+<li><p>Choose the AR and MA orders (p and q) and verify the choice by checking that the residuals behave like white noise.</p></li>
 <li><p>Model the ARIMA process using the <code>ARIMA()</code> function.</p></li>
 <li><p>Provide forecasts of the ARIMA process in R.</p></li>
 </ul>
@@ -3963,7 +4423,7 @@ Suggested Answer
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"https://jagelves.github.io/Data/Inflation.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 54 Columns: 5
+<pre><code>Rows: 57 Columns: 5
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr (1): Date
@@ -3995,14 +4455,14 @@ dbl (4): Inflation, InterestRate, S&amp;Preturns, Unemployment
 # Key:     Scenario, .model [2]
   Scenario .model     Date
   &lt;chr&gt;    &lt;chr&gt;     &lt;mth&gt;
-1 Keep     ARIMA  2024 Nov
-2 Keep     ARIMA  2024 Dec
-3 Keep     ARIMA  2025 Jan
-4 Keep     ARIMA  2025 Feb
-5 Lower    ARIMA  2024 Nov
-6 Lower    ARIMA  2024 Dec
-7 Lower    ARIMA  2025 Jan
-8 Lower    ARIMA  2025 Feb
+1 Keep     ARIMA  2025 Feb
+2 Keep     ARIMA  2025 Mar
+3 Keep     ARIMA  2025 Apr
+4 Keep     ARIMA  2025 May
+5 Lower    ARIMA  2025 Feb
+6 Lower    ARIMA  2025 Mar
+7 Lower    ARIMA  2025 Apr
+8 Lower    ARIMA  2025 May
 # ℹ 3 more variables: Inflation &lt;dist&gt;, .mean &lt;dbl&gt;, InterestRate &lt;dbl&gt;</code></pre>
 </div>
 </div>
