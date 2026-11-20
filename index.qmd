@@ -1,0 +1,158 @@
+
+# Preface {.unnumbered}
+
+This book is about making decisions under uncertainty, using R. It is for anyone who has to commit to a course of action without knowing how things will turn out, which is most people with a business problem in front of them.
+
+It has three parts. The first covers decision analysis: decision trees, risk analysis, and the frameworks for weighing options when the outcome is not yours to control. The second covers simulation, mostly Monte Carlo, where you build a small artificial version of a situation and run it enough times to see the range of things that could happen. The third covers time series, where the question is what a pattern over time can tell you about what comes next, using ARIMA and ETS. Business examples run throughout, and every chapter has problems to work.
+
+Comments are welcome at jagelves\@wm.edu.
+
+## Working with AI {#sec-working-with-ai}
+
+You can ask an AI to solve almost every technical problem in this book. It will build the simulation, set up the optimization, run the regression, and explain the output. It will usually be right, and when it is wrong it will be wrong confidently and fluently.
+
+So the first question to settle is why you should do any of this yourself.
+
+### Why bother
+
+If you have used a capable model, you have probably already drawn a conclusion about exercises like the ones in this book. The machine writes the code faster than you will. It explains the output more clearly than your notes do. Doing the work by hand starts to feel like ceremony, something the course requires rather than something you need. Students in this position usually comply. They finish the assignment and privately write it off.
+
+That judgment is correct about the thing being measured and wrong about the thing that matters. The purpose of the work was never the answer it produced. It is that working through it changes what you are able to see afterward.
+
+You might fairly answer that you have outsourced things before and been fine. Almost nobody navigates by memory anymore. The map in your head never formed, and you have not missed it.
+
+That is true, and the reason it is true is worth understanding, because it does not carry over. Directions are safe to hand off because you always know when you need them. You are lost or you are not. The tool sits there at the exact moment of need, and asking costs nothing. Outsourcing works whenever you can reliably tell that the moment has arrived.
+
+Judgment is the opposite case. The moment you need it is the moment nothing appears to be wrong. Consider signing a loan because the monthly payment fits your budget. Nothing in that number prompts you to ask what the loan costs in total. There is no alarm, no point at which you think to consult anyone, because from the inside it looks like a decision that has already been made correctly. Someone with a feel for how interest accumulates would have paused. Not because they ran the calculation, but because the figure did not sit right.
+
+That pause is the whole thing, and it cannot be delegated. You cannot ask a machine whether something is off if nothing strikes you as off. The trigger has to be in you, and it is built by having done the work often enough that wrong answers start to feel wrong.
+
+Everything in this book works the same way. Build a few models yourself and you start to notice when a result is off before you can say why. You develop a sense of which approach fits a situation, which is not available to someone reading the output of a machine that chose for them.
+
+The difficulty is that this payoff is invisible from where you are standing. It arrives later, in a form you will not be able to trace back to any particular assignment, and it cannot be demonstrated to anyone who does not already have it. You are being asked to invest in a capacity you cannot yet perceive, while the machine's advantage is obvious today. That is a hard trade to accept on someone else's word, and I am aware that I am asking you to accept it.
+
+The risk if you do not is worth naming plainly. A conclusion like this rarely stays confined to one assignment. A student who decides the exercise is theater soon decides the same about the course, the degree, and the effort as a whole. It is possible to complete every assignment in a program while forming none of the judgment it was designed to build, and to arrive at the end with a transcript and no capability, which is the outcome nobody checks for.
+
+### A test worth applying yourself
+
+Here is a way to think about whether any skill is worth building. Imagine a system that will perform any analytical task you can specify, correctly, on request. Not the AI you have used, which still fails in ways you can find, but a version with none of the current limitations. Call it the oracle. Then ask of anything you might learn: is it still worth knowing?
+
+Some things clearly fail the test. Skills whose value comes from doing cognitive work faster or more reliably than a machine do not survive it. Nobody competes with a calculator at arithmetic, and nobody should try to compete with a model at writing code.
+
+Some things clearly pass, and they pass for two different reasons. A few survive because no system can supply them. Knowing what you actually want is a fact about you. So is your tolerance for a bad outcome. So is being the person who has to answer for the choice. Others survive not as tasks you will perform but as the thing that makes the first kind possible. Take the restaurant owner described under the first skill below, who is losing money on catering. Pricing catering, screening which jobs to accept, exiting catering, adding a second van: choosing among those four means knowing what each involves, what it would require you to assume, and where each would break. Somebody who has never built a pricing model has no view about whether pricing is the right frame. They are not choosing. They are picking a phrase.
+
+That second reason is the one people miss. You cannot have preferences about a model you do not understand. The technical chapters are not here so you can beat the machine at producing the model. They are here because judgment about a thing requires having made one.
+
+I am not going to tell you where each of the six skills below falls. The sections that follow describe what each skill is and why it still matters against the models available right now, in 2026, which is a claim you can check rather than take on faith. Whether each one survives the oracle is a harder question and a better one. Decide it yourself, and be prepared to say why.
+
+Two warnings about the test. It is easy to conclude that a skill dies because a machine can perform it, and skip the question of what its absence would cost you elsewhere. It is equally easy to protect a skill you are fond of by inventing a scenario where the oracle fails. Watch for both in your own reasoning.
+
+
+### The six skills
+
+What follows are the six skills the assignments in this book are designed to build. They are ordered the way a real analysis moves, from a vague situation, to a model, to a defended recommendation.
+
+## 1. Framing the problem
+
+Turning a messy situation into a well-posed decision: identifying what is actually being chosen, what the objective is, which quantities are constraints and which are variables, and what can safely be left out.
+
+This used to be the thing AI was worst at. It is no longer true that a model will silently minimize whatever you hand it. Describe a vague business situation to a current model and it will often propose several framings and ask which one you meant, which is genuinely useful and worth doing.
+
+What it cannot do is answer the question it asks you. A model offering four versions of a problem has no basis for preferring one, because the choice depends on things it has no access to. Whether the owner wants to grow or wants to stop working weekends. Whether the loading dock takes three trucks a day. Whether the last expansion went badly enough that nobody will approve another. These are not facts it can look up or infer, and they are usually not in whatever you typed. The model widens the option set. Narrowing it is yours.
+
+Most modeling failures in practice are not arithmetic failures. They are failures to model the right thing, and they now tend to happen at the moment somebody accepts a reasonable-looking framing without asking what it ruled out.
+
+**Examples.**
+
+- A restaurant owner says "I'm losing money on catering." The decision might be how to price catering, or which catering jobs to accept, or whether to exit catering, or whether to add a second van. These are four different models with four different answers. Choosing among them is your job, not the model's.
+
+- A bakery has to decide how much to bake each morning. Framing this as "how many loaves" already assumes a great deal: one batch, no chance to bake more at noon, nothing carrying over to tomorrow, and demand that does not respond to price. Every one of those is a choice you made rather than a fact about the bakery, and relaxing any of them produces a different problem. Knowing which assumptions you have quietly made is part of framing.
+
+## 2. Reconciling evidence from different sources
+
+Pulling information from several places. A data set, an industry report, a manager's estimate, a published study. Working out what to believe when they disagree.
+
+Real inputs conflict. The point-of-sale system says the restaurant averages 180 covers a night; the chef says "about 200 on a good night"; a trade publication reports a category-wide decline. None of these is simply *the* number.
+
+A current model handles this better than you might expect. Give it the three figures and it will usually discuss how each was produced and which deserves more weight. The gap is not reasoning. It is access. The model cannot call the chef and find out that "a good night" means Saturday, cannot discover that the point-of-sale system stopped logging bar orders in March, and cannot know that the trade publication is funded by a supplier with a reason to describe the category as shrinking. Almost everything that determines what a number is worth lives outside the number.
+
+There is a second problem, which you can reproduce in a minute. Tell a model the chef is unreliable and it will discount the chef. Tell it the opposite and it will discount the data. It is agreeable, and it will often adopt your view of who to trust rather than challenge it. Whatever you walked in believing tends to come back to you with better supporting arguments than you had.
+
+**Examples.**
+
+- Two forecasts of next quarter's demand differ by 15%. Before averaging them, ask what each is conditioning on. If one assumes the new location opens on schedule and the other does not, the disagreement is not about forecasting. It is about a fact you can go check.
+
+- A survey says 60% of customers would pay more for organic ingredients. Your sales data says the organic option sells poorly. Both can be accurate. What people say they would pay and what they actually pay routinely diverge, and knowing which belongs in a pricing model is the whole question.
+
+## 3. Verifying the analysis
+
+Auditing a result you did not produce by hand. Checking whether a constraint was silently dropped, a distribution misapplied, a sign flipped, a number invented.
+
+AI output is fluent, and fluency reads as correctness. Current models are right far more often than they were, which makes this harder rather than easier: a tool that works nine times in ten trains you to stop checking the tenth. A calculation built on a wrong assumption produces a clean chart and a plausible number, and nothing about the output announces the error. To catch it you need enough technical fluency to referee the work. This is the practical reason the mechanics in this book still matter: **you cannot verify what you could not, in principle, do yourself.**
+
+There is a failure mode specific to how agreeable these systems are. Point at a correct result and say it looks wrong, and the model will frequently find a reason you might be right and revise it. Agreement is not confirmation. If you cannot tell the difference, the check you just performed was worthless.
+
+The habits below will eventually stop being procedures you run and become reflexes you have. That is the point of them. Auditing happens in real time, in a meeting, while someone is presenting. You cannot look up the instinct that something is wrong, because the instinct is what sends you to look.
+
+**Examples.**
+
+- Check the extremes. If the bakery bakes nothing, is profit zero? If it bakes far more than anyone could plausibly buy, does profit fall by the cost of each additional loaf? Boundary cases are cheap to check and catch a surprising share of errors.
+
+- Check the shape, not just the number. Profit as a function of how much you produce should rise, peak, and fall. If the best answer found sits at the highest quantity that was tried, it is probably not the best answer. It is the edge of what was searched.
+
+- Redo one line by hand. A single row of the output, one term of the calculation. If it matches, your confidence in the rest is earned rather than assumed.
+
+## 4. Testing how much the answer depends on its assumptions
+
+Asking not "what is the answer?" but "how wrong would my inputs have to be before I would change my decision?"
+
+A point estimate is a fragile thing to hand a decision maker. What they need to know is whether the recommendation survives being wrong. Two analyses can produce the same answer while one is flat for fifty units in either direction and the other falls off a cliff. Those are not the same recommendation, and only sensitivity analysis distinguishes them.
+
+Ask a current model to run one and it will, thoroughly, across every input you name. Two things are still on you. The first is knowing which assumptions are worth stressing, which depends on what the decision turns on rather than on what is easy to vary. The second is reading the result. A model will report that the best quantity shifts by 60 units when a cost moves from $2 to $3. It will not tell you that this means you should stop analyzing and go find out what the cost actually is, because that is a claim about where your remaining time is best spent.
+
+**Examples.**
+
+- If you are unsure whether a loaf costs $2 or $3 to produce, check the recommendation at both ends. If it barely moves, stop worrying about the number. If it moves a lot, the number is doing most of the work in your analysis and deserves real effort before you commit.
+
+- If the profit at the best quantity is barely higher than the profit twenty units below it, then the "best" quantity is a preference, not a requirement. Say so. Being easy to operate may be worth more than the last dollar of expected profit.
+
+## 5. Making the decision
+
+Converting analysis into a choice, under uncertainty, when the analysis does not fully determine the answer.
+
+Analysis narrows options; it rarely eliminates them. Two alternatives with nearly identical expected values may differ sharply in downside risk, reversibility, or how they interact with what the organization is already committed to. Choosing between them requires a view about risk tolerance and about what matters, and those are not properties of the data.
+
+Press a current model for a decision and it will usually give you one, with reasoning, after laying out the considerations on both sides. Read what it produced. It either applied a rule, such as maximizing expected value, or it inferred a risk tolerance from your phrasing and handed it back to you as a recommendation. Neither is your risk tolerance. The second is worse than the first, because it looks like advice.
+
+**Examples.**
+
+- Option A has an expected profit of \$240 with a 5% chance of a serious loss. Option B has an expected profit of \$232 and no realistic downside. There is no formula that settles this. It depends on whether the business can absorb the bad outcome, which is a fact about the business, not about the model.
+
+- Deciding not to decide yet is a decision, and sometimes the right one, but only if you can say what information would change your mind and what it costs to get it. "Let's gather more data" without that is procrastination in analytical clothing.
+
+## 6. Defending the recommendation
+
+Explaining and standing behind a recommendation in front of someone who is skeptical, better informed than you about the business, and looking for the flaw.
+
+The AI produces the analysis; a person owns the call. When a manager asks "why should I believe this?", the answer cannot be "the model said so." You need to state your assumptions, name the weakest link in your own reasoning, and say what would have to be true for you to be wrong. Analysts who can do this get their recommendations adopted. Analysts who cannot are treated as a calculator with opinions.
+
+A model will write you a defense. It will be articulate and it will cover the obvious objections. The trouble comes in the room, when the manager asks something the defense did not anticipate and you find out whether you understand the argument you are making. Anyone who has presented borrowed reasoning to a skeptical audience knows the specific feeling of the follow-up question.
+
+The deeper point is that accountability does not transfer. However capable these systems become, somebody has to be answerable for the choice, and that somebody will be you.
+
+**Examples.**
+
+- Lead with the decision and the reason, not the method: "Bake 200 loaves, because profit is highest there and it stays within 3% of the best possible across every level of demand we considered." The methodology comes after, if asked.
+
+- Volunteer the weak point before it is found. "The number I am least sure about is what a loaf costs us; if it is closer to $3 than $2, the answer moves to 140." This reads as competence rather than doubt, and it is far better than having your audience discover it for you.
+
+## What you should decide for yourself
+
+Everything above is a claim about the models available in 2026, and claims like that expire. Test them. Take a problem from any chapter, hand it to the best model you have access to, and push. See how far it gets on its own and where it needs you. If a section of this preface turns out to be wrong, I would rather you found out by checking than believed it because it was printed.
+
+Then take each of the six skills through the oracle test. Suppose every current limitation is gone and the system is right every time. Which of the six still matter, and why? Some of them survive because no machine can supply what they need. Some survive because you cannot exercise the first kind without them. Some may not survive at all, and saying so is a legitimate answer if you can defend it.
+
+Do not expect them to sort cleanly, and be suspicious of your own verdicts in both directions. Dismissing a skill because a machine can perform it skips the question of what its absence costs you somewhere else. Rescuing a skill you enjoy by imagining a scenario where the oracle fails is the same error in reverse.
+
+The exercise is the sixth skill applied to the other five. Reach a conclusion, name the weakest part of it, and be ready to defend it to someone who disagrees.
+
