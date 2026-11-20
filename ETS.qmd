@@ -318,19 +318,19 @@ fit %>% forecast(new_data=Down_Scenario) %>%
 
 The main reading for ETS models comes from Chapter 8 of @FPP3. These readings provide a bit more detail on the mathematical background behind each model and a few more applications. For an overview of the moving averages, the Holt, and Winters' models review @PMS.
 
--   @FPP3 Chapter 8 (Exponential Smoothing).
+- @FPP3 Chapter 8 (Exponential Smoothing).
 
--   @PMS Chapter 13.5 (Overview of Time Series Models), 13.6 (Moving Average Models), 13.7 (Exponential Smoothing Models).
+- @PMS Chapter 13.5 (Overview of Time Series Models), 13.6 (Moving Average Models), 13.7 (Exponential Smoothing Models).
 
 ## Lessons Learned
 
 In this module you have been introduced to the ETS model. Particularly you have learned to:
 
--   Use the `model()` and `ETS()` functions to estimate the model.
+- Use the `model()` and `ETS()` functions to estimate the model.
 
--   Identify when the ETS model is superior to other models by using cross validation and information criteria.
+- Identify when the ETS model is superior to other models by using cross validation and information criteria.
 
--   Forecast time series with the ETS model.
+- Forecast time series with the ETS model.
 
 ## Exercises {#exercises6}
 

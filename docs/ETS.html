@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<head>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.32">
 
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.6.32" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6  ETS – Decision Modeling</title>
+<title>6&nbsp; ETS – Decision Modeling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,7 +76,25 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-<!-- htmldependencies:E3FAD763 -->
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ARIMA.html" rel="next">
+<link href="./Benchmarks.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ed6da6eef3892af8a4b5ed59bfb951f5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -107,7 +123,7 @@ div.csl-indent {
   }
 }</script>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBSHZ5F458"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-ZBSHZ5F458"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -148,22 +164,17 @@ window.Quarto = {
 
 </head>
 
-<body>
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn"
-      data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" 
-      aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
-      onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <h1 class="quarto-secondary-nav-title no-breadcrumbs"></h1>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" role="link"
-        aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
-        onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ETS.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ETS</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -177,9 +188,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="/">
-      Decision Modeling
-      </a> 
+      <a href="./">Decision Modeling</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -191,72 +200,87 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/Decisions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>1</span>  <span class='chapter-title'>Decisions Under Uncertainty</span></span></a>
+  <a href="./Decisions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Decisions Under Uncertainty</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/Tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>2</span>  <span class='chapter-title'>Tools for Working With Simulation</span></span></a>
+  <a href="./Tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tools for Working With Simulation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/Simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>Simulation in R</span></span></a>
+  <a href="./Simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simulation in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/Tools2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>4</span>  <span class='chapter-title'>Time Series Tools</span></span></a>
+  <a href="./Tools2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Time Series Tools</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/Benchmarks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>Model Benchmarks</span></span></a>
+  <a href="./Benchmarks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Model Benchmarks</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/ETS.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class='chapter-number'>6</span>  <span class='chapter-title'>ETS</span></span></a>
+  <a href="./ETS.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ETS</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/ARIMA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>ARIMA</span></span></a>
+  <a href="./ARIMA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ARIMA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/references.html" class="sidebar-item-text sidebar-link">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" ></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <div id="quarto-toc-target"></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ets-components" id="toc-ets-components" class="nav-link active" data-scroll-target="#ets-components"><span class="header-section-number">6.1</span> ETS Components</a></li>
+  <li><a href="#teslas-deliveries" id="toc-teslas-deliveries" class="nav-link" data-scroll-target="#teslas-deliveries"><span class="header-section-number">6.2</span> Tesla’s Deliveries</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">6.3</span> The Data</a></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">6.4</span> Models</a></li>
+  <li><a href="#information-criterion" id="toc-information-criterion" class="nav-link" data-scroll-target="#information-criterion"><span class="header-section-number">6.5</span> Information Criterion</a></li>
+  <li><a href="#forecasts" id="toc-forecasts" class="nav-link" data-scroll-target="#forecasts"><span class="header-section-number">6.6</span> Forecasts</a></li>
+  <li><a href="#scenarios" id="toc-scenarios" class="nav-link" data-scroll-target="#scenarios"><span class="header-section-number">6.7</span> Scenarios</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">6.8</span> Readings</a></li>
+  <li><a href="#lessons-learned" id="toc-lessons-learned" class="nav-link" data-scroll-target="#lessons-learned"><span class="header-section-number">6.9</span> Lessons Learned</a></li>
+  <li><a href="#exercises6" id="toc-exercises6" class="nav-link" data-scroll-target="#exercises6"><span class="header-section-number">6.10</span> Exercises</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>  <span class="chapter-title">ETS</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ETS</span></h1>
 </div>
 
 
@@ -272,25 +296,10 @@ window.Quarto = {
 
 </header>
 
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#ets-components" id="toc-ets-components"><span class="header-section-number">6.1</span> ETS Components</a></li>
-  <li><a href="#teslas-deliveries" id="toc-teslas-deliveries"><span class="header-section-number">6.2</span> Tesla’s Deliveries</a></li>
-  <li><a href="#sec-data" id="toc-sec-data"><span class="header-section-number">6.3</span> The Data</a></li>
-  <li><a href="#models" id="toc-models"><span class="header-section-number">6.4</span> Models</a></li>
-  <li><a href="#information-criterion" id="toc-information-criterion"><span class="header-section-number">6.5</span> Information Criterion</a></li>
-  <li><a href="#forecasts" id="toc-forecasts"><span class="header-section-number">6.6</span> Forecasts</a></li>
-  <li><a href="#scenarios" id="toc-scenarios"><span class="header-section-number">6.7</span> Scenarios</a></li>
-  <li><a href="#readings" id="toc-readings"><span class="header-section-number">6.8</span> Readings</a></li>
-  <li><a href="#lessons-learned" id="toc-lessons-learned"><span class="header-section-number">6.9</span> Lessons Learned</a></li>
-  <li><a href="#exercises6" id="toc-exercises6"><span class="header-section-number">6.10</span> Exercises</a></li>
-  </ul>
-</nav>
+
 <p>In this section we will be introducing and applying the Error, Trend, Seasonality (ETS) model. This model provides a flexible approach for modeling and forecasting time series data by incorporating components for error, trend, and seasonality. The ETS model allows different combinations of these components to be included in the model based on the characteristics observed in the data.</p>
 <section id="ets-components" class="level2" data-number="6.1">
-<h2 data-number="6.1"><span class="header-section-number">6.1</span> ETS Components</h2>
+<h2 data-number="6.1" class="anchored" data-anchor-id="ets-components"><span class="header-section-number">6.1</span> ETS Components</h2>
 <p>ETS models build on simple exponential smoothing (SES). The basic idea behind SES is to assign more weight to recent observations and gradually decrease the weights as the observations become older. The model emphasizes the most recent data points and gives less importance to older observations.</p>
 <p>Mathematically, the simple exponential smoothing model can be defined as:</p>
 <center>
@@ -303,25 +312,25 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <p>The SES model is useful when forecasting series that have no trend or seasonality. The SES model can easily be modified to account for trend and seasonality by adding additional components. For example, Holt’s linear trend method adds a component to account for a linear trend, the damped trend methods flatten the trend some time into the future, and the Holt-Winters model accounts for seasonality. The collection of models generated by adding different components are summarized as Error, Trend, and Seasonality (ETS) models. We apply the ETS model to the deliveries of the electric car company Tesla in the sections below.</p>
 </section>
 <section id="teslas-deliveries" class="level2" data-number="6.2">
-<h2 data-number="6.2"><span class="header-section-number">6.2</span> Tesla’s Deliveries</h2>
+<h2 data-number="6.2" class="anchored" data-anchor-id="teslas-deliveries"><span class="header-section-number">6.2</span> Tesla’s Deliveries</h2>
 <p>Deliveries are a carefully watched number by Tesla shareholders and are the closest approximation of sales disclosed by the company. Additionally, Tesla’s deliveries are closely followed due to their impact on financial markets, the EV industry, innovation and disruption, production efficiency, and the growth of the EV market. The numbers serve as a key performance indicator for Tesla’s success and provide insights into the broader trends in the electric vehicle industry. Can we use the ETS model to forecast Tesla’s deliveries?</p>
 </section>
 <section id="sec-data" class="level2" data-number="6.3">
-<h2 data-number="6.3"><span class="header-section-number">6.3</span> The Data</h2>
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">6.3</span> The Data</h2>
 <p>The data can be found here <a href="https://ir.tesla.com/#quarterly-disclosure">Tesla</a>. Below is code that inputs the data as a tsibble in R.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create tsibble</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>tesla<span class="ot">&lt;-</span><span class="fu">tsibble</span>(</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">period=</span><span class="fu">yearquarter</span>(<span class="fu">c</span>(<span class="st">&quot;2016:Q1&quot;</span>,<span class="st">&quot;2016:Q2&quot;</span>,<span class="st">&quot;2016:Q3&quot;</span>,<span class="st">&quot;2016:Q4&quot;</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;2017:Q1&quot;</span>,<span class="st">&quot;2017:Q2&quot;</span>,<span class="st">&quot;2017:Q3&quot;</span>,<span class="st">&quot;2017:Q4&quot;</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;2018:Q1&quot;</span>,<span class="st">&quot;2018:Q2&quot;</span>,<span class="st">&quot;2018:Q3&quot;</span>,<span class="st">&quot;2018:Q4&quot;</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;2019:Q1&quot;</span>,<span class="st">&quot;2019:Q2&quot;</span>,<span class="st">&quot;2019:Q3&quot;</span>,<span class="st">&quot;2019:Q4&quot;</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;2020:Q1&quot;</span>,<span class="st">&quot;2020:Q2&quot;</span>,<span class="st">&quot;2020:Q3&quot;</span>,<span class="st">&quot;2020:Q4&quot;</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;2021:Q1&quot;</span>,<span class="st">&quot;2021:Q2&quot;</span>,<span class="st">&quot;2021:Q3&quot;</span>,<span class="st">&quot;2021:Q4&quot;</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;2022:Q1&quot;</span>,<span class="st">&quot;2022:Q2&quot;</span>,<span class="st">&quot;2022:Q3&quot;</span>,<span class="st">&quot;2022:Q4&quot;</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;2023:Q1&quot;</span>,<span class="st">&quot;2023:Q2&quot;</span>)),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">period=</span><span class="fu">yearquarter</span>(<span class="fu">c</span>(<span class="st">"2016:Q1"</span>,<span class="st">"2016:Q2"</span>,<span class="st">"2016:Q3"</span>,<span class="st">"2016:Q4"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2017:Q1"</span>,<span class="st">"2017:Q2"</span>,<span class="st">"2017:Q3"</span>,<span class="st">"2017:Q4"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2018:Q1"</span>,<span class="st">"2018:Q2"</span>,<span class="st">"2018:Q3"</span>,<span class="st">"2018:Q4"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2019:Q1"</span>,<span class="st">"2019:Q2"</span>,<span class="st">"2019:Q3"</span>,<span class="st">"2019:Q4"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2020:Q1"</span>,<span class="st">"2020:Q2"</span>,<span class="st">"2020:Q3"</span>,<span class="st">"2020:Q4"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2021:Q1"</span>,<span class="st">"2021:Q2"</span>,<span class="st">"2021:Q3"</span>,<span class="st">"2021:Q4"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2022:Q1"</span>,<span class="st">"2022:Q2"</span>,<span class="st">"2022:Q3"</span>,<span class="st">"2022:Q4"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2023:Q1"</span>,<span class="st">"2023:Q2"</span>)),</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">deliveries=</span><span class="fu">c</span>(<span class="fl">14.8</span>,<span class="fl">14.4</span>,<span class="fl">24.5</span>,<span class="fl">22.2</span>,</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>               <span class="dv">25</span>,<span class="dv">22</span>,<span class="fl">26.2</span>,<span class="fl">29.9</span>,</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>               <span class="dv">30</span>,<span class="fl">40.7</span>,<span class="fl">83.5</span>,<span class="fl">90.7</span>,</span>
@@ -331,80 +340,80 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>               <span class="fl">310.5</span>,<span class="fl">254.7</span>,<span class="fl">343.8</span>,<span class="fl">405.3</span>,</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>               <span class="fl">422.9</span>,<span class="fl">466.1</span>),</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">index=</span>period     <span class="co"># This is the time variable</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As you can see the tsibble is created with the <code>tsibble()</code> function included in the <code>fpp3</code> package. The <code>yearquarter()</code> function from the <code>tsibble</code> package is used to coerce the period data to a date. The time variable is then specified via the <em>index</em> parameter. The code below creates the plot of Tesla’s deliveries using the <code>autoplot()</code> function.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">.vars=</span>deliveries) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span> <span class="st">&quot;Tesla Car Deliveries&quot;</span>, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Q1 2016 to Q2 2023&quot;</span>) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Quarter&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">.vars=</span>deliveries) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span> <span class="st">"Tesla Car Deliveries"</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Q1 2016 to Q2 2023"</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Quarter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="ETS_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The most striking aspect of Tesla’s deliveries is the exponential trend. There also seems to be a seasonal component, with relatively higher deliveries in Q4 versus the other quarters. These characteristics will be adopted by the ETS model to forecast the series. Below we can see the STL decomposition that confirms these characteristics.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="fu">STL</span>(deliveries<span class="sc">~</span><span class="fu">trend</span>() <span class="sc">+</span> <span class="fu">season</span>())) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="ETS_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 <section id="models" class="level2" data-number="6.4">
-<h2 data-number="6.4"><span class="header-section-number">6.4</span> Models</h2>
+<h2 data-number="6.4" class="anchored" data-anchor-id="models"><span class="header-section-number">6.4</span> Models</h2>
 <p>To model the data and create the appropriate forecasts, we start by generating test and training sets from the available data.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>train_tesla<span class="ot">&lt;-</span><span class="fu">filter_index</span>(<span class="at">.data=</span>tesla,<span class="st">&quot;2016 Q1&quot;</span><span class="sc">~</span><span class="st">&quot;2021 Q4&quot;</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>test_tesla<span class="ot">&lt;-</span><span class="fu">filter_index</span>(<span class="at">.data=</span>tesla,<span class="st">&quot;2022 Q1&quot;</span><span class="sc">~</span><span class="st">&quot;2023 Q2&quot;</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>train_tesla<span class="ot">&lt;-</span><span class="fu">filter_index</span>(<span class="at">.data=</span>tesla,<span class="st">"2016 Q1"</span><span class="sc">~</span><span class="st">"2021 Q4"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>test_tesla<span class="ot">&lt;-</span><span class="fu">filter_index</span>(<span class="at">.data=</span>tesla,<span class="st">"2022 Q1"</span><span class="sc">~</span><span class="st">"2023 Q2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There is no fixed rule for determining the length of the train and test sets. In this example, it is important to allocate a sufficiently large portion of the data to the training set to capture the underlying seasonality and trend of Tesla’s deliveries. The sets are easily created using the <code>filter_index()</code> function.</p>
-<p>Five models will be estimated based on ETS. The first one is the Simple Exponential Smoothing model with additive errors (SES), the Holt model that includes an additive trend (HOLT), a damped trend model (DAMPED), a damped model with seasonality (DAMPEDS), and finally an algorithmic function that attempts to select the best ETS model (see <span class="citation" data-cites="FPP3">Hyndman (<a href="#ref-FPP3" role="doc-biblioref">2021</a>)</span>, Chapter 8). Along with these five models two more models are set forth. The first one is a simple least squares model (LS) and the second one is a quadratic model with seasonality dummies (LSS).</p>
+<p>Five models will be estimated based on ETS. The first one is the Simple Exponential Smoothing model with additive errors (SES), the Holt model that includes an additive trend (HOLT), a damped trend model (DAMPED), a damped model with seasonality (DAMPEDS), and finally an algorithmic function that attempts to select the best ETS model (see <span class="citation" data-cites="FPP3">Hyndman (<a href="references.html#ref-FPP3" role="doc-biblioref">2021</a>)</span>, Chapter 8). Along with these five models two more models are set forth. The first one is a simple least squares model (LS) and the second one is a quadratic model with seasonality dummies (LSS).</p>
 <p>Model selection will be done via cross validation. Recall that the <code>stretch_tsibble()</code> function reshapes the tsibble to accommodate for cross validation. The <em>.init</em> parameter sets the first eight observations to estimate our initial model and the <em>.step</em> argument increases the training set by four. Cross validation is done four periods ahead (a year) and accuracy measures are created by comparing forecasts to the test set.</p>
 <p>Each component of the ETS model can be included as either multiplicative (<span class="math inline">\(M\)</span>) or additive (<span class="math inline">\(A\)</span>). The trend component can be assigned to be damped (<span class="math inline">\(Ad\)</span> or <span class="math inline">\(Md\)</span>). If the component is to be omitted from the model, None (<span class="math inline">\(N\)</span>) is specified. Below is the code to estimate the models and the results of the cross validation.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>train_tesla <span class="sc">%&gt;%</span> <span class="fu">stretch_tsibble</span>(<span class="at">.init =</span> <span class="dv">8</span>, <span class="at">.step=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">SES=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;N&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;N&quot;</span>)),</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">HOLT=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;N&quot;</span>)),</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">DAMPED=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;Ad&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;N&quot;</span>)),</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">DAMPEDS=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;Ad&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;A&quot;</span>)),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">SES=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"N"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"N"</span>)),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">HOLT=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"N"</span>)),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">DAMPED=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"Ad"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"N"</span>)),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">DAMPEDS=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"Ad"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>)),</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">ALGO=</span><span class="fu">ETS</span>(deliveries),</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="at">LS =</span> <span class="fu">TSLM</span>(deliveries <span class="sc">~</span> <span class="fu">trend</span>()<span class="sc">+</span><span class="fu">I</span>(<span class="fu">trend</span>()<span class="sc">^</span><span class="dv">2</span>)),</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="at">LSS =</span> <span class="fu">TSLM</span>(deliveries <span class="sc">~</span> <span class="fu">trend</span>()<span class="sc">+</span><span class="fu">I</span>(<span class="fu">trend</span>()<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">season</span>()))<span class="sc">%&gt;%</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(tesla) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="st">&quot;ACF1&quot;</span>) </span></code></pre></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(tesla) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="st">"ACF1"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ygyfftinwc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ygyfftinwc table {
+<div id="fbysgpedmg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fbysgpedmg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ygyfftinwc thead, #ygyfftinwc tbody, #ygyfftinwc tfoot, #ygyfftinwc tr, #ygyfftinwc td, #ygyfftinwc th {
+#fbysgpedmg thead, #fbysgpedmg tbody, #fbysgpedmg tfoot, #fbysgpedmg tr, #fbysgpedmg td, #fbysgpedmg th {
   border-style: none;
 }
 
-#ygyfftinwc p {
+#fbysgpedmg p {
   margin: 0;
   padding: 0;
 }
 
-#ygyfftinwc .gt_table {
+#fbysgpedmg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -430,12 +439,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_caption {
+#fbysgpedmg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ygyfftinwc .gt_title {
+#fbysgpedmg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -447,7 +456,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#ygyfftinwc .gt_subtitle {
+#fbysgpedmg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -459,7 +468,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#ygyfftinwc .gt_heading {
+#fbysgpedmg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -471,13 +480,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_bottom_border {
+#fbysgpedmg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_col_headings {
+#fbysgpedmg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -492,7 +501,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_col_heading {
+#fbysgpedmg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,7 +521,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#ygyfftinwc .gt_column_spanner_outer {
+#fbysgpedmg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -524,15 +533,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#ygyfftinwc .gt_column_spanner_outer:first-child {
+#fbysgpedmg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ygyfftinwc .gt_column_spanner_outer:last-child {
+#fbysgpedmg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ygyfftinwc .gt_column_spanner {
+#fbysgpedmg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -544,11 +553,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#ygyfftinwc .gt_spanner_row {
+#fbysgpedmg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ygyfftinwc .gt_group_heading {
+#fbysgpedmg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -574,7 +583,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#ygyfftinwc .gt_empty_group_heading {
+#fbysgpedmg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -589,15 +598,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#ygyfftinwc .gt_from_md > :first-child {
+#fbysgpedmg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ygyfftinwc .gt_from_md > :last-child {
+#fbysgpedmg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ygyfftinwc .gt_row {
+#fbysgpedmg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -616,7 +625,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#ygyfftinwc .gt_stub {
+#fbysgpedmg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -629,7 +638,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#ygyfftinwc .gt_stub_row_group {
+#fbysgpedmg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -643,15 +652,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#ygyfftinwc .gt_row_group_first td {
+#fbysgpedmg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ygyfftinwc .gt_row_group_first th {
+#fbysgpedmg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ygyfftinwc .gt_summary_row {
+#fbysgpedmg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -661,16 +670,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#ygyfftinwc .gt_first_summary_row {
+#fbysgpedmg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_first_summary_row.thick {
+#fbysgpedmg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ygyfftinwc .gt_last_summary_row {
+#fbysgpedmg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -680,7 +689,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_grand_summary_row {
+#fbysgpedmg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -690,7 +699,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#ygyfftinwc .gt_first_grand_summary_row {
+#fbysgpedmg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -700,7 +709,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_last_grand_summary_row_top {
+#fbysgpedmg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -710,11 +719,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_striped {
+#fbysgpedmg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ygyfftinwc .gt_table_body {
+#fbysgpedmg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -723,7 +732,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_footnotes {
+#fbysgpedmg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -737,7 +746,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_footnote {
+#fbysgpedmg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -746,7 +755,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#ygyfftinwc .gt_sourcenotes {
+#fbysgpedmg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -760,7 +769,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#ygyfftinwc .gt_sourcenote {
+#fbysgpedmg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -768,77 +777,77 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#ygyfftinwc .gt_left {
+#fbysgpedmg .gt_left {
   text-align: left;
 }
 
-#ygyfftinwc .gt_center {
+#fbysgpedmg .gt_center {
   text-align: center;
 }
 
-#ygyfftinwc .gt_right {
+#fbysgpedmg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ygyfftinwc .gt_font_normal {
+#fbysgpedmg .gt_font_normal {
   font-weight: normal;
 }
 
-#ygyfftinwc .gt_font_bold {
+#fbysgpedmg .gt_font_bold {
   font-weight: bold;
 }
 
-#ygyfftinwc .gt_font_italic {
+#fbysgpedmg .gt_font_italic {
   font-style: italic;
 }
 
-#ygyfftinwc .gt_super {
+#fbysgpedmg .gt_super {
   font-size: 65%;
 }
 
-#ygyfftinwc .gt_footnote_marks {
+#fbysgpedmg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ygyfftinwc .gt_asterisk {
+#fbysgpedmg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ygyfftinwc .gt_indent_1 {
+#fbysgpedmg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ygyfftinwc .gt_indent_2 {
+#fbysgpedmg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ygyfftinwc .gt_indent_3 {
+#fbysgpedmg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ygyfftinwc .gt_indent_4 {
+#fbysgpedmg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ygyfftinwc .gt_indent_5 {
+#fbysgpedmg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ygyfftinwc .katex-display {
+#fbysgpedmg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ygyfftinwc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fbysgpedmg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
 <th colspan="9" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Cross Validation Models</strong></th>
@@ -941,36 +950,36 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 <p>The accuracy measures reveal that the DAMPEDS and LSS models perform consistently well. Below, we will continue with the DAMPEDS and LSS models as the trend seems to be exponential and there seems to be evidence of seasonality. These models are estimated and saved into an object called <em>fit</em> below.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> tesla <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> tesla <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">DAMPEDS =</span> <span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;Ad&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;A&quot;</span>)),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">DAMPEDS =</span> <span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"Ad"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>)),</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">LSS =</span> <span class="fu">TSLM</span>(deliveries <span class="sc">~</span> <span class="fu">trend</span>()<span class="sc">+</span><span class="fu">I</span>(<span class="fu">trend</span>()<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">season</span>())</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If one is interested in retrieving the model coefficients, one can use the <code>tidy()</code> (or <code>coef()</code>) function. Below the function is used along with the <em>fit</em> object to retrieve the coefficients of the Least Squares model with seasonality:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(.model<span class="sc">==</span><span class="st">&quot;LSS&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">&quot;.model&quot;</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(.model<span class="sc">==</span><span class="st">"LSS"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">".model"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="bzxijviuin" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bzxijviuin table {
+<div id="xuwogscajn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xuwogscajn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bzxijviuin thead, #bzxijviuin tbody, #bzxijviuin tfoot, #bzxijviuin tr, #bzxijviuin td, #bzxijviuin th {
+#xuwogscajn thead, #xuwogscajn tbody, #xuwogscajn tfoot, #xuwogscajn tr, #xuwogscajn td, #xuwogscajn th {
   border-style: none;
 }
 
-#bzxijviuin p {
+#xuwogscajn p {
   margin: 0;
   padding: 0;
 }
 
-#bzxijviuin .gt_table {
+#xuwogscajn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -996,12 +1005,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_caption {
+#xuwogscajn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bzxijviuin .gt_title {
+#xuwogscajn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1013,7 +1022,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#bzxijviuin .gt_subtitle {
+#xuwogscajn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1025,7 +1034,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#bzxijviuin .gt_heading {
+#xuwogscajn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1037,13 +1046,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_bottom_border {
+#xuwogscajn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_col_headings {
+#xuwogscajn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1058,7 +1067,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_col_heading {
+#xuwogscajn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1078,7 +1087,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#bzxijviuin .gt_column_spanner_outer {
+#xuwogscajn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1090,15 +1099,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#bzxijviuin .gt_column_spanner_outer:first-child {
+#xuwogscajn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bzxijviuin .gt_column_spanner_outer:last-child {
+#xuwogscajn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bzxijviuin .gt_column_spanner {
+#xuwogscajn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1110,11 +1119,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#bzxijviuin .gt_spanner_row {
+#xuwogscajn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bzxijviuin .gt_group_heading {
+#xuwogscajn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1140,7 +1149,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#bzxijviuin .gt_empty_group_heading {
+#xuwogscajn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1155,15 +1164,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#bzxijviuin .gt_from_md > :first-child {
+#xuwogscajn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bzxijviuin .gt_from_md > :last-child {
+#xuwogscajn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bzxijviuin .gt_row {
+#xuwogscajn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1182,7 +1191,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#bzxijviuin .gt_stub {
+#xuwogscajn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1195,7 +1204,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#bzxijviuin .gt_stub_row_group {
+#xuwogscajn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1209,15 +1218,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#bzxijviuin .gt_row_group_first td {
+#xuwogscajn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bzxijviuin .gt_row_group_first th {
+#xuwogscajn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bzxijviuin .gt_summary_row {
+#xuwogscajn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1227,16 +1236,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#bzxijviuin .gt_first_summary_row {
+#xuwogscajn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_first_summary_row.thick {
+#xuwogscajn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bzxijviuin .gt_last_summary_row {
+#xuwogscajn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1246,7 +1255,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_grand_summary_row {
+#xuwogscajn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1256,7 +1265,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#bzxijviuin .gt_first_grand_summary_row {
+#xuwogscajn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1266,7 +1275,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_last_grand_summary_row_top {
+#xuwogscajn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1276,11 +1285,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_striped {
+#xuwogscajn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bzxijviuin .gt_table_body {
+#xuwogscajn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1289,7 +1298,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_footnotes {
+#xuwogscajn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1303,7 +1312,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_footnote {
+#xuwogscajn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1312,7 +1321,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#bzxijviuin .gt_sourcenotes {
+#xuwogscajn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1326,7 +1335,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#bzxijviuin .gt_sourcenote {
+#xuwogscajn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1334,77 +1343,77 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#bzxijviuin .gt_left {
+#xuwogscajn .gt_left {
   text-align: left;
 }
 
-#bzxijviuin .gt_center {
+#xuwogscajn .gt_center {
   text-align: center;
 }
 
-#bzxijviuin .gt_right {
+#xuwogscajn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bzxijviuin .gt_font_normal {
+#xuwogscajn .gt_font_normal {
   font-weight: normal;
 }
 
-#bzxijviuin .gt_font_bold {
+#xuwogscajn .gt_font_bold {
   font-weight: bold;
 }
 
-#bzxijviuin .gt_font_italic {
+#xuwogscajn .gt_font_italic {
   font-style: italic;
 }
 
-#bzxijviuin .gt_super {
+#xuwogscajn .gt_super {
   font-size: 65%;
 }
 
-#bzxijviuin .gt_footnote_marks {
+#xuwogscajn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bzxijviuin .gt_asterisk {
+#xuwogscajn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bzxijviuin .gt_indent_1 {
+#xuwogscajn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bzxijviuin .gt_indent_2 {
+#xuwogscajn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bzxijviuin .gt_indent_3 {
+#xuwogscajn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bzxijviuin .gt_indent_4 {
+#xuwogscajn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bzxijviuin .gt_indent_5 {
+#xuwogscajn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bzxijviuin .katex-display {
+#xuwogscajn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bzxijviuin div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xuwogscajn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
 <th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>LSS Model Coefficients</strong></th>
@@ -1466,60 +1475,60 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 </div>
 </div>
-<p>The output above reveals that the seasonal dummy for Q4 is statistically significant at the <span class="math inline">\(10\)</span>% level, confirming the seasonal pattern found in the decomposition (<a href="#sec-data" class="quarto-xref"><span class="quarto-unresolved-ref">sec-data</span></a>). The plot below shows the fit of the models with the blue line representing the LSS model and the red line the DAMPEDS model.</p>
+<p>The output above reveals that the seasonal dummy for Q4 is statistically significant at the <span class="math inline">\(10\)</span>% level, confirming the seasonal pattern found in the decomposition (<a href="#sec-data" class="quarto-xref"><span>Section 6.3</span></a>). The plot below shows the fit of the models with the blue line representing the LSS model and the red line the DAMPEDS model.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(deliveries, <span class="at">lwd=</span><span class="fl">1.2</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">col=</span><span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> <span class="fu">augment</span>(fit)  <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">.model</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;LSS&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">col=</span><span class="st">&quot;red&quot;</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> <span class="fu">augment</span>(fit) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">.model</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;DAMPEDS&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span> <span class="st">&quot;Tesla Car Deliveries Fitted Values&quot;</span>, </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Q1 2016 to Q2 2023&quot;</span>) <span class="sc">+</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Quarter&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(deliveries, <span class="at">lwd=</span><span class="fl">1.2</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">col=</span><span class="st">"blue"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> <span class="fu">augment</span>(fit)  <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">.model</span><span class="st">`</span><span class="sc">==</span><span class="st">"LSS"</span>)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">col=</span><span class="st">"red"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> <span class="fu">augment</span>(fit) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">.model</span><span class="st">`</span><span class="sc">==</span><span class="st">"DAMPEDS"</span>)) <span class="sc">+</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span> <span class="st">"Tesla Car Deliveries Fitted Values"</span>, </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Q1 2016 to Q2 2023"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Quarter"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="ETS_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 <section id="information-criterion" class="level2" data-number="6.5">
-<h2 data-number="6.5"><span class="header-section-number">6.5</span> Information Criterion</h2>
+<h2 data-number="6.5" class="anchored" data-anchor-id="information-criterion"><span class="header-section-number">6.5</span> Information Criterion</h2>
 <p>We can also attempt to select our models via the AIC, AICc, or BIC. The code below summarizes these measures for the models considered.</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>train_tesla <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>train_tesla <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">SES=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;N&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;N&quot;</span>)),</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">HOLT=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;N&quot;</span>)),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">DAMPED=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;Ad&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;N&quot;</span>)),</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">DAMPEDS=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;Ad&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;A&quot;</span>)),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">SES=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"N"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"N"</span>)),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">HOLT=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"N"</span>)),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">DAMPED=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"Ad"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"N"</span>)),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">DAMPEDS=</span><span class="fu">ETS</span>(deliveries <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"Ad"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>)),</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">ALGO=</span><span class="fu">ETS</span>(deliveries),</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">LS =</span> <span class="fu">TSLM</span>(deliveries <span class="sc">~</span> <span class="fu">trend</span>()<span class="sc">+</span><span class="fu">I</span>(<span class="fu">trend</span>()<span class="sc">^</span><span class="dv">2</span>)),</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">LSS =</span> <span class="fu">TSLM</span>(deliveries <span class="sc">~</span> <span class="fu">trend</span>()<span class="sc">+</span><span class="fu">I</span>(<span class="fu">trend</span>()<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">season</span>())) <span class="sc">%&gt;%</span> </span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">report</span>()  <span class="sc">%&gt;%</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&#39;.model&#39;</span>,<span class="st">&quot;AIC&quot;</span>,<span class="st">&quot;AICc&quot;</span>,<span class="st">&quot;BIC&quot;</span>)</span></code></pre></div>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'.model'</span>,<span class="st">"AIC"</span>,<span class="st">"AICc"</span>,<span class="st">"BIC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="towtaipygg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#towtaipygg table {
+<div id="npoovztjjz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#npoovztjjz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#towtaipygg thead, #towtaipygg tbody, #towtaipygg tfoot, #towtaipygg tr, #towtaipygg td, #towtaipygg th {
+#npoovztjjz thead, #npoovztjjz tbody, #npoovztjjz tfoot, #npoovztjjz tr, #npoovztjjz td, #npoovztjjz th {
   border-style: none;
 }
 
-#towtaipygg p {
+#npoovztjjz p {
   margin: 0;
   padding: 0;
 }
 
-#towtaipygg .gt_table {
+#npoovztjjz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1545,12 +1554,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#towtaipygg .gt_caption {
+#npoovztjjz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#towtaipygg .gt_title {
+#npoovztjjz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1562,7 +1571,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#towtaipygg .gt_subtitle {
+#npoovztjjz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1574,7 +1583,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#towtaipygg .gt_heading {
+#npoovztjjz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1586,13 +1595,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#towtaipygg .gt_bottom_border {
+#npoovztjjz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#towtaipygg .gt_col_headings {
+#npoovztjjz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1607,7 +1616,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#towtaipygg .gt_col_heading {
+#npoovztjjz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1627,7 +1636,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#towtaipygg .gt_column_spanner_outer {
+#npoovztjjz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1639,15 +1648,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#towtaipygg .gt_column_spanner_outer:first-child {
+#npoovztjjz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#towtaipygg .gt_column_spanner_outer:last-child {
+#npoovztjjz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#towtaipygg .gt_column_spanner {
+#npoovztjjz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1659,11 +1668,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#towtaipygg .gt_spanner_row {
+#npoovztjjz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#towtaipygg .gt_group_heading {
+#npoovztjjz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1689,7 +1698,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#towtaipygg .gt_empty_group_heading {
+#npoovztjjz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1704,15 +1713,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#towtaipygg .gt_from_md > :first-child {
+#npoovztjjz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#towtaipygg .gt_from_md > :last-child {
+#npoovztjjz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#towtaipygg .gt_row {
+#npoovztjjz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1731,7 +1740,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#towtaipygg .gt_stub {
+#npoovztjjz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1744,7 +1753,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#towtaipygg .gt_stub_row_group {
+#npoovztjjz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1758,15 +1767,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#towtaipygg .gt_row_group_first td {
+#npoovztjjz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#towtaipygg .gt_row_group_first th {
+#npoovztjjz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#towtaipygg .gt_summary_row {
+#npoovztjjz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1776,16 +1785,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#towtaipygg .gt_first_summary_row {
+#npoovztjjz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#towtaipygg .gt_first_summary_row.thick {
+#npoovztjjz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#towtaipygg .gt_last_summary_row {
+#npoovztjjz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1795,7 +1804,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#towtaipygg .gt_grand_summary_row {
+#npoovztjjz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1805,7 +1814,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#towtaipygg .gt_first_grand_summary_row {
+#npoovztjjz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1815,7 +1824,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#towtaipygg .gt_last_grand_summary_row_top {
+#npoovztjjz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1825,11 +1834,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#towtaipygg .gt_striped {
+#npoovztjjz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#towtaipygg .gt_table_body {
+#npoovztjjz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1838,7 +1847,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#towtaipygg .gt_footnotes {
+#npoovztjjz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1852,7 +1861,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#towtaipygg .gt_footnote {
+#npoovztjjz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1861,7 +1870,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#towtaipygg .gt_sourcenotes {
+#npoovztjjz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1875,7 +1884,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#towtaipygg .gt_sourcenote {
+#npoovztjjz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1883,77 +1892,77 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#towtaipygg .gt_left {
+#npoovztjjz .gt_left {
   text-align: left;
 }
 
-#towtaipygg .gt_center {
+#npoovztjjz .gt_center {
   text-align: center;
 }
 
-#towtaipygg .gt_right {
+#npoovztjjz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#towtaipygg .gt_font_normal {
+#npoovztjjz .gt_font_normal {
   font-weight: normal;
 }
 
-#towtaipygg .gt_font_bold {
+#npoovztjjz .gt_font_bold {
   font-weight: bold;
 }
 
-#towtaipygg .gt_font_italic {
+#npoovztjjz .gt_font_italic {
   font-style: italic;
 }
 
-#towtaipygg .gt_super {
+#npoovztjjz .gt_super {
   font-size: 65%;
 }
 
-#towtaipygg .gt_footnote_marks {
+#npoovztjjz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#towtaipygg .gt_asterisk {
+#npoovztjjz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#towtaipygg .gt_indent_1 {
+#npoovztjjz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#towtaipygg .gt_indent_2 {
+#npoovztjjz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#towtaipygg .gt_indent_3 {
+#npoovztjjz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#towtaipygg .gt_indent_4 {
+#npoovztjjz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#towtaipygg .gt_indent_5 {
+#npoovztjjz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#towtaipygg .katex-display {
+#npoovztjjz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#towtaipygg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#npoovztjjz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
 <th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Model Fit Information Criterion</strong></th>
@@ -2017,33 +2026,33 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 <p>Here, once again the LSS model seems to perform the best as it provides the lowest values. Among the ETS models, the ALGO model now stands out. This should be of no surprise, as the ALGO model is designed to choose ETS components that minimize the AIC.</p>
 </section>
 <section id="forecasts" class="level2" data-number="6.6">
-<h2 data-number="6.6"><span class="header-section-number">6.6</span> Forecasts</h2>
+<h2 data-number="6.6" class="anchored" data-anchor-id="forecasts"><span class="header-section-number">6.6</span> Forecasts</h2>
 <p>Forecasts are created by using the <em>fit</em> object. We will forecast four quarters ahead using the <code>forecast()</code> function. The code below generates a table with the forecasts.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="st">&quot;.model&quot;</span>) <span class="ot">-&gt;</span> deliveries_fc</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>deliveries_fc</span></code></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="st">".model"</span>) <span class="ot">-&gt;</span> deliveries_fc</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>deliveries_fc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="hbybtipddn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hbybtipddn table {
+<div id="gkjjzpyjie" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gkjjzpyjie table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hbybtipddn thead, #hbybtipddn tbody, #hbybtipddn tfoot, #hbybtipddn tr, #hbybtipddn td, #hbybtipddn th {
+#gkjjzpyjie thead, #gkjjzpyjie tbody, #gkjjzpyjie tfoot, #gkjjzpyjie tr, #gkjjzpyjie td, #gkjjzpyjie th {
   border-style: none;
 }
 
-#hbybtipddn p {
+#gkjjzpyjie p {
   margin: 0;
   padding: 0;
 }
 
-#hbybtipddn .gt_table {
+#gkjjzpyjie .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2069,12 +2078,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_caption {
+#gkjjzpyjie .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hbybtipddn .gt_title {
+#gkjjzpyjie .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2086,7 +2095,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#hbybtipddn .gt_subtitle {
+#gkjjzpyjie .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2098,7 +2107,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#hbybtipddn .gt_heading {
+#gkjjzpyjie .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2110,13 +2119,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_bottom_border {
+#gkjjzpyjie .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_col_headings {
+#gkjjzpyjie .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2131,7 +2140,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_col_heading {
+#gkjjzpyjie .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2151,7 +2160,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#hbybtipddn .gt_column_spanner_outer {
+#gkjjzpyjie .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2163,15 +2172,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#hbybtipddn .gt_column_spanner_outer:first-child {
+#gkjjzpyjie .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hbybtipddn .gt_column_spanner_outer:last-child {
+#gkjjzpyjie .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hbybtipddn .gt_column_spanner {
+#gkjjzpyjie .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2183,11 +2192,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#hbybtipddn .gt_spanner_row {
+#gkjjzpyjie .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hbybtipddn .gt_group_heading {
+#gkjjzpyjie .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2213,7 +2222,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#hbybtipddn .gt_empty_group_heading {
+#gkjjzpyjie .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2228,15 +2237,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#hbybtipddn .gt_from_md > :first-child {
+#gkjjzpyjie .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hbybtipddn .gt_from_md > :last-child {
+#gkjjzpyjie .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hbybtipddn .gt_row {
+#gkjjzpyjie .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2255,7 +2264,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#hbybtipddn .gt_stub {
+#gkjjzpyjie .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2268,7 +2277,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#hbybtipddn .gt_stub_row_group {
+#gkjjzpyjie .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2282,15 +2291,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#hbybtipddn .gt_row_group_first td {
+#gkjjzpyjie .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hbybtipddn .gt_row_group_first th {
+#gkjjzpyjie .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hbybtipddn .gt_summary_row {
+#gkjjzpyjie .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2300,16 +2309,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#hbybtipddn .gt_first_summary_row {
+#gkjjzpyjie .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_first_summary_row.thick {
+#gkjjzpyjie .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hbybtipddn .gt_last_summary_row {
+#gkjjzpyjie .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2319,7 +2328,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_grand_summary_row {
+#gkjjzpyjie .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2329,7 +2338,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#hbybtipddn .gt_first_grand_summary_row {
+#gkjjzpyjie .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2339,7 +2348,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_last_grand_summary_row_top {
+#gkjjzpyjie .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2349,11 +2358,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_striped {
+#gkjjzpyjie .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hbybtipddn .gt_table_body {
+#gkjjzpyjie .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2362,7 +2371,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_footnotes {
+#gkjjzpyjie .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2376,7 +2385,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_footnote {
+#gkjjzpyjie .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2385,7 +2394,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#hbybtipddn .gt_sourcenotes {
+#gkjjzpyjie .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2399,7 +2408,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#hbybtipddn .gt_sourcenote {
+#gkjjzpyjie .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2407,77 +2416,77 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#hbybtipddn .gt_left {
+#gkjjzpyjie .gt_left {
   text-align: left;
 }
 
-#hbybtipddn .gt_center {
+#gkjjzpyjie .gt_center {
   text-align: center;
 }
 
-#hbybtipddn .gt_right {
+#gkjjzpyjie .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hbybtipddn .gt_font_normal {
+#gkjjzpyjie .gt_font_normal {
   font-weight: normal;
 }
 
-#hbybtipddn .gt_font_bold {
+#gkjjzpyjie .gt_font_bold {
   font-weight: bold;
 }
 
-#hbybtipddn .gt_font_italic {
+#gkjjzpyjie .gt_font_italic {
   font-style: italic;
 }
 
-#hbybtipddn .gt_super {
+#gkjjzpyjie .gt_super {
   font-size: 65%;
 }
 
-#hbybtipddn .gt_footnote_marks {
+#gkjjzpyjie .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hbybtipddn .gt_asterisk {
+#gkjjzpyjie .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hbybtipddn .gt_indent_1 {
+#gkjjzpyjie .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hbybtipddn .gt_indent_2 {
+#gkjjzpyjie .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hbybtipddn .gt_indent_3 {
+#gkjjzpyjie .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hbybtipddn .gt_indent_4 {
+#gkjjzpyjie .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hbybtipddn .gt_indent_5 {
+#gkjjzpyjie .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hbybtipddn .katex-display {
+#gkjjzpyjie .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hbybtipddn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gkjjzpyjie div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
 <th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Forecasts</strong></th>
@@ -2546,92 +2555,92 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 <p>Forecasts for the four quarters are shown above, with the corresponding mean. In general, both models predict Tesla will continue its trend and increase its deliveries every quarter. According to the DAMPEDS model, Tesla is expected to deliver about <span class="math inline">\(516,000\)</span> cars on average. The plot below illustrates the forecasts for both models along with the <span class="math inline">\(95\)</span>% prediction intervals. The increasing standard deviation for future periods reminds us that longer-period forecasts have even more uncertainty.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(tesla, <span class="at">level=</span><span class="dv">95</span>) <span class="sc">+</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Quarter&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Tesla Car Deliveries Forecasts&quot;</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Q1 2016 to Q2 2023&quot;</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Quarter"</span>, <span class="at">y=</span><span class="st">""</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Tesla Car Deliveries Forecasts"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Q1 2016 to Q2 2023"</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="ETS_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 <section id="scenarios" class="level2" data-number="6.7">
-<h2 data-number="6.7"><span class="header-section-number">6.7</span> Scenarios</h2>
+<h2 data-number="6.7" class="anchored" data-anchor-id="scenarios"><span class="header-section-number">6.7</span> Scenarios</h2>
 <p>On October 2, 2023, Tesla announced 435,059 deliveries for Q3, signaling strong performance. However, during the previous earnings call, Tesla had already cautioned investors about potential delivery impacts due to planned factory shutdowns and upgrades. These shutdowns are necessary to retool production lines for their upcoming vehicles, the Highland Model 3 and Cybertruck. Interestingly, a similar factory shutdown occurred in Q2 2022, giving us valuable historical data to make more precise predictions.</p>
 <p>To factor in the effect of these shutdowns, we can introduce a dummy variable, where we assign a value of 1 during shutdown quarters and 0 otherwise. Here’s the code:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tesla<span class="ot">&lt;-</span><span class="fu">mutate</span>(tesla,</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tesla<span class="ot">&lt;-</span><span class="fu">mutate</span>(tesla,</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">Down=</span><span class="fu">case_when</span>(</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                  period<span class="sc">==</span><span class="fu">yearquarter</span>(<span class="st">&quot;2022 Q2&quot;</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>))</span></code></pre></div>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                  period<span class="sc">==</span><span class="fu">yearquarter</span>(<span class="st">"2022 Q2"</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <em>Down</em> variable captures the impact of factory shutdowns on deliveries. Now, we can incorporate this information into our Time Series Linear Model (TSLM) to estimate Tesla’s deliveries more accurately:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> tesla <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> tesla <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">LSS =</span> <span class="fu">TSLM</span>(deliveries<span class="sc">~</span><span class="fu">trend</span>()<span class="sc">+</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">I</span>(<span class="fu">trend</span>()<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">season</span>()<span class="sc">+</span>Down)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, let’s explore two possible scenarios: one where Tesla undergoes a factory shutdown and another where production continues uninterrupted. Using the <code>scenarios()</code> function, we can create a dataset for forecasting over the next four periods, simulating both situations:</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Down_Scenario <span class="ot">&lt;-</span> <span class="fu">scenarios</span>(</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Down_Scenario <span class="ot">&lt;-</span> <span class="fu">scenarios</span>(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Factory_Down =</span> <span class="fu">new_data</span>(tesla, <span class="dv">4</span>) <span class="sc">|&gt;</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Down=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">4</span>)),</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Factory_Up =</span> <span class="fu">new_data</span>(tesla, <span class="dv">4</span>) <span class="sc">|&gt;</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Down=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>)),</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">&quot;Scenario&quot;</span>)</span></code></pre></div>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"Scenario"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, we can visualize how each scenario affects Tesla’s future delivery forecasts. Whether Tesla experiences another factory shutdown or keeps production running smoothly, this analysis will help us better understand the potential outcomes.</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(deliveries) <span class="sc">+</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(<span class="fu">forecast</span>(fit,<span class="at">new_data=</span>Down_Scenario),</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">level=</span><span class="cn">NULL</span>)<span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Quarter&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Tesla Car Deliveries Forecasts&quot;</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Scenario Forecast&quot;</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Quarter"</span>, <span class="at">y=</span><span class="st">""</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Tesla Car Deliveries Forecasts"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Scenario Forecast"</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="ETS_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The new forecast of 429,404 is now closer to the reported delivery number of 435,059 for Q3 2023 when compared to the analyst consensus estimate of 454,809. For the 4th quarter of 2023 the analyst consensus was 480,500, which is in line with the forecast of the LSS model (about 480,000). The 95% prediction interval of [422,553, 537,182] is retrieved using the <code>hilo()</code> function.</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">new_data=</span>Down_Scenario) <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="fu">unpack_hilo</span>(<span class="st">&quot;95%&quot;</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">new_data=</span>Down_Scenario) <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="fu">unpack_hilo</span>(<span class="st">"95%"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Down,period,.mean,<span class="st">`</span><span class="at">95%_lower</span><span class="st">`</span>,<span class="st">`</span><span class="at">95%_upper</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">columns=</span><span class="fu">c</span>(.mean,</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">`</span><span class="at">95%_lower</span><span class="st">`</span>,<span class="st">`</span><span class="at">95%_upper</span><span class="st">`</span>),</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">decimals =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">decimals =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="cvktfwzigf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cvktfwzigf table {
+<div id="jgofsnbswo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jgofsnbswo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cvktfwzigf thead, #cvktfwzigf tbody, #cvktfwzigf tfoot, #cvktfwzigf tr, #cvktfwzigf td, #cvktfwzigf th {
+#jgofsnbswo thead, #jgofsnbswo tbody, #jgofsnbswo tfoot, #jgofsnbswo tr, #jgofsnbswo td, #jgofsnbswo th {
   border-style: none;
 }
 
-#cvktfwzigf p {
+#jgofsnbswo p {
   margin: 0;
   padding: 0;
 }
 
-#cvktfwzigf .gt_table {
+#jgofsnbswo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2657,12 +2666,12 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-left-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_caption {
+#jgofsnbswo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cvktfwzigf .gt_title {
+#jgofsnbswo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2674,7 +2683,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-width: 0;
 }
 
-#cvktfwzigf .gt_subtitle {
+#jgofsnbswo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2686,7 +2695,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-width: 0;
 }
 
-#cvktfwzigf .gt_heading {
+#jgofsnbswo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2698,13 +2707,13 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_bottom_border {
+#jgofsnbswo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_col_headings {
+#jgofsnbswo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2719,7 +2728,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_col_heading {
+#jgofsnbswo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2739,7 +2748,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#cvktfwzigf .gt_column_spanner_outer {
+#jgofsnbswo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2751,15 +2760,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 4px;
 }
 
-#cvktfwzigf .gt_column_spanner_outer:first-child {
+#jgofsnbswo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cvktfwzigf .gt_column_spanner_outer:last-child {
+#jgofsnbswo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cvktfwzigf .gt_column_spanner {
+#jgofsnbswo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2771,11 +2780,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   width: 100%;
 }
 
-#cvktfwzigf .gt_spanner_row {
+#jgofsnbswo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cvktfwzigf .gt_group_heading {
+#jgofsnbswo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2801,7 +2810,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   text-align: left;
 }
 
-#cvktfwzigf .gt_empty_group_heading {
+#jgofsnbswo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2816,15 +2825,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: middle;
 }
 
-#cvktfwzigf .gt_from_md > :first-child {
+#jgofsnbswo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cvktfwzigf .gt_from_md > :last-child {
+#jgofsnbswo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cvktfwzigf .gt_row {
+#jgofsnbswo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2843,7 +2852,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   overflow-x: hidden;
 }
 
-#cvktfwzigf .gt_stub {
+#jgofsnbswo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2856,7 +2865,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#cvktfwzigf .gt_stub_row_group {
+#jgofsnbswo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2870,15 +2879,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   vertical-align: top;
 }
 
-#cvktfwzigf .gt_row_group_first td {
+#jgofsnbswo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cvktfwzigf .gt_row_group_first th {
+#jgofsnbswo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cvktfwzigf .gt_summary_row {
+#jgofsnbswo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2888,16 +2897,16 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#cvktfwzigf .gt_first_summary_row {
+#jgofsnbswo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_first_summary_row.thick {
+#jgofsnbswo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cvktfwzigf .gt_last_summary_row {
+#jgofsnbswo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2907,7 +2916,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_grand_summary_row {
+#jgofsnbswo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2917,7 +2926,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#cvktfwzigf .gt_first_grand_summary_row {
+#jgofsnbswo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2927,7 +2936,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-top-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_last_grand_summary_row_top {
+#jgofsnbswo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2937,11 +2946,11 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_striped {
+#jgofsnbswo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cvktfwzigf .gt_table_body {
+#jgofsnbswo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2950,7 +2959,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-bottom-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_footnotes {
+#jgofsnbswo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2964,7 +2973,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_footnote {
+#jgofsnbswo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2973,7 +2982,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#cvktfwzigf .gt_sourcenotes {
+#jgofsnbswo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2987,7 +2996,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   border-right-color: #D3D3D3;
 }
 
-#cvktfwzigf .gt_sourcenote {
+#jgofsnbswo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2995,77 +3004,77 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
   padding-right: 5px;
 }
 
-#cvktfwzigf .gt_left {
+#jgofsnbswo .gt_left {
   text-align: left;
 }
 
-#cvktfwzigf .gt_center {
+#jgofsnbswo .gt_center {
   text-align: center;
 }
 
-#cvktfwzigf .gt_right {
+#jgofsnbswo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cvktfwzigf .gt_font_normal {
+#jgofsnbswo .gt_font_normal {
   font-weight: normal;
 }
 
-#cvktfwzigf .gt_font_bold {
+#jgofsnbswo .gt_font_bold {
   font-weight: bold;
 }
 
-#cvktfwzigf .gt_font_italic {
+#jgofsnbswo .gt_font_italic {
   font-style: italic;
 }
 
-#cvktfwzigf .gt_super {
+#jgofsnbswo .gt_super {
   font-size: 65%;
 }
 
-#cvktfwzigf .gt_footnote_marks {
+#jgofsnbswo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cvktfwzigf .gt_asterisk {
+#jgofsnbswo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cvktfwzigf .gt_indent_1 {
+#jgofsnbswo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cvktfwzigf .gt_indent_2 {
+#jgofsnbswo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cvktfwzigf .gt_indent_3 {
+#jgofsnbswo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cvktfwzigf .gt_indent_4 {
+#jgofsnbswo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cvktfwzigf .gt_indent_5 {
+#jgofsnbswo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cvktfwzigf .katex-display {
+#jgofsnbswo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cvktfwzigf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jgofsnbswo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="Down" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Down</th>
@@ -3140,15 +3149,15 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </div>
 </section>
 <section id="readings" class="level2" data-number="6.8">
-<h2 data-number="6.8"><span class="header-section-number">6.8</span> Readings</h2>
-<p>The main reading for ETS models comes from Chapter 8 of <span class="citation" data-cites="FPP3">Hyndman (<a href="#ref-FPP3" role="doc-biblioref">2021</a>)</span>. These readings provide a bit more detail on the mathematical background behind each model and a few more applications. For an overview of the moving averages, the Holt, and Winters’ models review <span class="citation" data-cites="PMS">Winston and Albright (<a href="#ref-PMS" role="doc-biblioref">2019</a>)</span>.</p>
+<h2 data-number="6.8" class="anchored" data-anchor-id="readings"><span class="header-section-number">6.8</span> Readings</h2>
+<p>The main reading for ETS models comes from Chapter 8 of <span class="citation" data-cites="FPP3">Hyndman (<a href="references.html#ref-FPP3" role="doc-biblioref">2021</a>)</span>. These readings provide a bit more detail on the mathematical background behind each model and a few more applications. For an overview of the moving averages, the Holt, and Winters’ models review <span class="citation" data-cites="PMS">Winston and Albright (<a href="references.html#ref-PMS" role="doc-biblioref">2019</a>)</span>.</p>
 <ul>
-<li><p><span class="citation" data-cites="FPP3">Hyndman (<a href="#ref-FPP3" role="doc-biblioref">2021</a>)</span> Chapter 8 (Exponential Smoothing).</p></li>
-<li><p><span class="citation" data-cites="PMS">Winston and Albright (<a href="#ref-PMS" role="doc-biblioref">2019</a>)</span> Chapter 13.5 (Overview of Time Series Models), 13.6 (Moving Average Models), 13.7 (Exponential Smoothing Models).</p></li>
+<li><p><span class="citation" data-cites="FPP3">Hyndman (<a href="references.html#ref-FPP3" role="doc-biblioref">2021</a>)</span> Chapter 8 (Exponential Smoothing).</p></li>
+<li><p><span class="citation" data-cites="PMS">Winston and Albright (<a href="references.html#ref-PMS" role="doc-biblioref">2019</a>)</span> Chapter 13.5 (Overview of Time Series Models), 13.6 (Moving Average Models), 13.7 (Exponential Smoothing Models).</p></li>
 </ul>
 </section>
 <section id="lessons-learned" class="level2" data-number="6.9">
-<h2 data-number="6.9"><span class="header-section-number">6.9</span> Lessons Learned</h2>
+<h2 data-number="6.9" class="anchored" data-anchor-id="lessons-learned"><span class="header-section-number">6.9</span> Lessons Learned</h2>
 <p>In this module you have been introduced to the ETS model. Particularly you have learned to:</p>
 <ul>
 <li><p>Use the <code>model()</code> and <code>ETS()</code> functions to estimate the model.</p></li>
@@ -3157,7 +3166,7 @@ Smoothing Equation: <span class="math inline">\(l_{t}=\alpha y_t + (1-\alpha)l_{
 </ul>
 </section>
 <section id="exercises6" class="level2" data-number="6.10">
-<h2 data-number="6.10"><span class="header-section-number">6.10</span> Exercises</h2>
+<h2 data-number="6.10" class="anchored" data-anchor-id="exercises6"><span class="header-section-number">6.10</span> Exercises</h2>
 <ol type="1">
 <li><p>Tesla is rapidly expanding its footprint in renewable energy and energy storage solutions, with innovations like the Powerwall, Megapack, and Solar Roof driving the company forward. Tesla’s energy storage systems are gaining traction in both residential and large-scale utility markets, while its vision of Virtual Power Plants (VPPs) is revolutionizing how power is managed and distributed.</p>
 <p>Tesla is forecasting strong growth in energy deployment as they continue to scale their products and enter new markets. You have been asked to help forecast Tesla Energy’s deployment for Q4 2024, using historical quarterly data on energy storage and solar deployments from previous years.</p>
@@ -3170,11 +3179,11 @@ Suggested Answer
 </summary>
 <p>We can use the code below to develop the models:</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>storage<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;http://jagelves.github.io/Data/teslaE.csv&quot;</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>storage<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"http://jagelves.github.io/Data/teslaE.csv"</span>)</span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>storage <span class="sc">%&gt;%</span></span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">yearquarter</span>(Date)) <span class="sc">%&gt;%</span></span>
@@ -3183,11 +3192,11 @@ Suggested Answer
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>storage_ts <span class="sc">%&gt;%</span></span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">LM=</span><span class="fu">TSLM</span>(EnergyStorage<span class="sc">~</span><span class="fu">trend</span>()<span class="sc">+</span><span class="fu">season</span>()),</span>
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">LM2=</span><span class="fu">TSLM</span>(EnergyStorage<span class="sc">~</span><span class="fu">trend</span>()<span class="sc">+</span><span class="fu">I</span>(<span class="fu">trend</span>()<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">season</span>()),</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">ETS=</span><span class="fu">ETS</span>(EnergyStorage<span class="sc">~</span><span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;A&quot;</span>))) <span class="ot">-&gt;</span>fit</span></code></pre></div>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">ETS=</span><span class="fu">ETS</span>(EnergyStorage<span class="sc">~</span><span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>))) <span class="ot">-&gt;</span>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To obtain the information criterion we can use the <code>glance()</code> function:</p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">glance</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(.model,AIC<span class="sc">:</span>BIC)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">glance</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(.model,AIC<span class="sc">:</span>BIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   .model   AIC  AICc   BIC
@@ -3199,8 +3208,8 @@ Suggested Answer
 </div>
 <p>Forecasts are obtained with the <code>forecast()</code> function setting <em>h=4</em>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="dv">95</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="dv">95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tsibble: 12 x 5 [1Q]
 # Key:       .model [3]
@@ -3223,12 +3232,12 @@ Suggested Answer
 </div>
 <p>Finally, the graph is obtained using the <code>autoplot()</code> and <code>autolayer()</code> functions:</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">level=</span><span class="cn">NULL</span>)<span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(storage_ts,EnergyStorage) <span class="sc">+</span> <span class="fu">theme_clean</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">level=</span><span class="cn">NULL</span>)<span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(storage_ts,EnergyStorage) <span class="sc">+</span> <span class="fu">theme_clean</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="ETS_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -3245,26 +3254,26 @@ Suggested Answer
 </summary>
 <p>The code below provides an estimate by forecasting the months of August 2023 onward with an ETS model with additive terms.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>Elec<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;http://jagelves.github.io/Data/ElectricityBill.csv&quot;</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>Elec<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"http://jagelves.github.io/Data/ElectricityBill.csv"</span>)</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>Elec <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">yearmonth</span>(<span class="fu">paste</span>(Year, Month, <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>Elec <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">yearmonth</span>(<span class="fu">paste</span>(Year, Month, <span class="at">sep =</span> <span class="st">"-"</span>))) <span class="sc">%&gt;%</span> </span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Date,<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index=</span>Date)<span class="ot">-&gt;</span> Elec_ts</span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>pre<span class="ot">&lt;-</span>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">filter_index</span>(.<span class="sc">~</span><span class="st">&quot;2023 Jul&quot;</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>pre<span class="ot">&lt;-</span>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">filter_index</span>(.<span class="sc">~</span><span class="st">"2023 Jul"</span>)</span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>pre <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="at">ETS=</span><span class="fu">ETS</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span><span class="sc">~</span><span class="fu">error</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">&quot;A&quot;</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">&quot;A&quot;</span>))) <span class="ot">-&gt;</span> fitp</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>pre <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="at">ETS=</span><span class="fu">ETS</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span><span class="sc">~</span><span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>))) <span class="ot">-&gt;</span> fitp</span>
 <span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>fitp <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">12</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date,.mean) <span class="ot">-&gt;</span> NoMach</span>
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">filter_index</span>(<span class="st">&quot;2023 Aug&quot;</span><span class="sc">~</span>.) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">filter_index</span>(<span class="st">"2023 Aug"</span><span class="sc">~</span>.) <span class="sc">%&gt;%</span> </span>
 <span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()  <span class="ot">-&gt;</span> Mach</span>
 <span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(Mach<span class="sc">$</span><span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span><span class="sc">-</span> NoMach<span class="sc">$</span>.mean)</span></code></pre></div>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(Mach<span class="sc">$</span><span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span><span class="sc">-</span> NoMach<span class="sc">$</span>.mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in Mach$`Bill Amount` - NoMach$.mean: longer object length is not a
 multiple of shorter object length</code></pre>
@@ -3275,16 +3284,16 @@ multiple of shorter object length</code></pre>
 </div>
 <p>Following this analysis, the ice cream shop has paid an additional 649 dollars. Below is a graph that visualizes the difference:</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span>) <span class="sc">+</span> <span class="fu">theme_clean</span>() <span class="sc">+</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">as.Date</span>(<span class="st">&quot;2023-06-01&quot;</span>), <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">title=</span><span class="st">&quot;Electric Bill in Dollars&quot;</span>,</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">&quot;Forecast in blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(<span class="fu">forecast</span>(fitp,<span class="at">h=</span><span class="dv">12</span>), <span class="at">level=</span><span class="cn">NULL</span>)</span></code></pre></div>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">as.Date</span>(<span class="st">"2023-06-01"</span>), <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">title=</span><span class="st">"Electric Bill in Dollars"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"Forecast in blue"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(<span class="fu">forecast</span>(fitp,<span class="at">h=</span><span class="dv">12</span>), <span class="at">level=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="ETS_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -3299,46 +3308,46 @@ Suggested Answer
 </summary>
 <p>Create a dummy variable that tags the dates when the new machine was in operation and fit the TSLM model:</p>
 <div class="cell">
-<div class="sourceCode" id="cb27"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Elec_ts<span class="ot">&lt;-</span><span class="fu">mutate</span>(Elec_ts,</span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Elec_ts<span class="ot">&lt;-</span><span class="fu">mutate</span>(Elec_ts,</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">Down=</span><span class="fu">case_when</span>(</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                  Date<span class="sc">&gt;=</span><span class="fu">yearmonth</span>(<span class="st">&quot;2023 7&quot;</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                  Date<span class="sc">&gt;=</span><span class="fu">yearmonth</span>(<span class="st">"2023 7"</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>))</span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span></span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">LM2 =</span> <span class="fu">TSLM</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span><span class="sc">~</span><span class="fu">trend</span>()<span class="sc">+</span><span class="fu">season</span>()<span class="sc">+</span>Down)) <span class="ot">-&gt;</span> fit2</span></code></pre></div>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">LM2 =</span> <span class="fu">TSLM</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span><span class="sc">~</span><span class="fu">trend</span>()<span class="sc">+</span><span class="fu">season</span>()<span class="sc">+</span>Down)) <span class="ot">-&gt;</span> fit2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can create a new tsibble with data that assumes the new machine and no new machine with the <code>scenarios()</code> function.</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Mach <span class="ot">&lt;-</span> <span class="fu">scenarios</span>(</span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Mach <span class="ot">&lt;-</span> <span class="fu">scenarios</span>(</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">New_Mach =</span> <span class="fu">new_data</span>(Elec_ts, <span class="dv">12</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Down=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">12</span>)),</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Old_Mach =</span> <span class="fu">new_data</span>(Elec_ts, <span class="dv">12</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Down=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">12</span>)),</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">&quot;Scenario&quot;</span>)</span></code></pre></div>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"Scenario"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Lastly, we can use this new data to forecast with our model:</p>
 <div class="cell">
-<div class="sourceCode" id="cb29"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forecast</span>(fit2,<span class="at">new_data=</span>Mach) <span class="ot">-&gt;</span>est</span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forecast</span>(fit2,<span class="at">new_data=</span>Mach) <span class="ot">-&gt;</span>est</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(est) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Down) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Sum=</span><span class="fu">sum</span>(.mean)) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Sum) <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span></code></pre></div>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Sum=</span><span class="fu">sum</span>(.mean)) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Sum) <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 29.80462</code></pre>
 </div>
 </div>
 <p>It will cost the ice cream shop an additional 535 dollars in energy consumption to keep the machine. Below is a graph of the two scenarios:</p>
 <div class="cell">
-<div class="sourceCode" id="cb31"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span>) <span class="sc">+</span> </span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(<span class="fu">forecast</span>(fit2,<span class="at">new_data=</span>Mach),</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">level=</span><span class="cn">NULL</span>)<span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Months&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>,</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Energy Consumption&quot;</span>,</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Scenario Forecast&quot;</span>) <span class="sc">+</span> <span class="fu">theme_clean</span>()</span></code></pre></div>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Months"</span>, <span class="at">y=</span><span class="st">""</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Energy Consumption"</span>,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Scenario Forecast"</span>) <span class="sc">+</span> <span class="fu">theme_clean</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="ETS_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -3355,29 +3364,29 @@ Suggested Answer
 </summary>
 <p>Here is the R code to complete the task. Start by loading the data and creating the tsibble.</p>
 <div class="cell">
-<div class="sourceCode" id="cb32"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>Load<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;http://jagelves.github.io/Data/AirlinesLoad.csv&quot;</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>Load<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"http://jagelves.github.io/Data/AirlinesLoad.csv"</span>)</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>Load <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">yearmonth</span>(<span class="fu">paste</span>(Year, Month, <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Airline<span class="sc">==</span><span class="st">&quot;Delta&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Date,LF_total) <span class="sc">%&gt;%</span> <span class="fu">as_tsibble</span>(<span class="at">index=</span>Date) <span class="ot">-&gt;</span> Load_ts</span></code></pre></div>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>Load <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">yearmonth</span>(<span class="fu">paste</span>(Year, Month, <span class="at">sep =</span> <span class="st">"-"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Airline<span class="sc">==</span><span class="st">"Delta"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Date,LF_total) <span class="sc">%&gt;%</span> <span class="fu">as_tsibble</span>(<span class="at">index=</span>Date) <span class="ot">-&gt;</span> Load_ts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can create the train and test sets with the dates provided:</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Load_ts <span class="sc">%&gt;%</span> <span class="fu">filter_index</span>(<span class="st">&quot;2022 Jan&quot;</span><span class="sc">~</span><span class="st">&quot;2023 Dec&quot;</span>) <span class="ot">-&gt;</span> train</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>Load_ts <span class="sc">%&gt;%</span> <span class="fu">filter_index</span>(<span class="st">&quot;Jan 2024&quot;</span><span class="sc">~</span>.) <span class="ot">-&gt;</span> test</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Load_ts <span class="sc">%&gt;%</span> <span class="fu">filter_index</span>(<span class="st">"2022 Jan"</span><span class="sc">~</span><span class="st">"2023 Dec"</span>) <span class="ot">-&gt;</span> train</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>Load_ts <span class="sc">%&gt;%</span> <span class="fu">filter_index</span>(<span class="st">"Jan 2024"</span><span class="sc">~</span>.) <span class="ot">-&gt;</span> test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, estimate both models and compare the accuracy of their predictions on the test set:</p>
 <div class="cell">
-<div class="sourceCode" id="cb34"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> </span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">TSLM=</span><span class="fu">TSLM</span>(LF_total<span class="sc">~</span><span class="fu">trend</span>()<span class="sc">+</span><span class="fu">season</span>()),</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ETS=</span><span class="fu">ETS</span>(LF_total)) <span class="ot">-&gt;</span> fit</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(test) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(test) <span class="sc">%&gt;%</span> <span class="fu">select</span>(.model,RMSE)</span></code></pre></div>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(test) <span class="sc">%&gt;%</span> <span class="fu">select</span>(.model,RMSE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   .model  RMSE
@@ -3388,9 +3397,9 @@ Suggested Answer
 </div>
 <p>It seems like the algorithmic ETS performs better. Finally, let’s forecast the series using the algorithmic ETS model:</p>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Load_ts <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Load_ts <span class="sc">%&gt;%</span> </span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">ETS=</span><span class="fu">ETS</span>(LF_total)) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">4</span>)</span></code></pre></div>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A fable: 4 x 4 [1M]
 # Key:     .model [1]
@@ -3405,29 +3414,25 @@ Suggested Answer
 </div>
 <p>Here is the graph:</p>
 <div class="cell">
-<div class="sourceCode" id="cb38"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Load_ts <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Load_ts <span class="sc">%&gt;%</span> </span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">ETS=</span><span class="fu">ETS</span>(LF_total)) <span class="sc">%&gt;%</span> </span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">level=</span><span class="dv">95</span>) <span class="sc">+</span></span>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autolayer</span>(train,LF_total) <span class="sc">+</span> <span class="fu">autolayer</span>(test,LF_total,<span class="at">lty=</span><span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_clean</span>() <span class="sc">+</span> </span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Delta Airlines Load Factors&quot;</span>,</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;&quot;</span>,<span class="at">y=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Delta Airlines Load Factors"</span>,</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>,<span class="at">y=</span><span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="ETS_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="ETS_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </details>
-<div id="quarto-navigation-envelope" class="hidden">
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyLXRpdGxl">Decision Modeling</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXItdGl0bGU=">Decision Modeling</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uZXh0"><span class="chapter-number">7</span>  <span class="chapter-title">ARIMA</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1wcmV2"><span class="chapter-number">5</span>  <span class="chapter-title">Model Benchmarks</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbmRleC5odG1sUHJlZmFjZQ==">Preface</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9EZWNpc2lvbnMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5EZWNpc2lvbnMtVW5kZXItVW5jZXJ0YWludHk8L3NwYW4+"><span class="chapter-number">1</span>  <span class="chapter-title">Decisions Under Uncertainty</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9Ub29scy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4yPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlRvb2xzLWZvci1Xb3JraW5nLVdpdGgtU2ltdWxhdGlvbjwvc3Bhbj4="><span class="chapter-number">2</span>  <span class="chapter-title">Tools for Working With Simulation</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9TaW11bGF0aW9uLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjM8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+U2ltdWxhdGlvbi1pbi1SPC9zcGFuPg=="><span class="chapter-number">3</span>  <span class="chapter-title">Simulation in R</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9Ub29sczIuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5UaW1lLVNlcmllcy1Ub29sczwvc3Bhbj4="><span class="chapter-number">4</span>  <span class="chapter-title">Time Series Tools</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9CZW5jaG1hcmtzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjU8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+TW9kZWwtQmVuY2htYXJrczwvc3Bhbj4="><span class="chapter-number">5</span>  <span class="chapter-title">Model Benchmarks</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9FVFMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Njwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5FVFM8L3NwYW4+"><span class="chapter-number">6</span>  <span class="chapter-title">ETS</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9BUklNQS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz43PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkFSSU1BPC9zcGFuPg=="><span class="chapter-number">7</span>  <span class="chapter-title">ARIMA</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9yZWZlcmVuY2VzLmh0bWxSZWZlcmVuY2Vz">References</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWJyZWFkY3J1bWJzLTxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Njwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5FVFM8L3NwYW4+"><span class="chapter-number">6</span>  <span class="chapter-title">ETS</span></span></p>
-</div>
-<div id="quarto-meta-markdown" class="hidden">
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGF0aXRsZQ=="><span class="chapter-number">6</span>  <span class="chapter-title">ETS</span> – Decision Modeling</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkdGl0bGU="><span class="chapter-number">6</span>  <span class="chapter-title">ETS</span> – Decision Modeling</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZHRpdGxl"><span class="chapter-number">6</span>  <span class="chapter-title">ETS</span> – Decision Modeling</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGFzaXRlbmFtZQ==">Decision Modeling</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkZGVzYw=="></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZGRkZXNj"></span></p>
-</div>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-FPP3" class="csl-entry" role="listitem">
 Hyndman, Rob. 2021. <em>Forecasting Principles and Practice</em>. Otexts. <a href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a>.
 </div>
@@ -3438,7 +3443,7 @@ Winston, Wayne, and Christian Albright. 2019. <em>Practical Management Science</
 </section>
 
 </main> <!-- /main -->
-<script id = "quarto-html-after-body" type="application/javascript">
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -3860,18 +3865,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a  href="/Benchmarks.html" class="pagination-link" aria-label="Model Benchmarks">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>Model Benchmarks</span></span>
+      <a href="./Benchmarks.html" class="pagination-link" aria-label="Model Benchmarks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Model Benchmarks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a  href="/ARIMA.html" class="pagination-link" aria-label="ARIMA">
-        <span class="nav-page-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>ARIMA</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ARIMA.html" class="pagination-link" aria-label="ARIMA">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ARIMA</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 
-</body>
 
-</html>
+
+
+</body></html>
