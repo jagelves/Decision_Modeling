@@ -2749,6 +2749,10 @@ We can generate a white noise process by using the normal distribution with a me
 .arma-lab .verdict .tag.ok { color: var(--good); }
 .arma-lab .verdict .tag.bad { color: var(--alert); }
 .arma-lab .truth { font-size: .88rem; color: var(--text-secondary); }
+.arma-lab .answer { display: none; font-size: .9rem; margin: -2px 0 10px; padding: 8px 12px; border-radius: 8px;
+  border: 1px solid var(--model); background: #fdf0ea; color: var(--text-primary); }
+.arma-lab .answer.show { display: block; }
+.arma-lab .btn.on { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
 .arma-lab .truth b { color: var(--text-primary); }
 .arma-lab .tip { position: absolute; pointer-events: none; background: #0b0b0b; color: #fff; font-size: 12px;
   padding: 4px 8px; border-radius: 5px; white-space: nowrap; opacity: 0; transition: opacity .08s; z-index: 10; }
@@ -2765,6 +2769,7 @@ We can generate a white noise process by using the normal distribution with a me
     <button class="btn" data-act="reveal">Reveal true process</button>
     <button class="btn" data-act="new">New mystery series</button>
   </div>
+  <div class="answer" data-out="answer" aria-live="polite"></div>
 
   <div class="row">
     <div class="row-head"><b>1 · The series</b><span>Bars: sample ACF/PACF of the data. Orange dots: the part your ARMA(p,q) accounts for.</span></div>
@@ -3044,7 +3049,7 @@ We can generate a white noise process by using the normal distribution with a me
     out('eq').innerHTML = `<b style="color:var(--text-primary)">Fitted ${name(p, q)}${zero ? ' (ARMA(0,0))' : ''}</b>` +
       `<span class="eq">${equation(f.mu, f.phi, f.theta)} + e<sub>t</sub></span>` +
       (zero ? 'No AR or MA terms: the model is only the mean, so it explains none of the correlation and the errors carry the whole pattern of the series.'
-            : `The orange pattern is what these ${p + q} coefficient${p + q > 1 ? 's' : ''} can explain. Whatever part of the series ACF/PACF they cannot reproduce stays in the errors below.`);
+            : `The orange pattern is what ${p + q > 1 ? 'these ' + (p + q) + ' coefficients' : 'this coefficient'} can explain. Whatever part of the series ACF/PACF they cannot reproduce stays in the errors below.`);
 
     linePlot(plot('e'), 'Residuals e = y − ŷ', f.e, 'resid');
     corrPlot(plot('eacf'), 'ACF of residuals', eacf, { color: 'resid', n, ymax });
@@ -3058,12 +3063,16 @@ We can generate a white noise process by using the normal distribution with a me
       `<span>Ljung-Box (lag ${LB_LAG}): Q = ${lb.Q.toFixed(1)}, p-value ${lb.p < 0.001 ? '< 0.001' : '= ' + lb.p.toFixed(3)}</span>` +
       `<span>ACF spikes outside bounds (lags 1–${LB_LAG}): ${spikes}</span>` +
       `<span>BIC: ${f.bic.toFixed(1)}</span>`;
-    out('truth').innerHTML = revealed
-      ? `True process: <b>${name(truth.phi.length, truth.theta.length, true)}</b>` +
+    const ans = out('answer'), btn = root.querySelector('[data-act="reveal"]');
+    ans.classList.toggle('show', revealed);
+    btn.classList.toggle('on', revealed);
+    btn.textContent = revealed ? 'Hide true process' : 'Reveal true process';
+    const yours = name(p, q, true) === name(truth.phi.length, truth.theta.length, true);
+    ans.innerHTML = !revealed ? '' : `True process: <b>${name(truth.phi.length, truth.theta.length, true)}</b>` +
         (truth.phi.length ? ` with φ = [${truth.phi.map(v => v.toFixed(2)).join(', ')}]` : '') +
         (truth.theta.length ? `${truth.phi.length ? ' and' : ' with'} θ = [${truth.theta.map(v => v.toFixed(2)).join(', ')}]` : '') +
-        `. If two choices both leave white-noise errors, prefer the one with the lower BIC.`
-      : 'Tip: start with p = 0 and q = 0, then add terms one at a time and watch the residual spikes disappear.';
+        `. ` + (yours ? '<b>Your current choice matches.</b>' : 'Your current choice is different. If two choices both leave white-noise errors, prefer the one with the lower BIC.');
+    out('truth').innerHTML = 'Tip: start with p = 0 and q = 0, then add terms one at a time and watch the residual spikes disappear.';
   }
 
   // controls
@@ -3077,7 +3086,7 @@ We can generate a white noise process by using the normal distribution with a me
     }
   });
   root.querySelector('[data-act="new"]').addEventListener('click', newSeries);
-  root.querySelector('[data-act="reveal"]').addEventListener('click', () => { revealed = true; render(); });
+  root.querySelector('[data-act="reveal"]').addEventListener('click', () => { revealed = !revealed; render(); });
   newSeries();
 })();
 </script>

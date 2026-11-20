@@ -349,9 +349,9 @@ When comparing with the MA(1) simulated values, the ACF of TCM5Y reflects the sa
 
 The ARIMA model is based on stationary, AR, and MA processes. ARIMA stands for **AutoRegressive Integrated Moving Average**.
 
--   AutoRegressive (AR): The "AR" part means that the future values of a time series depend on its own past values. If today's value is high, tomorrow's value is likely to be high too.
--   Integrated (I): The "I" part is about making the time series stationary. It means we take the differences between consecutive observations to remove trends or seasonality.
--   Moving Average (MA): The "MA" part means that the future values also depend on the past prediction errors (residuals). If the model predicted a value that was too high or too low in the past, it will try to correct that in the future predictions.
+- AutoRegressive (AR): The "AR" part means that the future values of a time series depend on its own past values. If today's value is high, tomorrow's value is likely to be high too.
+- Integrated (I): The "I" part is about making the time series stationary. It means we take the differences between consecutive observations to remove trends or seasonality.
+- Moving Average (MA): The "MA" part means that the future values also depend on the past prediction errors (residuals). If the model predicted a value that was too high or too low in the past, it will try to correct that in the future predictions.
 
 ARIMA combines these three components to forecast future values in a time series by considering its own past, removing trends, and accounting for past errors in predictions. In terms of notation, an ARIMA(1,1,2), will perform the first difference of the series, and estimate the model with an AR(1) and MA(2) component. Below we first discuss how to choose p and q, and then estimate an ARIMA model.
 
@@ -360,7 +360,7 @@ ARIMA combines these three components to forecast future values in a time series
 Before estimating an ARIMA model we must choose how many AR terms (p) and how many MA terms (q) to include. The ACF and PACF are the main tools for this choice, because each process leaves a recognizable signature on them:
 
 | Process | ACF | PACF |
-|:--|:--|:--|
+|:-----------------------|:-----------------------|:-----------------------|
 | AR(p) | Decays gradually (may alternate in sign or oscillate) | Cuts off: significant spikes up to lag p, then nothing |
 | MA(q) | Cuts off: significant spikes up to lag q, then nothing | Decays gradually (may alternate in sign) |
 | ARMA(p,q) | Decays gradually | Decays gradually |
@@ -376,9 +376,9 @@ A useful way to think about any ARIMA model is that it splits the series into tw
 
 Every AR or MA term we include is a tool for reproducing part of the correlation pattern we see in the ACF and PACF. Once the model is estimated, that part of the pattern is "subtracted" from the series, and only what the model could not reproduce stays behind in the errors $\epsilon_t$. This gives a simple rule for judging our choice of p and q:
 
--   **Too few terms:** some of the correlation is not modeled, so it stays in the errors. The ACF and PACF of the residuals will still show significant spikes, typically at the lags we left out.
--   **The right terms:** all of the systematic correlation is captured and the residuals look like white noise. There is nothing left to model.
--   **Too many terms:** the residuals also look like white noise, but the extra coefficients add nothing except estimation noise. Between two models with white-noise residuals, we prefer the simpler one, which is the one with the lower BIC.
+- **Too few terms:** some of the correlation is not modeled, so it stays in the errors. The ACF and PACF of the residuals will still show significant spikes, typically at the lags we left out.
+- **The right terms:** all of the systematic correlation is captured and the residuals look like white noise. There is nothing left to model.
+- **Too many terms:** the residuals also look like white noise, but the extra coefficients add nothing except estimation noise. Between two models with white-noise residuals, we prefer the simpler one, which is the one with the lower BIC.
 
 Besides looking at the residual ACF, we can test formally whether a group of residual autocorrelations is jointly zero with the **Ljung-Box test**. A large p-value (above 0.05) means we cannot reject that the errors are white noise. In R, the test is applied to the residuals of a fitted model with `augment(fit) %>% features(.innov, ljung_box, lag = 10)`.
 
@@ -525,27 +525,27 @@ fit2 %>%
 
 Chapter 9 of @FPP3 deals with ARIMA models. The readings are not very technical and omit explaining the model selection process. For readers wanting even more mathematical details as well as a deep dive into the model selection process I recommend reading @GGR. For those looking for an alternative to @FPP3 you can try @ADAM or @IER.
 
--   @FPP3 Chapter 9 (ARIMA Models).
+- @FPP3 Chapter 9 (ARIMA Models).
 
--   @GGR Chapter 6 (MA models), Chapter 7 (AR models), Chapter 8 (Forecasting Practice I)
+- @GGR Chapter 6 (MA models), Chapter 7 (AR models), Chapter 8 (Forecasting Practice I)
 
--   @ADAM
+- @ADAM
 
--   @IER
+- @IER
 
 ## Leasons Learned
 
 In this module you have been introduced to ARIMA model. Particularly you have learned to:
 
--   Apply autocorrelations, partial autocorrelations, stationarity and white noise to model time series.
+- Apply autocorrelations, partial autocorrelations, stationarity and white noise to model time series.
 
--   Identify the AR(1) and MA(1) processes using the ACF and PACF.
+- Identify the AR(1) and MA(1) processes using the ACF and PACF.
 
--   Choose the AR and MA orders (p and q) and verify the choice by checking that the residuals behave like white noise.
+- Choose the AR and MA orders (p and q) and verify the choice by checking that the residuals behave like white noise.
 
--   Model the ARIMA process using the `ARIMA()` function.
+- Model the ARIMA process using the `ARIMA()` function.
 
--   Provide forecasts of the ARIMA process in R.
+- Provide forecasts of the ARIMA process in R.
 
 ## Exercises
 
