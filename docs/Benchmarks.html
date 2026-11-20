@@ -263,14 +263,14 @@ window.Quarto = {
    
   <ul>
   <li><a href="#sec-Bench" id="toc-sec-Bench" class="nav-link active" data-scroll-target="#sec-Bench"><span class="header-section-number">5.1</span> Benchmarks</a></li>
-  <li><a href="#modeling-the-the-average-price-of-avocados" id="toc-modeling-the-the-average-price-of-avocados" class="nav-link" data-scroll-target="#modeling-the-the-average-price-of-avocados"><span class="header-section-number">5.2</span> Modeling the the Average Price of Avocados</a></li>
+  <li><a href="#modeling-the-average-price-of-avocados" id="toc-modeling-the-average-price-of-avocados" class="nav-link" data-scroll-target="#modeling-the-average-price-of-avocados"><span class="header-section-number">5.2</span> Modeling the Average Price of Avocados</a></li>
   <li><a href="#model-fit" id="toc-model-fit" class="nav-link" data-scroll-target="#model-fit"><span class="header-section-number">5.3</span> Model Fit</a></li>
   <li><a href="#forecast" id="toc-forecast" class="nav-link" data-scroll-target="#forecast"><span class="header-section-number">5.4</span> Forecast</a></li>
   <li><a href="#over-fitting" id="toc-over-fitting" class="nav-link" data-scroll-target="#over-fitting"><span class="header-section-number">5.5</span> Over-Fitting</a></li>
   <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">5.6</span> Cross Validation</a></li>
   <li><a href="#other-accuracy-measures" id="toc-other-accuracy-measures" class="nav-link" data-scroll-target="#other-accuracy-measures"><span class="header-section-number">5.7</span> Other Accuracy Measures</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">5.8</span> Readings</a></li>
-  <li><a href="#leasons-learned" id="toc-leasons-learned" class="nav-link" data-scroll-target="#leasons-learned"><span class="header-section-number">5.9</span> Leasons Learned</a></li>
+  <li><a href="#lessons-learned" id="toc-lessons-learned" class="nav-link" data-scroll-target="#lessons-learned"><span class="header-section-number">5.9</span> Lessons Learned</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.10</span> Exercises</a></li>
   </ul>
 </nav>
@@ -297,28 +297,28 @@ window.Quarto = {
 </header>
 
 
-<p>This module will introduce the modeling procedure with four different benchmarks (Naive, Drift, Mean, and Least Squares). The fit of these benchmarks will be assessed using accuracy measures such as the Mean Error, Mean Absolute Error, Root Mean Squared Error, among others. In general, these accuracy measures compare the fitted values with observed values. A good model will account for most of the series’s systematic variation, leaving a small random error. Lastly, to avoid over-fitting the models, we will use a training set and test set along with cross validation.</p>
+<p>This module will introduce the modeling procedure with four different benchmarks (Naive, Drift, Mean, and Least Squares). The fit of these benchmarks will be assessed using accuracy measures such as the Mean Error, Mean Absolute Error, Root Mean Squared Error, among others. In general, these accuracy measures compare the fitted values with observed values. A good model will account for most of the series’ systematic variation, leaving a small random error. Lastly, to avoid over-fitting the models, we will use a training set and test set along with cross validation.</p>
 <section id="sec-Bench" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="sec-Bench"><span class="header-section-number">5.1</span> Benchmarks</h2>
-<p>One of the most intuitive (but naive) predictions we can make about the future is to expect that the value of a variable will behave as it did in the past. A <strong>naive prediction</strong> sets the prediction of a future period to the value of the preceding period. For example, if you consider the task of predicting your weight, a simple heuristic would be to think that your weight tomorrow be the same as the weight observed today. Mathematically we would write:</p>
+<p>One of the most intuitive (but naive) predictions we can make about the future is to expect that the value of a variable will behave as it did in the past. A <strong>naive prediction</strong> sets the prediction of a future period to the value of the preceding period. For example, if you consider the task of predicting your weight, a simple heuristic would be to think that your weight tomorrow will be the same as the weight observed today. Mathematically we would write:</p>
 <center>
 <span class="math inline">\(\hat y_{T+h}=y_T\)</span>
 </center>
 <p><br> where <span class="math inline">\(\hat y_{T+h}\)</span> is the predicted value for <span class="math inline">\(h\)</span> periods ahead, and <span class="math inline">\(y_T\)</span> is the value observed at the current time period <span class="math inline">\(T\)</span>. We can adjust the Naive prediction by accounting for some natural <strong>drift</strong> (an increase or decrease). Thinking about weight once again, we note that as kids grow, we expect their weight to be close to the previous measurement but slightly higher as we need to account for growth. We would “drift” the naive prediction upward. Mathematically we would write:</p>
 <center>
-<span class="math inline">\(\hat y_{T+h}=y_T+h(\frac{y_t-y_1}{T-1})\)</span>
+<span class="math inline">\(\hat y_{T+h}=y_T+h(\frac{y_T-y_1}{T-1})\)</span>
 </center>
-<p><br> where <span class="math inline">\(h(\frac{y_t-y_1}{T-1})\)</span> can be thought as the average increase of <span class="math inline">\(y\)</span> from period <span class="math inline">\(1\)</span> to the current period <span class="math inline">\(T\)</span>. One could also predict weight by observing weight during a period and <strong>averaging</strong> the values. Every day the data recorded would be slightly different, but if diets, exercise, sleep, etc., remain relatively constant, the mean could be a good predictor of your future weight. Formally:</p>
+<p><br> where <span class="math inline">\(\frac{y_T-y_1}{T-1}\)</span> can be thought of as the average increase of <span class="math inline">\(y\)</span> from period <span class="math inline">\(1\)</span> to the current period <span class="math inline">\(T\)</span>. One could also predict weight by observing weight during a period and <strong>averaging</strong> the values. Every day the data recorded would be slightly different, but if diets, exercise, sleep, etc., remain relatively constant, the mean could be a good predictor of your future weight. Formally:</p>
 <center>
 <span class="math inline">\(\hat y_{T+h}=\frac{(y_1+y_2+...+y_T)}{T}\)</span>
 </center>
-<p><br> Lastly, we can use the weight data collected from a period and observe if there is any trend. If we find ourselves motivated to lose weight we can start recording our weight every day. Ideally, we will start seeing the effect of our diet, exercise and healthy sleep in the data. We can predict tomorrows weight by taking into account the downward <strong>trend</strong> of our weight. Formally:</p>
+<p><br> Lastly, we can use the weight data collected from a period and observe if there is any trend. If we find ourselves motivated to lose weight we can start recording our weight every day. Ideally, we will start seeing the effect of our diet, exercise and healthy sleep in the data. We can predict tomorrow’s weight by taking into account the downward <strong>trend</strong> of our weight. Formally:</p>
 <center>
 <span class="math inline">\(\hat y_{T+h}=b_0+b_1(T+h)\)</span>
 </center>
 </section>
-<section id="modeling-the-the-average-price-of-avocados" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="modeling-the-the-average-price-of-avocados"><span class="header-section-number">5.2</span> Modeling the the Average Price of Avocados</h2>
+<section id="modeling-the-average-price-of-avocados" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="modeling-the-average-price-of-avocados"><span class="header-section-number">5.2</span> Modeling the Average Price of Avocados</h2>
 <p>Let’s apply these four models to forecast the average price of avocados in California. We’ll start by loading the <code>tidyverse</code> and <code>fpp3</code> packages and importing the data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -332,14 +332,14 @@ window.Quarto = {
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index=</span>date) <span class="sc">%&gt;%</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_index</span>(<span class="st">"2015-01-04"</span><span class="sc">~</span><span class="st">"2018-06-02"</span>) <span class="ot">-&gt;</span> calits_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now we can use the <code>model()</code> function to run the benchmarks discussed in <a href="#sec-Bench" class="quarto-xref"><span>Section 5.1</span></a>. We have saved the models to an object called <em>fit</em>.</p>
+<p>Now we can use the <code>model()</code> function to run the benchmarks discussed in <a href="#sec-Bench" class="quarto-xref"><span class="quarto-unresolved-ref">sec-Bench</span></a>. We have saved the models to an object called <em>fit</em>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">model</span>(calits_train,<span class="at">mean=</span><span class="fu">MEAN</span>(average_price),</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">Naive=</span><span class="fu">NAIVE</span>(average_price),</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">Drift=</span><span class="fu">RW</span>(average_price<span class="sc">~</span><span class="fu">drift</span>()),</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">LS=</span><span class="fu">TSLM</span>(average_price<span class="sc">~</span><span class="fu">trend</span>()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <em>fit</em> object is saved as a mable (model table). The <code>model()</code>function specifies the four models to be estimated using their respective functions (i.e., <code>MEAN()</code>, <code>NAIVE()</code>, <code>RW()</code>, and <code>TSLM()</code>). To explore the coefficients of the models estimated, we use the <code>coef()</code> function with <em>fit</em> as its single argument. The output table has been enhanced visually by using the <a href="https://gt.rstudio.com"><code>gt</code></a> package.</p>
+<p>The <em>fit</em> object is saved as a mable (model table). The <code>model()</code> function specifies the four models to be estimated using their respective functions (i.e., <code>MEAN()</code>, <code>NAIVE()</code>, <code>RW()</code>, and <code>TSLM()</code>). To explore the coefficients of the models estimated, we use the <code>coef()</code> function with <em>fit</em> as its single argument. The output table has been enhanced visually by using the <a href="https://gt.rstudio.com"><code>gt</code></a> package.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit) <span class="sc">%&gt;%</span> </span>
@@ -353,23 +353,23 @@ window.Quarto = {
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span><span class="fu">c</span>(statistic,estimate,std.error,p.value),</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">decimals =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="mutbarndna" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mutbarndna table {
+<div id="bgkrlwwlea" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bgkrlwwlea table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mutbarndna thead, #mutbarndna tbody, #mutbarndna tfoot, #mutbarndna tr, #mutbarndna td, #mutbarndna th {
+#bgkrlwwlea thead, #bgkrlwwlea tbody, #bgkrlwwlea tfoot, #bgkrlwwlea tr, #bgkrlwwlea td, #bgkrlwwlea th {
   border-style: none;
 }
 
-#mutbarndna p {
+#bgkrlwwlea p {
   margin: 0;
   padding: 0;
 }
 
-#mutbarndna .gt_table {
+#bgkrlwwlea .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -395,12 +395,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#mutbarndna .gt_caption {
+#bgkrlwwlea .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mutbarndna .gt_title {
+#bgkrlwwlea .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -412,7 +412,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#mutbarndna .gt_subtitle {
+#bgkrlwwlea .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -424,7 +424,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#mutbarndna .gt_heading {
+#bgkrlwwlea .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -436,13 +436,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mutbarndna .gt_bottom_border {
+#bgkrlwwlea .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mutbarndna .gt_col_headings {
+#bgkrlwwlea .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -457,7 +457,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mutbarndna .gt_col_heading {
+#bgkrlwwlea .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -477,7 +477,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mutbarndna .gt_column_spanner_outer {
+#bgkrlwwlea .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -489,15 +489,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#mutbarndna .gt_column_spanner_outer:first-child {
+#bgkrlwwlea .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mutbarndna .gt_column_spanner_outer:last-child {
+#bgkrlwwlea .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mutbarndna .gt_column_spanner {
+#bgkrlwwlea .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -509,11 +509,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#mutbarndna .gt_spanner_row {
+#bgkrlwwlea .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mutbarndna .gt_group_heading {
+#bgkrlwwlea .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -539,7 +539,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#mutbarndna .gt_empty_group_heading {
+#bgkrlwwlea .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -554,15 +554,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#mutbarndna .gt_from_md > :first-child {
+#bgkrlwwlea .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mutbarndna .gt_from_md > :last-child {
+#bgkrlwwlea .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mutbarndna .gt_row {
+#bgkrlwwlea .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -581,7 +581,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mutbarndna .gt_stub {
+#bgkrlwwlea .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -594,7 +594,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mutbarndna .gt_stub_row_group {
+#bgkrlwwlea .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -608,15 +608,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#mutbarndna .gt_row_group_first td {
+#bgkrlwwlea .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mutbarndna .gt_row_group_first th {
+#bgkrlwwlea .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mutbarndna .gt_summary_row {
+#bgkrlwwlea .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -626,16 +626,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mutbarndna .gt_first_summary_row {
+#bgkrlwwlea .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mutbarndna .gt_first_summary_row.thick {
+#bgkrlwwlea .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mutbarndna .gt_last_summary_row {
+#bgkrlwwlea .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -645,7 +645,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mutbarndna .gt_grand_summary_row {
+#bgkrlwwlea .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -655,7 +655,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mutbarndna .gt_first_grand_summary_row {
+#bgkrlwwlea .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -665,7 +665,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#mutbarndna .gt_last_grand_summary_row_top {
+#bgkrlwwlea .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -675,11 +675,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mutbarndna .gt_striped {
+#bgkrlwwlea .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mutbarndna .gt_table_body {
+#bgkrlwwlea .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -688,7 +688,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mutbarndna .gt_footnotes {
+#bgkrlwwlea .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -702,7 +702,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mutbarndna .gt_footnote {
+#bgkrlwwlea .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -711,7 +711,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mutbarndna .gt_sourcenotes {
+#bgkrlwwlea .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -725,7 +725,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mutbarndna .gt_sourcenote {
+#bgkrlwwlea .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -733,72 +733,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mutbarndna .gt_left {
+#bgkrlwwlea .gt_left {
   text-align: left;
 }
 
-#mutbarndna .gt_center {
+#bgkrlwwlea .gt_center {
   text-align: center;
 }
 
-#mutbarndna .gt_right {
+#bgkrlwwlea .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mutbarndna .gt_font_normal {
+#bgkrlwwlea .gt_font_normal {
   font-weight: normal;
 }
 
-#mutbarndna .gt_font_bold {
+#bgkrlwwlea .gt_font_bold {
   font-weight: bold;
 }
 
-#mutbarndna .gt_font_italic {
+#bgkrlwwlea .gt_font_italic {
   font-style: italic;
 }
 
-#mutbarndna .gt_super {
+#bgkrlwwlea .gt_super {
   font-size: 65%;
 }
 
-#mutbarndna .gt_footnote_marks {
+#bgkrlwwlea .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mutbarndna .gt_asterisk {
+#bgkrlwwlea .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mutbarndna .gt_indent_1 {
+#bgkrlwwlea .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mutbarndna .gt_indent_2 {
+#bgkrlwwlea .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mutbarndna .gt_indent_3 {
+#bgkrlwwlea .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mutbarndna .gt_indent_4 {
+#bgkrlwwlea .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mutbarndna .gt_indent_5 {
+#bgkrlwwlea .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mutbarndna .katex-display {
+#bgkrlwwlea .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mutbarndna div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bgkrlwwlea div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -856,7 +856,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The table records the estimates and p-values for all the benchmarks discussed in <a href="#sec-Bench" class="quarto-xref"><span>Section 5.1</span></a>. The Naive model has no entry, as the forecast is created by using the previous period’s observed value. Note as well that the Drift and LS models select a positive slope to account for the trend. Below we illustrate the fit of the Mean model by a dashed blue line, the Least Squares model by the red line and the Naive model by the orange line.</p>
+<p>The table records the estimates and p-values for all the benchmarks discussed in <a href="#sec-Bench" class="quarto-xref"><span class="quarto-unresolved-ref">sec-Bench</span></a>. The Naive model has no entry, as the forecast is created by using the previous period’s observed value. Note as well that the Drift and LS models select a positive slope to account for the trend. Below we illustrate the fit of the Mean model by a dashed blue line, the Least Squares model by the red line and the Naive model by the orange line.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>calits_train <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(average_price) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">col=</span><span class="st">"red"</span>,</span>
@@ -884,7 +884,7 @@ window.Quarto = {
 <center>
 <span class="math inline">\(MSE = \frac{ \sum (\hat{y}_t-y_t)^2}{T}\)</span>
 </center>
-<p><br> How we decide to aggregate our errors will determine our measure of accuracy. For example, if we follow the same procedure as the one for MSE’s but instead find the square root, we have calculated the RMSE. Below you will find a collection of accuracy measures.</p>
+<p><br> How we decide to aggregate our errors will determine our measure of accuracy. For example, if we follow the same procedure as the one for the MSE but instead find the square root, we have calculated the RMSE. Below you will find a collection of accuracy measures.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 23%">
@@ -952,23 +952,23 @@ window.Quarto = {
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="st">"Naive"</span>,</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">targets =</span><span class="st">"row"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="bocifoxtjy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bocifoxtjy table {
+<div id="kwkcjylwme" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kwkcjylwme table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bocifoxtjy thead, #bocifoxtjy tbody, #bocifoxtjy tfoot, #bocifoxtjy tr, #bocifoxtjy td, #bocifoxtjy th {
+#kwkcjylwme thead, #kwkcjylwme tbody, #kwkcjylwme tfoot, #kwkcjylwme tr, #kwkcjylwme td, #kwkcjylwme th {
   border-style: none;
 }
 
-#bocifoxtjy p {
+#kwkcjylwme p {
   margin: 0;
   padding: 0;
 }
 
-#bocifoxtjy .gt_table {
+#kwkcjylwme .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -994,12 +994,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_caption {
+#kwkcjylwme .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bocifoxtjy .gt_title {
+#kwkcjylwme .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1011,7 +1011,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#bocifoxtjy .gt_subtitle {
+#kwkcjylwme .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1023,7 +1023,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#bocifoxtjy .gt_heading {
+#kwkcjylwme .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1035,13 +1035,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_bottom_border {
+#kwkcjylwme .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_col_headings {
+#kwkcjylwme .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1056,7 +1056,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_col_heading {
+#kwkcjylwme .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1076,7 +1076,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bocifoxtjy .gt_column_spanner_outer {
+#kwkcjylwme .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1088,15 +1088,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#bocifoxtjy .gt_column_spanner_outer:first-child {
+#kwkcjylwme .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bocifoxtjy .gt_column_spanner_outer:last-child {
+#kwkcjylwme .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bocifoxtjy .gt_column_spanner {
+#kwkcjylwme .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1108,11 +1108,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#bocifoxtjy .gt_spanner_row {
+#kwkcjylwme .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bocifoxtjy .gt_group_heading {
+#kwkcjylwme .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1138,7 +1138,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#bocifoxtjy .gt_empty_group_heading {
+#kwkcjylwme .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1153,15 +1153,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#bocifoxtjy .gt_from_md > :first-child {
+#kwkcjylwme .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bocifoxtjy .gt_from_md > :last-child {
+#kwkcjylwme .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bocifoxtjy .gt_row {
+#kwkcjylwme .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1180,7 +1180,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bocifoxtjy .gt_stub {
+#kwkcjylwme .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1193,7 +1193,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bocifoxtjy .gt_stub_row_group {
+#kwkcjylwme .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1207,15 +1207,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#bocifoxtjy .gt_row_group_first td {
+#kwkcjylwme .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bocifoxtjy .gt_row_group_first th {
+#kwkcjylwme .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bocifoxtjy .gt_summary_row {
+#kwkcjylwme .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1225,16 +1225,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bocifoxtjy .gt_first_summary_row {
+#kwkcjylwme .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_first_summary_row.thick {
+#kwkcjylwme .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bocifoxtjy .gt_last_summary_row {
+#kwkcjylwme .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1244,7 +1244,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_grand_summary_row {
+#kwkcjylwme .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1254,7 +1254,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bocifoxtjy .gt_first_grand_summary_row {
+#kwkcjylwme .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1264,7 +1264,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_last_grand_summary_row_top {
+#kwkcjylwme .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1274,11 +1274,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_striped {
+#kwkcjylwme .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bocifoxtjy .gt_table_body {
+#kwkcjylwme .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1287,7 +1287,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_footnotes {
+#kwkcjylwme .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1301,7 +1301,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_footnote {
+#kwkcjylwme .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1310,7 +1310,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bocifoxtjy .gt_sourcenotes {
+#kwkcjylwme .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1324,7 +1324,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bocifoxtjy .gt_sourcenote {
+#kwkcjylwme .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1332,72 +1332,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bocifoxtjy .gt_left {
+#kwkcjylwme .gt_left {
   text-align: left;
 }
 
-#bocifoxtjy .gt_center {
+#kwkcjylwme .gt_center {
   text-align: center;
 }
 
-#bocifoxtjy .gt_right {
+#kwkcjylwme .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bocifoxtjy .gt_font_normal {
+#kwkcjylwme .gt_font_normal {
   font-weight: normal;
 }
 
-#bocifoxtjy .gt_font_bold {
+#kwkcjylwme .gt_font_bold {
   font-weight: bold;
 }
 
-#bocifoxtjy .gt_font_italic {
+#kwkcjylwme .gt_font_italic {
   font-style: italic;
 }
 
-#bocifoxtjy .gt_super {
+#kwkcjylwme .gt_super {
   font-size: 65%;
 }
 
-#bocifoxtjy .gt_footnote_marks {
+#kwkcjylwme .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bocifoxtjy .gt_asterisk {
+#kwkcjylwme .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bocifoxtjy .gt_indent_1 {
+#kwkcjylwme .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bocifoxtjy .gt_indent_2 {
+#kwkcjylwme .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bocifoxtjy .gt_indent_3 {
+#kwkcjylwme .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bocifoxtjy .gt_indent_4 {
+#kwkcjylwme .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bocifoxtjy .gt_indent_5 {
+#kwkcjylwme .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bocifoxtjy .katex-display {
+#kwkcjylwme .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bocifoxtjy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kwkcjylwme div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1497,12 +1497,12 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Note how the Mean and Naive models predict that the series will continue without a trend. The LS and Drift models predicts that the series will continue its trend but, like all other methods, do not consider the seasonal pattern that is evident in the average price of avocados. In future chapters, we will look at models that account for both trend and seasonality.</p>
+<p>Note how the Mean and Naive models predict that the series will continue without a trend. The LS and Drift models predict that the series will continue its trend but, like all other methods, do not consider the seasonal pattern that is evident in the average price of avocados. In future chapters, we will look at models that account for both trend and seasonality.</p>
 </section>
 <section id="over-fitting" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="over-fitting"><span class="header-section-number">5.5</span> Over-Fitting</h2>
 <p>Over-fitting can happen when a model is overly flexible. This can make the model fit to the random fluctuations or noise in the data, rather than the underlying pattern. This is a major failing in modeling as it ignores the systematic pattern that governs the time series.</p>
-<p>To overcome this problem, we usually have a <strong>training set</strong> or subset of the data that we use to estimate the model’s parameters. Once the model is estimated, we assess its performance on a new subset of the data that was not used in estimating the model. This second subset of data is called the <strong>test set</strong>. A model that over-fits to the training data, will often perform poorly when forecasting the test set.</p>
+<p>To overcome this problem, we usually have a <strong>training set</strong> or subset of the data that we use to estimate the model’s parameters. Once the model is estimated, we assess its performance on a new subset of the data that was not used in estimating the model. This second subset of data is called the <strong>test set</strong>. A model that over-fits to the training data will often perform poorly when forecasting the test set.</p>
 <p>Recall that benchmarks were estimated for the period between 2015-01-04~2018-06-02. We will call this our training set. For our test set, we’ll use the 2018-06-02~2018-12-02 period. The code below creates a test set and a set that includes both the test set and training set using the <code>filter_index()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cali <span class="sc">%&gt;%</span></span>
@@ -1529,27 +1529,27 @@ window.Quarto = {
 </div>
 <p>The graph shows how the LS method does well with the test data and a long forecast period. This can be confirmed by obtaining the accuracy measures against the test set. The code below uses the <code>accuracy()</code> function to generate the main table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(calits_fc, calits_test) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>ACF1, RMSSE, MASE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(calits_fc, calits_test) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>ACF1, <span class="sc">-</span>RMSSE, <span class="sc">-</span>MASE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ydudpgjbir" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ydudpgjbir table {
+<div id="dfbcgnfons" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dfbcgnfons table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ydudpgjbir thead, #ydudpgjbir tbody, #ydudpgjbir tfoot, #ydudpgjbir tr, #ydudpgjbir td, #ydudpgjbir th {
+#dfbcgnfons thead, #dfbcgnfons tbody, #dfbcgnfons tfoot, #dfbcgnfons tr, #dfbcgnfons td, #dfbcgnfons th {
   border-style: none;
 }
 
-#ydudpgjbir p {
+#dfbcgnfons p {
   margin: 0;
   padding: 0;
 }
 
-#ydudpgjbir .gt_table {
+#dfbcgnfons .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1575,12 +1575,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_caption {
+#dfbcgnfons .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ydudpgjbir .gt_title {
+#dfbcgnfons .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1592,7 +1592,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ydudpgjbir .gt_subtitle {
+#dfbcgnfons .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1604,7 +1604,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ydudpgjbir .gt_heading {
+#dfbcgnfons .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1616,13 +1616,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_bottom_border {
+#dfbcgnfons .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_col_headings {
+#dfbcgnfons .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1637,7 +1637,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_col_heading {
+#dfbcgnfons .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1657,7 +1657,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ydudpgjbir .gt_column_spanner_outer {
+#dfbcgnfons .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1669,15 +1669,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ydudpgjbir .gt_column_spanner_outer:first-child {
+#dfbcgnfons .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ydudpgjbir .gt_column_spanner_outer:last-child {
+#dfbcgnfons .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ydudpgjbir .gt_column_spanner {
+#dfbcgnfons .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1689,11 +1689,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ydudpgjbir .gt_spanner_row {
+#dfbcgnfons .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ydudpgjbir .gt_group_heading {
+#dfbcgnfons .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1719,7 +1719,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ydudpgjbir .gt_empty_group_heading {
+#dfbcgnfons .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1734,15 +1734,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ydudpgjbir .gt_from_md > :first-child {
+#dfbcgnfons .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ydudpgjbir .gt_from_md > :last-child {
+#dfbcgnfons .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ydudpgjbir .gt_row {
+#dfbcgnfons .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1761,7 +1761,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ydudpgjbir .gt_stub {
+#dfbcgnfons .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1774,7 +1774,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ydudpgjbir .gt_stub_row_group {
+#dfbcgnfons .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1788,15 +1788,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ydudpgjbir .gt_row_group_first td {
+#dfbcgnfons .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ydudpgjbir .gt_row_group_first th {
+#dfbcgnfons .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ydudpgjbir .gt_summary_row {
+#dfbcgnfons .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1806,16 +1806,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ydudpgjbir .gt_first_summary_row {
+#dfbcgnfons .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_first_summary_row.thick {
+#dfbcgnfons .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ydudpgjbir .gt_last_summary_row {
+#dfbcgnfons .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1825,7 +1825,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_grand_summary_row {
+#dfbcgnfons .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1835,7 +1835,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ydudpgjbir .gt_first_grand_summary_row {
+#dfbcgnfons .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1845,7 +1845,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_last_grand_summary_row_top {
+#dfbcgnfons .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1855,11 +1855,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_striped {
+#dfbcgnfons .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ydudpgjbir .gt_table_body {
+#dfbcgnfons .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1868,7 +1868,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_footnotes {
+#dfbcgnfons .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1882,7 +1882,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_footnote {
+#dfbcgnfons .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1891,7 +1891,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ydudpgjbir .gt_sourcenotes {
+#dfbcgnfons .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1905,7 +1905,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ydudpgjbir .gt_sourcenote {
+#dfbcgnfons .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1913,72 +1913,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ydudpgjbir .gt_left {
+#dfbcgnfons .gt_left {
   text-align: left;
 }
 
-#ydudpgjbir .gt_center {
+#dfbcgnfons .gt_center {
   text-align: center;
 }
 
-#ydudpgjbir .gt_right {
+#dfbcgnfons .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ydudpgjbir .gt_font_normal {
+#dfbcgnfons .gt_font_normal {
   font-weight: normal;
 }
 
-#ydudpgjbir .gt_font_bold {
+#dfbcgnfons .gt_font_bold {
   font-weight: bold;
 }
 
-#ydudpgjbir .gt_font_italic {
+#dfbcgnfons .gt_font_italic {
   font-style: italic;
 }
 
-#ydudpgjbir .gt_super {
+#dfbcgnfons .gt_super {
   font-size: 65%;
 }
 
-#ydudpgjbir .gt_footnote_marks {
+#dfbcgnfons .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ydudpgjbir .gt_asterisk {
+#dfbcgnfons .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ydudpgjbir .gt_indent_1 {
+#dfbcgnfons .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ydudpgjbir .gt_indent_2 {
+#dfbcgnfons .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ydudpgjbir .gt_indent_3 {
+#dfbcgnfons .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ydudpgjbir .gt_indent_4 {
+#dfbcgnfons .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ydudpgjbir .gt_indent_5 {
+#dfbcgnfons .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ydudpgjbir .katex-display {
+#dfbcgnfons .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ydudpgjbir div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dfbcgnfons div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2053,23 +2053,23 @@ window.Quarto = {
 <p><code>stretch_tsibble()</code> is a handy function that creates a variable called <em>id</em> that is initialized with the <em>.init</em> argument. In this case, the first three observations are given <span class="math inline">\(id=1\)</span>. The <em>id</em> then changes with a step of <span class="math inline">\(.step=1\)</span>. That is, <span class="math inline">\(id=2\)</span> for the first four observations, then <span class="math inline">\(id=3\)</span> for the first five observations, and so on. Below is a sample of the tsibble.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tflmcjkfog" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tflmcjkfog table {
+<div id="fbmdcxeblh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fbmdcxeblh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tflmcjkfog thead, #tflmcjkfog tbody, #tflmcjkfog tfoot, #tflmcjkfog tr, #tflmcjkfog td, #tflmcjkfog th {
+#fbmdcxeblh thead, #fbmdcxeblh tbody, #fbmdcxeblh tfoot, #fbmdcxeblh tr, #fbmdcxeblh td, #fbmdcxeblh th {
   border-style: none;
 }
 
-#tflmcjkfog p {
+#fbmdcxeblh p {
   margin: 0;
   padding: 0;
 }
 
-#tflmcjkfog .gt_table {
+#fbmdcxeblh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2095,12 +2095,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_caption {
+#fbmdcxeblh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tflmcjkfog .gt_title {
+#fbmdcxeblh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2112,7 +2112,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#tflmcjkfog .gt_subtitle {
+#fbmdcxeblh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2124,7 +2124,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#tflmcjkfog .gt_heading {
+#fbmdcxeblh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2136,13 +2136,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_bottom_border {
+#fbmdcxeblh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_col_headings {
+#fbmdcxeblh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2157,7 +2157,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_col_heading {
+#fbmdcxeblh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2177,7 +2177,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#tflmcjkfog .gt_column_spanner_outer {
+#fbmdcxeblh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2189,15 +2189,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#tflmcjkfog .gt_column_spanner_outer:first-child {
+#fbmdcxeblh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tflmcjkfog .gt_column_spanner_outer:last-child {
+#fbmdcxeblh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tflmcjkfog .gt_column_spanner {
+#fbmdcxeblh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2209,11 +2209,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#tflmcjkfog .gt_spanner_row {
+#fbmdcxeblh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tflmcjkfog .gt_group_heading {
+#fbmdcxeblh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2239,7 +2239,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#tflmcjkfog .gt_empty_group_heading {
+#fbmdcxeblh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2254,15 +2254,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#tflmcjkfog .gt_from_md > :first-child {
+#fbmdcxeblh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tflmcjkfog .gt_from_md > :last-child {
+#fbmdcxeblh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tflmcjkfog .gt_row {
+#fbmdcxeblh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2281,7 +2281,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#tflmcjkfog .gt_stub {
+#fbmdcxeblh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2294,7 +2294,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tflmcjkfog .gt_stub_row_group {
+#fbmdcxeblh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2308,15 +2308,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#tflmcjkfog .gt_row_group_first td {
+#fbmdcxeblh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tflmcjkfog .gt_row_group_first th {
+#fbmdcxeblh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tflmcjkfog .gt_summary_row {
+#fbmdcxeblh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2326,16 +2326,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tflmcjkfog .gt_first_summary_row {
+#fbmdcxeblh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_first_summary_row.thick {
+#fbmdcxeblh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tflmcjkfog .gt_last_summary_row {
+#fbmdcxeblh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2345,7 +2345,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_grand_summary_row {
+#fbmdcxeblh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2355,7 +2355,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tflmcjkfog .gt_first_grand_summary_row {
+#fbmdcxeblh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2365,7 +2365,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_last_grand_summary_row_top {
+#fbmdcxeblh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2375,11 +2375,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_striped {
+#fbmdcxeblh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tflmcjkfog .gt_table_body {
+#fbmdcxeblh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2388,7 +2388,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_footnotes {
+#fbmdcxeblh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2402,7 +2402,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_footnote {
+#fbmdcxeblh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2411,7 +2411,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tflmcjkfog .gt_sourcenotes {
+#fbmdcxeblh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2425,7 +2425,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tflmcjkfog .gt_sourcenote {
+#fbmdcxeblh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2433,72 +2433,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tflmcjkfog .gt_left {
+#fbmdcxeblh .gt_left {
   text-align: left;
 }
 
-#tflmcjkfog .gt_center {
+#fbmdcxeblh .gt_center {
   text-align: center;
 }
 
-#tflmcjkfog .gt_right {
+#fbmdcxeblh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tflmcjkfog .gt_font_normal {
+#fbmdcxeblh .gt_font_normal {
   font-weight: normal;
 }
 
-#tflmcjkfog .gt_font_bold {
+#fbmdcxeblh .gt_font_bold {
   font-weight: bold;
 }
 
-#tflmcjkfog .gt_font_italic {
+#fbmdcxeblh .gt_font_italic {
   font-style: italic;
 }
 
-#tflmcjkfog .gt_super {
+#fbmdcxeblh .gt_super {
   font-size: 65%;
 }
 
-#tflmcjkfog .gt_footnote_marks {
+#fbmdcxeblh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tflmcjkfog .gt_asterisk {
+#fbmdcxeblh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tflmcjkfog .gt_indent_1 {
+#fbmdcxeblh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tflmcjkfog .gt_indent_2 {
+#fbmdcxeblh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tflmcjkfog .gt_indent_3 {
+#fbmdcxeblh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tflmcjkfog .gt_indent_4 {
+#fbmdcxeblh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tflmcjkfog .gt_indent_5 {
+#fbmdcxeblh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tflmcjkfog .katex-display {
+#fbmdcxeblh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tflmcjkfog div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fbmdcxeblh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2582,23 +2582,23 @@ window.Quarto = {
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="st">"Naive"</span>,</span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">targets =</span><span class="st">"row"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="xaytdwiows" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xaytdwiows table {
+<div id="holxoamrxg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#holxoamrxg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xaytdwiows thead, #xaytdwiows tbody, #xaytdwiows tfoot, #xaytdwiows tr, #xaytdwiows td, #xaytdwiows th {
+#holxoamrxg thead, #holxoamrxg tbody, #holxoamrxg tfoot, #holxoamrxg tr, #holxoamrxg td, #holxoamrxg th {
   border-style: none;
 }
 
-#xaytdwiows p {
+#holxoamrxg p {
   margin: 0;
   padding: 0;
 }
 
-#xaytdwiows .gt_table {
+#holxoamrxg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2624,12 +2624,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_caption {
+#holxoamrxg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xaytdwiows .gt_title {
+#holxoamrxg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2641,7 +2641,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#xaytdwiows .gt_subtitle {
+#holxoamrxg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2653,7 +2653,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#xaytdwiows .gt_heading {
+#holxoamrxg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2665,13 +2665,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_bottom_border {
+#holxoamrxg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_col_headings {
+#holxoamrxg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2686,7 +2686,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_col_heading {
+#holxoamrxg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2706,7 +2706,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#xaytdwiows .gt_column_spanner_outer {
+#holxoamrxg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2718,15 +2718,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#xaytdwiows .gt_column_spanner_outer:first-child {
+#holxoamrxg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xaytdwiows .gt_column_spanner_outer:last-child {
+#holxoamrxg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xaytdwiows .gt_column_spanner {
+#holxoamrxg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2738,11 +2738,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#xaytdwiows .gt_spanner_row {
+#holxoamrxg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xaytdwiows .gt_group_heading {
+#holxoamrxg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2768,7 +2768,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#xaytdwiows .gt_empty_group_heading {
+#holxoamrxg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2783,15 +2783,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#xaytdwiows .gt_from_md > :first-child {
+#holxoamrxg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xaytdwiows .gt_from_md > :last-child {
+#holxoamrxg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xaytdwiows .gt_row {
+#holxoamrxg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2810,7 +2810,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#xaytdwiows .gt_stub {
+#holxoamrxg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2823,7 +2823,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xaytdwiows .gt_stub_row_group {
+#holxoamrxg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2837,15 +2837,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#xaytdwiows .gt_row_group_first td {
+#holxoamrxg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xaytdwiows .gt_row_group_first th {
+#holxoamrxg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xaytdwiows .gt_summary_row {
+#holxoamrxg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2855,16 +2855,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xaytdwiows .gt_first_summary_row {
+#holxoamrxg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_first_summary_row.thick {
+#holxoamrxg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xaytdwiows .gt_last_summary_row {
+#holxoamrxg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2874,7 +2874,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_grand_summary_row {
+#holxoamrxg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2884,7 +2884,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xaytdwiows .gt_first_grand_summary_row {
+#holxoamrxg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2894,7 +2894,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_last_grand_summary_row_top {
+#holxoamrxg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2904,11 +2904,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_striped {
+#holxoamrxg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xaytdwiows .gt_table_body {
+#holxoamrxg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2917,7 +2917,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_footnotes {
+#holxoamrxg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2931,7 +2931,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_footnote {
+#holxoamrxg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2940,7 +2940,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xaytdwiows .gt_sourcenotes {
+#holxoamrxg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2954,7 +2954,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xaytdwiows .gt_sourcenote {
+#holxoamrxg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2962,72 +2962,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xaytdwiows .gt_left {
+#holxoamrxg .gt_left {
   text-align: left;
 }
 
-#xaytdwiows .gt_center {
+#holxoamrxg .gt_center {
   text-align: center;
 }
 
-#xaytdwiows .gt_right {
+#holxoamrxg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xaytdwiows .gt_font_normal {
+#holxoamrxg .gt_font_normal {
   font-weight: normal;
 }
 
-#xaytdwiows .gt_font_bold {
+#holxoamrxg .gt_font_bold {
   font-weight: bold;
 }
 
-#xaytdwiows .gt_font_italic {
+#holxoamrxg .gt_font_italic {
   font-style: italic;
 }
 
-#xaytdwiows .gt_super {
+#holxoamrxg .gt_super {
   font-size: 65%;
 }
 
-#xaytdwiows .gt_footnote_marks {
+#holxoamrxg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xaytdwiows .gt_asterisk {
+#holxoamrxg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xaytdwiows .gt_indent_1 {
+#holxoamrxg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xaytdwiows .gt_indent_2 {
+#holxoamrxg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xaytdwiows .gt_indent_3 {
+#holxoamrxg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xaytdwiows .gt_indent_4 {
+#holxoamrxg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xaytdwiows .gt_indent_5 {
+#holxoamrxg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xaytdwiows .katex-display {
+#holxoamrxg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xaytdwiows div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#holxoamrxg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3114,11 +3114,11 @@ window.Quarto = {
 <li><strong>AIC</strong> is a measure that penalizes model complexity. It balances the trade-off between model fit and the number of parameters in the model. The AIC value is calculated using the formula:</li>
 </ul>
 <center>
-<span class="math inline">\(AIC = T*ln(SSE/T) + 2(k+1)\)</span>
+<span class="math inline">\(AIC = T*ln(SSE/T) + 2(k+2)\)</span>
 </center>
 <p><br> where <span class="math inline">\(T\)</span> is the number of observations, <span class="math inline">\(SSE\)</span> the sum squared errors, and <span class="math inline">\(k\)</span> is the number of predictors (i.e., complexity of the model). The lower the AIC value, the better the model.</p>
 <ul>
-<li><strong>AICc</strong> is an adjustment to the AIC measure, particularly for smaller sample sizes. AIC tends to overestimate the complexity penalty when the number of data points is relatively small. AICc adds a correction factor to account for this and is calculated using the formula:</li>
+<li><strong>AICc</strong> is an adjustment to the AIC measure, particularly for smaller sample sizes. AIC’s complexity penalty tends to be too small when the number of data points is relatively small, so it can favor models that are too complex. AICc adds a correction factor to account for this and is calculated using the formula:</li>
 </ul>
 <center>
 <span class="math inline">\(AICc = AIC + \frac{2(k+2)(k+3)}{T-k-3}\)</span>
@@ -3142,23 +3142,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="mmrigcyphh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mmrigcyphh table {
+<div id="mkdbzjtbdi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mkdbzjtbdi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mmrigcyphh thead, #mmrigcyphh tbody, #mmrigcyphh tfoot, #mmrigcyphh tr, #mmrigcyphh td, #mmrigcyphh th {
+#mkdbzjtbdi thead, #mkdbzjtbdi tbody, #mkdbzjtbdi tfoot, #mkdbzjtbdi tr, #mkdbzjtbdi td, #mkdbzjtbdi th {
   border-style: none;
 }
 
-#mmrigcyphh p {
+#mkdbzjtbdi p {
   margin: 0;
   padding: 0;
 }
 
-#mmrigcyphh .gt_table {
+#mkdbzjtbdi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3184,12 +3184,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_caption {
+#mkdbzjtbdi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mmrigcyphh .gt_title {
+#mkdbzjtbdi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3201,7 +3201,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#mmrigcyphh .gt_subtitle {
+#mkdbzjtbdi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3213,7 +3213,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#mmrigcyphh .gt_heading {
+#mkdbzjtbdi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3225,13 +3225,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_bottom_border {
+#mkdbzjtbdi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_col_headings {
+#mkdbzjtbdi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3246,7 +3246,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_col_heading {
+#mkdbzjtbdi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3266,7 +3266,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mmrigcyphh .gt_column_spanner_outer {
+#mkdbzjtbdi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3278,15 +3278,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#mmrigcyphh .gt_column_spanner_outer:first-child {
+#mkdbzjtbdi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mmrigcyphh .gt_column_spanner_outer:last-child {
+#mkdbzjtbdi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mmrigcyphh .gt_column_spanner {
+#mkdbzjtbdi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3298,11 +3298,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#mmrigcyphh .gt_spanner_row {
+#mkdbzjtbdi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mmrigcyphh .gt_group_heading {
+#mkdbzjtbdi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3328,7 +3328,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#mmrigcyphh .gt_empty_group_heading {
+#mkdbzjtbdi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3343,15 +3343,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#mmrigcyphh .gt_from_md > :first-child {
+#mkdbzjtbdi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mmrigcyphh .gt_from_md > :last-child {
+#mkdbzjtbdi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mmrigcyphh .gt_row {
+#mkdbzjtbdi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3370,7 +3370,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mmrigcyphh .gt_stub {
+#mkdbzjtbdi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3383,7 +3383,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mmrigcyphh .gt_stub_row_group {
+#mkdbzjtbdi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3397,15 +3397,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#mmrigcyphh .gt_row_group_first td {
+#mkdbzjtbdi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mmrigcyphh .gt_row_group_first th {
+#mkdbzjtbdi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mmrigcyphh .gt_summary_row {
+#mkdbzjtbdi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3415,16 +3415,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mmrigcyphh .gt_first_summary_row {
+#mkdbzjtbdi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_first_summary_row.thick {
+#mkdbzjtbdi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mmrigcyphh .gt_last_summary_row {
+#mkdbzjtbdi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3434,7 +3434,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_grand_summary_row {
+#mkdbzjtbdi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3444,7 +3444,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mmrigcyphh .gt_first_grand_summary_row {
+#mkdbzjtbdi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3454,7 +3454,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_last_grand_summary_row_top {
+#mkdbzjtbdi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3464,11 +3464,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_striped {
+#mkdbzjtbdi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mmrigcyphh .gt_table_body {
+#mkdbzjtbdi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3477,7 +3477,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_footnotes {
+#mkdbzjtbdi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3491,7 +3491,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_footnote {
+#mkdbzjtbdi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3500,7 +3500,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mmrigcyphh .gt_sourcenotes {
+#mkdbzjtbdi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3514,7 +3514,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mmrigcyphh .gt_sourcenote {
+#mkdbzjtbdi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3522,72 +3522,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mmrigcyphh .gt_left {
+#mkdbzjtbdi .gt_left {
   text-align: left;
 }
 
-#mmrigcyphh .gt_center {
+#mkdbzjtbdi .gt_center {
   text-align: center;
 }
 
-#mmrigcyphh .gt_right {
+#mkdbzjtbdi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mmrigcyphh .gt_font_normal {
+#mkdbzjtbdi .gt_font_normal {
   font-weight: normal;
 }
 
-#mmrigcyphh .gt_font_bold {
+#mkdbzjtbdi .gt_font_bold {
   font-weight: bold;
 }
 
-#mmrigcyphh .gt_font_italic {
+#mkdbzjtbdi .gt_font_italic {
   font-style: italic;
 }
 
-#mmrigcyphh .gt_super {
+#mkdbzjtbdi .gt_super {
   font-size: 65%;
 }
 
-#mmrigcyphh .gt_footnote_marks {
+#mkdbzjtbdi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mmrigcyphh .gt_asterisk {
+#mkdbzjtbdi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mmrigcyphh .gt_indent_1 {
+#mkdbzjtbdi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mmrigcyphh .gt_indent_2 {
+#mkdbzjtbdi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mmrigcyphh .gt_indent_3 {
+#mkdbzjtbdi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mmrigcyphh .gt_indent_4 {
+#mkdbzjtbdi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mmrigcyphh .gt_indent_5 {
+#mkdbzjtbdi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mmrigcyphh .katex-display {
+#mkdbzjtbdi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mmrigcyphh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mkdbzjtbdi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3629,19 +3629,19 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The model with the lowest AIC (AICc or BIC) is the simple Least Squares model that only has two parameters to estimate (slope and intercept). These results indicate that LS provides a good fit relative to it’s complexity.</p>
+<p>The model with the lowest AIC (AICc or BIC) is the simple Least Squares model that only has two parameters to estimate (slope and intercept). These results indicate that LS provides a good fit relative to its complexity.</p>
 </section>
 <section id="readings" class="level2" data-number="5.8">
 <h2 data-number="5.8" class="anchored" data-anchor-id="readings"><span class="header-section-number">5.8</span> Readings</h2>
-<p>The primary reading for this chapter comes from <span class="citation" data-cites="FPP3">Hyndman (<a href="references.html#ref-FPP3" role="doc-biblioref">2021</a>)</span>. Topics include the forecasting process, accuracy measures, and time series analysis using simple regression. For a basic introduction to regression and time series with Excel, the <span class="citation" data-cites="PMS">Winston and Albright (<a href="references.html#ref-PMS" role="doc-biblioref">2019</a>)</span> reading is recommended.</p>
+<p>The primary reading for this chapter comes from <span class="citation" data-cites="FPP3">Hyndman (<a href="#ref-FPP3" role="doc-biblioref">2021</a>)</span>. Topics include the forecasting process, accuracy measures, and time series analysis using simple regression. For a basic introduction to regression and time series with Excel, the <span class="citation" data-cites="PMS">Winston and Albright (<a href="#ref-PMS" role="doc-biblioref">2019</a>)</span> reading is recommended.</p>
 <ul>
-<li><p><span class="citation" data-cites="FPP3">Hyndman (<a href="references.html#ref-FPP3" role="doc-biblioref">2021</a>)</span> Chapter 5 (The Forecaster’s Toolbox), Chapter 7 (Time Series Regression Models).</p></li>
-<li><p><span class="citation" data-cites="PMS">Winston and Albright (<a href="references.html#ref-PMS" role="doc-biblioref">2019</a>)</span> Chapter 13.1 (Introduction), 13.2 (Overview of Regression Models), 13.3 (Simple Regression Models).</p></li>
+<li><p><span class="citation" data-cites="FPP3">Hyndman (<a href="#ref-FPP3" role="doc-biblioref">2021</a>)</span> Chapter 5 (The Forecaster’s Toolbox), Chapter 7 (Time Series Regression Models).</p></li>
+<li><p><span class="citation" data-cites="PMS">Winston and Albright (<a href="#ref-PMS" role="doc-biblioref">2019</a>)</span> Chapter 13.1 (Introduction), 13.2 (Overview of Regression Models), 13.3 (Simple Regression Models).</p></li>
 <li><p>gt package: <a href="https://gt.rstudio.com" class="uri">https://gt.rstudio.com</a></p></li>
 </ul>
 </section>
-<section id="leasons-learned" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="leasons-learned"><span class="header-section-number">5.9</span> Leasons Learned</h2>
+<section id="lessons-learned" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="lessons-learned"><span class="header-section-number">5.9</span> Lessons Learned</h2>
 <p>In this module you have been introduced to the general procedure in forecasting time series. Particularly you have learned to:</p>
 <ul>
 <li><p>Create forecasts with simple heuristics.</p></li>
@@ -3712,10 +3712,10 @@ dbl (58): Index, Location_code, SDMX_code, Parent code, Year, Total_Populati...
 # ℹ 2 more variables: Total_Population &lt;dist&gt;, .mean &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>The population is expected to go down to 122,868 people. This represents a decrease of 1.21%.</p>
+<p>The population is expected to go down to 122,868 thousand people (about 122.9 million). This represents a decrease of 1.21%.</p>
 </details>
 <ol start="2" type="1">
-<li>Fertility rates are crucial because they directly impact population growth and demographic structure. Low fertility rates can lead to an aging population, shrinking workforce, and challenges in sustaining economic growth and social welfare programs. To maintain a stable population in the U.S., the total fertility rate (TFR) needs to be around 2.1 children per woman (i.e.&nbsp;the replacement rate) If the TFR falls below this level for an extended period, the population may decline without immigration. Use the data found here: <a href="https://jagelves.github.io/Data/UNPOP.csv" class="uri">https://jagelves.github.io/Data/UNPOP.csv</a> to plot the fertility rate for the US from 1960-2023 and the current replacement rate. What is the two year projected fertility rate when using a simple linear trend? How does this change when running the same model with a log transformation on the fertility variable?</li>
+<li>Fertility rates are crucial because they directly impact population growth and demographic structure. Low fertility rates can lead to an aging population, shrinking workforce, and challenges in sustaining economic growth and social welfare programs. To maintain a stable population in the U.S., the total fertility rate (TFR) needs to be around 2.1 children per woman (i.e.&nbsp;the replacement rate). If the TFR falls below this level for an extended period, the population may decline without immigration. Use the data found here: <a href="https://jagelves.github.io/Data/UNPOP.csv" class="uri">https://jagelves.github.io/Data/UNPOP.csv</a> to plot the fertility rate for the US from 1960-2023 and the current replacement rate. What is the two-year projected fertility rate when using a simple linear trend? How does this change when running the same model with a log transformation on the fertility variable?</li>
 </ol>
 <details>
 <summary>
@@ -3808,13 +3808,13 @@ Suggested Answer
 <p>If we follow the RMSE, the logarithmic model fits the data better.</p>
 </details>
 <ol start="4" type="1">
-<li>Refer back to Problem 2, where your task is to forecast the fertility rate. For both the linear and logarithmic models you’ve developed, perform leave-one-out cross-validation. Initialize the cross-validation with eight observations and use a step of one. Which model performs better according to the RMSE?</li>
+<li>Refer back to Problem 2, where your task is to forecast the fertility rate. For both the linear and logarithmic models you’ve developed, perform time series cross-validation. Initialize the cross-validation with eight observations and use a step of one. Which model performs better according to the RMSE?</li>
 </ol>
 <details>
 <summary>
 Suggested Answer
 </summary>
-<p>To perform leave-one-out cross validation, we initialize the process with eight observations and set the step size to one. The cross validation forecasts one period ahead. The code below performs the cross validation:</p>
+<p>To perform time series cross validation, we initialize the process with eight observations and set the step size to one. The cross validation forecasts one period ahead. The code below performs the cross validation:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>USFert <span class="sc">%&gt;%</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stretch_tsibble</span>(<span class="at">.init =</span> <span class="dv">8</span>, <span class="at">.step =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
@@ -3888,7 +3888,7 @@ Suggested Answer
 </details>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-FPP3" class="csl-entry" role="listitem">
 Hyndman, Rob. 2021. <em>Forecasting Principles and Practice</em>. Otexts. <a href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a>.
 </div>

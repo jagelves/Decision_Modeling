@@ -5,7 +5,7 @@ This book is about making decisions under uncertainty, using R. It is for anyone
 
 It has three parts. The first covers decision analysis: decision trees, risk analysis, and the frameworks for weighing options when the outcome is not yours to control. The second covers simulation, mostly Monte Carlo, where you build a small artificial version of a situation and run it enough times to see the range of things that could happen. The third covers time series, where the question is what a pattern over time can tell you about what comes next, using ARIMA and ETS. Business examples run throughout, and every chapter has problems to work.
 
-Comments are welcomed at jagelves\@wm.edu.
+Comments are welcome at jagelves\@wm.edu.
 
 ## Working with AI {#sec-working-with-ai}
 
@@ -39,7 +39,7 @@ Here is a way to think about whether any skill is worth building. Imagine a syst
 
 Some things clearly fail the test. Skills whose value comes from doing cognitive work faster or more reliably than a machine do not survive it. Nobody competes with a calculator at arithmetic, and nobody should try to compete with a model at writing code.
 
-Some things clearly pass, and they pass for two different reasons. A few survive because no system can supply them. Knowing what you actually want is a fact about you. So is your tolerance for a bad outcome. So is being the person who has to answer for the choice. Others survive not as tasks you will perform but as the thing that makes the first kind possible. Go back to the restaurant owner. Pricing catering, screening which jobs to accept, exiting the line, buying a second van: choosing among those four means knowing what each involves, what it would require you to assume, and where each would break. Somebody who has never built a pricing model has no view about whether pricing is the right frame. They are not choosing. They are picking a phrase.
+Some things clearly pass, and they pass for two different reasons. A few survive because no system can supply them. Knowing what you actually want is a fact about you. So is your tolerance for a bad outcome. So is being the person who has to answer for the choice. Others survive not as tasks you will perform but as the thing that makes the first kind possible. Take the restaurant owner described under the first skill below, who is losing money on catering. Pricing catering, screening which jobs to accept, exiting catering, adding a second van: choosing among those four means knowing what each involves, what it would require you to assume, and where each would break. Somebody who has never built a pricing model has no view about whether pricing is the right frame. They are not choosing. They are picking a phrase.
 
 That second reason is the one people miss. You cannot have preferences about a model you do not understand. The technical chapters are not here so you can beat the machine at producing the model. They are here because judgment about a thing requires having made one.
 
@@ -64,7 +64,7 @@ Most modeling failures in practice are not arithmetic failures. They are failure
 
 **Examples.**
 
-- A restaurant owner says "I'm losing money on catering." The decision might be how to price catering, or which catering jobs to accept, or whether to exit catering, or whether to hire a second van. These are four different models with four different answers. Choosing among them is your job, not the model's.
+- A restaurant owner says "I'm losing money on catering." The decision might be how to price catering, or which catering jobs to accept, or whether to exit catering, or whether to add a second van. These are four different models with four different answers. Choosing among them is your job, not the model's.
 
 - A bakery has to decide how much to bake each morning. Framing this as "how many loaves" already assumes a great deal: one batch, no chance to bake more at noon, nothing carrying over to tomorrow, and demand that does not respond to price. Every one of those is a choice you made rather than a fact about the bakery, and relaxing any of them produces a different problem. Knowing which assumptions you have quietly made is part of framing.
 
@@ -148,7 +148,7 @@ The deeper point is that accountability does not transfer. However capable these
 
 ## What you should decide for yourself
 
-Everything above is a claim about the models available in 2026, and claims like that expire. Test them. Take a problem from any chapter, hand it to the best model you have access to, and push. See how far it gets on its own and where it needs you. If a section of this chapter turns out to be wrong, I would rather you found out by checking than believed it because it was printed.
+Everything above is a claim about the models available in 2026, and claims like that expire. Test them. Take a problem from any chapter, hand it to the best model you have access to, and push. See how far it gets on its own and where it needs you. If a section of this preface turns out to be wrong, I would rather you found out by checking than believed it because it was printed.
 
 Then take each of the six skills through the oracle test. Suppose every current limitation is gone and the system is right every time. Which of the six still matter, and why? Some of them survive because no machine can supply what they need. Some survive because you cannot exercise the first kind without them. Some may not survive at all, and saying so is a legitimate answer if you can defend it.
 

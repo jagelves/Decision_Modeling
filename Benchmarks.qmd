@@ -1,26 +1,26 @@
 # Model Benchmarks
 
-This module will introduce the modeling procedure with four different benchmarks (Naive, Drift, Mean, and Least Squares). The fit of these benchmarks will be assessed using accuracy measures such as the Mean Error, Mean Absolute Error, Root Mean Squared Error, among others. In general, these accuracy measures compare the fitted values with observed values. A good model will account for most of the series's systematic variation, leaving a small random error. Lastly, to avoid over-fitting the models, we will use a training set and test set along with cross validation.
+This module will introduce the modeling procedure with four different benchmarks (Naive, Drift, Mean, and Least Squares). The fit of these benchmarks will be assessed using accuracy measures such as the Mean Error, Mean Absolute Error, Root Mean Squared Error, among others. In general, these accuracy measures compare the fitted values with observed values. A good model will account for most of the series' systematic variation, leaving a small random error. Lastly, to avoid over-fitting the models, we will use a training set and test set along with cross validation.
 
 ## Benchmarks {#sec-Bench}
 
-One of the most intuitive (but naive) predictions we can make about the future is to expect that the value of a variable will behave as it did in the past. A **naive prediction** sets the prediction of a future period to the value of the preceding period. For example, if you consider the task of predicting your weight, a simple heuristic would be to think that your weight tomorrow be the same as the weight observed today. Mathematically we would write:
+One of the most intuitive (but naive) predictions we can make about the future is to expect that the value of a variable will behave as it did in the past. A **naive prediction** sets the prediction of a future period to the value of the preceding period. For example, if you consider the task of predicting your weight, a simple heuristic would be to think that your weight tomorrow will be the same as the weight observed today. Mathematically we would write:
 
 <center>$\hat y_{T+h}=y_T$</center>
 
 <br> where $\hat y_{T+h}$ is the predicted value for $h$ periods ahead, and $y_T$ is the value observed at the current time period $T$. We can adjust the Naive prediction by accounting for some natural **drift** (an increase or decrease). Thinking about weight once again, we note that as kids grow, we expect their weight to be close to the previous measurement but slightly higher as we need to account for growth. We would "drift" the naive prediction upward. Mathematically we would write:
 
-<center>$\hat y_{T+h}=y_T+h(\frac{y_t-y_1}{T-1})$</center>
+<center>$\hat y_{T+h}=y_T+h(\frac{y_T-y_1}{T-1})$</center>
 
-<br> where $h(\frac{y_t-y_1}{T-1})$ can be thought as the average increase of $y$ from period $1$ to the current period $T$. One could also predict weight by observing weight during a period and **averaging** the values. Every day the data recorded would be slightly different, but if diets, exercise, sleep, etc., remain relatively constant, the mean could be a good predictor of your future weight. Formally:
+<br> where $\frac{y_T-y_1}{T-1}$ can be thought of as the average increase of $y$ from period $1$ to the current period $T$. One could also predict weight by observing weight during a period and **averaging** the values. Every day the data recorded would be slightly different, but if diets, exercise, sleep, etc., remain relatively constant, the mean could be a good predictor of your future weight. Formally:
 
 <center>$\hat y_{T+h}=\frac{(y_1+y_2+...+y_T)}{T}$</center>
 
-<br> Lastly, we can use the weight data collected from a period and observe if there is any trend. If we find ourselves motivated to lose weight we can start recording our weight every day. Ideally, we will start seeing the effect of our diet, exercise and healthy sleep in the data. We can predict tomorrows weight by taking into account the downward **trend** of our weight. Formally:
+<br> Lastly, we can use the weight data collected from a period and observe if there is any trend. If we find ourselves motivated to lose weight we can start recording our weight every day. Ideally, we will start seeing the effect of our diet, exercise and healthy sleep in the data. We can predict tomorrow's weight by taking into account the downward **trend** of our weight. Formally:
 
 <center>$\hat y_{T+h}=b_0+b_1(T+h)$</center>
 
-## Modeling the the Average Price of Avocados
+## Modeling the Average Price of Avocados
 
 Let's apply these four models to forecast the average price of avocados in California. We'll start by loading the `tidyverse` and `fpp3` packages and importing the data.
 
@@ -48,7 +48,7 @@ fit <- model(calits_train,mean=MEAN(average_price),
               LS=TSLM(average_price~trend()))
 ```
 
-The *fit* object is saved as a mable (model table). The `model()`function specifies the four models to be estimated using their respective functions (i.e., `MEAN()`, `NAIVE()`, `RW()`, and `TSLM()`). To explore the coefficients of the models estimated, we use the `coef()` function with *fit* as its single argument. The output table has been enhanced visually by using the [`gt`](https://gt.rstudio.com) package.
+The *fit* object is saved as a mable (model table). The `model()` function specifies the four models to be estimated using their respective functions (i.e., `MEAN()`, `NAIVE()`, `RW()`, and `TSLM()`). To explore the coefficients of the models estimated, we use the `coef()` function with *fit* as its single argument. The output table has been enhanced visually by using the [`gt`](https://gt.rstudio.com) package.
 
 ```{r , echo=TRUE, warning=FALSE, message=FALSE}
 library(gt)
@@ -87,7 +87,7 @@ The model fit will be assessed by comparing the fitted values against observed v
 
 <center>$MSE = \frac{ \sum (\hat{y}_t-y_t)^2}{T}$</center>
 
-<br> How we decide to aggregate our errors will determine our measure of accuracy. For example, if we follow the same procedure as the one for MSE's but instead find the square root, we have calculated the RMSE. Below you will find a collection of accuracy measures.
+<br> How we decide to aggregate our errors will determine our measure of accuracy. For example, if we follow the same procedure as the one for the MSE but instead find the square root, we have calculated the RMSE. Below you will find a collection of accuracy measures.
 
 | **Measure** | **Explanation** | **Formula** |
 |-----------------|------------------------------------|--------------------|
@@ -135,13 +135,13 @@ calits_fc %>% autoplot(level=NULL) + theme_classic() +
        x="")
 ```
 
-Note how the Mean and Naive models predict that the series will continue without a trend. The LS and Drift models predicts that the series will continue its trend but, like all other methods, do not consider the seasonal pattern that is evident in the average price of avocados. In future chapters, we will look at models that account for both trend and seasonality.
+Note how the Mean and Naive models predict that the series will continue without a trend. The LS and Drift models predict that the series will continue its trend but, like all other methods, do not consider the seasonal pattern that is evident in the average price of avocados. In future chapters, we will look at models that account for both trend and seasonality.
 
 ## Over-Fitting
 
 Over-fitting can happen when a model is overly flexible. This can make the model fit to the random fluctuations or noise in the data, rather than the underlying pattern. This is a major failing in modeling as it ignores the systematic pattern that governs the time series.
 
-To overcome this problem, we usually have a **training set** or subset of the data that we use to estimate the model's parameters. Once the model is estimated, we assess its performance on a new subset of the data that was not used in estimating the model. This second subset of data is called the **test set**. A model that over-fits to the training data, will often perform poorly when forecasting the test set.
+To overcome this problem, we usually have a **training set** or subset of the data that we use to estimate the model's parameters. Once the model is estimated, we assess its performance on a new subset of the data that was not used in estimating the model. This second subset of data is called the **test set**. A model that over-fits to the training data will often perform poorly when forecasting the test set.
 
 Recall that benchmarks were estimated for the period between 2015-01-04\~2018-06-02. We will call this our training set. For our test set, we'll use the 2018-06-02\~2018-12-02 period. The code below creates a test set and a set that includes both the test set and training set using the `filter_index()` function.
 
@@ -167,7 +167,7 @@ calits_fc %>% autoplot(level=NULL) +
 The graph shows how the LS method does well with the test data and a long forecast period. This can be confirmed by obtaining the accuracy measures against the test set. The code below uses the `accuracy()` function to generate the main table.
 
 ```{r results='hide'}
-accuracy(calits_fc, calits_test) %>% select(-ACF1, RMSSE, MASE)
+accuracy(calits_fc, calits_test) %>% select(-ACF1, -RMSSE, -MASE)
 ```
 
 ```{r, echo=FALSE}
@@ -239,11 +239,11 @@ AIC (Akaike Information Criterion), AICc (corrected AIC), and BIC (Bayesian Info
 
 -   **AIC** is a measure that penalizes model complexity. It balances the trade-off between model fit and the number of parameters in the model. The AIC value is calculated using the formula:
 
-<center>$AIC = T*ln(SSE/T) + 2(k+1)$</center>
+<center>$AIC = T*ln(SSE/T) + 2(k+2)$</center>
 
 <br> where $T$ is the number of observations, $SSE$ the sum squared errors, and $k$ is the number of predictors (i.e., complexity of the model). The lower the AIC value, the better the model.
 
--   **AICc** is an adjustment to the AIC measure, particularly for smaller sample sizes. AIC tends to overestimate the complexity penalty when the number of data points is relatively small. AICc adds a correction factor to account for this and is calculated using the formula:
+-   **AICc** is an adjustment to the AIC measure, particularly for smaller sample sizes. AIC's complexity penalty tends to be too small when the number of data points is relatively small, so it can favor models that are too complex. AICc adds a correction factor to account for this and is calculated using the formula:
 
 <center>$AICc = AIC + \frac{2(k+2)(k+3)}{T-k-3}$</center>
 
@@ -287,7 +287,7 @@ calits_train %>%
              decimals = 2) 
 ```
 
-The model with the lowest AIC (AICc or BIC) is the simple Least Squares model that only has two parameters to estimate (slope and intercept). These results indicate that LS provides a good fit relative to it's complexity.
+The model with the lowest AIC (AICc or BIC) is the simple Least Squares model that only has two parameters to estimate (slope and intercept). These results indicate that LS provides a good fit relative to its complexity.
 
 ## Readings
 
@@ -299,7 +299,7 @@ The primary reading for this chapter comes from @FPP3. Topics include the foreca
 
 -   gt package: <https://gt.rstudio.com>
 
-## Leasons Learned
+## Lessons Learned
 
 In this module you have been introduced to the general procedure in forecasting time series. Particularly you have learned to:
 
@@ -347,11 +347,11 @@ For the forecast we can use the `forecast()` function:
 fit %>% forecast(h=7) %>% filter(.model=="TSLMQ")
 ```
 
-The population is expected to go down to 122,868 people. This represents a decrease of `r round((124371-122868)/124371*100,2)`%.
+The population is expected to go down to 122,868 thousand people (about 122.9 million). This represents a decrease of `r round((124371-122868)/124371*100,2)`%.
 
 </details>
 
-2.  Fertility rates are crucial because they directly impact population growth and demographic structure. Low fertility rates can lead to an aging population, shrinking workforce, and challenges in sustaining economic growth and social welfare programs. To maintain a stable population in the U.S., the total fertility rate (TFR) needs to be around 2.1 children per woman (i.e. the replacement rate) If the TFR falls below this level for an extended period, the population may decline without immigration. Use the data found here: <https://jagelves.github.io/Data/UNPOP.csv> to plot the fertility rate for the US from 1960-2023 and the current replacement rate. What is the two year projected fertility rate when using a simple linear trend? How does this change when running the same model with a log transformation on the fertility variable?
+2.  Fertility rates are crucial because they directly impact population growth and demographic structure. Low fertility rates can lead to an aging population, shrinking workforce, and challenges in sustaining economic growth and social welfare programs. To maintain a stable population in the U.S., the total fertility rate (TFR) needs to be around 2.1 children per woman (i.e. the replacement rate). If the TFR falls below this level for an extended period, the population may decline without immigration. Use the data found here: <https://jagelves.github.io/Data/UNPOP.csv> to plot the fertility rate for the US from 1960-2023 and the current replacement rate. What is the two-year projected fertility rate when using a simple linear trend? How does this change when running the same model with a log transformation on the fertility variable?
 
 <details>
 
@@ -426,13 +426,13 @@ If we follow the RMSE, the logarithmic model fits the data better.
 
 </details>
 
-4.  Refer back to Problem 2, where your task is to forecast the fertility rate. For both the linear and logarithmic models you've developed, perform leave-one-out cross-validation. Initialize the cross-validation with eight observations and use a step of one. Which model performs better according to the RMSE?
+4.  Refer back to Problem 2, where your task is to forecast the fertility rate. For both the linear and logarithmic models you've developed, perform time series cross-validation. Initialize the cross-validation with eight observations and use a step of one. Which model performs better according to the RMSE?
 
 <details>
 
 <summary>Suggested Answer</summary>
 
-To perform leave-one-out cross validation, we initialize the process with eight observations and set the step size to one. The cross validation forecasts one period ahead. The code below performs the cross validation:
+To perform time series cross validation, we initialize the process with eight observations and set the step size to one. The cross validation forecasts one period ahead. The code below performs the cross validation:
 
 ```{r warning=FALSE}
 USFert %>%

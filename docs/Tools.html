@@ -402,11 +402,11 @@ window.Quarto = {
 <p>Recall that the <strong>binomial distribution</strong> illustrates the probability of <em>x</em> successes from an experiment with <em>n</em> trials. We can use the distribution to generate random numbers by providing the probability of success (<em>p</em>) and the number of trials (<em>n</em>) parameters. Similarly, the <strong>uniform distribution</strong> shows the probability of a random variable within a <em>minimum</em> and <em>maximum</em> limit. Hence, we can generate random numbers from the distribution by providing the <em>minimum</em> and the <em>maximum</em>. In general, we can generate random numbers that follow a variety of distributions by providing the required arguments to the particular random number generator needed.</p>
 <p>Every one of these functions shares the same convenient feature: the first argument is <em>how many</em> numbers you want. <code>rbinom(1,100,0.7)</code> returns a single draw, and <code>rbinom(100000,100,0.7)</code> returns one hundred thousand draws in a single call. Asking for all the numbers at once, rather than one at a time, is the first and most important habit to build.</p>
 <p>In addition to the functions mentioned above, R provides the <code>sample()</code> function, a versatile tool for generating random values from a specified data set. The <code>sample()</code> function allows users to randomly select a specified number of elements from a vector, either with or without replacement. For example, <code>sample(x, size, replace = FALSE)</code> randomly selects elements from the vector x. If <em>replace = TRUE</em>, the function will sample with replacement, meaning the same element can be selected more than once. You can also pass a vector of probabilities using the <em>prob</em> argument, allowing you to generate various observed distributions.</p>
-<p>In the code below we simulate the toss of a “biased coin” that turns head 60% of the times.</p>
+<p>In the code below we simulate the toss of a “biased coin” that lands on heads 60% of the time.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"H"</span>,<span class="st">"T"</span>), <span class="dv">5</span>, <span class="at">replace=</span> <span class="cn">TRUE</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.6</span>,<span class="fl">0.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "H" "H" "H" "T" "H"</code></pre>
+<pre><code>[1] "H" "T" "T" "T" "T"</code></pre>
 </div>
 </div>
 </section>
@@ -423,11 +423,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 3
   Books             Price Demand
   &lt;chr&gt;             &lt;dbl&gt;  &lt;int&gt;
-1 Frankenstein       9.5      69
-2 Dracula            5.78     67
-3 Moby Dick          6.34     73
-4 War Of The Worlds  5.67     66
-5 Beowulf            2.45     71</code></pre>
+1 Frankenstein       9.5      78
+2 Dracula            5.78     65
+3 Moby Dick          6.34     71
+4 War Of The Worlds  5.67     79
+5 Beowulf            2.45     66</code></pre>
 </div>
 </div>
 <p>The demand for the book is generated using the <code>rbinom()</code> function. The first input of the <code>rbinom()</code> function specifies how many random numbers are needed (<span class="math inline">\(5\)</span>), the second one specifies the number of trials in the experiment (<span class="math inline">\(100\)</span>), and the last one specifies the probability of success (<span class="math inline">\(0.7\)</span>). Wrapping the whole assignment in parentheses is a small convenience: it stores the tibble in <em>MS</em> and prints it at the same time.</p>
@@ -439,11 +439,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 4
   Books             Price Demand Revenue
   &lt;chr&gt;             &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt;
-1 Frankenstein       9.5      69    656.
-2 Dracula            5.78     67    387.
-3 Moby Dick          6.34     73    463.
-4 War Of The Worlds  5.67     66    374.
-5 Beowulf            2.45     71    174.</code></pre>
+1 Frankenstein       9.5      78    741 
+2 Dracula            5.78     65    376.
+3 Moby Dick          6.34     71    450.
+4 War Of The Worlds  5.67     79    448.
+5 Beowulf            2.45     66    162.</code></pre>
 </div>
 </div>
 <p>The <code>mutate()</code> function from the tidyverse adds (or replaces) a column in a tibble. The <code>%&gt;%</code> symbol is called the <strong>pipe</strong>, and it takes whatever is on its left and passes it as the first argument to the function on its right. So <code>MS %&gt;% mutate(...)</code> reads as “take MS, then add a column to it.” Pipes let us chain several transformations in the order we think about them, which is why they read so naturally once you are used to them.</p>
@@ -460,7 +460,7 @@ window.Quarto = {
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>Revenue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 646.00 410.38 399.42 368.55 169.05</code></pre>
+<pre><code>[1] 598.50 410.38 431.12 459.27 171.50</code></pre>
 </div>
 </div>
 <p>The code above starts by creating an empty vector to store the revenue generated by each book. The loop then takes the first price in the <em>MS$Price</em> vector, multiplies it by a single random number drawn from the binomial distribution with <span class="math inline">\(100\)</span> trials and probability <span class="math inline">\(0.7\)</span>, and glues the result onto the end of <em>Revenue</em> with <code>c(Revenue, ...)</code>. This process is repeated for every number in the <em>MS$Price</em> vector, leading to a final vector with each book’s revenues.</p>
@@ -479,7 +479,7 @@ window.Quarto = {
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>loop_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>elapsed 
-  2.487 </code></pre>
+  2.612 </code></pre>
 </div>
 </div>
 <p>Now the same <span class="math inline">\(50{,}000\)</span> scenarios, written as a single vectorized expression.</p>
@@ -494,7 +494,7 @@ window.Quarto = {
   0.003 </code></pre>
 </div>
 </div>
-<p>The loop takes about 2.49 seconds; the vectorized version takes about 0.003 seconds. That is roughly 829 times faster for exactly the same answer. Two separate costs are hiding in the loop. The first is that R must set up and tear down the call to <code>rbinom()</code> fifty thousand times instead of once. The second, and the larger one here, is that <code>c(Revenue, ...)</code> builds a brand new vector on every pass, copying everything computed so far. A loop that grows an object this way slows down as it runs.</p>
+<p>The loop takes about 2.61 seconds; the vectorized version takes about 0.003 seconds. That is roughly 871 times faster for exactly the same calculation. Two separate costs are hiding in the loop. The first is that R must set up and tear down the call to <code>rbinom()</code> fifty thousand times instead of once. The second, and the larger one here, is that <code>c(Revenue, ...)</code> builds a brand new vector on every pass, copying everything computed so far. A loop that grows an object this way slows down as it runs.</p>
 </section>
 <section id="conditional-logic-without-loops" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="conditional-logic-without-loops"><span class="header-section-number">2.5</span> Conditional Logic Without Loops</h2>
@@ -539,11 +539,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 5
   Books             Price Demand Revenue Tier    
   &lt;chr&gt;             &lt;dbl&gt;  &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;   
-1 Frankenstein       9.5      69    656. Flagship
-2 Dracula            5.78     67    387. Flagship
-3 Moby Dick          6.34     73    463. Standard
-4 War Of The Worlds  5.67     66    374. Discount
-5 Beowulf            2.45     71    174. Discount</code></pre>
+1 Frankenstein       9.5      78    741  Flagship
+2 Dracula            5.78     65    376. Flagship
+3 Moby Dick          6.34     71    450. Standard
+4 War Of The Worlds  5.67     79    448. Discount
+5 Beowulf            2.45     66    162. Discount</code></pre>
 </div>
 </div>
 <p>Notice that <code>case_when()</code> is being used inside <code>mutate()</code>, and that it refers to the <em>Books</em> and <em>Price</em> columns directly by name. This is the pattern we will use for the rest of the book: one tibble holding every scenario, and columns built from other columns with <code>mutate()</code>, <code>ifelse()</code>, and <code>case_when()</code>.</p>
@@ -551,7 +551,7 @@ window.Quarto = {
 <section id="the-va-department-of-transportation-wants-your-services" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="the-va-department-of-transportation-wants-your-services"><span class="header-section-number">2.6</span> The VA Department of Transportation Wants Your Services</h2>
 <p>The VA ferry crossing the James River was first established in <span class="math inline">\(1925\)</span>. The ferry transports vehicles back and forth from Jamestown to Scotland in a <span class="math inline">\(15\)</span>-minute ride. The VA Department of Transportation wants you to simulate the daily demand for the ferry so that they can schedule staff and the number of ferries to run.</p>
-<p>Assume that the VA Department of transportation shares four weeks of data with hopes of us being able to simulate the fifth week. Can we generate a convincing simulation of the data? The table below records the number of vehicles that used the ferry service:</p>
+<p>Assume that the VA Department of Transportation shares four weeks of data with hopes of us being able to simulate the fifth week. Can we generate a convincing simulation of the data? The table below records the number of vehicles that used the ferry service:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -787,7 +787,7 @@ window.Quarto = {
 </div>
 </div>
 <p><code>accumulate()</code> walks through <em>returns</em> and keeps a running value. Inside the formula, <code>.x</code> is the value carried over from the previous step and <code>.y</code> is the current element of <em>returns</em>, so <code>.x*(1+.y)</code> grows last year’s balance by this year’s return. The <code>.init</code> argument supplies the starting balance. The result includes the initial value, so six numbers are returned for five years of returns.</p>
-<p>This particular example could also be written as <code>1000*cumprod(1+returns)</code>, and when a shortcut like that exists you should use it. But suppose the investor also adds <span class="math inline">\(6{,}000\)</span> dollars at the end of each year. The <code>cumprod()</code> trick breaks down immediately, while <code>accumulate()</code> needs only a small edit.</p>
+<p>This particular example could also be written as <code>1000*cumprod(1+returns)</code>, and when a shortcut like that exists you should use it. But suppose the investor also adds <span class="math inline">\(6{,}000\)</span> dollars at the start of each year. The <code>cumprod()</code> trick breaks down immediately, while <code>accumulate()</code> needs only a small edit.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accumulate</span>(returns, <span class="sc">~</span> (.x<span class="sc">+</span><span class="dv">6000</span>)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span>.y), <span class="at">.init=</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -797,40 +797,46 @@ window.Quarto = {
 </section>
 <section id="chi-square-test" class="level2" data-number="2.8">
 <h2 data-number="2.8" class="anchored" data-anchor-id="chi-square-test"><span class="header-section-number">2.8</span> Chi Square Test</h2>
-<p>Although we have visual confirmation that ferry rides during weekdays are uniformly distributed, we would like to perform a statistical test to prove that this is in fact the case. The <strong>Chi-Square Test</strong> is generally used to compare observed frequencies with expected frequencies across categorical data. Using this comparison, we can determine if the observed data does in fact follow the hypothesized distribution. Below is code to perform the test:</p>
+<p>Although we have visual confirmation that ferry rides during weekdays are uniformly distributed, we would like to perform a statistical test to check whether the data are consistent with a uniform distribution. The <strong>Chi-Square Test</strong> is generally used to compare observed frequencies with expected frequencies across categorical data. Using this comparison, we can determine if the observed data does in fact follow the hypothesized distribution. Below is code to perform the test:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed frequencies</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected frequencies under uniform distribution</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Since we have 5 categories and assuming uniform distribution,</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># each category is expected to have an equal frequency.</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>num_categories <span class="ot">&lt;-</span> <span class="fu">length</span>(observed)</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the Chi-Square test</span></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>chi_square_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(observed, <span class="at">p =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span>num_categories, num_categories))</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the test results</span></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chi_square_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed frequencies: weekday rides counted in the four bins of the histogram</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>weekday <span class="ot">&lt;-</span> ferry <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Type<span class="sc">==</span><span class="st">"Weekday"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Rides)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">cut</span>(weekday, <span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1000</span>,<span class="dv">1200</span>,<span class="at">by=</span><span class="dv">50</span>), <span class="at">right=</span><span class="cn">FALSE</span>))</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>observed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  [1e+03,1.05e+03) [1.05e+03,1.1e+03) [1.1e+03,1.15e+03) [1.15e+03,1.2e+03) 
+                 5                  5                  6                  4 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected frequencies under uniform distribution</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Since we have 4 categories and assuming uniform distribution,</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># each category is expected to have an equal frequency.</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>num_categories <span class="ot">&lt;-</span> <span class="fu">length</span>(observed)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the Chi-Square test</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>chi_square_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(observed, <span class="at">p =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span>num_categories, num_categories))</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the test results</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chi_square_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Chi-squared test for given probabilities
 
 data:  observed
-X-squared = 0, df = 4, p-value = 1</code></pre>
+X-squared = 0.4, df = 3, p-value = 0.9402</code></pre>
 </div>
 </div>
-<p><strong>Chi-Square Statistic (X-squared)</strong> measures the divergence between observed and expected frequencies. Since the observed distribution is the same as the expected frequency, the divergence is 0. The p-value indicates the probability of observing a Chi-Square statistic as extreme as, or more extreme than, the one computed, assuming the null hypothesis (that the distribution is uniform) is true. A small p-value (typically &lt; 0.05) indicates that the observed distribution is significantly different from a uniform distribution. Since the reported p-value is 1, we can’t reject the null hypothesis and we vote in favor of ferry rides being uniformly distributed.</p>
-<p>Note that the Chi-Square test can be used for any discrete distribution or alternately as an approximation when the distributions are continuous. For testing normality (continuous distribution), other tests like the Shapiro-Wilk (<code>shapiro.test()</code> in R) or Kolmogorov-Smirnov (<code>ks.test()</code>) are more commonly used and better suited than the Chi-Square test.</p>
+<p><strong>Chi-Square Statistic (X-squared)</strong> measures the divergence between observed and expected frequencies. Here the observed counts (5, 5, 6, 4) are very close to the 5 per bin expected under a uniform distribution, so the statistic is small (0.4). The p-value indicates the probability of observing a Chi-Square statistic as extreme as, or more extreme than, the one computed, assuming the null hypothesis (that the distribution is uniform) is true. A small p-value (typically &lt; 0.05) indicates that the observed distribution is significantly different from a uniform distribution. Since the reported p-value (about 0.94) is well above 0.05, we can’t reject the null hypothesis and we vote in favor of ferry rides being uniformly distributed.</p>
+<p>Note that the Chi-Square test can be used for any discrete distribution or alternatively as an approximation when the distributions are continuous. For testing normality (continuous distribution), other tests like the Shapiro-Wilk (<code>shapiro.test()</code> in R) or Kolmogorov-Smirnov (<code>ks.test()</code>) are more commonly used and better suited than the Chi-Square test.</p>
 </section>
 <section id="readings" class="level2" data-number="2.9">
 <h2 data-number="2.9" class="anchored" data-anchor-id="readings"><span class="header-section-number">2.9</span> Readings</h2>
-<p>These readings will help you review the concepts and theory necessary for completing this chapter. <span class="citation" data-cites="HOP">Grolemund (<a href="references.html#ref-HOP" role="doc-biblioref">2014</a>)</span> reviews the R basics needed to perform computer simulation, <span class="citation" data-cites="JK">Jaggia and Kelly (<a href="references.html#ref-JK" role="doc-biblioref">2022</a>)</span> introduces probability distributions, <span class="citation" data-cites="GelvesBS">Gelves (<a href="references.html#ref-GelvesBS" role="doc-biblioref">2022</a>)</span> has several applied probability problems (with solutions), while <span class="citation" data-cites="PMS">Winston and Albright (<a href="references.html#ref-PMS" role="doc-biblioref">2019</a>)</span> provides an application of the distributions to business simulation.</p>
+<p>These readings will help you review the concepts and theory necessary for completing this chapter. <span class="citation" data-cites="HOP">Grolemund (<a href="#ref-HOP" role="doc-biblioref">2014</a>)</span> reviews the R basics needed to perform computer simulation, <span class="citation" data-cites="JK">Jaggia and Kelly (<a href="#ref-JK" role="doc-biblioref">2022</a>)</span> introduces probability distributions, <span class="citation" data-cites="GelvesBS">Gelves (<a href="#ref-GelvesBS" role="doc-biblioref">2022</a>)</span> has several applied probability problems (with solutions), while <span class="citation" data-cites="PMS">Winston and Albright (<a href="#ref-PMS" role="doc-biblioref">2019</a>)</span> provides an application of the distributions to business simulation.</p>
 <ul>
-<li><p><span class="citation" data-cites="HOP">Grolemund (<a href="references.html#ref-HOP" role="doc-biblioref">2014</a>)</span> Chapter 1 (The Very Basics), Chapter 2 (Packages and Help Pages), Chapter 3 (R Objects), Chapter 7.2, 7.3 (Conditional Statements), Chapter 9.3, 9.4, 9.5 (Loops). The loop material is worth reading once so that you recognize the construct, but keep in mind that we will prefer vectorized code throughout.</p></li>
-<li><p><span class="citation" data-cites="JK">Jaggia and Kelly (<a href="references.html#ref-JK" role="doc-biblioref">2022</a>)</span> Chapter 5 (Discrete Probability Distributions) and Chapter 6 (Continuous Probability Distributions).</p></li>
-<li><p><span class="citation" data-cites="GelvesBS">Gelves (<a href="references.html#ref-GelvesBS" role="doc-biblioref">2022</a>)</span> Chapter 10 (Discrete Random Variables), Chapter 11 (Continuous Random Variables). This is mainly review from your probability course. It is recommended you attempt the exercises in both chapters (solutions are provided at the end).</p></li>
-<li><p><span class="citation" data-cites="PMS">Winston and Albright (<a href="references.html#ref-PMS" role="doc-biblioref">2019</a>)</span> Chapter 10.1 (Introduction) and 10.2 (Probability Distributions for Input Variables). Pay special attention to the probability distributions and try to replicate the examples in R.</p></li>
+<li><p><span class="citation" data-cites="HOP">Grolemund (<a href="#ref-HOP" role="doc-biblioref">2014</a>)</span> Chapter 1 (The Very Basics), Chapter 2 (Packages and Help Pages), Chapter 3 (R Objects), Chapter 7.2, 7.3 (Conditional Statements), Chapter 9.3, 9.4, 9.5 (Loops). The loop material is worth reading once so that you recognize the construct, but keep in mind that we will prefer vectorized code throughout.</p></li>
+<li><p><span class="citation" data-cites="JK">Jaggia and Kelly (<a href="#ref-JK" role="doc-biblioref">2022</a>)</span> Chapter 5 (Discrete Probability Distributions) and Chapter 6 (Continuous Probability Distributions).</p></li>
+<li><p><span class="citation" data-cites="GelvesBS">Gelves (<a href="#ref-GelvesBS" role="doc-biblioref">2022</a>)</span> Chapter 10 (Discrete Random Variables), Chapter 11 (Continuous Random Variables). This is mainly review from your probability course. It is recommended you attempt the exercises in both chapters (solutions are provided at the end).</p></li>
+<li><p><span class="citation" data-cites="PMS">Winston and Albright (<a href="#ref-PMS" role="doc-biblioref">2019</a>)</span> Chapter 10.1 (Introduction) and 10.2 (Probability Distributions for Input Variables). Pay special attention to the probability distributions and try to replicate the examples in R.</p></li>
 </ul>
 </section>
 <section id="lessons-learned-in-this-chapter" class="level2" data-number="2.10">
@@ -853,7 +859,7 @@ X-squared = 0, df = 4, p-value = 1</code></pre>
 Suggested Answer
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">1</span>, print)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">1</span>, print)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10
 [1] 9
@@ -866,7 +872,7 @@ Suggested Answer
 [1] 2
 [1] 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Liftoff!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Liftoff!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Liftoff!"</code></pre>
 </div>
@@ -879,15 +885,15 @@ Suggested Answer
 <summary>
 Suggested Answer
 </summary>
-<p>Use the <code>rtriang()</code> function from the <code>extraDistr</code> package to generate 1,000 ages, and <code>ifelse()</code> to turn those ages into an entry decision. Both columns are created in a single <code>tibble()</code> call, since a column may refer to one defined before it.</p>
+<p>Use the <code>rtriang()</code> function from the <code>extraDistr</code> package to generate 1,000 ages, and <code>ifelse()</code> to turn those ages into an entry decision. The <em>Age</em> column is created with <code>tibble()</code>, and <code>mutate()</code> then adds the <em>Entry</em> column based on it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>patrons<span class="ot">&lt;-</span><span class="fu">tibble</span>(<span class="at">Age=</span><span class="fu">rtriang</span>(<span class="dv">1000</span>,<span class="dv">16</span>,<span class="dv">25</span>,<span class="dv">21</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Entry=</span><span class="fu">ifelse</span>(Age<span class="sc">&gt;=</span><span class="dv">21</span>,<span class="st">"Access Granted"</span>,<span class="st">"Access Denied"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>patrons<span class="ot">&lt;-</span><span class="fu">tibble</span>(<span class="at">Age=</span><span class="fu">rtriang</span>(<span class="dv">1000</span>,<span class="dv">16</span>,<span class="dv">25</span>,<span class="dv">21</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Entry=</span><span class="fu">ifelse</span>(Age<span class="sc">&gt;=</span><span class="dv">21</span>,<span class="st">"Access Granted"</span>,<span class="st">"Access Denied"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The share turned away is then a single <code>summarise()</code> away. Recall that a logical comparison returns a vector of TRUE and FALSE values, and that the mean of such a vector is the proportion of TRUE values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>patrons <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Denied=</span><span class="fu">round</span>(<span class="fu">mean</span>(Entry<span class="sc">==</span><span class="st">"Access Denied"</span>),<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>patrons <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Denied=</span><span class="fu">round</span>(<span class="fu">mean</span>(Entry<span class="sc">==</span><span class="st">"Access Denied"</span>),<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   Denied
@@ -905,26 +911,26 @@ Suggested Answer
 </summary>
 <p>All 100 spins can be drawn at once with <code>sample()</code>, and the payoff for every spin can be assigned at once with <code>ifelse()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>wheel<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"red"</span>,<span class="dv">18</span>), <span class="fu">rep</span>(<span class="st">"black"</span>,<span class="dv">18</span>), <span class="fu">rep</span>(<span class="st">"green"</span>,<span class="dv">2</span>))</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>spins<span class="ot">&lt;-</span><span class="fu">tibble</span>(<span class="at">Spin=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">Result=</span><span class="fu">sample</span>(wheel,<span class="dv">100</span>,<span class="at">replace=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Payoff=</span><span class="fu">ifelse</span>(Result<span class="sc">==</span><span class="st">"red"</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>))</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(spins<span class="sc">$</span>Payoff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>wheel<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"red"</span>,<span class="dv">18</span>), <span class="fu">rep</span>(<span class="st">"black"</span>,<span class="dv">18</span>), <span class="fu">rep</span>(<span class="st">"green"</span>,<span class="dv">2</span>))</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>spins<span class="ot">&lt;-</span><span class="fu">tibble</span>(<span class="at">Spin=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">Result=</span><span class="fu">sample</span>(wheel,<span class="dv">100</span>,<span class="at">replace=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Payoff=</span><span class="fu">ifelse</span>(Result<span class="sc">==</span><span class="st">"red"</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(spins<span class="sc">$</span>Payoff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -14</code></pre>
 </div>
 </div>
 <p>The same code simulates a hundred thousand spins by changing two numbers. Because the average payoff converges to <span class="math inline">\(-2/38\)</span>, the house edge guarantees the player loses in the long run.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>spins<span class="ot">&lt;-</span><span class="fu">tibble</span>(<span class="at">Spin=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>,</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">Result=</span><span class="fu">sample</span>(wheel,<span class="dv">100000</span>,<span class="at">replace=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Payoff=</span><span class="fu">ifelse</span>(Result<span class="sc">==</span><span class="st">"red"</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>))</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>spins <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Total=</span><span class="fu">sum</span>(Payoff), <span class="at">Average=</span><span class="fu">mean</span>(Payoff))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>spins<span class="ot">&lt;-</span><span class="fu">tibble</span>(<span class="at">Spin=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>,</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">Result=</span><span class="fu">sample</span>(wheel,<span class="dv">100000</span>,<span class="at">replace=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Payoff=</span><span class="fu">ifelse</span>(Result<span class="sc">==</span><span class="st">"red"</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>spins <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Total=</span><span class="fu">sum</span>(Payoff), <span class="at">Average=</span><span class="fu">mean</span>(Payoff))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   Total Average
@@ -934,13 +940,13 @@ Suggested Answer
 </div>
 </details>
 <ol start="4" type="1">
-<li>Franklin and Templeton wants you to generate 4 simulated returns for the SPY (an ETF that tracks the S&amp;P 500). They provide you with the data and histogram shown below. What distribution would you use to simulate the data? What parameters would you use?</li>
+<li>Franklin Templeton wants you to generate 4 simulated returns for the SPY (an ETF that tracks the S&amp;P 500). They provide you with the data and histogram shown below. What distribution would you use to simulate the data? What parameters would you use?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"https://jagelves.github.io/Data/returns.csv"</span>)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Stock<span class="sc">==</span><span class="st">"TSLA"</span>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>Return), <span class="at">bg=</span><span class="st">"grey"</span>,<span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"https://jagelves.github.io/Data/returns.csv"</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Stock<span class="sc">==</span><span class="st">"SPY"</span>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>Return), <span class="at">bg=</span><span class="st">"grey"</span>,<span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -955,12 +961,12 @@ Suggested Answer
 </summary>
 <p>The distribution of returns looks normal. We can use the mean and the standard deviation of the sample provided as inputs in the <code>rnorm()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Stock<span class="sc">==</span><span class="st">"SPY"</span>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>Return), <span class="at">bg=</span><span class="st">"grey"</span>,<span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">rnorm</span>(<span class="fu">length</span>(Return),<span class="fu">mean</span>(Return),</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">sd</span>(Return))), <span class="at">bg=</span><span class="st">"blue"</span>,</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Stock<span class="sc">==</span><span class="st">"SPY"</span>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>Return), <span class="at">bg=</span><span class="st">"grey"</span>,<span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">rnorm</span>(<span class="fu">length</span>(Return),<span class="fu">mean</span>(Return),</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">sd</span>(Return))), <span class="at">bg=</span><span class="st">"blue"</span>,</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -969,11 +975,11 @@ Suggested Answer
 </div>
 </div>
 </div>
-<p>As you can see the simulated demand follows the pattern of the sample returns (i.e.&nbsp;the normal distribution). To retrieve the mean and standard deviation of each investment we can use the code below:</p>
+<p>As you can see the simulated returns follow the pattern of the sample returns (i.e.&nbsp;the normal distribution). To retrieve the mean and standard deviation of each investment we can use the code below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>(stats<span class="ot">&lt;-</span>data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stock) <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Average=</span><span class="fu">mean</span>(Return),</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD=</span><span class="fu">sd</span>(Return)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>(stats<span class="ot">&lt;-</span>data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stock) <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Average=</span><span class="fu">mean</span>(Return),</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD=</span><span class="fu">sd</span>(Return)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   Stock  Average     SD
@@ -983,11 +989,11 @@ Suggested Answer
 3 TSLA  0.00511  0.0502</code></pre>
 </div>
 </div>
-<p>Lastly, we can now use the mean and the standard deviation of SPY to simulate four returns. Rather than typing the numbers back in, we pull them out of the summary table with <code>filter()</code> and <code>pull()</code>, which extracts a single column as a vector.</p>
+<p>Lastly, we can now use the mean and the standard deviation of SPY to simulate four returns. Rather than typing the numbers back in, we pull them out of the summary table with <code>filter()</code> and then refer to each column with <code>$</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">7</span>)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>SPY<span class="ot">&lt;-</span>stats <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Stock<span class="sc">==</span><span class="st">"SPY"</span>)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">4</span>, SPY<span class="sc">$</span>Average, SPY<span class="sc">$</span>SD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">7</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>SPY<span class="ot">&lt;-</span>stats <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Stock<span class="sc">==</span><span class="st">"SPY"</span>)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">4</span>, SPY<span class="sc">$</span>Average, SPY<span class="sc">$</span>SD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0.041297959 -0.020347740 -0.011456950 -0.006467293</code></pre>
 </div>
@@ -997,10 +1003,10 @@ Suggested Answer
 <li>XYZ Call Center, a popular customer service provider, wants you to simulate the daily number of calls their agents receive. The company has provided you with each employee’s call volume for a day and the histogram for the data. Analyze the data to determine the appropriate distribution that can be used to model the number of daily calls. You can determine the parameters for the distribution based on the historical data. Generate four simulated values representing the possible daily call volumes using the chosen distribution and parameters. What distribution would you use to simulate the daily call volumes for XYZ Call Center? What are the parameters of the chosen distribution? What are the four simulated daily call volumes?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"https://jagelves.github.io/Data/CallCenter.csv"</span>)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>Calls), <span class="at">bg=</span><span class="st">"grey"</span>,<span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"https://jagelves.github.io/Data/CallCenter.csv"</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>Calls), <span class="at">bg=</span><span class="st">"grey"</span>,<span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1015,12 +1021,12 @@ Suggested Answer
 </summary>
 <p>Given the context of the problem and data, we can think about using the Poisson distribution. The data shows us number of calls per day for each employee (i.e.&nbsp;number of successes in a given time interval). The mean number of calls is 34.079 per day. We can use this parameter to generate simulated data as shown below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>Calls), <span class="at">bg=</span><span class="st">"grey"</span>,<span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">rpois</span>(<span class="fu">length</span>(Calls),<span class="fu">mean</span>(Calls,<span class="at">na.rm=</span><span class="cn">TRUE</span>))),</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">bg=</span><span class="st">"blue"</span>,</span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>Calls), <span class="at">bg=</span><span class="st">"grey"</span>,<span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">rpois</span>(<span class="fu">length</span>(Calls),<span class="fu">mean</span>(Calls,<span class="at">na.rm=</span><span class="cn">TRUE</span>))),</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">bg=</span><span class="st">"blue"</span>,</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1031,19 +1037,19 @@ Suggested Answer
 </div>
 <p>The simulated data seems to resemble the call center data. We can perform a Chi-Squared Test:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">table</span>(data<span class="sc">$</span>Calls)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean (lambda) for the Poisson distribution</span></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Calls, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the expected frequencies for each observed count</span></span>
-<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> <span class="fu">dpois</span>(<span class="fu">as.numeric</span>(<span class="fu">names</span>(observed)), lambda) <span class="sc">*</span> <span class="fu">sum</span>(observed)</span>
-<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the Chi-Square test</span></span>
-<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>chi_square_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(<span class="at">x =</span> observed, <span class="at">p =</span> expected <span class="sc">/</span> <span class="fu">sum</span>(expected))</span>
-<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the test results</span></span>
-<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chi_square_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">table</span>(data<span class="sc">$</span>Calls)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean (lambda) for the Poisson distribution</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Calls, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the expected frequencies for each observed count</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> <span class="fu">dpois</span>(<span class="fu">as.numeric</span>(<span class="fu">names</span>(observed)), lambda) <span class="sc">*</span> <span class="fu">sum</span>(observed)</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the Chi-Square test</span></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>chi_square_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(<span class="at">x =</span> observed, <span class="at">p =</span> expected <span class="sc">/</span> <span class="fu">sum</span>(expected))</span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the test results</span></span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chi_square_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Chi-squared test for given probabilities
@@ -1052,9 +1058,9 @@ data:  observed
 X-squared = 35.136, df = 34, p-value = 0.4141</code></pre>
 </div>
 </div>
-<p>Given the large p-value, we can’t reject the null and vote in favor a Poisson distribution. Now we can generate four simulated number of calls in a day by using the <code>rpois()</code> function and the estimated mean number of calls in a day.</p>
+<p>Given the large p-value, we can’t reject the null and vote in favor of a Poisson distribution. Now we can generate four simulated number of calls in a day by using the <code>rpois()</code> function and the estimated mean number of calls in a day.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpois</span>(<span class="dv">4</span>,<span class="fu">mean</span>(data<span class="sc">$</span>Calls,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpois</span>(<span class="dv">4</span>,<span class="fu">mean</span>(data<span class="sc">$</span>Calls,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 28 34 32 33</code></pre>
 </div>
@@ -1062,7 +1068,7 @@ X-squared = 35.136, df = 34, p-value = 0.4141</code></pre>
 </details>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-GelvesBS" class="csl-entry" role="listitem">
 Gelves, J. Alejandro. 2022. <em>Business Statistics</em>. Bookdown. <a href="https://jagelves.github.io/BusinessStats/">https://jagelves.github.io/BusinessStats/</a>.
 </div>

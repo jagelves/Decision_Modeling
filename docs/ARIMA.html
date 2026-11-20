@@ -285,7 +285,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#combination-of-models-ensembles" id="toc-combination-of-models-ensembles" class="nav-link" data-scroll-target="#combination-of-models-ensembles"><span class="header-section-number">7.5</span> Combination of Models (Ensembles)</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings"><span class="header-section-number">7.6</span> Readings</a></li>
-  <li><a href="#leasons-learned" id="toc-leasons-learned" class="nav-link" data-scroll-target="#leasons-learned"><span class="header-section-number">7.7</span> Leasons Learned</a></li>
+  <li><a href="#lessons-learned" id="toc-lessons-learned" class="nav-link" data-scroll-target="#lessons-learned"><span class="header-section-number">7.7</span> Lessons Learned</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.8</span> Exercises</a></li>
   </ul>
 </nav>
@@ -371,8 +371,8 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 </div>
 </div>
-<p>The series now fluctuates closer to the mean, but unlike the white noise process behaves less erratic. You will notice that in some periods the change in deliveries from quarter to quarter is high. For example, following the lows at the beginning of the year, deliveries seem to increase sharply. There seems to be correlations between the quarters (time dependencies).</p>
-<p>Another pattern shown in the graph above is heteroskedasticity (increasing variance), The variance of the series seems to be low in the period of 2016-2018 while significantly higher for the period after. To normalize the variance of the series we can conduct a Box-Cox transformation.</p>
+<p>The series now fluctuates closer to the mean, but, unlike the white noise process, it behaves less erratically. You will notice that in some periods the change in deliveries from quarter to quarter is high. For example, following the lows at the beginning of the year, deliveries seem to increase sharply. There seem to be correlations between the quarters (time dependencies).</p>
+<p>Another pattern shown in the graph above is heteroskedasticity (increasing variance). The variance of the series seems to be low in the period of 2016-2018 while significantly higher for the period after. To normalize the variance of the series we can conduct a Box-Cox transformation.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> tesla <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">features</span>(deliveries, <span class="at">features =</span> guerrero) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(lambda_guerrero) </span>
@@ -390,8 +390,8 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 </div>
 </div>
-<p>The transformation has made the series a bit more homoskedastic (variance is more uniform) than the series without the transformation. It is important to note that both transformations (differencing and box-cox) can be undone by using an inverse function. Hence, we can always return the series to its original form. Luckily, <code>fable</code> does this automatically for us when we forecast a model.</p>
-<p>A couple of statistical features used to determine the stationarity of a series are the <em>unitroot_kpss</em> and <em>unitroot_ndiffs</em>. In general, a low p-value allows us to reject the null of hypothesis of stationarity. Below, we test the features with Tesla’s deliveries.</p>
+<p>The transformation has made the series a bit more homoskedastic (variance is more uniform) than the series without the transformation. It is important to note that both transformations (differencing and Box-Cox) can be undone by using an inverse function. Hence, we can always return the series to its original form. Luckily, <code>fable</code> does this automatically for us when we forecast a model.</p>
+<p>A couple of statistical features used to determine the stationarity of a series are the <em>unitroot_kpss</em> and <em>unitroot_ndiffs</em>. In general, a low p-value allows us to reject the null hypothesis of stationarity. Below, we test the features with Tesla’s deliveries.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tesla <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">features</span>(deliveries, <span class="at">features =</span> <span class="fu">c</span>(unitroot_kpss, unitroot_ndiffs)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -877,7 +877,7 @@ We can generate a white noise process by using the normal distribution with a me
 <h3 class="unnumbered anchored" data-anchor-id="the-autocorrelation-function">The autocorrelation function</h3>
 <p>Autocorrelations are essential in time series analysis since they indicate the degree of similarity between a time series and a lagged version of itself (a previous period). They help identify patterns and trends in the data allowing us to predict future values of the series. For example, suppose a time series exhibits a strong positive autocorrelation at a lag of <span class="math inline">\(k\)</span> periods. In such a case, the value at time <span class="math inline">\(t+k\)</span> will likely be similar to that at time <span class="math inline">\(t\)</span>. Formally we can write the autocorrelation as:</p>
 <center>
-<span class="math inline">\(\rho_{y_t,y_{t-k}}=\frac{cov(y_t,y_{y-k})}{sd(y_t)sd(y_{t-k})}\)</span>
+<span class="math inline">\(\rho_{y_t,y_{t-k}}=\frac{cov(y_t,y_{t-k})}{sd(y_t)sd(y_{t-k})}\)</span>
 </center>
 <p><br> Let’s illustrate the use of autocorrelations with an example. This time let’s inspect personal income growth in the state of California. Below we load the data and create the train and test sets.</p>
 <div class="cell">
@@ -935,7 +935,7 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 </div>
 </div>
-<p>The graph shows that the series has a strong correlation only with its first lag. Specifically, lag 2, 3, and 4 seemed to have been correlated with the series (see ACF), but this was mainly because of the influence of lag 1.</p>
+<p>The graph shows that the series has a strong correlation only with its first lag. Specifically, lags 2, 3, and 4 seemed to have been correlated with the series (see ACF), but this was mainly because of the influence of lag 1.</p>
 <p>Let’s inspect the white noise process once more to confirm that there are no patterns.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wn <span class="sc">%&gt;%</span> <span class="fu">PACF</span>(x) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">"PACF"</span>) <span class="sc">+</span></span>
@@ -969,7 +969,7 @@ We can generate a white noise process by using the normal distribution with a me
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>y[i]<span class="ot">=</span>const<span class="sc">+</span>phi<span class="sc">*</span>y[i<span class="dv">-1</span>]<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.5</span>)</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now we can use the data generated to see what the ACF looks like for a AR(1) process. This will allow us to visually identify the process.</p>
+<p>Now we can use the data generated to see what the ACF looks like for an AR(1) process. This will allow us to visually identify the process.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tsibble</span>(<span class="at">y=</span>y,<span class="at">period=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">length</span>(y)),<span class="at">index=</span>period) <span class="sc">%&gt;%</span> <span class="fu">ACF</span>(<span class="at">lag_max =</span> <span class="dv">12</span>, y) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()<span class="sc">+</span><span class="fu">theme_bw</span>()<span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span><span class="st">""</span>, <span class="at">title=</span><span class="st">"ACF For Simulated AR(1) phi=0.7, c=1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1507,7 +1507,7 @@ We can generate a white noise process by using the normal distribution with a me
 </div>
 </div>
 </div>
-<p>The estimated coefficient (<span class="math inline">\(\phi=0.7\)</span>) for the AR(1) process is equal the one used in our simulation. However, the estimated constant is 1.8. If we changed the constant to 1.8, the simulation would resemble the personal income growth data better. That is, the AR model selects the constant and lag coefficient (<span class="math inline">\(\phi\)</span>) such that it fits the data.</p>
+<p>The estimated coefficient (<span class="math inline">\(\phi=0.7\)</span>) for the AR(1) process is equal to the one used in our simulation. However, the estimated constant is 1.8. If we changed the constant to 1.8, the simulation would resemble the personal income growth data better. That is, the AR model selects the constant and lag coefficient (<span class="math inline">\(\phi\)</span>) such that it fits the data.</p>
 <p>If the AR(1) process correctly describes the series, the errors should behave like white noise. If the model picks up all of the systemic variation, only random error should be left. To inspect the errors we can use the <code>augment()</code> function along with the object that contains the model (<em>PI_fit</em>). The ACF of the error is displayed below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>errors_PI<span class="ot">&lt;-</span><span class="fu">augment</span>(PI_fit)</span>
@@ -4311,9 +4311,9 @@ We can generate a white noise process by using the normal distribution with a me
 <li><p><span class="citation" data-cites="IER">Hank (<a href="references.html#ref-IER" role="doc-biblioref">2023</a>)</span></p></li>
 </ul>
 </section>
-<section id="leasons-learned" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="leasons-learned"><span class="header-section-number">7.7</span> Leasons Learned</h2>
-<p>In this module you have been introduced to ARIMA model. Particularly you have learned to:</p>
+<section id="lessons-learned" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="lessons-learned"><span class="header-section-number">7.7</span> Lessons Learned</h2>
+<p>In this module you have been introduced to the ARIMA model. Particularly you have learned to:</p>
 <ul>
 <li><p>Apply autocorrelations, partial autocorrelations, stationarity and white noise to model time series.</p></li>
 <li><p>Identify the AR(1) and MA(1) processes using the ACF and PACF.</p></li>
@@ -4355,7 +4355,7 @@ Suggested Answer
 </div>
 </div>
 </div>
-<p>There is a one spike at lag number one in the ACF and one spike in lag number one in the PACF. We could use both an AR1 or MA1 process to model the behavior. Let’s estimate the AR1.</p>
+<p>There is one spike at lag number one in the ACF and one spike at lag number one in the PACF. We could use either an AR1 or an MA1 process to model the behavior. Let’s estimate the AR1.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Elec_ts <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="at">AR1=</span><span class="fu">ARIMA</span>(<span class="st">`</span><span class="at">Bill Amount</span><span class="st">`</span><span class="sc">~</span><span class="fu">pdq</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>))) <span class="ot">-&gt;</span> fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -4372,10 +4372,10 @@ Suggested Answer
 </div>
 </div>
 </div>
-<p>The are no significant spikes. We can conclude that the errors resemble white noise.</p>
+<p>There are no significant spikes. We can conclude that the errors resemble white noise.</p>
 </details>
 <ol start="2" type="1">
-<li>Recall problem 1 in chapter 6 (<a href="./ETS.html#exercises6">ExercisesETS</a>), where you are tasked to forecast Tesla’s energy deployment. Use the entire data found here: <a href="http://jagelves.github.io/Data/ElectricityBill.csv" class="uri">http://jagelves.github.io/Data/ElectricityBill.csv</a> to estimate an ensemble of the TSLM model with linear trend and seasonality, and a TSLM model with quadratic trend and seasonality. Let the weight of the linear model be 30% and that of the quadratic model 70%. Graph the forecast for the next four periods of the three models.</li>
+<li>Recall problem 1 in chapter 6 (<a href="./ETS.html#exercises6">ExercisesETS</a>), where you are tasked to forecast Tesla’s energy deployment. Use the entire data found here: <a href="http://jagelves.github.io/Data/teslaE.csv" class="uri">http://jagelves.github.io/Data/teslaE.csv</a> to estimate an ensemble of the TSLM model with linear trend and seasonality, and a TSLM model with quadratic trend and seasonality. Let the weight of the linear model be 30% and that of the quadratic model 70%. Graph the forecast for the next four periods of the three models.</li>
 </ol>
 <details>
 <summary>

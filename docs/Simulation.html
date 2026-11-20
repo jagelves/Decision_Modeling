@@ -304,10 +304,10 @@ window.Quarto = {
 </div>
 <section id="roll-with-it-sushi-needs-your-help" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="roll-with-it-sushi-needs-your-help"><span class="header-section-number">3.1</span> Roll With It Sushi Needs Your Help</h2>
-<p>Renowned for serving the freshest sushi in the city, Roll With It Sushi is hosting a yellow-tail festival. Every morning, the Sous-Chef purchases fish at the market and any unsold fish at the end of the day gets discarded.</p>
+<p>Renowned for serving the freshest sushi in the city, Roll With It Sushi is hosting a yellowtail festival. Every morning, the Sous-Chef purchases fish at the market and any unsold fish at the end of the day gets discarded.</p>
 <p>The restaurant has contacted you because they are still determining how many people will attend the event and worry about how this will impact their business financially. To ensure they have enough sushi and budget appropriately, they want you to recommend the amount of fish needed. Based on past events, they expect at least 20 people to attend and have the capacity to seat up to 50 guests. They anticipate the most likely attendance to be around 30 people, and without your guidance they feel like this is the best guide in determining the fish needed.</p>
-<p>Roll With It Sushi can purchase any quantity of yellow-tail from the fresh market at 9 dollars for 16 ounces (divisible). Each guest at the festival is entitled to 5 ounces of fish. If the sushi runs out, some customers will not be happy. However, the restaurant has promised to refund their entry fee. Additionally, they have promised to serve their famous Miso soup to every attendee. The cost of making a batch for up to 50 guests is 300 dollars.</p>
-<p>Given that the festival charges 20 dollars per entry, how much yellow-tail would you recommend the restaurant to purchase to maximize expected profits?</p>
+<p>Roll With It Sushi can purchase any quantity of yellowtail from the fresh market at 9 dollars for 16 ounces (divisible). Each guest at the festival is entitled to 5 ounces of fish. If the sushi runs out, some customers will not be happy. However, the restaurant has promised to refund their entry fee. Additionally, they have promised to serve their famous Miso soup to every attendee. The cost of making a batch for up to 50 guests is 300 dollars.</p>
+<p>Given that the festival charges 20 dollars per entry, how much yellowtail would you recommend the restaurant to purchase to maximize expected profits?</p>
 </section>
 <section id="model-framework" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="model-framework"><span class="header-section-number">3.2</span> Model Framework</h2>
@@ -343,8 +343,8 @@ window.Quarto = {
 </section>
 <section id="the-news-vendor-problem" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="the-news-vendor-problem"><span class="header-section-number">3.3</span> The News Vendor Problem</h2>
-<p>Note how the decision variable (Order_Oz) affects directly our outcome (Profit). We can see that it decreases the restaurant’s profit through costs, but also affects revenue through the amount of fish available. This is the heart of the problem. We don’t know how many people will attend, so if the restaurant orders too much fish their profits will go down because their costs are large. However, if they order too little then they will have to issue refunds, which decrease their revenue.</p>
-<p>As you observe the <em>Profit</em> formula in the code above, you’ll notice the use of the <code>min()</code> function. This function returns the minimum of the <em>Demand</em> and <em>Available</em> values. The intuition here is that the restaurant can only collect entry fees for people who consumed sushi when the attendance is greater than the amount of sushi available. Likewise, their revenue will be capped at the total amount of people who attended, even if they ordered plenty of fish.</p>
+<p>Note how the decision variable (Order_Oz) directly affects our outcome (Profit). We can see that it decreases the restaurant’s profit through costs, but also affects revenue through the amount of fish available. This is the heart of the problem. We don’t know how many people will attend, so if the restaurant orders too much fish their profits will go down because their costs are large. However, if they order too little then they will have to issue refunds, which decrease their revenue.</p>
+<p>As you observe the <em>Consumption</em> formula in the code above, you’ll notice the use of the <code>min()</code> function. This function returns the minimum of the <em>Demand</em> and <em>Available</em> values. The intuition here is that the restaurant can only collect entry fees for people who consumed sushi when the attendance is greater than the amount of sushi available. Likewise, their revenue will be capped at the total amount of people who attended, even if they ordered plenty of fish.</p>
 <p>The problem illustrated above is called the news vendor problem. The <strong>news vendor problem</strong> is a classic decision-making problem in operations research and economics that involves deciding how much of a product to order (and sometimes at what price to sell it). The problem is called the “news vendor” problem because it was originally used to model the decision-making process of a newspaper vendor trying to decide how many copies of a newspaper to order and at what price to sell them.</p>
 </section>
 <section id="law-of-large-numbers" class="level2" data-number="3.4">
@@ -420,7 +420,7 @@ window.Quarto = {
 </div>
 <p>The plot is built in layers. The <code>ggplot()</code> function starts an empty canvas from our tibble, <code>geom_histogram()</code> adds the bars, and <code>aes()</code> tells R that the <em>Profit</em> column belongs on the horizontal axis. The <code>geom_vline()</code> layer draws the vertical line at the average, and <code>labs()</code> and <code>theme_classic()</code> control the labels and the overall appearance. Layers are added with <code>+</code>, and each one can be removed or changed without touching the others.</p>
 <p>As you can see most of the outcomes are close to <span class="math inline">\(250\)</span> dollars. So a better recommendation to the restaurant would be to inform them that when ordering <span class="math inline">\(160\)</span> ounces, they will most likely get a profit of <span class="math inline">\(250\)</span> dollars. There is a small risk of them making less than <span class="math inline">\(100\)</span> dollars in profit, but they should not expect more than <span class="math inline">\(250\)</span> dollars. The average in this case seems to be a poor predictor of what is expected as its frequency is not very large as shown in the histogram. This result is known as the flaw of averages.</p>
-<p><strong>The flaw of averages</strong>, also known as the “law of averages fallacy,” is the idea that the average value of a particular characteristic in a population can be used to represent the value of that characteristic for individual members of the population. This is often not the case because the average value can be misleading and does not take into account the variability and distribution of the characteristic within the population.</p>
+<p><strong>The flaw of averages</strong> is the mistaken idea that the average value of a particular characteristic in a population can be used to represent the value of that characteristic for individual members of the population. This is often not the case because the average value can be misleading and does not take into account the variability and distribution of the characteristic within the population.</p>
 </section>
 <section id="optimal-order-amount" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="optimal-order-amount"><span class="header-section-number">3.6</span> Optimal Order Amount</h2>
@@ -450,14 +450,14 @@ window.Quarto = {
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>loop_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>elapsed 
-  1.501 </code></pre>
+  1.529 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(Profits,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 212.04 225.54 234.74 240.56 243.16 242.43 240.51 236.34 231.17</code></pre>
 </div>
 </div>
-<p>The <code>seq()</code> function generates the candidate orders from <span class="math inline">\(160\)</span> to <span class="math inline">\(240\)</span> in steps of <span class="math inline">\(10\)</span>. Everything after that is bookkeeping: an empty vector to hold the answers, a counter <em>k</em> to remember which slot to fill, and a running total that is reset for each order. Nine hundred thousand trips through the inner loop take about 1.5 seconds.</p>
+<p>The <code>seq()</code> function generates the candidate orders from <span class="math inline">\(160\)</span> to <span class="math inline">\(240\)</span> in steps of <span class="math inline">\(10\)</span>. Everything after that is bookkeeping: an empty vector to hold the answers, a counter <em>k</em> to remember which slot to fill, and a running total that is reset for each order. Nine hundred thousand trips through the inner loop take about 1.53 seconds.</p>
 <p>Now consider the same problem the way R prefers to see it. Instead of nine separate simulations, we build <strong>one</strong> tibble with nine hundred thousand rows, where a column records which order that row belongs to. Every calculation is then applied to the whole table at once, and <code>group_by()</code> and <code>summarise()</code> split the results back out by order.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>vector_time<span class="ot">&lt;-</span><span class="fu">system.time</span>({</span>
@@ -478,7 +478,7 @@ window.Quarto = {
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>vector_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>elapsed 
-  0.095 </code></pre>
+  0.094 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -563,7 +563,7 @@ window.Quarto = {
 </section>
 <section id="sensitivity-analysis" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="sensitivity-analysis"><span class="header-section-number">3.7</span> Sensitivity Analysis</h2>
-<p>What if the price of yellow-tail increases unexpectedly? What if the restaurant wishes to provide each guest with six ounces of fish instead of five? The model we have created above can accommodate these changes easily by just changing the input values. We can additionally inform the restaurant how sensitive the results are to changes in key inputs or assumptions. This is the idea behind sensitivity analysis.</p>
+<p>What if the price of yellowtail increases unexpectedly? What if the restaurant wishes to provide each guest with six ounces of fish instead of five? The model we have created above can accommodate these changes easily by just changing the input values. We can additionally inform the restaurant how sensitive the results are to changes in key inputs or assumptions. This is the idea behind sensitivity analysis.</p>
 <p><strong>Sensitivity analysis</strong> assesses the robustness of a model or decision by evaluating the impact of changes in certain key input variables on the output of the model or decision. Sensitivity analysis helps to identify which variables are most important and how sensitive the output is to changes in those variables.</p>
 <p>Let’s consider providing each guest with five, six, or seven ounces of fish. Because our model is already a table of scenarios, adding a second dimension is a matter of making the table bigger. The <code>expand_grid()</code> function creates every combination of the values it is given, which is exactly the set of scenarios we need: three serving sizes, times eighteen candidate orders, times fifty thousand replications.</p>
 <div class="cell">
@@ -621,10 +621,10 @@ window.Quarto = {
 </section>
 <section id="readings" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="readings"><span class="header-section-number">3.8</span> Readings</h2>
-<p>The readings for this chapter will introduce the application of simulation models to business. <span class="citation" data-cites="PMS">Winston and Albright (<a href="references.html#ref-PMS" role="doc-biblioref">2019</a>)</span> highlight the technical application of the models using Excel. It is recommended that you follow in R instead. <span class="citation" data-cites="KI">Kwak and Ingall (<a href="references.html#ref-KI" role="doc-biblioref">2007</a>)</span> motivates the use of Monte Carlo simulation for managing project risks and uncertainties.</p>
+<p>The readings for this chapter will introduce the application of simulation models to business. <span class="citation" data-cites="PMS">Winston and Albright (<a href="#ref-PMS" role="doc-biblioref">2019</a>)</span> highlight the technical application of the models using Excel. It is recommended that you follow in R instead. <span class="citation" data-cites="KI">Kwak and Ingall (<a href="#ref-KI" role="doc-biblioref">2007</a>)</span> motivates the use of Monte Carlo simulation for managing project risks and uncertainties.</p>
 <ul>
-<li><p><span class="citation" data-cites="PMS">Winston and Albright (<a href="references.html#ref-PMS" role="doc-biblioref">2019</a>)</span> Chapter 10.3 (Simulation and the Flaw of Averages), and 10.4 (Simulation with Built-In Excel Tools). Example 10.4 (Additional Uncertainty at Walton Bookstore) It is recommended you follow along using R instead of Excel.</p></li>
-<li><p><span class="citation" data-cites="KI">Kwak and Ingall (<a href="references.html#ref-KI" role="doc-biblioref">2007</a>)</span></p></li>
+<li><p><span class="citation" data-cites="PMS">Winston and Albright (<a href="#ref-PMS" role="doc-biblioref">2019</a>)</span> Chapter 10.3 (Simulation and the Flaw of Averages), and 10.4 (Simulation with Built-In Excel Tools). Example 10.4 (Additional Uncertainty at Walton Bookstore) It is recommended you follow along using R instead of Excel.</p></li>
+<li><p><span class="citation" data-cites="KI">Kwak and Ingall (<a href="#ref-KI" role="doc-biblioref">2007</a>)</span></p></li>
 </ul>
 </section>
 <section id="lessons-learned-in-this-chapter" class="level2" data-number="3.9">
@@ -680,11 +680,11 @@ Suggested Answer
 </summary>
 <p><em>Expected Profit: 645,000</em></p>
 <p><em>Standard Deviation: 119,326</em></p>
-<p><em>90% Confidence Interval: [430,000, 830,000]</em></p>
+<p><em>90% Range (5th to 95th percentile): [430,000, 830,000]</em></p>
 </details>
 <ol start="2" type="1">
 <li><p>Alaska Airlines is preparing for the peak holiday travel season and needs to decide how many seats to overbook on the SEA-SFO route. Overbooking is expected in the airline industry, as some passengers typically do not show up for their flights. The airline has data indicating that the number of no-show passengers on this route follows a normal distribution with a mean of 20 and a standard deviation of 5.</p>
-<p>If the airline does not overbook enough seats, empty seats result in lost revenue, as the cost of an unused seat is estimated to be $300. However, if the airline overbooks too many seats, it may need to compensate bumped passengers with vouchers worth $600 each. Use 10,000 simulations to determine the optimal number of seats to overbook to minimize the airline’s expected cost. Try possible values from 10 to 30 in increments of 5. Use <code>expand_grid()</code> to lay out every combination of overbooking level and simulation, <code>case_when()</code> to assign the cost of each scenario, and <code>group_by()</code> with <code>summarise()</code> to compare the levels.</p></li>
+<p>If the airline does not overbook enough seats, empty seats result in lost revenue, as the cost of an unused seat is estimated to be $300. However, if the airline overbooks too many seats, it may need to compensate bumped passengers with vouchers worth $600 each. Use 10,000 simulations to determine the optimal number of seats to overbook to minimize the airline’s expected cost. Try possible values from 10 to 30 in increments of 1. Use <code>expand_grid()</code> to lay out every combination of overbooking level and simulation, <code>case_when()</code> to assign the cost of each scenario, and <code>group_by()</code> with <code>summarise()</code> to compare the levels.</p></li>
 </ol>
 <details>
 <summary>
@@ -694,9 +694,9 @@ Suggested Answer
 <p><em>Minimum Expected Cost: $1,633</em></p>
 </details>
 <ol start="3" type="1">
-<li>In August, Bronco Wine Company must decide how many bottles of next year’s vintage wine to order. Each bottle costs the winery <span class="math inline">\(7.50\)</span> and sells for <span class="math inline">\(10\)</span>. After January 1, all unsold bottles will be returned to the supplier for a refund of <span class="math inline">\(2.50\)</span> per bottle. Bronco believes that the number of bottles it can sell by January 1 follows a uniform distribution with a mean of 200, a maximum value of 300, and a minimum value of 100. The maximum number of bottles Bronco’s supplier can provide is uncertain and follows a normal distribution with a mean of 200 and a standard deviation of 50. Once Bronco places an order, the supplier will charge <span class="math inline">\(7.50\)</span> per bottle if they can supply the entire order; otherwise, they will charge <span class="math inline">\(7.25\)</span> per bottle. Bronco wants to use simulation to analyze the resulting profit for various order quantities.</li>
+<li><p>In August, Bronco Wine Company must decide how many bottles of next year’s vintage wine to order. Each bottle costs the winery <span class="math inline">\(7.50\)</span> and sells for <span class="math inline">\(10\)</span>. After January 1, all unsold bottles will be returned to the supplier for a refund of <span class="math inline">\(2.50\)</span> per bottle. Bronco believes that the number of bottles it can sell by January 1 follows a uniform distribution with a mean of 200, a maximum value of 300, and a minimum value of 100. The maximum number of bottles Bronco’s supplier can provide is uncertain and follows a normal distribution with a mean of 200 and a standard deviation of 50. Once Bronco places an order, the supplier will charge <span class="math inline">\(7.50\)</span> per bottle if they can supply the entire order; otherwise, they will charge <span class="math inline">\(7.25\)</span> per bottle. Bronco wants to use simulation to analyze the resulting profit for various order quantities.</p>
+<p>Use 10,000 simulations to determine the optimal number of bottles to order to maximize the winery’s expected profit. Consider order quantities from 100 to 300 in increments of 50. Note that this model has two random variables, which simply means two random columns in the same tibble. Create a five number summary to describe the distribution of profits at the optimal number of bottles.</p></li>
 </ol>
-<p>Use 10,000 simulations to determine the optimal number of bottles to produce to maximize the winery’s expected profit. Note that this model has two random variables, which simply means two random columns in the same tibble. Create a five number summary to describe the distribution of profits at the optimal number of bottles.</p>
 <details>
 <summary>
 Suggested Answer
@@ -750,7 +750,7 @@ Suggested Answer
 </details>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-KI" class="csl-entry" role="listitem">
 Kwak, Young, and Lisa Ingall. 2007. <span>“Exploring Monte Carlo Simulation Applications for Project Management.”</span>
 </div>

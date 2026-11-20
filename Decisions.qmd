@@ -60,11 +60,11 @@ graph LR
 
 <br> Decision trees are read from left to right. Notice that there are two main branches stemming from the first decision node (i.e., the first square to the left). You can decide to *Introduce* or *Not Introduce* the new production line. If you *Introduce*, you reach a probability node (i.e., the circle that leads to the success and failure branches) where chance determines success or failure at the probabilities given. In the end, your choice of introducing the new product line yields an expected monetary value of 1.8 million, whereas not introducing the line yields no payoff.
 
-To solve decision trees and find the optimal decision use **backward induction**. Starting from the right of the decision tree and working back to the left at each probability node calculate the EMV. At each decision node, take the maximum of EMV's to identify the optimal decision. Applying this procedure to our simple example, we would start with the probability node that leads to the success and failure branches and calculate the EMV of 1.8 million (refer to @sec-EMV). Moving back to our initial decision, we now have the choice to *Introduce* or *Not Introduce*. In this case we should *Introduce*, since the resulting EMV (1.8) is higher than *Not Introduce* (0).
+To solve decision trees and find the optimal decision use **backward induction**. Starting from the right of the decision tree and working back to the left at each probability node calculate the EMV. At each decision node, take the maximum of the EMVs to identify the optimal decision. Applying this procedure to our simple example, we would start with the probability node that leads to the success and failure branches and calculate the EMV of 1.8 million (refer to @sec-EMV). Moving back to our initial decision, we now have the choice to *Introduce* or *Not Introduce*. In this case we should *Introduce*, since the resulting EMV (1.8) is higher than *Not Introduce* (0).
 
 ## Consulting Team
 
-Consider now the option of hiring a consulting team that promises to give you a bit more certainty. The team provides a recommendation based on market research, historical data, and their expertise for \$500,000. However, it is known that the team has a false positive rate (i.e., recommending to go with a project when the project would fail) of 15% and a false negative rate of 5% (i.e., recommending not going with a project and when the project would succeed). Below you can see the updated decision tree with the results of the recommendation (i.e., *Positive*, and *Negative*).
+Consider now the option of hiring a consulting team that promises to give you a bit more certainty. The team provides a recommendation based on market research, historical data, and their expertise for \$500,000. However, it is known that the team has a false positive rate (i.e., recommending to go with a project when the project would fail) of 15% and a false negative rate of 5% (i.e., recommending not going with a project when the project would succeed). Below you can see the updated decision tree with the results of the recommendation (i.e., *Positive*, and *Negative*).
 
 ```{mermaid theme=darkly}
 %%| fig-width: 5
@@ -82,9 +82,9 @@ graph LR
     H -->|Failure p=?| K( -3.5 )
 ```
 
-Note that even though the consultants might recommend not introducing the production line, the CEO can still decide to go against their recommendation. Also, some probabilities are now unknown and must be calculated (they are highlighted in the decision tree with $?$). For example, given that the recommendation is positive, the probability that the introduction would succeed is unknown $p(Success|+)$. We will use probability theory to uncover the missing probabilities in the upcoming sections. Finally, the final payoffs have all been adjusted to reflect the cost of hiring the team of consultants.
+Note that even though the consultants might recommend not introducing the production line, the CEO can still decide to go against their recommendation. Also, some probabilities are now unknown and must be calculated (they are highlighted in the decision tree with $?$). For example, given that the recommendation is positive, the probability that the introduction would succeed is unknown $p(Success|+)$. We will use probability theory to uncover the missing probabilities in the upcoming sections. Finally, the payoffs have all been adjusted to reflect the cost of hiring the team of consultants.
 
-Ultimately, we would like gain more certainty on our decision to introduce the production line. Additionally, knowing if we should hire consultants to advise is equally essential.
+Ultimately, we would like to gain more certainty on our decision to introduce the production line. Additionally, knowing if we should hire consultants to advise is equally essential.
 
 ## Updating Probabilities
 
@@ -160,7 +160,7 @@ graph LR
 
 ## Optimal Decision {#sec-Optimal}
 
-Now that we have calculated the probabilities we can finally decide whether we should hire the consulting team, and most importantly whether we should introduce the new product line. Summarizing the decision tree by calculating the EMV's for each probability node yields:
+Now that we have calculated the probabilities we can finally decide whether we should hire the consulting team, and most importantly whether we should introduce the new product line. Summarizing the decision tree by calculating the EMVs for each probability node yields:
 
 ```{mermaid theme=darkly}
 %%| fig-width: 5
@@ -218,7 +218,7 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
 ## Exercises
 
-1.  Tesla, a U.S. EV car manufacturer, is considering expanding production to meet potential increases in the demand for one of its cars. Tesla’s alternatives are to construct a new plant, expand the existing plant, or do nothing in the short run. Analysts within Tesla expect the market for their EV’s may expand, remain stable, or contract, with probabilities of 0.35, 0.35, and 0.30, respectively. The table below contains the profit generated under each scenario. What is your recommendation to Tesla?
+1.  Tesla, a U.S. EV car manufacturer, is considering expanding production to meet potential increases in the demand for one of its cars. Tesla’s alternatives are to construct a new plant, expand the existing plant, or do nothing in the short run. Analysts within Tesla expect the market for their EVs may expand, remain stable, or contract, with probabilities of 0.35, 0.35, and 0.30, respectively. The table below contains the profit generated under each scenario. What is your recommendation to Tesla?
 
 |              | Expand  |  Stable  | Contract |
 |:------------:|:-------:|:--------:|:--------:|
@@ -248,7 +248,7 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
 <summary>Suggested Answer</summary>
 
-*Once again we can use the expected value in this problem. The option of buying the airplane yields an expected profit of 43 million dollars, whereas the option of leasing the airplane yields a profit of 30 million. Given this result, we should **recommend Frontier airlines to buy the airplane**.*
+*Once again we can use the expected value in this problem. The option of buying the airplane yields an expected profit of 43 million dollars, whereas the option of leasing the airplane yields a profit of 30 million. Given this result, we should **recommend Frontier Airlines to buy the airplane**.*
 
 </details>
 
@@ -264,11 +264,11 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
 <summary>Suggested Answer</summary>
 
-*The expected value when not launching the clinical trial is 8 million. Since the expected value after conducting the trial is higher (11.2 million), **PharmaCo should conduct the clinical trial and use the results to inform their decision on whether to launch CureFast.PharmaCo should pay at most 8.2 million for the clinical trial**.*
+*The expected value when not launching the clinical trial is 8 million. Since the expected value after conducting the trial is higher (11.2 million), **PharmaCo should conduct the clinical trial and use the results to inform their decision on whether to launch CureFast. PharmaCo should pay at most 8.2 million for the clinical trial**.*
 
 </details>
 
-4.  João “Golden Toes” Silva is the next Brazilian league wonder kid, and Arsenal's scouts are buzzing with excitement. The club’s analysts estimate that João has a 30% chance of being a success at Arsenal, performing at a top level and helping the club win titles.
+4.  João “Golden Toes” Silva is the next Brazilian league wonderkid, and Arsenal's scouts are buzzing with excitement. The club’s analysts estimate that João has a 30% chance of being a success at Arsenal, performing at a top level and helping the club win titles.
 
     If João is successful, Arsenal stands to make £18 million in profits through merchandise sales, increased ticket revenue, and potential transfer fees. However, if João fails to live up to expectations (which has a 70% chance), it could cost the club £8 million (wasted wages, and negative press).
 
@@ -280,7 +280,7 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
 <summary>Suggested Answer</summary>
 
-*Without the test, the expected value is -200,000 pounds. With the perfect test, the expected value is 2,400,000 pounds. We **recommend Arsenal go with the test and sign the player**. The club can pay up to 5,400,000 pounds for the test.*
+*Without the test, signing the player has an expected value of -200,000 pounds, so Arsenal's best option is not to sign him (expected value of 0). With the perfect test, the expected value is 2,400,000 pounds. We **recommend Arsenal go with the test and sign the player**. The club can pay up to 5,400,000 pounds for the test.*
 
 </details>
 
@@ -292,7 +292,7 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
 - Purchase all 50 Bitcoins needed in six months at the market price.
 
-  The price of Bitcoin bought now for delivery in six months is 30,000 dollars per Bitcoin. The transaction cost for 25-Bitcoin and 50-Bitcoin future contracts are 1,500 and 2,800 dollars, respectively. Finally, the company has assessed the probability distribution for the possible Bitcoin prices six months from now in dollars per Bitcoin. The table below contains the possible prices and the corresponding probabilities. Which investment strategy should Crypto Gains pursue to minimize risk and potential costs while securing the necessary Bitcoins?
+  The price of Bitcoin bought now for delivery in six months is 30,000 dollars per Bitcoin. The transaction costs for 25-Bitcoin and 50-Bitcoin futures contracts are 1,500 and 2,800 dollars, respectively. Finally, the company has assessed the probability distribution for the possible Bitcoin prices six months from now in dollars per Bitcoin. The table below contains the possible prices and the corresponding probabilities. Which investment strategy should Crypto Gains pursue to minimize risk and potential costs while securing the necessary Bitcoins?
 
 |  Price   | Probability |
 |:--------:|:-----------:|
@@ -307,19 +307,19 @@ The readings for this chapter are mainly from @PMS. Chapter 9 provides an excell
 
 <summary>Suggested Answer</summary>
 
-*The expected values are a follows: buy 50 Bitcoins now via futures contract: 1,502,800, buy 25 Bitcoins now via futures contract, and 25 Bitcoins in six months at market price: 1,520,875, buy all 50 Bitcoins in six months at market price: 1,538,750. **Crypto Gains should purchase a futures contract for 50 Bitcoins now to secure the necessary investment and minimize costs**.*
+*The expected values are as follows: buy 50 Bitcoins now via futures contract: 1,502,800, buy 25 Bitcoins now via futures contract, and 25 Bitcoins in six months at market price: 1,520,875, buy all 50 Bitcoins in six months at market price: 1,538,750. **Crypto Gains should purchase a futures contract for 50 Bitcoins now to secure the necessary investment and minimize costs**.*
 
 </details>
 
-Meridian Instruments manufactures laboratory spectrometers. Its flagship product, the M9, is the machine that established the company's reputation, but unit sales have declined for four consecutive years. The M9 currently occupies a production line that could be converted to build the M3, a lower priced benchtop unit with a nine month waiting list. The board must commit to one of three paths for the next three years.
+6.  Meridian Instruments manufactures laboratory spectrometers. Its flagship product, the M9, is the machine that established the company's reputation, but unit sales have declined for four consecutive years. The M9 currently occupies a production line that could be converted to build the M3, a lower-priced benchtop unit with a nine-month waiting list. The board must commit to one of three paths for the next three years.
 
-If Meridian keeps the M9 in production, its profit depends on the research funding environment, which the company cannot control and will not know for another year. Under a strong funding environment (a 55% probability) the M9 generates \$42 million over three years, and under a weak environment it generates only \$6 million.
+    If Meridian keeps the M9 in production, its profit depends on the research funding environment, which the company cannot control and will not know for another year. Under a strong funding environment (a 55% probability) the M9 generates \$42 million over three years, and under a weak environment it generates only \$6 million.
 
-Alternatively, Meridian can retire the M9 immediately and convert the line to the M3. Because the M3 already has a waiting list, demand is known, and this option yields \$26 million regardless of the funding environment.
+    Alternatively, Meridian can retire the M9 immediately and convert the line to the M3. Because the M3 already has a waiting list, demand is known, and this option yields \$26 million regardless of the funding environment.
 
-Finally, the board can run the M9 for one final year at reduced volume, at a cost of \$4 million, and then decide. By the end of that year the funding environment is public knowledge. If it turns out strong, Meridian keeps the M9 and earns \$38 million. If it turns out weak, Meridian converts the line and earns \$22 million.
+    Finally, the board can run the M9 for one final year at reduced volume, at a cost of \$4 million, and then decide. By the end of that year the funding environment is public knowledge. If it turns out strong, Meridian keeps the M9 and earns \$38 million. If it turns out weak, Meridian converts the line and earns \$22 million.
 
-Which path should Meridian take? What is the maximum the board should pay for a forecast that reveals the funding environment with certainty?
+    Which path should Meridian take? What is the maximum the board should pay for a forecast that reveals the funding environment with certainty?
     
 
 <details>
